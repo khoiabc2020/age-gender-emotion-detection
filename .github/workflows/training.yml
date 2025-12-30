@@ -1,0 +1,93 @@
+name: Training Pipeline
+
+on:
+  workflow_dispatch:
+    inputs:
+      epochs:
+        description: 'Number of training epochs'
+        required: false
+        default: '10'
+        type: string
+      batch_size:
+        description: 'Batch size'
+        required: false
+        default: '32'
+        type: string
+  schedule:
+    # Run training every Sunday at 2 AM UTC
+    - cron: '0 2 * * 0'
+
+jobs:
+  train-model:
+    name: Train Model
+    runs-on: ubuntu-latest
+    
+    # Use GPU if available (GitHub Actions doesn't provide GPU by default)
+    # For GPU training, consider using self-hosted runners or cloud providers
+    strategy:
+      matrix:
+        python-version: ['3.11']
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+          cache: 'pip'
+      
+      - name: Install dependencies
+        working-directory: ./training_experiments
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+      
+      - name: Check datasets
+        working-directory: ./training_experiments
+        run: |
+          python scripts/check_datasets.py
+        continue-on-error: true
+      
+      - name: Run training
+        working-directory: ./training_experiments
+        env:
+          EPOCHS: ${{ github.event.inputs.epochs || '10' }}
+          BATCH_SIZE: ${{ github.event.inputs.batch_size || '32' }}
+        run: |
+          python train_optimized.py \
+            --data_dir data/processed \
+            --epochs ${{ env.EPOCHS }} \
+            --batch_size ${{ env.BATCH_SIZE }} \
+            --save_dir checkpoints/ci_training
+        continue-on-error: true
+      
+      - name: Upload training results
+        uses: actions/upload-artifact@v4
+        with:
+          name: training-results
+          path: |
+            training_experiments/checkpoints/ci_training/*.pth
+            training_experiments/checkpoints/ci_training/*.json
+            training_experiments/checkpoints/ci_training/*.log
+        if: always()
+        continue-on-error: true
+      
+      - name: Convert to ONNX
+        working-directory: ./training_experiments
+        run: |
+          python scripts/convert_to_onnx.py \
+            --model_path checkpoints/ci_training/best_model.pth \
+            --output_path models/multitask_model.onnx
+        if: success()
+        continue-on-error: true
+      
+      - name: Upload ONNX model
+        uses: actions/upload-artifact@v4
+        with:
+          name: onnx-model
+          path: training_experiments/models/multitask_model.onnx
+        if: success()
+        continue-on-error: true
+

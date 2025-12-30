@@ -149,8 +149,8 @@ tmp/
 artifacts/
 *.artifact
 
-# GitHub Actions workflows (nếu token không có scope workflow)
-.github/workflows/
+# GitHub Actions workflows (đã có token với workflow scope)
+# .github/workflows/
 
 # ========== SECURITY & SECRETS ==========
 *.pem
