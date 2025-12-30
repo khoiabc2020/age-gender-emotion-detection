@@ -182,10 +182,16 @@ Thumbs.db
 
 def main():
     """Hàm chính"""
-    print("=" * 60)
-    print("🚀 Tự động Commit và Push lên GitHub")
-    print("=" * 60)
-    print()
+    try:
+        print("=" * 60)
+        print("Tu dong Commit va Push len GitHub")
+        print("=" * 60)
+        print()
+    except:
+        print("=" * 60)
+        print("Auto Commit and Push to GitHub")
+        print("=" * 60)
+        print()
     
     # Kiểm tra và setup git nếu cần
     if not check_git_repo():
