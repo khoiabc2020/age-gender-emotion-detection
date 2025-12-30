@@ -1,0 +1,12 @@
+{
+  "timestamp": "2025-12-30T15:03:58.957024",
+  "total_runs": 10,
+  "successful_runs": 0,
+  "failed_runs": 10,
+  "success_rate": 0.0,
+  "best_run": null,
+  "config_analysis": {},
+  "recommendations": [
+    "⚠️ Nhiều lần training thất bại. Kiểm tra lại dữ liệu và dependencies."
+  ]
+}

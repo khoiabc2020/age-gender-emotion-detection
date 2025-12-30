@@ -1,0 +1,204 @@
+# ============================================
+# SMART RETAIL AI - GIT IGNORE
+# ============================================
+
+# ========== PYTHON ==========
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+*.egg-info/
+dist/
+build/
+*.egg
+
+# Virtual Environments
+venv/
+venv_gpu/
+env/
+ENV/
+.venv/
+.ENV/
+
+# ========== NODE.JS / FRONTEND ==========
+node_modules/
+/.pnp
+.pnp.js
+.npm
+.yarn/
+package-lock.json.backup
+yarn.lock.backup
+
+# Build outputs
+/build
+/dist
+/.next
+/out
+
+# ========== ENVIRONMENT FILES ==========
+.env
+.env.local
+.env.*.local
+.env.development
+.env.production
+.env.test
+*.env
+
+# ========== MODELS & DATA (LARGE FILES) ==========
+# Model files (quá lớn, dùng Git LFS hoặc external storage)
+**/models/*.onnx
+**/models/*.pt
+**/models/*.pth
+**/models/*.pkl
+**/models/*.h5
+**/models/*.ckpt
+**/models/*.pb
+**/models/*.tflite
+
+# Training data (không commit datasets lớn)
+data/raw/
+data/processed/
+training_experiments/data/raw/
+training_experiments/data/processed/
+training_experiments/data/utkface/
+training_experiments/data/fer2013/
+training_experiments/data/all_age_face_dataset/
+
+# Checkpoints và training results
+checkpoints/
+training_experiments/checkpoints/
+training_experiments/training_results/
+*.pth
+*.pt
+*.ckpt
+
+# ========== LOGS ==========
+logs/
+*.log
+*.log.*
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
+
+# ========== DATABASE ==========
+*.db
+*.sqlite
+*.sqlite3
+*.db-journal
+*.db-wal
+*.db-shm
+
+# ========== IDE & EDITORS ==========
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+*.sublime-project
+*.sublime-workspace
+*.code-workspace
+
+# ========== OS FILES ==========
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+desktop.ini
+$RECYCLE.BIN/
+
+# ========== JUPYTER NOTEBOOKS ==========
+.ipynb_checkpoints/
+*.ipynb
+# Uncomment nếu muốn commit notebooks:
+# !*.ipynb
+
+# ========== TESTING & COVERAGE ==========
+.coverage
+coverage/
+*.cover
+.hypothesis/
+.pytest_cache/
+.tox/
+htmlcov/
+.nyc_output/
+coverage.xml
+*.lcov
+
+# ========== DOCKER ==========
+.dockerignore
+docker-compose.override.yml
+
+# ========== TEMPORARY FILES ==========
+*.tmp
+*.temp
+*.bak
+*.backup
+*.swp
+*.swo
+temp/
+tmp/
+*.cache
+
+# ========== CI/CD ARTIFACTS ==========
+.github/workflows/*.log
+artifacts/
+*.artifact
+
+# ========== SECURITY & SECRETS ==========
+*.pem
+*.key
+*.cert
+*.crt
+secrets/
+.secrets/
+*.secret
+
+# ========== DOCUMENTATION BUILDS ==========
+docs/_build/
+docs/.doctrees/
+site/
+
+# ========== MISC ==========
+*.orig
+*.rej
+*.patch
+.cache/
+.parcel-cache/
+.eslintcache
+.stylelintcache
+
+# ========== PROJECT SPECIFIC ==========
+# Training experiments
+training_experiments/venv/
+training_experiments/venv_gpu/
+training_experiments/notebooks/*.ipynb
+
+# Edge app logs
+ai_edge_app/logs/
+ai_edge_app/models/*.onnx
+ai_edge_app/models/*.pt
+ai_edge_app/models/*.pth
+
+# Backend
+backend_api/venv/
+backend_api/.env
+backend_api/logs/
+
+# Frontend
+dashboard/.env.local
+dashboard/.env.production
+dashboard/.env.development
+dashboard/node_modules/
+dashboard/dist/
+dashboard/build/
+dashboard/.next/
+
+# Database volumes
+postgres_data/
+mqtt_data/
+mqtt_log/

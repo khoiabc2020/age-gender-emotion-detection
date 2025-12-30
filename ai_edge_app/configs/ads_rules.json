@@ -1,0 +1,46 @@
+{
+  "ad_rules": [
+    {
+      "ad_id": "coffee_morning",
+      "name": "Cà phê buổi sáng",
+      "target_age_min": 18,
+      "target_age_max": 50,
+      "target_gender": ["all"],
+      "target_emotions": ["happy", "neutral"],
+      "time_preference": {
+        "start_hour": 6,
+        "end_hour": 11
+      },
+      "priority": 8
+    },
+    {
+      "ad_id": "lunch_special",
+      "name": "Ưu đãi trưa",
+      "target_age_min": 20,
+      "target_age_max": 60,
+      "target_gender": ["all"],
+      "target_emotions": ["all"],
+      "time_preference": {
+        "start_hour": 11,
+        "end_hour": 14
+      },
+      "priority": 9
+    },
+    {
+      "ad_id": "premium_product",
+      "name": "Sản phẩm cao cấp",
+      "target_age_min": 30,
+      "target_age_max": 65,
+      "target_gender": ["all"],
+      "target_emotions": ["happy"],
+      "time_preference": {
+        "start_hour": 0,
+        "end_hour": 23
+      },
+      "priority": 7
+    }
+  ],
+  "exploration_rate": 0.1,
+  "fallback_ad": "default_promotion"
+}
+

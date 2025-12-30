@@ -1,0 +1,158 @@
+{
+  "timestamp": "2025-12-30T13:36:48.661623",
+  "total_runs": 10,
+  "successful_runs": 0,
+  "results": [
+    {
+      "run_id": 1,
+      "config": {
+        "data_dir": "data/processed",
+        "epochs": 50,
+        "batch_size": 32,
+        "learning_rate": 0.001,
+        "use_distillation": true,
+        "use_qat": false,
+        "output_dir": "models/run_1"
+      },
+      "success": false,
+      "elapsed_time": 17.319888830184937,
+      "returncode": 2
+    },
+    {
+      "run_id": 2,
+      "config": {
+        "data_dir": "data/processed",
+        "epochs": 50,
+        "batch_size": 32,
+        "learning_rate": 0.002,
+        "use_distillation": true,
+        "use_qat": false,
+        "output_dir": "models/run_2"
+      },
+      "success": false,
+      "elapsed_time": 11.301902294158936,
+      "returncode": 2
+    },
+    {
+      "run_id": 3,
+      "config": {
+        "data_dir": "data/processed",
+        "epochs": 50,
+        "batch_size": 32,
+        "learning_rate": 0.0005,
+        "use_distillation": true,
+        "use_qat": false,
+        "output_dir": "models/run_3"
+      },
+      "success": false,
+      "elapsed_time": 10.516689538955688,
+      "returncode": 2
+    },
+    {
+      "run_id": 4,
+      "config": {
+        "data_dir": "data/processed",
+        "epochs": 50,
+        "batch_size": 64,
+        "learning_rate": 0.001,
+        "use_distillation": true,
+        "use_qat": false,
+        "output_dir": "models/run_4"
+      },
+      "success": false,
+      "elapsed_time": 10.666070222854614,
+      "returncode": 2
+    },
+    {
+      "run_id": 5,
+      "config": {
+        "data_dir": "data/processed",
+        "epochs": 50,
+        "batch_size": 16,
+        "learning_rate": 0.001,
+        "use_distillation": true,
+        "use_qat": false,
+        "output_dir": "models/run_5"
+      },
+      "success": false,
+      "elapsed_time": 12.628324031829834,
+      "returncode": 2
+    },
+    {
+      "run_id": 6,
+      "config": {
+        "data_dir": "data/processed",
+        "epochs": 75,
+        "batch_size": 32,
+        "learning_rate": 0.001,
+        "use_distillation": true,
+        "use_qat": false,
+        "output_dir": "models/run_6"
+      },
+      "success": false,
+      "elapsed_time": 9.873515605926514,
+      "returncode": 2
+    },
+    {
+      "run_id": 7,
+      "config": {
+        "data_dir": "data/processed",
+        "epochs": 50,
+        "batch_size": 32,
+        "learning_rate": 0.001,
+        "use_distillation": true,
+        "use_qat": true,
+        "output_dir": "models/run_7"
+      },
+      "success": false,
+      "elapsed_time": 9.505669832229614,
+      "returncode": 2
+    },
+    {
+      "run_id": 8,
+      "config": {
+        "data_dir": "data/processed",
+        "epochs": 50,
+        "batch_size": 32,
+        "learning_rate": 0.0005,
+        "use_distillation": true,
+        "use_qat": true,
+        "output_dir": "models/run_8"
+      },
+      "success": false,
+      "elapsed_time": 9.368517637252808,
+      "returncode": 2
+    },
+    {
+      "run_id": 9,
+      "config": {
+        "data_dir": "data/processed",
+        "epochs": 50,
+        "batch_size": 64,
+        "learning_rate": 0.002,
+        "use_distillation": true,
+        "use_qat": false,
+        "output_dir": "models/run_9"
+      },
+      "success": false,
+      "elapsed_time": 9.617948055267334,
+      "returncode": 2
+    },
+    {
+      "run_id": 10,
+      "config": {
+        "data_dir": "data/processed",
+        "epochs": 60,
+        "batch_size": 48,
+        "learning_rate": 0.0015,
+        "use_distillation": true,
+        "use_qat": false,
+        "output_dir": "models/run_10"
+      },
+      "success": false,
+      "elapsed_time": 10.180640935897827,
+      "returncode": 2
+    }
+  ],
+  "best_run": null
+}

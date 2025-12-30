@@ -1,0 +1,61 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+*.egg-info/
+dist/
+build/
+
+# Virtual Environment
+venv/
+venv_gpu/
+env/
+ENV/
+
+# Data (không commit datasets lớn)
+data/raw/
+data/processed/
+*.pth
+*.onnx
+*.h5
+*.ckpt
+
+# Checkpoints và logs
+checkpoints/
+*.pth
+*.pt
+logs/
+*.log
+
+# Jupyter Notebooks
+.ipynb_checkpoints/
+*.ipynb
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# TensorBoard
+runs/
+events.out.tfevents.*
+
+# Model files (quá lớn để commit)
+models/*.pth
+models/*.onnx
+models/*.pt
+
+# Temporary files
+*.tmp
+*.temp
+temp/
+tmp/
+

@@ -1,0 +1,19 @@
+# Dashboard Dependencies
+# Streamlit dashboard for Smart Retail Analytics
+
+# Web framework
+streamlit>=1.28.0
+
+# Data processing
+pandas>=2.1.0
+numpy>=1.24.0
+
+# Visualization
+plotly>=5.17.0
+
+# HTTP requests
+requests>=2.31.0
+
+# Utilities
+python-dotenv>=1.0.0
+

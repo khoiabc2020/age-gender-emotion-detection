@@ -1,0 +1,26 @@
+apiVersion: serving.kserve.io/v1beta1
+kind: InferenceService
+metadata:
+  name: multitask-model
+  namespace: smart-retail
+spec:
+  predictor:
+    pytorch:
+      storageUri: s3://models/multitask_fastvit/v1/
+      resources:
+        requests:
+          cpu: "2"
+          memory: "4Gi"
+        limits:
+          cpu: "4"
+          memory: "8Gi"
+      env:
+      - name: STORAGE_ENDPOINT
+        value: "http://minio:9000"
+      - name: AWS_ACCESS_KEY_ID
+        value: "minioadmin"
+      - name: AWS_SECRET_ACCESS_KEY
+        value: "minioadmin123"
+      - name: AWS_ENDPOINT_URL
+        value: "http://minio:9000"
+

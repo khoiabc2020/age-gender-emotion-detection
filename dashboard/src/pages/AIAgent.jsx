@@ -1,0 +1,439 @@
+import React, { useState, useEffect, useRef } from 'react'
+import { Card, Input, Button, Typography, Space, Spin, message, Select, Divider, Tag, List, Avatar } from 'antd'
+import {
+  RobotOutlined,
+  SendOutlined,
+  FileTextOutlined,
+  BulbOutlined,
+  CheckCircleOutlined,
+  LoadingOutlined,
+  ThunderboltOutlined,
+} from '@ant-design/icons'
+import api from '../services/api'
+
+const { Title, Text, Paragraph } = Typography
+const { TextArea } = Input
+const { Option } = Select
+
+const AIAgentPage = () => {
+  const [question, setQuestion] = useState('')
+  const [chatHistory, setChatHistory] = useState([])
+  const [loading, setLoading] = useState(false)
+  const [analyzing, setAnalyzing] = useState(false)
+  const [reportGenerating, setReportGenerating] = useState(false)
+  const [analysis, setAnalysis] = useState(null)
+  const [report, setReport] = useState(null)
+  const [timeRange, setTimeRange] = useState(24)
+  const [aiStatus, setAiStatus] = useState(null)
+  const chatEndRef = useRef(null)
+
+  useEffect(() => {
+    checkAIStatus()
+  }, [])
+
+  const checkAIStatus = async () => {
+    try {
+      const response = await api.get('/api/v1/ai/status')
+      setAiStatus(response.data)
+    } catch (error) {
+      console.error('Failed to check AI status:', error)
+    }
+  }
+
+  const handleChat = async () => {
+    if (!question.trim()) {
+      message.warning('Vui lòng nhập câu hỏi!')
+      return
+    }
+
+    setLoading(true)
+    const userQuestion = question
+    setQuestion('')
+
+    // Add user message to history
+    const userMessage = {
+      type: 'user',
+      content: userQuestion,
+      timestamp: new Date().toLocaleTimeString(),
+    }
+    setChatHistory((prev) => [...prev, userMessage])
+
+    try {
+      const response = await api.post('/api/v1/ai/chat', {
+        question: userQuestion,
+        time_range_hours: timeRange,
+      })
+
+      const aiMessage = {
+        type: 'ai',
+        content: response.data.answer,
+        timestamp: new Date().toLocaleTimeString(),
+      }
+      setChatHistory((prev) => [...prev, aiMessage])
+      // Auto scroll to bottom
+      setTimeout(() => {
+        chatEndRef.current?.scrollIntoView({ behavior: 'smooth' })
+      }, 100)
+    } catch (error) {
+      message.error('Lỗi khi gửi câu hỏi. Vui lòng kiểm tra cấu hình AI.')
+      setChatHistory((prev) => prev.slice(0, -1)) // Remove user message on error
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  const handleAnalyze = async () => {
+    setAnalyzing(true)
+    try {
+      const response = await api.post(`/api/v1/ai/analyze?time_range_hours=${timeRange}`)
+      setAnalysis(response.data)
+      message.success('Phân tích hoàn tất!')
+    } catch (error) {
+      message.error('Lỗi khi phân tích. Vui lòng kiểm tra cấu hình AI.')
+    } finally {
+      setAnalyzing(false)
+    }
+  }
+
+  const handleGenerateReport = async () => {
+    setReportGenerating(true)
+    try {
+      const response = await api.post('/api/v1/ai/generate-report', {
+        time_range_hours: timeRange,
+        include_charts: true,
+      })
+      setReport(response.data.report)
+      message.success('Báo cáo đã được tạo!')
+    } catch (error) {
+      message.error('Lỗi khi tạo báo cáo. Vui lòng kiểm tra cấu hình AI.')
+    } finally {
+      setReportGenerating(false)
+    }
+  }
+
+  const quickQuestions = [
+    'Phân tích xu hướng khách hàng trong 24h qua?',
+    'Nhóm tuổi nào chiếm đa số?',
+    'Cảm xúc phổ biến nhất là gì?',
+    'Quảng cáo nào hiệu quả nhất?',
+    'Đề xuất cải thiện hệ thống?',
+  ]
+
+  return (
+    <div className="animate-fade-in">
+      {/* Header */}
+      <div className="mb-6">
+        <div className="flex items-center justify-between">
+          <div>
+            <Title level={2} className="gradient-text mb-2 flex items-center gap-3">
+              <RobotOutlined className="text-4xl" style={{ color: '#667eea' }} />
+              AI Agent - Trợ lý Phân tích
+            </Title>
+            <p className="text-gray-500">Chat với dữ liệu và nhận insights tự động từ AI</p>
+          </div>
+          {aiStatus && (
+            <Tag
+              color={aiStatus.available ? 'success' : 'warning'}
+              icon={aiStatus.available ? <CheckCircleOutlined /> : <LoadingOutlined />}
+              className="text-base px-4 py-2"
+            >
+              {aiStatus.available
+                ? `AI ${aiStatus.provider === 'both' ? 'Ready (Both)' : aiStatus.provider === 'google_ai' ? 'Ready (Google)' : 'Ready (ChatGPT)'}`
+                : 'Chưa cấu hình'}
+            </Tag>
+          )}
+        </div>
+      </div>
+
+      {/* AI Status Info */}
+      {aiStatus && !aiStatus.available && (
+        <Card
+          className="mb-6 border-orange-200 bg-orange-50"
+          style={{ borderRadius: '16px' }}
+        >
+          <div className="flex items-center gap-3">
+            <ThunderboltOutlined className="text-2xl text-orange-500" />
+            <div>
+              <Text strong className="text-orange-800">
+                AI Agent chưa được cấu hình
+              </Text>
+              <Paragraph className="text-orange-600 mb-0 mt-1">
+                Vui lòng thêm API keys trong Settings để sử dụng tính năng AI.
+                Hỗ trợ Google AI (Gemini) và ChatGPT.
+              </Paragraph>
+            </div>
+          </div>
+        </Card>
+      )}
+
+      <Row gutter={[16, 16]}>
+        {/* Chat Section */}
+        <Col xs={24} lg={14}>
+          <Card
+            className="card-hover border-0 shadow-lg h-full"
+            style={{ borderRadius: '20px', background: 'rgba(255, 255, 255, 0.95)' }}
+            title={
+              <span className="text-lg font-semibold gradient-text flex items-center gap-2">
+                <RobotOutlined /> Chat với AI
+              </span>
+            }
+            extra={
+              <Select
+                value={timeRange}
+                onChange={setTimeRange}
+                style={{ width: 120 }}
+                size="small"
+              >
+                <Option value={1}>1 giờ</Option>
+                <Option value={6}>6 giờ</Option>
+                <Option value={24}>24 giờ</Option>
+                <Option value={48}>48 giờ</Option>
+                <Option value={72}>72 giờ</Option>
+              </Select>
+            }
+          >
+            {/* Chat History */}
+            <div
+              className="mb-4 p-4 rounded-lg"
+              style={{
+                height: '400px',
+                overflowY: 'auto',
+                background: '#f8fafc',
+                border: '1px solid #e2e8f0',
+              }}
+            >
+              {chatHistory.length === 0 ? (
+                <div className="text-center text-gray-400 py-8">
+                  <RobotOutlined className="text-4xl mb-3" />
+                  <p>Bắt đầu trò chuyện với AI Agent</p>
+                  <p className="text-sm mt-2">Hoặc chọn câu hỏi nhanh bên dưới</p>
+                </div>
+              ) : (
+                <Space direction="vertical" size="large" className="w-full">
+                  {chatHistory.map((msg, index) => (
+                    <div
+                      key={index}
+                      className={`flex gap-3 ${
+                        msg.type === 'user' ? 'justify-end' : 'justify-start'
+                      }`}
+                    >
+                      {msg.type === 'ai' && (
+                        <Avatar
+                          icon={<RobotOutlined />}
+                          style={{
+                            background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+                          }}
+                        />
+                      )}
+                      <div
+                        className={`max-w-[80%] p-3 rounded-lg ${
+                          msg.type === 'user'
+                            ? 'bg-gradient-primary text-white'
+                            : 'bg-white border border-gray-200'
+                        }`}
+                        style={{
+                          borderRadius: '12px',
+                        }}
+                      >
+                        <Paragraph className="mb-1" style={{ color: msg.type === 'user' ? 'white' : '#1e293b' }}>
+                          {msg.content}
+                        </Paragraph>
+                        <Text
+                          className="text-xs opacity-70"
+                          style={{ color: msg.type === 'user' ? 'white' : '#64748b' }}
+                        >
+                          {msg.timestamp}
+                        </Text>
+                      </div>
+                      {msg.type === 'user' && (
+                        <Avatar
+                          style={{
+                            background: 'linear-gradient(135deg, #f093fb 0%, #f5576c 100%)',
+                          }}
+                        >
+                          U
+                        </Avatar>
+                      )}
+                    </div>
+                  ))}
+                  {loading && (
+                    <div className="flex justify-start gap-3">
+                      <Avatar
+                        icon={<RobotOutlined />}
+                        style={{
+                          background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+                        }}
+                      />
+                      <div className="bg-white border border-gray-200 p-3 rounded-lg">
+                        <Spin size="small" />
+                        <span className="ml-2 text-gray-500">AI đang suy nghĩ...</span>
+                      </div>
+                    </div>
+                  )}
+                  <div ref={chatEndRef} />
+                </Space>
+              )}
+            </div>
+
+            {/* Quick Questions */}
+            <div className="mb-4">
+              <Text className="text-sm text-gray-500 mb-2 block">Câu hỏi nhanh:</Text>
+              <Space wrap>
+                {quickQuestions.map((q, index) => (
+                  <Button
+                    key={index}
+                    size="small"
+                    type="dashed"
+                    onClick={() => setQuestion(q)}
+                    className="rounded-lg"
+                  >
+                    {q}
+                  </Button>
+                ))}
+              </Space>
+            </div>
+
+            {/* Input */}
+            <Space.Compact className="w-full">
+              <TextArea
+                value={question}
+                onChange={(e) => setQuestion(e.target.value)}
+                placeholder="Nhập câu hỏi của bạn..."
+                rows={2}
+                onPressEnter={(e) => {
+                  if (!e.shiftKey) {
+                    e.preventDefault()
+                    handleChat()
+                  }
+                }}
+                className="rounded-l-lg"
+              />
+              <Button
+                type="primary"
+                icon={<SendOutlined />}
+                onClick={handleChat}
+                loading={loading}
+                className="rounded-r-lg bg-gradient-primary border-0"
+                style={{
+                  background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+                  height: 'auto',
+                }}
+              >
+                Gửi
+              </Button>
+            </Space.Compact>
+          </Card>
+        </Col>
+
+        {/* Analysis & Report Section */}
+        <Col xs={24} lg={10}>
+          <Space direction="vertical" size="large" className="w-full">
+            {/* Quick Analyze */}
+            <Card
+              className="card-hover border-0 shadow-lg"
+              style={{ borderRadius: '20px', background: 'rgba(255, 255, 255, 0.95)' }}
+              title={
+                <span className="text-lg font-semibold gradient-text flex items-center gap-2">
+                  <BulbOutlined /> Phân tích Nhanh
+                </span>
+              }
+            >
+              <Button
+                type="primary"
+                block
+                icon={<BulbOutlined />}
+                onClick={handleAnalyze}
+                loading={analyzing}
+                className="rounded-lg bg-gradient-success border-0 mb-3"
+                style={{
+                  background: 'linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)',
+                  height: '48px',
+                  fontSize: '16px',
+                  fontWeight: 600,
+                }}
+              >
+                Phân tích Dữ liệu
+              </Button>
+              {analysis && (
+                <div className="mt-4 space-y-3">
+                  {analysis.insights && analysis.insights.length > 0 && (
+                    <div>
+                      <Text strong className="text-gray-700">Insights:</Text>
+                      <List
+                        size="small"
+                        dataSource={analysis.insights}
+                        renderItem={(item) => (
+                          <List.Item>
+                            <Text className="text-sm">{item}</Text>
+                          </List.Item>
+                        )}
+                      />
+                    </div>
+                  )}
+                  {analysis.recommendations && analysis.recommendations.length > 0 && (
+                    <div>
+                      <Text strong className="text-gray-700">Đề xuất:</Text>
+                      <List
+                        size="small"
+                        dataSource={analysis.recommendations}
+                        renderItem={(item) => (
+                          <List.Item>
+                            <Text className="text-sm">{item}</Text>
+                          </List.Item>
+                        )}
+                      />
+                    </div>
+                  )}
+                </div>
+              )}
+            </Card>
+
+            {/* Generate Report */}
+            <Card
+              className="card-hover border-0 shadow-lg"
+              style={{ borderRadius: '20px', background: 'rgba(255, 255, 255, 0.95)' }}
+              title={
+                <span className="text-lg font-semibold gradient-text flex items-center gap-2">
+                  <FileTextOutlined /> Báo cáo Tự động
+                </span>
+              }
+            >
+              <Button
+                type="primary"
+                block
+                icon={<FileTextOutlined />}
+                onClick={handleGenerateReport}
+                loading={reportGenerating}
+                className="rounded-lg bg-gradient-warning border-0"
+                style={{
+                  background: 'linear-gradient(135deg, #fa709a 0%, #fee140 100%)',
+                  height: '48px',
+                  fontSize: '16px',
+                  fontWeight: 600,
+                }}
+              >
+                Tạo Báo cáo
+              </Button>
+              {report && (
+                <div
+                  className="mt-4 p-4 rounded-lg bg-gray-50"
+                  style={{
+                    maxHeight: '300px',
+                    overflowY: 'auto',
+                    whiteSpace: 'pre-wrap',
+                    fontSize: '13px',
+                  }}
+                >
+                  <Paragraph className="text-gray-700">{report}</Paragraph>
+                </div>
+              )}
+            </Card>
+          </Space>
+        </Col>
+      </Row>
+    </div>
+  )
+}
+
+export default AIAgentPage
+

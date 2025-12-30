@@ -1,0 +1,15 @@
+{
+  "run_id": 3,
+  "config": {
+    "data_dir": "data/processed",
+    "epochs": 50,
+    "batch_size": 32,
+    "learning_rate": 0.0005,
+    "use_distillation": true,
+    "use_qat": false,
+    "output_dir": "models/run_3"
+  },
+  "success": false,
+  "elapsed_time": 10.516689538955688,
+  "returncode": 2
+}

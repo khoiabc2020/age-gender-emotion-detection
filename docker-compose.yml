@@ -1,0 +1,154 @@
+version: '3.8'
+
+services:
+  # PostgreSQL Database
+  postgres:
+    image: postgres:15-alpine
+    container_name: retail_analytics_db
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: retail_analytics
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./database/init.sql:/docker-entrypoint-initdb.d/init.sql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - retail_network
+    restart: unless-stopped
+
+  # MQTT Broker (Mosquitto)
+  mqtt:
+    image: eclipse-mosquitto:2.0
+    container_name: retail_analytics_mqtt
+    ports:
+      - "1883:1883"
+      - "9001:9001"
+    volumes:
+      - ./mqtt/config:/mosquitto/config
+      - mqtt_data:/mosquitto/data
+      - mqtt_log:/mosquitto/log
+    networks:
+      - retail_network
+    restart: unless-stopped
+
+  # Backend API
+  backend:
+    build:
+      context: ./backend_api
+      dockerfile: Dockerfile
+    container_name: retail_analytics_api
+    environment:
+      DATABASE_URL: postgresql://postgres:postgres@postgres:5432/retail_analytics
+      MQTT_BROKER: mqtt
+      MQTT_PORT: 1883
+      MQTT_TOPIC: retail/analytics
+      SECRET_KEY: ${SECRET_KEY:-your-secret-key-change-in-production}
+      DEBUG: ${DEBUG:-true}
+      # AI Agent Configuration
+      GOOGLE_AI_API_KEY: ${GOOGLE_AI_API_KEY:-}
+      OPENAI_API_KEY: ${OPENAI_API_KEY:-}
+      AI_PROVIDER: ${AI_PROVIDER:-google_ai}
+    ports:
+      - "8000:8000"
+    depends_on:
+      postgres:
+        condition: service_healthy
+      mqtt:
+        condition: service_started
+    volumes:
+      - ./backend_api:/app
+    networks:
+      - retail_network
+    command: uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # MQTT Worker (Background worker)
+  mqtt_worker:
+    build:
+      context: ./backend_api
+      dockerfile: Dockerfile
+    container_name: retail_analytics_worker
+    environment:
+      DATABASE_URL: postgresql://postgres:postgres@postgres:5432/retail_analytics
+      MQTT_BROKER: mqtt
+      MQTT_PORT: 1883
+      MQTT_TOPIC: retail/analytics
+    depends_on:
+      - postgres
+      - mqtt
+      - backend
+    volumes:
+      - ./backend_api:/app
+    networks:
+      - retail_network
+    command: python -m app.workers.mqtt_worker
+    restart: unless-stopped
+
+  # Dashboard (React Frontend)
+  dashboard:
+    build:
+      context: ./dashboard
+      dockerfile: Dockerfile
+    container_name: retail_analytics_dashboard
+    environment:
+      VITE_API_BASE_URL: http://localhost:8000
+    ports:
+      - "3000:80"
+    depends_on:
+      - backend
+    networks:
+      - retail_network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost/"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # Edge AI App (optional, can run separately)
+  # Uncomment to run edge app in Docker
+  # edge_app:
+  #   build:
+  #     context: ./ai_edge_app
+  #     dockerfile: Dockerfile
+  #   container_name: retail_analytics_edge
+  #   environment:
+  #     MQTT_BROKER: mqtt
+  #     MQTT_PORT: 1883
+  #     MQTT_TOPIC: retail/analytics
+  #     DEVICE_KEY: ${EDGE_DEVICE_KEY:-edge_device_001}
+  #   devices:
+  #     - /dev/video0:/dev/video0  # Camera device
+  #   depends_on:
+  #     - mqtt
+  #   volumes:
+  #     - ./ai_edge_app:/app
+  #     - ./ai_edge_app/models:/app/models
+  #   networks:
+  #     - retail_network
+  #   privileged: true
+  #   restart: unless-stopped
+
+volumes:
+  postgres_data:
+    driver: local
+  mqtt_data:
+    driver: local
+  mqtt_log:
+    driver: local
+
+networks:
+  retail_network:
+    driver: bridge

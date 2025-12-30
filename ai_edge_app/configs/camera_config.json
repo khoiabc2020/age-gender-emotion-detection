@@ -1,0 +1,28 @@
+{
+  "camera": {
+    "source": 0,
+    "width": 640,
+    "height": 480,
+    "fps": 30
+  },
+  "detection": {
+    "confidence_threshold": 0.7,
+    "min_face_size": 40
+  },
+  "tracking": {
+    "use_bytetrack": true,
+    "max_age": 30,
+    "min_hits": 3,
+    "iou_threshold": 0.3,
+    "track_thresh": 0.5,
+    "high_thresh": 0.6,
+    "dwell_threshold": 3.0
+  },
+  "mqtt": {
+    "broker": "localhost",
+    "port": 1883,
+    "topic": "retail/analytics",
+    "device_key": "edge_device_001"
+  }
+}
+
