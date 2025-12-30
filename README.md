@@ -42,7 +42,9 @@ START_PROJECT.bat
 
 **Xem file:** [`HUONG_DAN_CHAY_LOCALHOST.md`](HUONG_DAN_CHAY_LOCALHOST.md) - Hướng dẫn đầy đủ cách chạy localhost
 
-**Học tập & Sử dụng:** [`HUONG_DAN_HOC_TAP_VA_SU_DUNG.md`](HUONG_DAN_HOC_TAP_VA_SU_DUNG.md) - **Hướng dẫn học tập & sử dụng từ A đến Z** ⭐⭐⭐ NEW
+**Học tập & Sử dụng:** [`HUONG_DAN_HOC_TAP_VA_SU_DUNG.md`](HUONG_DAN_HOC_TAP_VA_SU_DUNG.md) - **Hướng dẫn học tập & sử dụng từ A đến Z** ⭐⭐⭐
+
+**GitHub & Colab:** [`docs/GITHUB_AND_COLAB_GUIDE.md`](docs/GITHUB_AND_COLAB_GUIDE.md) - **Hướng dẫn upload GitHub và train trên Colab** ⭐⭐⭐
 
 **Tài liệu tổng hợp:** [`PROJECT_DOCUMENTATION.md`](PROJECT_DOCUMENTATION.md) - Tài liệu đầy đủ về dự án
 
@@ -169,27 +171,25 @@ npm test
 
 ## 📚 Documentation
 
-### ⭐ Hướng Dẫn Chạy (Quan Trọng)
-- **[HUONG_DAN_CHAY_LOCALHOST.md](HUONG_DAN_CHAY_LOCALHOST.md)** - **Hướng dẫn chạy localhost chi tiết** ⭐⭐⭐
-- [README_START.md](README_START.md) - Hướng dẫn chạy từng phần
-- [QUICK_START.md](QUICK_START.md) - Quick start guide
+### ⭐ Hướng Dẫn Quan Trọng
+- **[HUONG_DAN_CHAY_LOCALHOST.md](HUONG_DAN_CHAY_LOCALHOST.md)** - Hướng dẫn chạy localhost chi tiết ⭐⭐⭐
+- **[HUONG_DAN_HOC_TAP_VA_SU_DUNG.md](HUONG_DAN_HOC_TAP_VA_SU_DUNG.md)** - Hướng dẫn học tập & sử dụng từ A đến Z ⭐⭐⭐
+- **[docs/GITHUB_AND_COLAB_GUIDE.md](docs/GITHUB_AND_COLAB_GUIDE.md)** - Hướng dẫn GitHub & Colab ⭐⭐⭐
 
 ### 📖 Tài Liệu Chính
-- [README_COMPLETE.md](README_COMPLETE.md) - Complete documentation
-- [PROJECT_STATUS.md](PROJECT_STATUS.md) - Trạng thái dự án
 - [PROJECT_DOCUMENTATION.md](PROJECT_DOCUMENTATION.md) - Index tất cả tài liệu
+- [docs/PROJECT_DETAILS.md](docs/PROJECT_DETAILS.md) - Chi tiết dự án
+- [docs/ROADMAP.md](docs/ROADMAP.md) - Roadmap phát triển
+- [docs/SETUP.md](docs/SETUP.md) - Hướng dẫn setup
 
-### 📁 Tài Liệu Chi Tiết
-- [docs/PROJECT_README.md](docs/PROJECT_README.md) - Complete project overview
-- [docs/HUONG_DAN_CHAY_DU_AN.md](docs/HUONG_DAN_CHAY_DU_AN.md) - Hướng dẫn đầy đủ
+### 🎓 Training
+- [training_experiments/README.md](training_experiments/README.md) - Training guide
+- [training_experiments/AUTO_TRAINING_GUIDE.md](training_experiments/AUTO_TRAINING_GUIDE.md) - Auto training
+- [training_experiments/DATASETS_INFO.md](training_experiments/DATASETS_INFO.md) - Datasets info
 
-### Training
-- [training_experiments/TRAINING_GUIDE.md](training_experiments/TRAINING_GUIDE.md) - Complete training guide
-- [training_experiments/TRAINING_OPTIMIZATION_GUIDE.md](training_experiments/TRAINING_OPTIMIZATION_GUIDE.md) - Advanced optimization
-
-### Edge App
+### 🚀 Edge App
 - [ai_edge_app/README.md](ai_edge_app/README.md) - Edge app docs
-- [ai_edge_app/ULTIMATE_ROADMAP.md](ai_edge_app/ULTIMATE_ROADMAP.md) - Ultimate Edition roadmap
+- [ai_edge_app/ULTIMATE_ROADMAP.md](ai_edge_app/ULTIMATE_ROADMAP.md) - Roadmap
 
 ## 🔒 Security
 
