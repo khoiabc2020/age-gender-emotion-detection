@@ -8,7 +8,7 @@ echo.
 cd /d "%~dp0\..\.."
 
 REM Thông tin GitHub
-set GITHUB_USER=khoiabc2k4
+set GITHUB_USER=khoiabc2020
 set GITHUB_REPO=age-gender-emotion-detection
 set GITHUB_URL=https://github.com/%GITHUB_USER%/%GITHUB_REPO%.git
 

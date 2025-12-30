@@ -4,8 +4,8 @@ echo ============================================================
 echo TU DONG PUSH CODE LEN GITHUB
 echo ============================================================
 echo.
-echo Repository: https://github.com/khoiabc2k4/age-gender-emotion-detection
-echo Username: khoiabc2k4
+echo Repository: https://github.com/khoiabc2020/age-gender-emotion-detection
+echo Username: khoiabc2020
 echo.
 
 cd /d "%~dp0"
@@ -34,7 +34,7 @@ if not exist ".git" (
 echo.
 echo [2/6] Dang setup remote...
 git remote remove origin 2>nul
-git remote add origin https://github.com/khoiabc2k4/age-gender-emotion-detection.git
+git remote add origin https://github.com/khoiabc2020/age-gender-emotion-detection.git
 echo [OK] Da them remote
 
 echo.
