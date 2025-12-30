@@ -150,8 +150,7 @@ artifacts/
 *.artifact
 
 # GitHub Actions workflows (nếu token không có scope workflow)
-# Uncomment nếu gặp lỗi khi push:
-# .github/workflows/
+.github/workflows/
 
 # ========== SECURITY & SECRETS ==========
 *.pem
