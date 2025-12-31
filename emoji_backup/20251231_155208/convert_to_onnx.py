@@ -73,14 +73,14 @@ def convert_to_onnx(
         verbose=False
     )
     
-    print(f"[OK] Model exported to: {output_path}")
+    print(f"✅ Model exported to: {output_path}")
     
     # Verify ONNX model
     print("\nVerifying ONNX model...")
     try:
         onnx_model = onnx.load(str(output_path))
         onnx.checker.check_model(onnx_model)
-        print("[OK] ONNX model is valid!")
+        print("✅ ONNX model is valid!")
         
         # Print model info
         print(f"\nModel info:")
@@ -89,7 +89,7 @@ def convert_to_onnx(
         print(f"  Opset version: {onnx_model.opset_import[0].version}")
         
     except Exception as e:
-        print(f"[ERROR] Error verifying ONNX model: {e}")
+        print(f"❌ Error verifying ONNX model: {e}")
         return False
     
     # Test inference
@@ -103,16 +103,16 @@ def convert_to_onnx(
         dummy_np = dummy_input.numpy()
         outputs = session.run(None, {input_name: dummy_np})
         
-        print(f"[OK] ONNX inference successful!")
+        print(f"✅ ONNX inference successful!")
         print(f"  Gender logits shape: {outputs[0].shape}")
         print(f"  Age prediction shape: {outputs[1].shape}")
         print(f"  Emotion logits shape: {outputs[2].shape}")
         
     except Exception as e:
-        print(f"[WARNING]  Warning: Could not test ONNX inference: {e}")
+        print(f"⚠️  Warning: Could not test ONNX inference: {e}")
     
     print("\n" + "=" * 60)
-    print("[OK] Conversion completed successfully!")
+    print("✅ Conversion completed successfully!")
     print("=" * 60)
     
     return True

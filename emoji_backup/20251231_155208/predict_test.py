@@ -106,13 +106,13 @@ def main():
     # Check if model exists
     model_path = Path(args.model_path)
     if not model_path.exists():
-        print(f"[ERROR] Model not found: {model_path}")
+        print(f"❌ Model not found: {model_path}")
         return
     
     # Check if image exists
     image_path = Path(args.image_path)
     if not image_path.exists():
-        print(f"[ERROR] Image not found: {image_path}")
+        print(f"❌ Image not found: {image_path}")
         return
     
     print(f"Model: {model_path}")
@@ -128,7 +128,7 @@ def main():
         results = predict_pytorch(str(model_path), str(image_path), args.device)
     
     # Print results
-    print("\n[INFO] Prediction Results:")
+    print("\n📊 Prediction Results:")
     print(f"  Gender: {results['gender']}")
     print(f"  Age: {results['age']} years")
     print(f"  Emotion: {results['emotion']}")

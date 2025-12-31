@@ -191,7 +191,7 @@ def evaluate_model(model_path, data_dir, batch_size=32, device='cuda'):
     print("EVALUATION RESULTS")
     print("=" * 60)
     
-    print(f"\n[INFO] Overall Metrics:")
+    print(f"\n📊 Overall Metrics:")
     print(f"  Gender Accuracy: {gender_acc:.2f}%")
     print(f"  Emotion Accuracy: {emotion_acc:.2f}%")
     print(f"  Age MAE: {age_mae:.2f} years")
@@ -211,7 +211,7 @@ def evaluate_model(model_path, data_dir, batch_size=32, device='cuda'):
         print(f"  {range_name}: MAE={stats['mae']:.2f} years (n={stats['count']})")
     
     # Check if metrics meet targets
-    print(f"\n[TARGET] Target Check:")
+    print(f"\n🎯 Target Check:")
     targets_met = {
         'gender': gender_acc >= 92.0,
         'emotion': emotion_acc >= 75.0,
@@ -219,7 +219,7 @@ def evaluate_model(model_path, data_dir, batch_size=32, device='cuda'):
     }
     
     for task, met in targets_met.items():
-        status = "[OK]" if met else "[ERROR]"
+        status = "✅" if met else "❌"
         print(f"  {task.capitalize()}: {status}")
     
     print("=" * 60)
@@ -246,7 +246,7 @@ def main():
     
     # Check device
     if args.device == 'cuda' and not torch.cuda.is_available():
-        print("[WARNING]  CUDA not available, using CPU")
+        print("⚠️  CUDA not available, using CPU")
         args.device = 'cpu'
     
     # Evaluate
@@ -263,7 +263,7 @@ def main():
         output_path.parent.mkdir(parents=True, exist_ok=True)
         with open(output_path, 'w') as f:
             json.dump(metrics, f, indent=2)
-        print(f"\n[OK] Metrics saved to: {output_path}")
+        print(f"\n✅ Metrics saved to: {output_path}")
 
 
 if __name__ == "__main__":

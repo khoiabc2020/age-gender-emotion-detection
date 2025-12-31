@@ -46,23 +46,23 @@ def check_training_status():
 def analyze_and_update():
     """Phân tích và cập nhật kết quả"""
     print("\n" + "=" * 80)
-    print("[RELOAD] CẬP NHẬT KẾT QUẢ VÀ ĐÁNH GIÁ")
+    print("🔄 CẬP NHẬT KẾT QUẢ VÀ ĐÁNH GIÁ")
     print("=" * 80)
     
     # Check status
     status = check_training_status()
-    print(f"\n[INFO] Trạng thái: {status['message']}")
+    print(f"\n📊 Trạng thái: {status['message']}")
     
     if status['status'] == 'not_started':
-        print("[ERROR] Training chưa bắt đầu. Chạy: python train_10x_automated.py")
+        print("❌ Training chưa bắt đầu. Chạy: python train_10x_automated.py")
         return
     
     if status['status'] == 'running':
-        print("[WAIT] Training đang chạy. Vui lòng đợi...")
+        print("⏳ Training đang chạy. Vui lòng đợi...")
         return
     
     # Run analysis
-    print("\n[UP] Đang phân tích kết quả...")
+    print("\n📈 Đang phân tích kết quả...")
     try:
         result = subprocess.run(
             [sys.executable, "analyze_results.py"],
@@ -75,7 +75,7 @@ def analyze_and_update():
         if result.stderr:
             print("Warnings:", result.stderr)
     except Exception as e:
-        print(f"[ERROR] Lỗi khi phân tích: {e}")
+        print(f"❌ Lỗi khi phân tích: {e}")
     
     # Create final report
     create_final_report()
@@ -95,11 +95,11 @@ def create_final_report():
     report_file = results_dir / "FINAL_EVALUATION_REPORT.md"
     
     with open(report_file, 'w', encoding='utf-8') as f:
-        f.write("# [INFO] BÁO CÁO ĐÁNH GIÁ CUỐI CÙNG - TRAINING 10 LẦN\n\n")
+        f.write("# 📊 BÁO CÁO ĐÁNH GIÁ CUỐI CÙNG - TRAINING 10 LẦN\n\n")
         f.write(f"**Ngày**: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n\n")
         f.write("---\n\n")
         
-        f.write("## [UP] Tổng quan\n\n")
+        f.write("## 📈 Tổng quan\n\n")
         f.write(f"- **Tổng số lần chạy**: {summary['total_runs']}\n")
         f.write(f"- **Số lần thành công**: {summary['successful_runs']}\n")
         f.write(f"- **Số lần thất bại**: {summary['total_runs'] - summary['successful_runs']}\n")
@@ -118,21 +118,21 @@ def create_final_report():
                 f.write(f"- **Test Accuracy**: {best['test_accuracy']:.4f}\n")
             f.write("\n")
         
-        f.write("## [LIST] Chi tiết từng Run\n\n")
+        f.write("## 📋 Chi tiết từng Run\n\n")
         for i, result in enumerate(summary['results'], 1):
             f.write(f"### Run {i}\n\n")
             f.write(f"- **Config**: {json.dumps(result['config'], indent=2)}\n")
-            f.write(f"- **Status**: {'[OK] Success' if result['success'] else '[ERROR] Failed'}\n")
+            f.write(f"- **Status**: {'✅ Success' if result['success'] else '❌ Failed'}\n")
             f.write(f"- **Thời gian**: {result['elapsed_time']:.1f}s\n")
             if result.get('stdout'):
                 f.write(f"- **Error Output**: {result['stdout'][:200]}...\n")
             f.write("\n")
         
         f.write("---\n\n")
-        f.write("## [TIP] Kết luận\n\n")
+        f.write("## 💡 Kết luận\n\n")
         
         if summary['successful_runs'] == 0:
-            f.write("[WARNING] **Tất cả lần training đều thất bại.**\n\n")
+            f.write("⚠️ **Tất cả lần training đều thất bại.**\n\n")
             f.write("**Nguyên nhân có thể:**\n")
             f.write("1. Thiếu dữ liệu training\n")
             f.write("2. Lỗi trong script training\n")
@@ -143,16 +143,16 @@ def create_final_report():
             f.write("2. Kiểm tra log: Xem `results/auto_train_10x/run_*_results.json`\n")
             f.write("3. Chạy thử 1 lần: `python train_week2_lightweight.py --data_dir data/processed --epochs 1`\n")
         elif summary['successful_runs'] > 0:
-            f.write(f"[OK] **{summary['successful_runs']} lần training thành công!**\n\n")
+            f.write(f"✅ **{summary['successful_runs']} lần training thành công!**\n\n")
             if summary.get('best_run'):
                 f.write(f"**Best Model**: Run {summary['best_run']['run_id']}\n")
                 f.write(f"**Location**: `results/auto_train_10x/run_{summary['best_run']['run_id']}/best_model.pth`\n")
         f.write("\n")
         
         f.write("---\n\n")
-        f.write("**Status**: [OK] Report Complete\n")
+        f.write("**Status**: ✅ Report Complete\n")
     
-    print(f"\n[OK] Báo cáo đã lưu vào: {report_file}")
+    print(f"\n✅ Báo cáo đã lưu vào: {report_file}")
 
 
 if __name__ == "__main__":

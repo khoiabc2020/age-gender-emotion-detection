@@ -314,7 +314,7 @@ def main():
     
     # Print summary
     print("\n" + "=" * 80)
-    print("[INFO] TỔNG KẾT TRAINING 10 LẦN")
+    print("📊 TỔNG KẾT TRAINING 10 LẦN")
     print("=" * 80)
     
     print(f"\nTổng số lần chạy: {len(all_results)}")
@@ -328,7 +328,7 @@ def main():
             print(f"   Test Accuracy: {summary['best_run']['test_accuracy']:.4f}")
         print(f"   Elapsed Time: {summary['best_run']['elapsed_time']:.1f}s")
     
-    print(f"\n[FOLDER] Results saved to: {results_dir}")
+    print(f"\n📁 Results saved to: {results_dir}")
     print("=" * 80 + "\n")
     
     return summary
@@ -339,9 +339,9 @@ if __name__ == "__main__":
         summary = main()
         sys.exit(0)
     except KeyboardInterrupt:
-        print("\n[WARNING]  Training interrupted by user")
+        print("\n⚠️  Training interrupted by user")
         sys.exit(1)
     except Exception as e:
-        logger.error(f"[ERROR] Fatal error: {e}", exc_info=True)
+        logger.error(f"❌ Fatal error: {e}", exc_info=True)
         sys.exit(1)
 

@@ -23,7 +23,7 @@ def test_preprocessing():
     data_dir = Path(__file__).parent.parent / "data" / "processed" / "utkface"
     
     if not data_dir.exists():
-        print(f"[ERROR] FAILED: Processed data not found at: {data_dir}")
+        print(f"❌ FAILED: Processed data not found at: {data_dir}")
         print("   Please run: python src/data/preprocess.py")
         return False
     
@@ -31,7 +31,7 @@ def test_preprocessing():
     for split in ['train', 'val', 'test']:
         split_dir = data_dir / split
         if not split_dir.exists():
-            print(f"[ERROR] FAILED: {split} directory not found")
+            print(f"❌ FAILED: {split} directory not found")
             return False
         
         # Count images
@@ -44,7 +44,7 @@ def test_preprocessing():
         else:
             print(f"  {split}: {len(images)} images")
     
-    print("[OK] PASSED: Preprocessing data found")
+    print("✅ PASSED: Preprocessing data found")
     return True
 
 
@@ -57,17 +57,17 @@ def test_dataset():
     data_dir = Path(__file__).parent.parent / "data" / "processed" / "utkface"
     
     if not data_dir.exists():
-        print("[ERROR] SKIPPED: Preprocessing data not found")
+        print("❌ SKIPPED: Preprocessing data not found")
         return False
     
     try:
         # Test dataset
         dataset = MultiTaskDataset(data_dir, split='train')
-        print(f"[OK] Dataset loaded: {len(dataset)} samples")
+        print(f"✅ Dataset loaded: {len(dataset)} samples")
         
         # Test sample
         sample = dataset[0]
-        print(f"[OK] Sample loaded:")
+        print(f"✅ Sample loaded:")
         print(f"   Image shape: {sample['image'].shape}")
         print(f"   Age: {sample['age'].item()}")
         print(f"   Gender: {sample['gender'].item()}")
@@ -77,21 +77,21 @@ def test_dataset():
         train_loader, val_loader, test_loader = get_dataloaders(
             data_dir, batch_size=4, num_workers=0
         )
-        print(f"[OK] DataLoaders created:")
+        print(f"✅ DataLoaders created:")
         print(f"   Train batches: {len(train_loader)}")
         print(f"   Val batches: {len(val_loader)}")
         print(f"   Test batches: {len(test_loader)}")
         
         # Test batch
         batch = next(iter(train_loader))
-        print(f"[OK] Batch loaded:")
+        print(f"✅ Batch loaded:")
         print(f"   Batch size: {batch['image'].shape[0]}")
         print(f"   Image shape: {batch['image'].shape}")
         
         return True
         
     except Exception as e:
-        print(f"[ERROR] FAILED: {e}")
+        print(f"❌ FAILED: {e}")
         import traceback
         traceback.print_exc()
         return False
@@ -105,14 +105,14 @@ def test_model():
     
     try:
         model = MultiTaskModel()
-        print(f"[OK] Model created")
+        print(f"✅ Model created")
         print(f"   Parameters: {sum(p.numel() for p in model.parameters()):,}")
         
         # Test forward pass
         x = torch.randn(2, 3, 224, 224)
         gender_logits, age_pred, emotion_logits = model(x)
         
-        print(f"[OK] Forward pass successful:")
+        print(f"✅ Forward pass successful:")
         print(f"   Gender logits: {gender_logits.shape}")
         print(f"   Age prediction: {age_pred.shape}")
         print(f"   Emotion logits: {emotion_logits.shape}")
@@ -127,14 +127,14 @@ def test_model():
         predictions = (gender_logits, age_pred, emotion_logits)
         losses = criterion(predictions, targets)
         
-        print(f"[OK] Loss calculation successful:")
+        print(f"✅ Loss calculation successful:")
         for key, value in losses.items():
             print(f"   {key}: {value.item():.4f}")
         
         return True
         
     except Exception as e:
-        print(f"[ERROR] FAILED: {e}")
+        print(f"❌ FAILED: {e}")
         import traceback
         traceback.print_exc()
         return False
@@ -149,7 +149,7 @@ def test_training_step():
     data_dir = Path(__file__).parent.parent / "data" / "processed" / "utkface"
     
     if not data_dir.exists():
-        print("[ERROR] SKIPPED: Preprocessing data not found")
+        print("❌ SKIPPED: Preprocessing data not found")
         return False
     
     try:
@@ -188,13 +188,13 @@ def test_training_step():
         losses['total'].backward()
         optimizer.step()
         
-        print(f"[OK] Training step successful:")
+        print(f"✅ Training step successful:")
         print(f"   Loss: {losses['total'].item():.4f}")
         
         return True
         
     except Exception as e:
-        print(f"[ERROR] FAILED: {e}")
+        print(f"❌ FAILED: {e}")
         import traceback
         traceback.print_exc()
         return False
@@ -224,19 +224,19 @@ def main():
     total = len(results)
     
     for name, result in results:
-        status = "[OK] PASSED" if result else "[ERROR] FAILED"
+        status = "✅ PASSED" if result else "❌ FAILED"
         print(f"{name}: {status}")
     
     print(f"\nTotal: {passed}/{total} tests passed")
     
     if passed == total:
-        print("\n[SUCCESS] All tests passed! Ready for training!")
+        print("\n🎉 All tests passed! Ready for training!")
         print("\nNext steps:")
         print("1. Run full training: python train.py --data_dir data/processed/utkface --epochs 50")
         print("2. Monitor: tensorboard --logdir checkpoints/logs")
         print("3. Convert to ONNX: python scripts/convert_to_onnx.py")
     else:
-        print("\n[WARNING]  Some tests failed. Please fix issues before training.")
+        print("\n⚠️  Some tests failed. Please fix issues before training.")
     
     print("=" * 60)
 

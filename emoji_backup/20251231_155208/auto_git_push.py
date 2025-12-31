@@ -45,36 +45,36 @@ def auto_commit_push():
     
     # Kiểm tra git repo
     if not check_git_repo():
-        print("[ERROR] Không phải git repository!")
+        print("❌ Không phải git repository!")
         print("   Chạy: git init")
         return False
     
     # Kiểm tra có thay đổi không
     success, status = get_git_status()
     if not success:
-        print("[ERROR] Lỗi khi kiểm tra git status")
+        print("❌ Lỗi khi kiểm tra git status")
         return False
     
     if not status:
-        print("[OK] Không có thay đổi nào để commit")
+        print("✅ Không có thay đổi nào để commit")
         return True
     
-    print("[NOTE] Phát hiện thay đổi:")
+    print("📝 Phát hiện thay đổi:")
     print(status)
     print()
     
     # Add tất cả thay đổi
-    print("[PACKAGE] Đang add files...")
+    print("📦 Đang add files...")
     success, stdout, stderr = run_command('git add .', cwd=project_root)
     if not success:
-        print(f"[ERROR] Lỗi khi add files: {stderr}")
+        print(f"❌ Lỗi khi add files: {stderr}")
         return False
     
     # Commit
     timestamp = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
     commit_message = f"Auto commit: {timestamp}"
     
-    print(f"[SAVE] Đang commit: {commit_message}")
+    print(f"💾 Đang commit: {commit_message}")
     success, stdout, stderr = run_command(
         f'git commit -m "{commit_message}"',
         cwd=project_root
@@ -82,26 +82,26 @@ def auto_commit_push():
     
     if not success:
         if "nothing to commit" in stderr.lower():
-            print("[OK] Không có gì để commit")
+            print("✅ Không có gì để commit")
             return True
-        print(f"[ERROR] Lỗi khi commit: {stderr}")
+        print(f"❌ Lỗi khi commit: {stderr}")
         return False
     
-    print("[OK] Đã commit thành công")
+    print("✅ Đã commit thành công")
     
     # Push
-    print("[OUTBOX] Đang push lên GitHub...")
+    print("📤 Đang push lên GitHub...")
     success, stdout, stderr = run_command('git push', cwd=project_root)
     
     if not success:
         if "no upstream branch" in stderr.lower():
-            print("[WARNING]  Chưa có upstream branch")
+            print("⚠️  Chưa có upstream branch")
             print("   Chạy: git push -u origin main")
             return False
-        print(f"[ERROR] Lỗi khi push: {stderr}")
+        print(f"❌ Lỗi khi push: {stderr}")
         return False
     
-    print("[OK] Đã push lên GitHub thành công!")
+    print("✅ Đã push lên GitHub thành công!")
     return True
 
 
@@ -110,15 +110,15 @@ def setup_git_repo():
     project_root = Path(__file__).parent.parent.parent
     
     if check_git_repo():
-        print("[OK] Đã là git repository")
+        print("✅ Đã là git repository")
         return True
     
-    print("[CONFIG] Đang setup git repository...")
+    print("🔧 Đang setup git repository...")
     
     # Init git
     success, stdout, stderr = run_command('git init', cwd=project_root)
     if not success:
-        print(f"[ERROR] Lỗi khi init git: {stderr}")
+        print(f"❌ Lỗi khi init git: {stderr}")
         return False
     
     # Tạo .gitignore nếu chưa có
@@ -169,10 +169,10 @@ Thumbs.db
 *.temp
 """
         gitignore.write_text(gitignore_content, encoding='utf-8')
-        print("[OK] Đã tạo .gitignore")
+        print("✅ Đã tạo .gitignore")
     
-    print("[OK] Đã setup git repository")
-    print("\n[NOTE] Các bước tiếp theo:")
+    print("✅ Đã setup git repository")
+    print("\n📝 Các bước tiếp theo:")
     print("1. Thêm remote: git remote add origin <your-github-repo-url>")
     print("2. Commit lần đầu: git add . && git commit -m 'Initial commit'")
     print("3. Push: git push -u origin main")
@@ -203,11 +203,11 @@ def main():
     
     if success:
         print("\n" + "=" * 60)
-        print("[OK] Hoàn tất!")
+        print("✅ Hoàn tất!")
         print("=" * 60)
     else:
         print("\n" + "=" * 60)
-        print("[ERROR] Có lỗi xảy ra")
+        print("❌ Có lỗi xảy ra")
         print("=" * 60)
 
 

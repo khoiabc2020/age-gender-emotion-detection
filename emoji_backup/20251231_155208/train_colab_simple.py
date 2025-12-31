@@ -242,7 +242,7 @@ def main():
             }
             
             torch.save(checkpoint, save_path / 'best_model.pth')
-            print(f"[OK] Saved best model (acc: {best_acc:.2f}%)")
+            print(f"✅ Saved best model (acc: {best_acc:.2f}%)")
     
     # Training complete
     elapsed = time.time() - start_time
@@ -271,9 +271,9 @@ def main():
             output_names=['gender', 'age', 'emotion'],
             dynamic_axes={'input': {0: 'batch_size'}}
         )
-        print(f"[OK] ONNX model saved to: {onnx_path}")
+        print(f"✅ ONNX model saved to: {onnx_path}")
     except Exception as e:
-        print(f"[WARNING] Could not export to ONNX: {e}")
+        print(f"⚠️ Could not export to ONNX: {e}")
     
     # Save results
     import json
@@ -287,7 +287,7 @@ def main():
     with open(Path(args.save_dir) / 'training_results.json', 'w') as f:
         json.dump(results, f, indent=2)
     
-    print(f"\n[OK] All done!")
+    print(f"\n✅ All done!")
 
 
 if __name__ == '__main__':

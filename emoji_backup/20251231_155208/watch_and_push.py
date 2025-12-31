@@ -15,7 +15,7 @@ try:
     WATCHDOG_AVAILABLE = True
 except ImportError:
     WATCHDOG_AVAILABLE = False
-    print("[WARNING]  Cần cài đặt: pip install watchdog")
+    print("⚠️  Cần cài đặt: pip install watchdog")
 
 
 class GitAutoPushHandler(FileSystemEventHandler):
@@ -43,7 +43,7 @@ class GitAutoPushHandler(FileSystemEventHandler):
         if any(ignored in event.src_path for ignored in ignored_dirs):
             return
         
-        print(f"[NOTE] Phát hiện thay đổi: {event.src_path}")
+        print(f"📝 Phát hiện thay đổi: {event.src_path}")
         self.pending_changes = True
         
         # Đợi delay giây trước khi commit (tránh commit quá nhiều)
@@ -55,7 +55,7 @@ class GitAutoPushHandler(FileSystemEventHandler):
     
     def commit_and_push(self):
         """Commit và push lên GitHub"""
-        print(f"\n[ALARM] {datetime.now().strftime('%Y-%m-%d %H:%M:%S')} - Đang commit và push...")
+        print(f"\n⏰ {datetime.now().strftime('%Y-%m-%d %H:%M:%S')} - Đang commit và push...")
         
         # Add
         subprocess.run(['git', 'add', '.'], cwd=self.project_root, 
@@ -72,7 +72,7 @@ class GitAutoPushHandler(FileSystemEventHandler):
         )
         
         if result.returncode == 0 and "nothing to commit" not in result.stdout.lower():
-            print(f"[OK] Đã commit: {commit_msg}")
+            print(f"✅ Đã commit: {commit_msg}")
             
             # Push
             push_result = subprocess.run(
@@ -83,9 +83,9 @@ class GitAutoPushHandler(FileSystemEventHandler):
             )
             
             if push_result.returncode == 0:
-                print(f"[OK] Đã push lên GitHub")
+                print(f"✅ Đã push lên GitHub")
             else:
-                print(f"[WARNING]  Lỗi khi push: {push_result.stderr}")
+                print(f"⚠️  Lỗi khi push: {push_result.stderr}")
         else:
             print("ℹ️  Không có gì để commit")
 
@@ -93,7 +93,7 @@ class GitAutoPushHandler(FileSystemEventHandler):
 def watch_and_push(project_root=None, delay=30):
     """Theo dõi thay đổi và tự động push"""
     if not WATCHDOG_AVAILABLE:
-        print("[ERROR] Cần cài đặt watchdog: pip install watchdog")
+        print("❌ Cần cài đặt watchdog: pip install watchdog")
         return
     
     if project_root is None:
@@ -102,16 +102,16 @@ def watch_and_push(project_root=None, delay=30):
     project_root = Path(project_root)
     
     if not (project_root / '.git').exists():
-        print("[ERROR] Không phải git repository!")
+        print("❌ Không phải git repository!")
         print("   Chạy: python scripts/auto_git_push.py để setup")
         return
     
     print("=" * 60)
     print("👀 Đang theo dõi thay đổi file...")
-    print(f"[FOLDER] Thư mục: {project_root}")
-    print(f"[TIMER]  Delay: {delay} giây")
+    print(f"📁 Thư mục: {project_root}")
+    print(f"⏱️  Delay: {delay} giây")
     print("=" * 60)
-    print("[TIP] Nhấn Ctrl+C để dừng")
+    print("💡 Nhấn Ctrl+C để dừng")
     print()
     
     event_handler = GitAutoPushHandler(project_root, delay)
@@ -127,7 +127,7 @@ def watch_and_push(project_root=None, delay=30):
         observer.stop()
     
     observer.join()
-    print("[OK] Đã dừng theo dõi")
+    print("✅ Đã dừng theo dõi")
 
 
 if __name__ == "__main__":
@@ -138,7 +138,7 @@ if __name__ == "__main__":
         try:
             delay = int(sys.argv[1])
         except ValueError:
-            print("[WARNING]  Delay không hợp lệ, sử dụng mặc định: 30 giây")
+            print("⚠️  Delay không hợp lệ, sử dụng mặc định: 30 giây")
     
     watch_and_push(delay=delay)
 

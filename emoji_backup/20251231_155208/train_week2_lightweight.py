@@ -185,16 +185,16 @@ def export_to_onnx(model, output_path, opset_version=13):
         verbose=False
     )
     
-    print(f"[OK] Model exported to: {output_path}")
+    print(f"✅ Model exported to: {output_path}")
     
     # Verify
     try:
         import onnx
         onnx_model = onnx.load(str(output_path))
         onnx.checker.check_model(onnx_model)
-        print(f"[OK] ONNX model valid (opset {onnx_model.opset_import[0].version})")
+        print(f"✅ ONNX model valid (opset {onnx_model.opset_import[0].version})")
     except Exception as e:
-        print(f"[WARNING]  Warning: Could not verify ONNX model: {e}")
+        print(f"⚠️  Warning: Could not verify ONNX model: {e}")
 
 
 def main():
@@ -232,7 +232,7 @@ def main():
         teacher_model.eval()  # Freeze teacher
         for param in teacher_model.parameters():
             param.requires_grad = False
-        print("[OK] Teacher model loaded")
+        print("✅ Teacher model loaded")
     else:
         teacher_model = None
     
@@ -245,12 +245,12 @@ def main():
         print("Enabling Quantization-Aware Training...")
         student_model = QATMultiTaskModel(base_student).to(device)
         student_model.prepare_qat()
-        print("[OK] QAT enabled")
+        print("✅ QAT enabled")
     else:
         student_model = base_student
     
     total_params = sum(p.numel() for p in student_model.parameters())
-    print(f"[OK] Student model created: {total_params:,} parameters")
+    print(f"✅ Student model created: {total_params:,} parameters")
     
     # Loss function
     if args.use_distillation:
@@ -334,7 +334,7 @@ def main():
                 'best_val_acc': best_val_acc
             }
             torch.save(checkpoint, save_dir / 'best_model.pth')
-            print(f"  [OK] Saved best model (Acc: {best_val_acc:.4f})")
+            print(f"  ✅ Saved best model (Acc: {best_val_acc:.4f})")
     
     # Export to ONNX
     print("\n" + "=" * 60)
@@ -356,7 +356,7 @@ def main():
     export_to_onnx(student_model, onnx_path, opset_version=args.opset_version)
     
     print("\n" + "=" * 60)
-    print("[OK] Training Complete!")
+    print("✅ Training Complete!")
     print("=" * 60)
     print(f"Best Model: {save_dir / 'best_model.pth'}")
     print(f"ONNX Model: {onnx_path}")

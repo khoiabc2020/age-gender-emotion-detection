@@ -52,18 +52,18 @@ def check_data():
 def prepare_data():
     """Chuẩn bị dữ liệu nếu chưa có"""
     print("\n" + "=" * 80)
-    print("[PACKAGE] CHUẨN BỊ DỮ LIỆU")
+    print("📦 CHUẨN BỊ DỮ LIỆU")
     print("=" * 80)
     
     # Kiểm tra data
     has_data, message = check_data()
     
     if has_data:
-        print(f"[OK] {message}")
+        print(f"✅ {message}")
         return True
     
-    print(f"[ERROR] {message}")
-    print("\n[CONFIG] Đang chuẩn bị dữ liệu...")
+    print(f"❌ {message}")
+    print("\n🔧 Đang chuẩn bị dữ liệu...")
     
     # Chạy script preprocess
     try:
@@ -80,37 +80,37 @@ def prepare_data():
         print("\n[2/3] Preprocessing data...")
         # Có thể cần chạy preprocess script
         # Tạm thời chỉ báo lỗi
-        print("[WARNING] Cần chạy preprocessing script trước!")
+        print("⚠️ Cần chạy preprocessing script trước!")
         print("   Chạy: python scripts/copy_datasets_to_project.py")
         print("   Sau đó: python src/data/preprocess.py")
         
         return False
         
     except Exception as e:
-        print(f"[ERROR] Lỗi khi chuẩn bị dữ liệu: {e}")
+        print(f"❌ Lỗi khi chuẩn bị dữ liệu: {e}")
         return False
 
 
 def run_training():
     """Chạy training"""
     print("\n" + "=" * 80)
-    print("[START] BẮT ĐẦU TRAINING")
+    print("🚀 BẮT ĐẦU TRAINING")
     print("=" * 80)
     
     # Kiểm tra lại data
     has_data, message = check_data()
     if not has_data:
-        print(f"[ERROR] {message}")
-        print("\n[WARNING] Không thể chạy training vì thiếu dữ liệu!")
-        print("\n[LIST] Hướng dẫn chuẩn bị dữ liệu:")
+        print(f"❌ {message}")
+        print("\n⚠️ Không thể chạy training vì thiếu dữ liệu!")
+        print("\n📋 Hướng dẫn chuẩn bị dữ liệu:")
         print("   1. Download datasets từ Kaggle")
         print("   2. Copy vào project: python scripts/copy_datasets_to_project.py")
         print("   3. Preprocess: python src/data/preprocess.py")
         return False
     
     # Chạy training
-    print(f"[OK] {message}")
-    print("\n[START] Đang chạy training 10 lần...")
+    print(f"✅ {message}")
+    print("\n🚀 Đang chạy training 10 lần...")
     
     try:
         result = subprocess.run(
@@ -120,29 +120,29 @@ def run_training():
         )
         
         if result.returncode == 0:
-            print("\n[OK] Training hoàn thành!")
+            print("\n✅ Training hoàn thành!")
             return True
         else:
-            print(f"\n[ERROR] Training thất bại với returncode: {result.returncode}")
+            print(f"\n❌ Training thất bại với returncode: {result.returncode}")
             return False
             
     except subprocess.TimeoutExpired:
-        print("\n[ALARM] Training timeout (quá 24 giờ)")
+        print("\n⏰ Training timeout (quá 24 giờ)")
         return False
     except Exception as e:
-        print(f"\n[ERROR] Lỗi khi chạy training: {e}")
+        print(f"\n❌ Lỗi khi chạy training: {e}")
         return False
 
 
 def main():
     """Main function"""
     print("\n" + "=" * 80)
-    print("[TARGET] CHUẨN BỊ & TRAINING TỰ ĐỘNG")
+    print("🎯 CHUẨN BỊ & TRAINING TỰ ĐỘNG")
     print("=" * 80)
     
     # Step 1: Prepare data
     if not prepare_data():
-        print("\n[ERROR] Không thể chuẩn bị dữ liệu. Vui lòng chuẩn bị thủ công.")
+        print("\n❌ Không thể chuẩn bị dữ liệu. Vui lòng chuẩn bị thủ công.")
         return
     
     # Step 2: Run training
@@ -150,16 +150,16 @@ def main():
     
     if success:
         print("\n" + "=" * 80)
-        print("[OK] HOÀN THÀNH!")
+        print("✅ HOÀN THÀNH!")
         print("=" * 80)
-        print("\n[INFO] Phân tích kết quả:")
+        print("\n📊 Phân tích kết quả:")
         print("   python analyze_results.py")
         print("   python update_results_and_evaluate.py")
     else:
         print("\n" + "=" * 80)
-        print("[ERROR] TRAINING THẤT BẠI")
+        print("❌ TRAINING THẤT BẠI")
         print("=" * 80)
-        print("\n[LIST] Kiểm tra:")
+        print("\n📋 Kiểm tra:")
         print("   1. Xem log: results/auto_train_10x/run_*_results.json")
         print("   2. Kiểm tra data: python scripts/check_datasets.py")
         print("   3. Chạy thử 1 lần: python train_week2_lightweight.py --data_dir data/processed --epochs 1")

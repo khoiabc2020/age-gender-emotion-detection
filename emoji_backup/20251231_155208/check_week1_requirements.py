@@ -22,7 +22,7 @@ sys.path.insert(0, str(project_root / "training_experiments" / "src"))
 def check_datasets():
     """Kiểm tra datasets có tồn tại không"""
     print("=" * 60)
-    print("[INFO] KIỂM TRA DATASETS")
+    print("📊 KIỂM TRA DATASETS")
     print("=" * 60)
     
     data_dir = project_root / "training_experiments" / "data"
@@ -41,13 +41,13 @@ def check_datasets():
         if path.exists():
             images = list(path.glob("*.jpg")) + list(path.glob("*.png"))
             if len(images) > 0:
-                print(f"   [OK] UTKFace found: {path}")
+                print(f"   ✅ UTKFace found: {path}")
                 print(f"      Images: {len(images)}")
                 utkface_found = True
                 break
     
     if not utkface_found:
-        print("   [ERROR] UTKFace dataset not found")
+        print("   ❌ UTKFace dataset not found")
         print("      Expected locations:")
         for path in utkface_paths:
             print(f"        - {path}")
@@ -72,14 +72,14 @@ def check_datasets():
                     for d in emotion_dirs
                 )
                 if total_images > 0:
-                    print(f"   [OK] FER2013 found: {path}")
+                    print(f"   ✅ FER2013 found: {path}")
                     print(f"      Emotion classes: {len(emotion_dirs)}")
                     print(f"      Total images: {total_images}")
                     fer2013_found = True
                     break
     
     if not fer2013_found:
-        print("   [ERROR] FER2013 dataset not found")
+        print("   ❌ FER2013 dataset not found")
         print("      Expected locations:")
         for path in fer2013_paths:
             print(f"        - {path}")
@@ -91,7 +91,7 @@ def check_datasets():
 def check_disgust_merge():
     """Kiểm tra logic gộp Disgust -> Angry"""
     print("\n" + "=" * 60)
-    print("[CLEAN] KIỂM TRA DATA CLEANING (Gộp Disgust -> Angry)")
+    print("🧹 KIỂM TRA DATA CLEANING (Gộp Disgust -> Angry)")
     print("=" * 60)
     
     results = []
@@ -108,15 +108,15 @@ def check_disgust_merge():
         has_emotion_map = 'disgust' in content.lower() and 'angry' in content.lower()
         
         if has_merge and has_emotion_map:
-            print("   [OK] Disgust -> Angry merge logic found")
+            print("   ✅ Disgust -> Angry merge logic found")
             print("      - merge_disgust_to_angry parameter")
             print("      - emotion_map with disgust -> angry")
             results.append(("advanced_preprocess.py", True))
         else:
-            print("   [WARNING]  Disgust merge logic may be incomplete")
+            print("   ⚠️  Disgust merge logic may be incomplete")
             results.append(("advanced_preprocess.py", False))
     else:
-        print("   [ERROR] advanced_preprocess.py not found")
+        print("   ❌ advanced_preprocess.py not found")
         results.append(("advanced_preprocess.py", False))
     
     # Check dataset.py
@@ -131,15 +131,15 @@ def check_disgust_merge():
         has_6_classes = 'num_emotions=6' in content or '6 classes' in content.lower()
         
         if has_emotion_map:
-            print("   [OK] Disgust -> Angry mapping in dataset.py")
+            print("   ✅ Disgust -> Angry mapping in dataset.py")
             if has_6_classes:
                 print("      - 6 emotion classes (Disgust merged)")
             results.append(("dataset.py", True))
         else:
-            print("   [WARNING]  Disgust mapping may be missing")
+            print("   ⚠️  Disgust mapping may be missing")
             results.append(("dataset.py", False))
     else:
-        print("   [ERROR] dataset.py not found")
+        print("   ❌ dataset.py not found")
         results.append(("dataset.py", False))
     
     return results
@@ -148,7 +148,7 @@ def check_disgust_merge():
 def check_albumentations():
     """Kiểm tra Albumentations augmentations"""
     print("\n" + "=" * 60)
-    print("[STYLE] KIỂM TRA DATA AUGMENTATION (Albumentations)")
+    print("🎨 KIỂM TRA DATA AUGMENTATION (Albumentations)")
     print("=" * 60)
     
     results = []
@@ -157,10 +157,10 @@ def check_albumentations():
     print("\n[1/3] Checking Albumentations package...")
     try:
         import albumentations as A
-        print(f"   [OK] Albumentations installed: {A.__version__}")
+        print(f"   ✅ Albumentations installed: {A.__version__}")
         results.append(("Albumentations Package", True))
     except ImportError:
-        print("   [ERROR] Albumentations not installed")
+        print("   ❌ Albumentations not installed")
         print("      Install: pip install albumentations")
         results.append(("Albumentations Package", False))
         return results
@@ -196,17 +196,17 @@ def check_albumentations():
         
         print(f"   Found {found_count}/{total_count} augmentations:")
         for aug_name, found in augmentations.items():
-            status = "[OK]" if found else "[ERROR]"
+            status = "✅" if found else "❌"
             print(f"      {status} {aug_name}")
         
         if found_count >= 10:
-            print(f"\n   [OK] Advanced augmentations implemented ({found_count}/{total_count})")
+            print(f"\n   ✅ Advanced augmentations implemented ({found_count}/{total_count})")
             results.append(("Augmentation Transforms", True))
         else:
-            print(f"\n   [WARNING]  Some augmentations missing ({found_count}/{total_count})")
+            print(f"\n   ⚠️  Some augmentations missing ({found_count}/{total_count})")
             results.append(("Augmentation Transforms", found_count >= 8))
     else:
-        print("   [ERROR] dataset.py not found")
+        print("   ❌ dataset.py not found")
         results.append(("Augmentation Transforms", False))
     
     # Check for MixUp and CutMix
@@ -219,14 +219,14 @@ def check_albumentations():
         has_cutmix = 'cutmix' in content.lower() and '_cutmix' in content.lower()
         
         if has_mixup:
-            print("   [OK] MixUp augmentation found")
+            print("   ✅ MixUp augmentation found")
         else:
-            print("   [ERROR] MixUp not found")
+            print("   ❌ MixUp not found")
         
         if has_cutmix:
-            print("   [OK] CutMix augmentation found")
+            print("   ✅ CutMix augmentation found")
         else:
-            print("   [ERROR] CutMix not found")
+            print("   ❌ CutMix not found")
         
         results.append(("MixUp & CutMix", has_mixup and has_cutmix))
     
@@ -236,7 +236,7 @@ def check_albumentations():
 def main():
     """Main function"""
     print("\n" + "=" * 60)
-    print("[SEARCH] KIỂM TRA TUẦN 1: CHUẨN BỊ & XỬ LÝ DỮ LIỆU")
+    print("🔍 KIỂM TRA TUẦN 1: CHUẨN BỊ & XỬ LÝ DỮ LIỆU")
     print("=" * 60)
     
     all_results = []
@@ -255,7 +255,7 @@ def main():
     
     # Summary
     print("\n" + "=" * 60)
-    print("[INFO] TỔNG KẾT")
+    print("📊 TỔNG KẾT")
     print("=" * 60)
     
     passed = sum(1 for _, result in all_results if result)
@@ -264,16 +264,16 @@ def main():
     print(f"\nKết quả: {passed}/{total} checks passed\n")
     
     for name, result in all_results:
-        status = "[OK] PASSED" if result else "[ERROR] FAILED"
+        status = "✅ PASSED" if result else "❌ FAILED"
         print(f"{name:40s} {status}")
     
     print("\n" + "=" * 60)
     
     if passed == total:
-        print("[SUCCESS] Tất cả yêu cầu Tuần 1 đã hoàn thành!")
+        print("🎉 Tất cả yêu cầu Tuần 1 đã hoàn thành!")
         print("\nCó thể tiếp tục với Tuần 2: Model Training")
     else:
-        print("[WARNING]  Một số yêu cầu chưa hoàn thành")
+        print("⚠️  Một số yêu cầu chưa hoàn thành")
         print("\nCần kiểm tra và sửa các phần còn thiếu trước khi tiếp tục")
     
     print("=" * 60 + "\n")

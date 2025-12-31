@@ -18,12 +18,12 @@ try:
     GOOGLE_DRIVE_AVAILABLE = True
 except ImportError:
     GOOGLE_DRIVE_AVAILABLE = False
-    print("[WARNING]  Cần cài đặt: pip install google-api-python-client google-auth-httplib2 google-auth-oauthlib")
+    print("⚠️  Cần cài đặt: pip install google-api-python-client google-auth-httplib2 google-auth-oauthlib")
 
 
 def create_zip_file(source_dir, output_zip):
     """Tạo file zip từ thư mục"""
-    print(f"[PACKAGE] Đang tạo file zip từ {source_dir}...")
+    print(f"📦 Đang tạo file zip từ {source_dir}...")
     
     with zipfile.ZipFile(output_zip, 'w', zipfile.ZIP_DEFLATED) as zipf:
         for root, dirs, files in os.walk(source_dir):
@@ -44,7 +44,7 @@ def create_zip_file(source_dir, output_zip):
                 zipf.write(file_path, arcname)
     
     size_mb = os.path.getsize(output_zip) / (1024 * 1024)
-    print(f"[OK] Đã tạo file zip: {output_zip} ({size_mb:.2f} MB)")
+    print(f"✅ Đã tạo file zip: {output_zip} ({size_mb:.2f} MB)")
     return output_zip
 
 
@@ -68,8 +68,8 @@ def authenticate_google_drive():
             creds.refresh(Request())
         else:
             if not os.path.exists(creds_file):
-                print("[ERROR] Không tìm thấy credentials.json")
-                print("\n[NOTE] Cách lấy credentials.json:")
+                print("❌ Không tìm thấy credentials.json")
+                print("\n📝 Cách lấy credentials.json:")
                 print("1. Truy cập: https://console.cloud.google.com/")
                 print("2. Tạo project mới (hoặc chọn project có sẵn)")
                 print("3. Enable Google Drive API:")
@@ -94,7 +94,7 @@ def authenticate_google_drive():
 def upload_to_drive(file_path, folder_name='Colab_Training', service=None):
     """Upload file lên Google Drive"""
     if not GOOGLE_DRIVE_AVAILABLE:
-        print("[ERROR] Google Drive API chưa được cài đặt")
+        print("❌ Google Drive API chưa được cài đặt")
         return None
     
     if service is None:
@@ -111,7 +111,7 @@ def upload_to_drive(file_path, folder_name='Colab_Training', service=None):
     
     if items:
         folder_id = items[0]['id']
-        print(f"[OK] Tìm thấy thư mục: {folder_name}")
+        print(f"✅ Tìm thấy thư mục: {folder_name}")
     else:
         # Tạo thư mục mới
         file_metadata = {
@@ -120,7 +120,7 @@ def upload_to_drive(file_path, folder_name='Colab_Training', service=None):
         }
         folder = service.files().create(body=file_metadata, fields='id').execute()
         folder_id = folder.get('id')
-        print(f"[OK] Đã tạo thư mục mới: {folder_name}")
+        print(f"✅ Đã tạo thư mục mới: {folder_name}")
     
     # Upload file
     file_name = os.path.basename(file_path)
@@ -130,7 +130,7 @@ def upload_to_drive(file_path, folder_name='Colab_Training', service=None):
     }
     
     media = MediaFileUpload(file_path, resumable=True)
-    print(f"[OUTBOX] Đang upload {file_name}...")
+    print(f"📤 Đang upload {file_name}...")
     
     file = service.files().create(
         body=file_metadata,
@@ -141,7 +141,7 @@ def upload_to_drive(file_path, folder_name='Colab_Training', service=None):
     file_id = file.get('id')
     file_link = file.get('webViewLink')
     
-    print(f"[OK] Upload thành công!")
+    print(f"✅ Upload thành công!")
     print(f"   File ID: {file_id}")
     print(f"   Link: {file_link}")
     
@@ -151,7 +151,7 @@ def upload_to_drive(file_path, folder_name='Colab_Training', service=None):
 def main():
     """Hàm chính"""
     print("=" * 60)
-    print("[START] Tự động upload code lên Google Drive cho Colab")
+    print("🚀 Tự động upload code lên Google Drive cho Colab")
     print("=" * 60)
     
     # Đường dẫn thư mục training_experiments
@@ -160,7 +160,7 @@ def main():
     training_dir = project_root / 'training_experiments'
     
     if not training_dir.exists():
-        print(f"[ERROR] Không tìm thấy thư mục: {training_dir}")
+        print(f"❌ Không tìm thấy thư mục: {training_dir}")
         return
     
     # Tạo file zip
@@ -173,7 +173,7 @@ def main():
         # Upload lên Google Drive
         if GOOGLE_DRIVE_AVAILABLE:
             print("\n" + "=" * 60)
-            print("[OUTBOX] Upload lên Google Drive...")
+            print("📤 Upload lên Google Drive...")
             print("=" * 60)
             
             result = upload_to_drive(str(zip_file))
@@ -181,21 +181,21 @@ def main():
             if result:
                 file_id, file_link = result
                 print("\n" + "=" * 60)
-                print("[OK] HOÀN TẤT!")
+                print("✅ HOÀN TẤT!")
                 print("=" * 60)
-                print(f"\n[FOLDER] File đã được upload lên Google Drive")
-                print(f"[LINK] Link: {file_link}")
-                print(f"\n[NOTE] Các bước tiếp theo:")
+                print(f"\n📁 File đã được upload lên Google Drive")
+                print(f"🔗 Link: {file_link}")
+                print(f"\n📝 Các bước tiếp theo:")
                 print(f"1. Mở Google Colab: https://colab.research.google.com/")
                 print(f"2. Mount Google Drive trong Colab")
                 print(f"3. Giải nén file zip từ Drive")
                 print(f"4. Chạy notebook train_on_colab.ipynb")
         else:
             print("\n" + "=" * 60)
-            print("[PACKAGE] File zip đã được tạo")
+            print("📦 File zip đã được tạo")
             print("=" * 60)
-            print(f"[FOLDER] Vị trí: {zip_file}")
-            print(f"\n[NOTE] Các bước tiếp theo:")
+            print(f"📁 Vị trí: {zip_file}")
+            print(f"\n📝 Các bước tiếp theo:")
             print(f"1. Upload file zip lên Google Drive thủ công")
             print(f"2. Mở Google Colab và mount Drive")
             print(f"3. Giải nén file zip")

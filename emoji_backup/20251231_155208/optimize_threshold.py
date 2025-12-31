@@ -146,7 +146,7 @@ def main():
     
     # Check device
     if args.device == 'cuda' and not torch.cuda.is_available():
-        print("[WARNING]  CUDA not available, using CPU")
+        print("⚠️  CUDA not available, using CPU")
         args.device = 'cpu'
     
     device = torch.device(args.device)
@@ -189,7 +189,7 @@ def main():
         gender_probs, gender_targets, 'gender'
     )
     
-    print(f"\n[INFO] Gender Threshold Optimization:")
+    print(f"\n📊 Gender Threshold Optimization:")
     print(f"  Best threshold: {gender_threshold:.3f}")
     print(f"  F1 Score: {gender_metrics['f1']:.4f}")
     print(f"  Precision: {gender_metrics['precision']:.4f}")
@@ -202,7 +202,7 @@ def main():
     )
     
     emotion_names = ['Angry', 'Disgust', 'Fear', 'Happy', 'Neutral', 'Sad', 'Surprise']
-    print(f"\n[INFO] Emotion Threshold Optimization:")
+    print(f"\n📊 Emotion Threshold Optimization:")
     print(f"  Average F1: {emotion_metrics['average_f1']:.4f}")
     print(f"  Per-class thresholds:")
     for i, (name, threshold) in enumerate(zip(emotion_names, emotion_thresholds)):
@@ -225,7 +225,7 @@ def main():
     with open(output_path, 'w') as f:
         json.dump(output_data, f, indent=2)
     
-    print(f"\n[OK] Optimal thresholds saved to: {output_path}")
+    print(f"\n✅ Optimal thresholds saved to: {output_path}")
     print("\n" + "=" * 60)
     print("Usage: Use these thresholds in inference for better results")
     print("=" * 60)

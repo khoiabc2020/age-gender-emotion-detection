@@ -96,15 +96,15 @@ def analyze_results(summary: Dict) -> Dict:
     
     # Đưa ra recommendations
     if len(failed_runs) > len(successful_runs):
-        analysis['recommendations'].append("[WARNING] Nhiều lần training thất bại. Kiểm tra lại dữ liệu và dependencies.")
+        analysis['recommendations'].append("⚠️ Nhiều lần training thất bại. Kiểm tra lại dữ liệu và dependencies.")
     
     if successful_runs:
-        analysis['recommendations'].append("[OK] Training thành công! Có thể sử dụng best model.")
+        analysis['recommendations'].append("✅ Training thành công! Có thể sử dụng best model.")
     
     # Phân tích config tốt nhất
     if config_stats:
         best_config_key = min(config_stats.keys(), key=lambda k: config_stats[k]['avg_time'])
-        analysis['recommendations'].append(f"[TIP] Config nhanh nhất: {best_config_key}")
+        analysis['recommendations'].append(f"💡 Config nhanh nhất: {best_config_key}")
     
     return analysis
 
@@ -112,10 +112,10 @@ def analyze_results(summary: Dict) -> Dict:
 def print_analysis(analysis: Dict):
     """In ra phân tích kết quả"""
     print("\n" + "=" * 80)
-    print("[INFO] PHÂN TÍCH KẾT QUẢ TRAINING")
+    print("📊 PHÂN TÍCH KẾT QUẢ TRAINING")
     print("=" * 80)
     
-    print(f"\n[UP] Tổng quan:")
+    print(f"\n📈 Tổng quan:")
     print(f"  - Tổng số lần chạy: {analysis['total_runs']}")
     print(f"  - Số lần thành công: {analysis['successful_runs']}")
     print(f"  - Số lần thất bại: {analysis['failed_runs']}")
@@ -130,14 +130,14 @@ def print_analysis(analysis: Dict):
             print(f"  - Test Accuracy: {analysis['best_run']['test_accuracy']:.4f}")
     
     if analysis['config_analysis']:
-        print(f"\n[SETTINGS] Phân tích Config:")
+        print(f"\n⚙️ Phân tích Config:")
         for config_key, stats in analysis['config_analysis'].items():
             print(f"  - {config_key}:")
             print(f"    + Số lần chạy: {stats['count']}")
             print(f"    + Thời gian TB: {stats['avg_time']:.1f}s")
     
     if analysis['recommendations']:
-        print(f"\n[TIP] Khuyến nghị:")
+        print(f"\n💡 Khuyến nghị:")
         for rec in analysis['recommendations']:
             print(f"  {rec}")
     
@@ -148,7 +148,7 @@ def save_analysis(analysis: Dict, output_file: Path):
     """Lưu phân tích vào file"""
     with open(output_file, 'w', encoding='utf-8') as f:
         json.dump(analysis, f, indent=2, ensure_ascii=False, default=str)
-    print(f"\n[OK] Phân tích đã lưu vào: {output_file}")
+    print(f"\n✅ Phân tích đã lưu vào: {output_file}")
 
 
 def main():
@@ -156,14 +156,14 @@ def main():
     results_dir = Path("results/auto_train_10x")
     
     if not results_dir.exists():
-        print(f"[ERROR] Không tìm thấy thư mục kết quả: {results_dir}")
+        print(f"❌ Không tìm thấy thư mục kết quả: {results_dir}")
         print("   Training có thể chưa hoàn thành hoặc đang chạy...")
         return
     
     # Load results
     summary = load_results(results_dir)
     if not summary:
-        print(f"[ERROR] Không tìm thấy file summary.json trong {results_dir}")
+        print(f"❌ Không tìm thấy file summary.json trong {results_dir}")
         return
     
     # Analyze
@@ -183,11 +183,11 @@ def main():
 def create_markdown_report(analysis: Dict, output_file: Path):
     """Tạo báo cáo markdown"""
     with open(output_file, 'w', encoding='utf-8') as f:
-        f.write("# [INFO] BÁO CÁO PHÂN TÍCH KẾT QUẢ TRAINING\n\n")
+        f.write("# 📊 BÁO CÁO PHÂN TÍCH KẾT QUẢ TRAINING\n\n")
         f.write(f"**Ngày**: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n\n")
         f.write("---\n\n")
         
-        f.write("## [UP] Tổng quan\n\n")
+        f.write("## 📈 Tổng quan\n\n")
         f.write(f"- **Tổng số lần chạy**: {analysis['total_runs']}\n")
         f.write(f"- **Số lần thành công**: {analysis['successful_runs']}\n")
         f.write(f"- **Số lần thất bại**: {analysis['failed_runs']}\n")
@@ -203,15 +203,15 @@ def create_markdown_report(analysis: Dict, output_file: Path):
             f.write("\n")
         
         if analysis['recommendations']:
-            f.write("## [TIP] Khuyến nghị\n\n")
+            f.write("## 💡 Khuyến nghị\n\n")
             for rec in analysis['recommendations']:
                 f.write(f"- {rec}\n")
             f.write("\n")
         
         f.write("---\n\n")
-        f.write("**Status**: [OK] Analysis Complete\n")
+        f.write("**Status**: ✅ Analysis Complete\n")
     
-    print(f"[OK] Báo cáo markdown đã lưu vào: {output_file}")
+    print(f"✅ Báo cáo markdown đã lưu vào: {output_file}")
 
 
 if __name__ == "__main__":

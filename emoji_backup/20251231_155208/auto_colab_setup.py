@@ -39,16 +39,16 @@ def create_auto_run_notebook():
         "cell_type": "markdown",
         "metadata": {},
         "source": [
-            "# [START] Training Tự Động trên Google Colab\n",
+            "# 🚀 Training Tự Động trên Google Colab\n",
             "\n",
             "Notebook này sẽ tự động:\n",
-            "1. [OK] Cài đặt dependencies\n",
-            "2. [OK] Kiểm tra GPU\n",
-            "3. [OK] Mount Google Drive\n",
-            "4. [OK] Download code từ Google Drive\n",
-            "5. [OK] Download/Setup dữ liệu\n",
-            "6. [OK] Chạy training tự động\n",
-            "7. [OK] Lưu kết quả về Google Drive\n",
+            "1. ✅ Cài đặt dependencies\n",
+            "2. ✅ Kiểm tra GPU\n",
+            "3. ✅ Mount Google Drive\n",
+            "4. ✅ Download code từ Google Drive\n",
+            "5. ✅ Download/Setup dữ liệu\n",
+            "6. ✅ Chạy training tự động\n",
+            "7. ✅ Lưu kết quả về Google Drive\n",
             "\n",
             "**Lưu ý**: Chọn GPU runtime trước khi chạy!"
         ]
@@ -67,7 +67,7 @@ def create_auto_run_notebook():
             "%pip install -q pandas numpy Pillow opencv-python\n",
             "%pip install -q kagglehub\n",
             "\n",
-            "print(\"[OK] Đã cài đặt xong các thư viện!\")"
+            "print(\"✅ Đã cài đặt xong các thư viện!\")"
         ]
     })
     
@@ -88,7 +88,7 @@ def create_auto_run_notebook():
             "    print(f\"GPU device: {cuda.get_device_name(0)}\")\n",
             "    print(f\"GPU memory: {cuda.get_device_properties(0).total_memory / 1024**3:.2f} GB\")\n",
             "else:\n",
-            "    print(\"[WARNING]  Không có GPU! Vui lòng chọn GPU runtime:\")\n",
+            "    print(\"⚠️  Không có GPU! Vui lòng chọn GPU runtime:\")\n",
             "    print(\"   Runtime → Change runtime type → Hardware accelerator → GPU\")"
         ]
     })
@@ -109,8 +109,8 @@ def create_auto_run_notebook():
             "# Tạo thư mục lưu kết quả\n",
             "DRIVE_RESULTS_DIR = '/content/drive/MyDrive/age_gender_emotion_training'\n",
             "os.makedirs(DRIVE_RESULTS_DIR, exist_ok=True)\n",
-            "print(f\"[OK] Đã mount Google Drive\")\n",
-            "print(f\"[FOLDER] Kết quả sẽ lưu tại: {DRIVE_RESULTS_DIR}\")"
+            "print(f\"✅ Đã mount Google Drive\")\n",
+            "print(f\"📁 Kết quả sẽ lưu tại: {DRIVE_RESULTS_DIR}\")"
         ]
     })
     
@@ -135,22 +135,22 @@ def create_auto_run_notebook():
             "if zip_files:\n",
             "    # Lấy file mới nhất\n",
             "    latest_zip = max(zip_files, key=os.path.getctime)\n",
-            "    print(f\"[PACKAGE] Tìm thấy file: {os.path.basename(latest_zip)}\")\n",
+            "    print(f\"📦 Tìm thấy file: {os.path.basename(latest_zip)}\")\n",
             "    \n",
             "    # Giải nén\n",
             "    print(\"📂 Đang giải nén...\")\n",
             "    with zipfile.ZipFile(latest_zip, 'r') as zip_ref:\n",
             "        zip_ref.extractall('/content/project')\n",
-            "    print(\"[OK] Đã giải nén code\")\n",
+            "    print(\"✅ Đã giải nén code\")\n",
             "    \n",
             "    # Kiểm tra cấu trúc\n",
             "    project_dir = Path('/content/project/training_experiments')\n",
             "    if project_dir.exists():\n",
-            "        print(f\"[OK] Code đã sẵn sàng tại: {project_dir}\")\n",
+            "        print(f\"✅ Code đã sẵn sàng tại: {project_dir}\")\n",
             "    else:\n",
-            "        print(\"[WARNING]  Cần kiểm tra lại cấu trúc thư mục\")\n",
+            "        print(\"⚠️  Cần kiểm tra lại cấu trúc thư mục\")\n",
             "else:\n",
-            "    print(\"[WARNING]  Không tìm thấy file zip trên Drive\")\n",
+            "    print(\"⚠️  Không tìm thấy file zip trên Drive\")\n",
             "    print(\"   Hãy upload file zip vào: /content/drive/MyDrive/Colab_Training/\")"
         ]
     })
@@ -170,11 +170,11 @@ def create_auto_run_notebook():
             "LOCAL_DATA_DIR = Path('/content/project/training_experiments/data/processed')\n",
             "\n",
             "if os.path.exists(DRIVE_DATA_DIR):\n",
-            "    print(f\"[FOLDER] Copy dữ liệu từ Drive...\")\n",
+            "    print(f\"📁 Copy dữ liệu từ Drive...\")\n",
             "    shutil.copytree(DRIVE_DATA_DIR, LOCAL_DATA_DIR, dirs_exist_ok=True)\n",
-            "    print(f\"[OK] Đã copy dữ liệu\")\n",
+            "    print(f\"✅ Đã copy dữ liệu\")\n",
             "else:\n",
-            "    print(f\"[WARNING]  Chưa có dữ liệu trên Drive\")\n",
+            "    print(f\"⚠️  Chưa có dữ liệu trên Drive\")\n",
             "    print(f\"   Upload dữ liệu vào: {DRIVE_DATA_DIR}\")\n",
             "    print(f\"   Hoặc sử dụng cell tiếp theo để download từ Kaggle\")"
         ]
@@ -194,7 +194,7 @@ def create_auto_run_notebook():
             "val_dir = data_dir / 'val'\n",
             "test_dir = data_dir / 'test'\n",
             "\n",
-            "print(\"[INFO] Kiểm tra dữ liệu:\")\n",
+            "print(\"📊 Kiểm tra dữ liệu:\")\n",
             "print(f\"   Train: {train_dir.exists()}\")\n",
             "print(f\"   Val: {val_dir.exists()}\")\n",
             "print(f\"   Test: {test_dir.exists()}\")\n",
@@ -210,9 +210,9 @@ def create_auto_run_notebook():
             "    print(f\"   Test: {len(test_images)}\")\n",
             "    \n",
             "    if len(train_images) == 0:\n",
-            "        print(\"\\n[WARNING]  Chưa có ảnh trong thư mục train!\")\n",
+            "        print(\"\\n⚠️  Chưa có ảnh trong thư mục train!\")\n",
             "else:\n",
-            "    print(\"\\n[WARNING]  Chưa có dữ liệu processed!\")"
+            "    print(\"\\n⚠️  Chưa có dữ liệu processed!\")"
         ]
     })
     
@@ -239,9 +239,9 @@ def create_auto_run_notebook():
             "USE_QAT = True\n",
             "USE_DISTILLATION = True\n",
             "\n",
-            "print(\"[START] Bắt đầu training tự động...\")\n",
+            "print(\"🚀 Bắt đầu training tự động...\")\n",
             "print(\"=\" * 60)\n",
-            "print(f\"[SETTINGS]  Cấu hình:\")\n",
+            "print(f\"⚙️  Cấu hình:\")\n",
             "print(f\"   Epochs: {EPOCHS}\")\n",
             "print(f\"   Batch size: {BATCH_SIZE}\")\n",
             "print(f\"   Learning rate: {LEARNING_RATE}\")\n",
@@ -261,7 +261,7 @@ def create_auto_run_notebook():
             "os.system(cmd)\n",
             "\n",
             "print(\"\\n\" + \"=\" * 60)\n",
-            "print(\"[OK] Training hoàn tất!\")"
+            "print(\"✅ Training hoàn tất!\")"
         ]
     })
     
@@ -284,25 +284,25 @@ def create_auto_run_notebook():
             "# Copy checkpoints\n",
             "checkpoint_dir = Path('/content/project/training_experiments/checkpoints/week2_colab')\n",
             "if checkpoint_dir.exists():\n",
-            "    print(f\"[PACKAGE] Copy checkpoints...\")\n",
+            "    print(f\"📦 Copy checkpoints...\")\n",
             "    shutil.copytree(checkpoint_dir, results_dir / 'checkpoints', dirs_exist_ok=True)\n",
-            "    print(f\"[OK] Đã copy checkpoints\")\n",
+            "    print(f\"✅ Đã copy checkpoints\")\n",
             "\n",
             "# Copy logs\n",
             "logs_dir = checkpoint_dir / 'logs'\n",
             "if logs_dir.exists():\n",
-            "    print(f\"[INFO] Copy logs...\")\n",
+            "    print(f\"📊 Copy logs...\")\n",
             "    shutil.copytree(logs_dir, results_dir / 'logs', dirs_exist_ok=True)\n",
-            "    print(f\"[OK] Đã copy logs\")\n",
+            "    print(f\"✅ Đã copy logs\")\n",
             "\n",
             "# Copy ONNX model\n",
             "onnx_file = checkpoint_dir / 'mobileone_multitask.onnx'\n",
             "if onnx_file.exists():\n",
-            "    print(f\"[FILE] Copy ONNX model...\")\n",
+            "    print(f\"📄 Copy ONNX model...\")\n",
             "    shutil.copy2(onnx_file, results_dir / 'mobileone_multitask.onnx')\n",
-            "    print(f\"[OK] Đã copy ONNX model\")\n",
+            "    print(f\"✅ Đã copy ONNX model\")\n",
             "\n",
-            "print(f\"\\n[OK] Tất cả kết quả đã được lưu tại:\")\n",
+            "print(f\"\\n✅ Tất cả kết quả đã được lưu tại:\")\n",
             "print(f\"   {results_dir}\")"
         ]
     })

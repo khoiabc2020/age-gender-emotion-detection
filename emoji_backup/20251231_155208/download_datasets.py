@@ -31,8 +31,8 @@ def download_all_age_face_dataset():
     try:
         # Download latest version
         path = kagglehub.dataset_download("eshachakraborty00/all-age-face-dataset")
-        print(f"\n[OK] Download successful!")
-        print(f"[FOLDER] Path to dataset files: {path}")
+        print(f"\n✅ Download successful!")
+        print(f"📁 Path to dataset files: {path}")
         
         # List contents
         if os.path.exists(path):
@@ -40,15 +40,15 @@ def download_all_age_face_dataset():
             for item in os.listdir(path):
                 item_path = os.path.join(path, item)
                 if os.path.isdir(item_path):
-                    print(f"  [FOLDER] {item}/")
+                    print(f"  📁 {item}/")
                 else:
                     size = os.path.getsize(item_path) / (1024 * 1024)  # MB
-                    print(f"  [FILE] {item} ({size:.2f} MB)")
+                    print(f"  📄 {item} ({size:.2f} MB)")
         
         return path
     except Exception as e:
-        print(f"\n[ERROR] Error downloading dataset: {e}")
-        print("\n[TIP] Make sure you have:")
+        print(f"\n❌ Error downloading dataset: {e}")
+        print("\n💡 Make sure you have:")
         print("   1. Kaggle account")
         print("   2. Kaggle API credentials set up")
         print("   3. Run: pip install kagglehub")
@@ -84,7 +84,7 @@ def download_fer2013_dataset():
 def main():
     """Main function to download all datasets"""
     print("\n" + "=" * 60)
-    print("[INBOX] Smart Retail Analytics - Dataset Downloader")
+    print("📥 Smart Retail Analytics - Dataset Downloader")
     print("=" * 60)
     
     # Create data directory if it doesn't exist
@@ -97,7 +97,7 @@ def main():
     
     if dataset_path:
         # Optionally create symlink or copy to data directory
-        print(f"\n[TIP] Dataset saved to: {dataset_path}")
+        print(f"\n💡 Dataset saved to: {dataset_path}")
         print(f"   You can use this path in your training scripts")
     
     # Show info about other datasets
@@ -105,9 +105,9 @@ def main():
     download_fer2013_dataset()
     
     print("\n" + "=" * 60)
-    print("[OK] Dataset download process completed!")
+    print("✅ Dataset download process completed!")
     print("=" * 60)
-    print("\n[NOTE] Next steps:")
+    print("\n📝 Next steps:")
     print("   1. Verify dataset files are downloaded correctly")
     print("   2. Check dataset structure and format")
     print("   3. Run data preprocessing scripts")

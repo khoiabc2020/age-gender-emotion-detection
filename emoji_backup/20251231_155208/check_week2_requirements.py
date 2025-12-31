@@ -40,15 +40,15 @@ def check_mobileone():
         has_multitask = 'MobileOneMultiTaskModel' in content
         
         if has_mobileone and has_multitask:
-            print("   [OK] MobileOne-S2 architecture found")
+            print("   ✅ MobileOne-S2 architecture found")
             print("      - MobileOneS2 backbone")
             print("      - MobileOneMultiTaskModel")
             results.append(("MobileOne Architecture", True))
         else:
-            print("   [WARNING]  MobileOne architecture may be incomplete")
+            print("   ⚠️  MobileOne architecture may be incomplete")
             results.append(("MobileOne Architecture", False))
     else:
-        print("   [ERROR] mobileone.py not found")
+        print("   ❌ mobileone.py not found")
         results.append(("MobileOne Architecture", False))
     
     # Check if can import
@@ -57,11 +57,11 @@ def check_mobileone():
         from models.mobileone import MobileOneMultiTaskModel
         model = MobileOneMultiTaskModel(num_emotions=6)
         total_params = sum(p.numel() for p in model.parameters())
-        print(f"   [OK] MobileOne model can be imported")
+        print(f"   ✅ MobileOne model can be imported")
         print(f"      Parameters: {total_params:,}")
         results.append(("MobileOne Import", True))
     except Exception as e:
-        print(f"   [ERROR] Cannot import MobileOne: {e}")
+        print(f"   ❌ Cannot import MobileOne: {e}")
         results.append(("MobileOne Import", False))
     
     return results
@@ -88,16 +88,16 @@ def check_knowledge_distillation():
         has_distill_loss = 'DistillationLoss' in content or 'MultiTaskDistillationLoss' in content
         
         if has_teacher and has_student and has_distill_loss:
-            print("   [OK] Knowledge Distillation found")
+            print("   ✅ Knowledge Distillation found")
             print("      - TeacherModel (ResNet50)")
             print("      - DistillationLoss")
             print("      - MultiTaskDistillationLoss")
             results.append(("Distillation Module", True))
         else:
-            print("   [WARNING]  Distillation may be incomplete")
+            print("   ⚠️  Distillation may be incomplete")
             results.append(("Distillation Module", False))
     else:
-        print("   [ERROR] knowledge_distillation.py not found")
+        print("   ❌ knowledge_distillation.py not found")
         results.append(("Distillation Module", False))
     
     # Check training script
@@ -111,23 +111,23 @@ def check_knowledge_distillation():
         has_distill_train = 'train_with_distillation' in content or 'distillation' in content.lower()
         
         if has_distill_train:
-            print("   [OK] Distillation training function found")
+            print("   ✅ Distillation training function found")
             results.append(("Distillation Training", True))
         else:
-            print("   [WARNING]  Distillation training may be missing")
+            print("   ⚠️  Distillation training may be missing")
             results.append(("Distillation Training", False))
     else:
-        print("   [ERROR] train_week2_lightweight.py not found")
+        print("   ❌ train_week2_lightweight.py not found")
         results.append(("Distillation Training", False))
     
     # Check if can import
     print("\n[3/3] Testing import...")
     try:
         from models.knowledge_distillation import TeacherModel, MultiTaskDistillationLoss
-        print("   [OK] Distillation modules can be imported")
+        print("   ✅ Distillation modules can be imported")
         results.append(("Distillation Import", True))
     except Exception as e:
-        print(f"   [ERROR] Cannot import distillation: {e}")
+        print(f"   ❌ Cannot import distillation: {e}")
         results.append(("Distillation Import", False))
     
     return results
@@ -136,7 +136,7 @@ def check_knowledge_distillation():
 def check_qat():
     """Kiểm tra Quantization-Aware Training"""
     print("\n" + "=" * 60)
-    print("[FAST] KIỂM TRA QUANTIZATION-AWARE TRAINING (QAT)")
+    print("⚡ KIỂM TRA QUANTIZATION-AWARE TRAINING (QAT)")
     print("=" * 60)
     
     results = []
@@ -155,16 +155,16 @@ def check_qat():
         has_quant_stub = 'QuantStub' in content
         
         if has_qat and has_prepare and has_convert and has_quant_stub:
-            print("   [OK] QAT module found")
+            print("   ✅ QAT module found")
             print("      - QATMultiTaskModel")
             print("      - prepare_qat()")
             print("      - convert_to_quantized()")
             results.append(("QAT Module", True))
         else:
-            print("   [WARNING]  QAT may be incomplete")
+            print("   ⚠️  QAT may be incomplete")
             results.append(("QAT Module", False))
     else:
-        print("   [ERROR] qat_model.py not found")
+        print("   ❌ qat_model.py not found")
         results.append(("QAT Module", False))
     
     # Check PyTorch quantization support
@@ -174,13 +174,13 @@ def check_qat():
         import torch.quantization as quantization
         
         if hasattr(quantization, 'prepare_qat'):
-            print(f"   [OK] PyTorch quantization support found (v{torch.__version__})")
+            print(f"   ✅ PyTorch quantization support found (v{torch.__version__})")
             results.append(("PyTorch QAT Support", True))
         else:
-            print("   [WARNING]  PyTorch version may not support QAT")
+            print("   ⚠️  PyTorch version may not support QAT")
             results.append(("PyTorch QAT Support", False))
     except Exception as e:
-        print(f"   [ERROR] Error checking PyTorch: {e}")
+        print(f"   ❌ Error checking PyTorch: {e}")
         results.append(("PyTorch QAT Support", False))
     
     # Check training script
@@ -195,10 +195,10 @@ def check_qat():
         has_qat_wrap = 'QATMultiTaskModel' in content
         
         if has_qat_flag and has_qat_wrap:
-            print("   [OK] QAT integration in training script")
+            print("   ✅ QAT integration in training script")
             results.append(("QAT Training Integration", True))
         else:
-            print("   [WARNING]  QAT integration may be missing")
+            print("   ⚠️  QAT integration may be missing")
             results.append(("QAT Training Integration", False))
     else:
         results.append(("QAT Training Integration", False))
@@ -209,7 +209,7 @@ def check_qat():
 def check_onnx_export():
     """Kiểm tra ONNX export với opset 13+"""
     print("\n" + "=" * 60)
-    print("[PACKAGE] KIỂM TRA ONNX EXPORT (Opset 13+)")
+    print("📦 KIỂM TRA ONNX EXPORT (Opset 13+)")
     print("=" * 60)
     
     results = []
@@ -226,15 +226,15 @@ def check_onnx_export():
         has_export = 'torch.onnx.export' in content
         
         if has_opset_13 and has_export:
-            print("   [OK] ONNX export with opset 13+ found")
+            print("   ✅ ONNX export with opset 13+ found")
             print("      - Default opset_version = 13")
             print("      - torch.onnx.export")
             results.append(("ONNX Export Script", True))
         else:
-            print("   [WARNING]  ONNX export may use older opset")
+            print("   ⚠️  ONNX export may use older opset")
             results.append(("ONNX Export Script", False))
     else:
-        print("   [ERROR] convert_to_onnx.py not found")
+        print("   ❌ convert_to_onnx.py not found")
         results.append(("ONNX Export Script", False))
     
     # Check training script export function
@@ -249,10 +249,10 @@ def check_onnx_export():
         has_opset_param = 'opset_version' in content
         
         if has_export_func and has_opset_param:
-            print("   [OK] ONNX export function found")
+            print("   ✅ ONNX export function found")
             results.append(("ONNX Export Function", True))
         else:
-            print("   [WARNING]  ONNX export function may be missing")
+            print("   ⚠️  ONNX export function may be missing")
             results.append(("ONNX Export Function", False))
     else:
         results.append(("ONNX Export Function", False))
@@ -261,10 +261,10 @@ def check_onnx_export():
     print("\n[3/3] Checking ONNX package...")
     try:
         import onnx
-        print(f"   [OK] ONNX package installed: {onnx.__version__}")
+        print(f"   ✅ ONNX package installed: {onnx.__version__}")
         results.append(("ONNX Package", True))
     except ImportError:
-        print("   [ERROR] ONNX package not installed")
+        print("   ❌ ONNX package not installed")
         print("      Install: pip install onnx")
         results.append(("ONNX Package", False))
     
@@ -274,7 +274,7 @@ def check_onnx_export():
 def main():
     """Main function"""
     print("\n" + "=" * 60)
-    print("[SEARCH] KIỂM TRA TUẦN 2: MODEL TRAINING (LIGHTWEIGHT SOTA)")
+    print("🔍 KIỂM TRA TUẦN 2: MODEL TRAINING (LIGHTWEIGHT SOTA)")
     print("=" * 60)
     
     all_results = []
@@ -297,7 +297,7 @@ def main():
     
     # Summary
     print("\n" + "=" * 60)
-    print("[INFO] TỔNG KẾT")
+    print("📊 TỔNG KẾT")
     print("=" * 60)
     
     passed = sum(1 for _, result in all_results if result)
@@ -306,13 +306,13 @@ def main():
     print(f"\nKết quả: {passed}/{total} checks passed\n")
     
     for name, result in all_results:
-        status = "[OK] PASSED" if result else "[ERROR] FAILED"
+        status = "✅ PASSED" if result else "❌ FAILED"
         print(f"{name:50s} {status}")
     
     print("\n" + "=" * 60)
     
     if passed == total:
-        print("[SUCCESS] Tất cả yêu cầu Tuần 2 đã hoàn thành!")
+        print("🎉 Tất cả yêu cầu Tuần 2 đã hoàn thành!")
         print("\nCó thể chạy training:")
         print("  python training_experiments/train_week2_lightweight.py \\")
         print("    --data_dir data/processed \\")
@@ -320,7 +320,7 @@ def main():
         print("    --use_distillation \\")
         print("    --use_qat")
     else:
-        print("[WARNING]  Một số yêu cầu chưa hoàn thành")
+        print("⚠️  Một số yêu cầu chưa hoàn thành")
         print("\nCần kiểm tra và sửa các phần còn thiếu")
     
     print("=" * 60 + "\n")
