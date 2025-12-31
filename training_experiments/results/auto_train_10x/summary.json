@@ -1,5 +1,5 @@
 {
-  "timestamp": "2025-12-30T13:36:48.661623",
+  "timestamp": "2025-12-31T12:48:21.148671",
   "total_runs": 10,
   "successful_runs": 0,
   "results": [
@@ -7,151 +7,151 @@
       "run_id": 1,
       "config": {
         "data_dir": "data/processed",
-        "epochs": 50,
+        "epochs": 5,
         "batch_size": 32,
         "learning_rate": 0.001,
         "use_distillation": true,
         "use_qat": false,
-        "output_dir": "models/run_1"
+        "output_dir": "models/run_1",
+        "original_epochs": 50
       },
       "success": false,
-      "elapsed_time": 17.319888830184937,
-      "returncode": 2
+      "error": "name 'results_dir' is not defined"
     },
     {
       "run_id": 2,
       "config": {
         "data_dir": "data/processed",
-        "epochs": 50,
+        "epochs": 5,
         "batch_size": 32,
         "learning_rate": 0.002,
         "use_distillation": true,
         "use_qat": false,
-        "output_dir": "models/run_2"
+        "output_dir": "models/run_2",
+        "original_epochs": 50
       },
       "success": false,
-      "elapsed_time": 11.301902294158936,
-      "returncode": 2
+      "error": "name 'results_dir' is not defined"
     },
     {
       "run_id": 3,
       "config": {
         "data_dir": "data/processed",
-        "epochs": 50,
+        "epochs": 5,
         "batch_size": 32,
         "learning_rate": 0.0005,
         "use_distillation": true,
         "use_qat": false,
-        "output_dir": "models/run_3"
+        "output_dir": "models/run_3",
+        "original_epochs": 50
       },
       "success": false,
-      "elapsed_time": 10.516689538955688,
-      "returncode": 2
+      "error": "name 'results_dir' is not defined"
     },
     {
       "run_id": 4,
       "config": {
         "data_dir": "data/processed",
-        "epochs": 50,
-        "batch_size": 64,
+        "epochs": 5,
+        "batch_size": 32,
         "learning_rate": 0.001,
         "use_distillation": true,
         "use_qat": false,
-        "output_dir": "models/run_4"
+        "output_dir": "models/run_4",
+        "original_epochs": 50
       },
       "success": false,
-      "elapsed_time": 10.666070222854614,
-      "returncode": 2
+      "error": "name 'results_dir' is not defined"
     },
     {
       "run_id": 5,
       "config": {
         "data_dir": "data/processed",
-        "epochs": 50,
+        "epochs": 5,
         "batch_size": 16,
         "learning_rate": 0.001,
         "use_distillation": true,
         "use_qat": false,
-        "output_dir": "models/run_5"
+        "output_dir": "models/run_5",
+        "original_epochs": 50
       },
       "success": false,
-      "elapsed_time": 12.628324031829834,
-      "returncode": 2
+      "error": "name 'results_dir' is not defined"
     },
     {
       "run_id": 6,
       "config": {
         "data_dir": "data/processed",
-        "epochs": 75,
+        "epochs": 5,
         "batch_size": 32,
         "learning_rate": 0.001,
         "use_distillation": true,
         "use_qat": false,
-        "output_dir": "models/run_6"
+        "output_dir": "models/run_6",
+        "original_epochs": 75
       },
       "success": false,
-      "elapsed_time": 9.873515605926514,
-      "returncode": 2
+      "error": "name 'results_dir' is not defined"
     },
     {
       "run_id": 7,
       "config": {
         "data_dir": "data/processed",
-        "epochs": 50,
+        "epochs": 5,
         "batch_size": 32,
         "learning_rate": 0.001,
         "use_distillation": true,
         "use_qat": true,
-        "output_dir": "models/run_7"
+        "output_dir": "models/run_7",
+        "original_epochs": 50
       },
       "success": false,
-      "elapsed_time": 9.505669832229614,
-      "returncode": 2
+      "error": "name 'results_dir' is not defined"
     },
     {
       "run_id": 8,
       "config": {
         "data_dir": "data/processed",
-        "epochs": 50,
+        "epochs": 5,
         "batch_size": 32,
         "learning_rate": 0.0005,
         "use_distillation": true,
         "use_qat": true,
-        "output_dir": "models/run_8"
+        "output_dir": "models/run_8",
+        "original_epochs": 50
       },
       "success": false,
-      "elapsed_time": 9.368517637252808,
-      "returncode": 2
+      "error": "name 'results_dir' is not defined"
     },
     {
       "run_id": 9,
       "config": {
         "data_dir": "data/processed",
-        "epochs": 50,
-        "batch_size": 64,
+        "epochs": 5,
+        "batch_size": 32,
         "learning_rate": 0.002,
         "use_distillation": true,
         "use_qat": false,
-        "output_dir": "models/run_9"
+        "output_dir": "models/run_9",
+        "original_epochs": 50
       },
       "success": false,
-      "elapsed_time": 9.617948055267334,
-      "returncode": 2
+      "error": "name 'results_dir' is not defined"
     },
     {
       "run_id": 10,
       "config": {
         "data_dir": "data/processed",
-        "epochs": 60,
-        "batch_size": 48,
+        "epochs": 5,
+        "batch_size": 32,
         "learning_rate": 0.0015,
         "use_distillation": true,
         "use_qat": false,
-        "output_dir": "models/run_10"
+        "output_dir": "models/run_10",
+        "original_epochs": 60
       },
       "success": false,
-      "elapsed_time": 10.180640935897827,
-      "returncode": 2
+      "error": "name 'results_dir' is not defined"
     }
   ],
   "best_run": null

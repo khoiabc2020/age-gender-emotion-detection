@@ -40,7 +40,11 @@ START_PROJECT.bat
 
 ### 📚 Hướng Dẫn Chi Tiết
 
-**Xem file:** [`HUONG_DAN_CHAY_LOCALHOST.md`](HUONG_DAN_CHAY_LOCALHOST.md) - Hướng dẫn đầy đủ cách chạy localhost
+**🚀 Production Ready:** [`PRODUCTION_READY.md`](PRODUCTION_READY.md) - **Tổng quan hoàn chỉnh về sản phẩm sẵn sàng triển khai** ⭐⭐⭐⭐
+
+**📊 Training Results:** [`TRAINING_RESULTS.md`](TRAINING_RESULTS.md) - **Kết quả training mới nhất và đánh giá model**
+
+**Chạy Localhost:** [`HUONG_DAN_CHAY_LOCALHOST.md`](HUONG_DAN_CHAY_LOCALHOST.md) - Hướng dẫn đầy đủ cách chạy localhost
 
 **Học tập & Sử dụng:** [`HUONG_DAN_HOC_TAP_VA_SU_DUNG.md`](HUONG_DAN_HOC_TAP_VA_SU_DUNG.md) - **Hướng dẫn học tập & sử dụng từ A đến Z** ⭐⭐⭐
 
@@ -176,11 +180,21 @@ npm test
 - **[HUONG_DAN_HOC_TAP_VA_SU_DUNG.md](HUONG_DAN_HOC_TAP_VA_SU_DUNG.md)** - Hướng dẫn học tập & sử dụng từ A đến Z ⭐⭐⭐
 - **[docs/GITHUB_AND_COLAB_GUIDE.md](docs/GITHUB_AND_COLAB_GUIDE.md)** - Hướng dẫn GitHub & Colab ⭐⭐⭐
 
-### 📖 Tài Liệu Chính
+### 📖 Tài Liệu Kỹ Thuật
 - [PROJECT_DOCUMENTATION.md](PROJECT_DOCUMENTATION.md) - Index tất cả tài liệu
-- [docs/PROJECT_DETAILS.md](docs/PROJECT_DETAILS.md) - Chi tiết dự án
+- [docs/PROJECT_DETAILS.md](docs/PROJECT_DETAILS.md) - Chi tiết kỹ thuật dự án
+- [docs/SETUP.md](docs/SETUP.md) - Hướng dẫn setup môi trường
+- [docs/OPTIMIZATION.md](docs/OPTIMIZATION.md) - Báo cáo tối ưu hóa
+
+### 🚀 Roadmap & Development
 - [docs/ROADMAP.md](docs/ROADMAP.md) - Roadmap phát triển
-- [docs/SETUP.md](docs/SETUP.md) - Hướng dẫn setup
+- [docs/MLOPS_ROADMAP.md](docs/MLOPS_ROADMAP.md) - Hybrid MLOps roadmap
+- [docs/PRODUCTION_ROADMAP.md](docs/PRODUCTION_ROADMAP.md) - Roadmap to production ⭐ NEW
+
+### 🔒 Security & DevOps
+- [docs/SECURITY.md](docs/SECURITY.md) - Security best practices
+- [docs/GIT_GUIDE.md](docs/GIT_GUIDE.md) - Git commit guidelines
+- [docs/CI_CD.md](docs/CI_CD.md) - CI/CD pipeline guide
 
 ### 🎓 Training
 - [training_experiments/README.md](training_experiments/README.md) - Training guide
@@ -213,7 +227,7 @@ npm test
 **Status:** 🚧 In Active Development  
 **Last Updated:** 2025-12-30
 
-## 🆕 HYBRID MLOPS ROADMAP
+## 🆕 HYBRID MLOPS & PRODUCTION READY
 
 Dự án đã được nâng cấp lên kiến trúc **Hybrid MLOps & Edge Ultra**:
 
@@ -223,4 +237,6 @@ Dự án đã được nâng cấp lên kiến trúc **Hybrid MLOps & Edge Ultra
 - 🚀 **KServe** cho model serving
 - 📡 **OTA Updates** cho edge devices
 
-Xem chi tiết: [HYBRID_MLOPS_ROADMAP.md](HYBRID_MLOPS_ROADMAP.md)
+**Xem chi tiết:**
+- [docs/MLOPS_ROADMAP.md](docs/MLOPS_ROADMAP.md) - Hybrid MLOps roadmap
+- [docs/PRODUCTION_ROADMAP.md](docs/PRODUCTION_ROADMAP.md) - Roadmap to production ⭐ NEW

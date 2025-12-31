@@ -1,16 +1,22 @@
 """
-Automated Training Script - 10 lần training
-Tối ưu và chạy training 10 lần để đạt kết quả tốt nhất
+Automated Training Script - 10 lan training
+Toi uu va chay training 10 lan de dat ket qua tot nhat
 """
 
 import sys
 import os
+import io
 import json
 import time
 from pathlib import Path
 from datetime import datetime
 import subprocess
 import numpy as np
+
+# Fix encoding for Windows
+if sys.platform == 'win32':
+    sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8')
+    sys.stderr = io.TextIOWrapper(sys.stderr.buffer, encoding='utf-8')
 
 # Add src to path
 project_root = Path(__file__).parent.parent
@@ -45,7 +51,7 @@ def run_training(run_id: int, config: dict) -> dict:
     Returns:
         Results dictionary
     """
-    logger.info(f"🚀 Starting training run {run_id}/10")
+    logger.info(f"Starting training run {run_id}/10")
     logger.info(f"Config: {config}")
     
     start_time = time.time()
@@ -127,12 +133,12 @@ def run_training(run_id: int, config: dict) -> dict:
                     except:
                         pass
         
-        logger.info(f"✅ Training run {run_id} completed in {elapsed_time:.1f}s")
+        logger.info(f"Training run {run_id} completed in {elapsed_time:.1f}s")
         
         return metrics
         
     except subprocess.TimeoutExpired:
-        logger.error(f"❌ Training run {run_id} timed out")
+        logger.error(f"Training run {run_id} timed out")
         return {
             'run_id': run_id,
             'config': config,
@@ -140,7 +146,7 @@ def run_training(run_id: int, config: dict) -> dict:
             'error': 'timeout'
         }
     except Exception as e:
-        logger.error(f"❌ Training run {run_id} failed: {e}")
+        logger.error(f"Training run {run_id} failed: {e}")
         return {
             'run_id': run_id,
             'config': config,
@@ -233,7 +239,7 @@ def generate_configs() -> list:
 def main():
     """Main function"""
     print("\n" + "=" * 80)
-    print("🚀 AUTOMATED TRAINING - 10 LẦN")
+    print("AUTOMATED TRAINING - 10 RUNS")
     print("=" * 80)
     
     # Create results directory
@@ -245,7 +251,7 @@ def main():
     
     # Optimize configs for faster testing (reduce epochs for initial runs)
     # User can increase epochs later for full training
-    print("\n⚙️  Optimizing configs for efficient training...")
+    print("\n[CONFIG] Optimizing configs for efficient training...")
     print("   Note: Epochs reduced to 5 for quick testing. Edit train_10x_automated.py to increase.")
     for config in configs:
         # Reduce epochs for faster testing - user can increase later
@@ -274,9 +280,9 @@ def main():
         
         # Print progress
         if result.get('success'):
-            print(f"✅ Run {i} completed successfully")
+            print(f"[OK] Run {i} completed successfully")
         else:
-            print(f"❌ Run {i} failed - check error log")
+            print(f"[FAIL] Run {i} failed - check error log")
         
         # Small delay between runs
         if i < len(configs):

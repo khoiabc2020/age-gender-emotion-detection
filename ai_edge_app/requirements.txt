@@ -52,6 +52,10 @@ python-dotenv>=1.0.0
 scipy>=1.10.0  # For advanced tracking algorithms
 filterpy>=1.4.5  # For Kalman filter
 
+# YOLO Support (Optional - for YOLO detection)
+# ultralytics>=8.0.0  # For YOLOv8 (if using PyTorch version)
+# onnxruntime-gpu>=1.16.0  # For GPU acceleration (optional)
+
 # New Features (Phase 2)
 qrcode>=7.0.0
 requests>=2.31.0

@@ -14,7 +14,7 @@ from typing import Optional, Dict
 from collections import deque
 
 
-from src.detectors import RetinaFaceDetector
+from src.detectors import RetinaFaceDetector, YOLOFaceDetector, YOLOPersonDetector
 from src.trackers import DeepSORTTracker, ByteTracker
 from src.classifiers import MultiTaskClassifier
 from src.ads_engine import AdsSelector
@@ -94,22 +94,53 @@ class EdgeAIApp:
         try:
             self.logger.info("Initializing Edge AI Application...")
             
-            # Initialize detector
+            # Initialize detector (support multiple backends: RetinaFace, YOLO)
             model_dir = Path("models")
-            detector_model = model_dir / "retinaface_mnet.onnx"
+            detector_type = self.config['detection'].get('type', 'retinaface')  # 'retinaface', 'yolo_face', 'yolo_person'
             
-            # Try ONNX model, fallback to OpenCV DNN
-            if detector_model.exists():
-                self.detector = RetinaFaceDetector(
-                    str(detector_model),
-                    confidence_threshold=self.config['detection']['confidence_threshold']
-                )
-                self.logger.info("Loaded RetinaFace ONNX model")
-            else:
-                self.logger.warning(f"Detector model not found: {detector_model}, using fallback")
-                self.detector = RetinaFaceDetector(
-                    confidence_threshold=self.config['detection']['confidence_threshold']
-                )
+            if detector_type == 'yolo_face':
+                # YOLO Face Detection
+                yolo_model = model_dir / "yolov8n-face.onnx"  # or yolov5-face.onnx
+                if yolo_model.exists():
+                    self.detector = YOLOFaceDetector(
+                        str(yolo_model),
+                        confidence_threshold=self.config['detection']['confidence_threshold'],
+                        iou_threshold=self.config['detection'].get('iou_threshold', 0.45)
+                    )
+                    self.logger.info("Loaded YOLO Face Detection model")
+                else:
+                    self.logger.warning(f"YOLO face model not found: {yolo_model}, falling back to RetinaFace")
+                    detector_type = 'retinaface'  # Fallback
+            
+            elif detector_type == 'yolo_person':
+                # YOLO Person Detection (full body)
+                yolo_model = model_dir / "yolov8n.onnx"  # COCO pretrained
+                if yolo_model.exists():
+                    self.detector = YOLOPersonDetector(
+                        str(yolo_model),
+                        confidence_threshold=self.config['detection']['confidence_threshold'],
+                        iou_threshold=self.config['detection'].get('iou_threshold', 0.45)
+                    )
+                    self.logger.info("Loaded YOLO Person Detection model (full body)")
+                else:
+                    self.logger.warning(f"YOLO person model not found: {yolo_model}, falling back to RetinaFace")
+                    detector_type = 'retinaface'  # Fallback
+            
+            # Default: RetinaFace
+            if detector_type == 'retinaface' or self.detector is None:
+                detector_model = model_dir / "retinaface_mnet.onnx"
+                
+                if detector_model.exists():
+                    self.detector = RetinaFaceDetector(
+                        str(detector_model),
+                        confidence_threshold=self.config['detection']['confidence_threshold']
+                    )
+                    self.logger.info("Loaded RetinaFace ONNX model")
+                else:
+                    self.logger.warning(f"Detector model not found: {detector_model}, using fallback")
+                    self.detector = RetinaFaceDetector(
+                        confidence_threshold=self.config['detection']['confidence_threshold']
+                    )
             
             # Initialize tracker (Tuần 7: ByteTrack thay DeepSORT)
             use_bytetrack = self.config['tracking'].get('use_bytetrack', False)

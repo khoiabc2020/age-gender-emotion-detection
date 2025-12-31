@@ -6,7 +6,9 @@
     "fps": 30
   },
   "detection": {
+    "type": "retinaface",
     "confidence_threshold": 0.7,
+    "iou_threshold": 0.45,
     "min_face_size": 40
   },
   "tracking": {

@@ -2,14 +2,14 @@
   "run_id": 3,
   "config": {
     "data_dir": "data/processed",
-    "epochs": 50,
+    "epochs": 5,
     "batch_size": 32,
     "learning_rate": 0.0005,
     "use_distillation": true,
     "use_qat": false,
-    "output_dir": "models/run_3"
+    "output_dir": "models/run_3",
+    "original_epochs": 50
   },
   "success": false,
-  "elapsed_time": 10.516689538955688,
-  "returncode": 2
+  "error": "name 'results_dir' is not defined"
 }
