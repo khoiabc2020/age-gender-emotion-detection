@@ -1,0 +1,6 @@
+{
+  "best_accuracy": 61.84173864586236,
+  "epochs": 50,
+  "training_time_minutes": 102.11098696390788,
+  "num_classes": 7
+}
