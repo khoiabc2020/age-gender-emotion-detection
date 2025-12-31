@@ -40,27 +40,28 @@ START_PROJECT.bat
 
 ### 📚 Hướng Dẫn Chi Tiết
 
-**🚀 Production Ready:** [`PRODUCTION_READY.md`](PRODUCTION_READY.md) - **Tổng quan hoàn chỉnh về sản phẩm sẵn sàng triển khai** ⭐⭐⭐⭐
+**🚀 Production Ready:** [`PRODUCTION_READY.md`](PRODUCTION_READY.md) - Tổng quan hoàn chỉnh về sản phẩm sẵn sàng triển khai ⭐⭐⭐⭐
 
-**⚡ Train on Colab:** [`TRAIN_ON_COLAB_QUICKSTART.md`](TRAIN_ON_COLAB_QUICKSTART.md) - **Train với GPU miễn phí trong 5 phút!** ⭐⭐⭐⭐ 🆕
+**📖 Project Documentation:** [`PROJECT_DOCUMENTATION.md`](PROJECT_DOCUMENTATION.md) - Tài liệu đầy đủ về dự án và hướng dẫn sử dụng ⭐⭐⭐⭐
 
-**📊 Training Results:** [`TRAINING_RESULTS.md`](TRAINING_RESULTS.md) - **Kết quả training mới nhất và đánh giá model**
+**📊 Training Results:** [`TRAINING_RESULTS.md`](TRAINING_RESULTS.md) - Kết quả training mới nhất và đánh giá model
 
-**Chạy Localhost:** [`HUONG_DAN_CHAY_LOCALHOST.md`](HUONG_DAN_CHAY_LOCALHOST.md) - Hướng dẫn đầy đủ cách chạy localhost
+**🎓 Learning Guide:** [`HUONG_DAN_HOC_TAP_VA_SU_DUNG.md`](HUONG_DAN_HOC_TAP_VA_SU_DUNG.md) - Hướng dẫn học tập & sử dụng từ A đến Z ⭐⭐⭐
 
-**Học tập & Sử dụng:** [`HUONG_DAN_HOC_TAP_VA_SU_DUNG.md`](HUONG_DAN_HOC_TAP_VA_SU_DUNG.md) - **Hướng dẫn học tập & sử dụng từ A đến Z** ⭐⭐⭐
-
-**Colab Training Guide:** [`COLAB_TRAINING_GUIDE.md`](COLAB_TRAINING_GUIDE.md) - **Hướng dẫn chi tiết train trên Colab** ⭐⭐⭐ 🆕
-
-**Tài liệu tổng hợp:** [`PROJECT_DOCUMENTATION.md`](PROJECT_DOCUMENTATION.md) - Tài liệu đầy đủ về dự án
+**🤝 Contributing:** [`CONTRIBUTING.md`](CONTRIBUTING.md) - Hướng dẫn đóng góp cho dự án
 
 ### 🐳 Docker (Production)
 
 ```bash
+# Start all services
 docker-compose up -d
-```
 
-Xem chi tiết trong [`HUONG_DAN_CHAY_LOCALHOST.md`](HUONG_DAN_CHAY_LOCALHOST.md)
+# Check status
+docker-compose ps
+
+# View logs
+docker-compose logs -f
+```
 
 ## 🔑 Authentication
 
@@ -177,35 +178,39 @@ npm test
 
 ## 📚 Documentation
 
-### ⭐ Hướng Dẫn Quan Trọng
-- **[HUONG_DAN_CHAY_LOCALHOST.md](HUONG_DAN_CHAY_LOCALHOST.md)** - Hướng dẫn chạy localhost chi tiết ⭐⭐⭐
-- **[HUONG_DAN_HOC_TAP_VA_SU_DUNG.md](HUONG_DAN_HOC_TAP_VA_SU_DUNG.md)** - Hướng dẫn học tập & sử dụng từ A đến Z ⭐⭐⭐
-- **[docs/GITHUB_AND_COLAB_GUIDE.md](docs/GITHUB_AND_COLAB_GUIDE.md)** - Hướng dẫn GitHub & Colab ⭐⭐⭐
+### ⭐ Core Documentation
+- **[PROJECT_DOCUMENTATION.md](PROJECT_DOCUMENTATION.md)** - Complete project documentation index ⭐⭐⭐⭐
+- **[PRODUCTION_READY.md](PRODUCTION_READY.md)** - Production readiness checklist ⭐⭐⭐⭐
+- **[PRODUCTION_TODO.md](PRODUCTION_TODO.md)** - Production deployment roadmap
+- **[CONTRIBUTING.md](CONTRIBUTING.md)** - Contribution guidelines
 
-### 📖 Tài Liệu Kỹ Thuật
-- [PROJECT_DOCUMENTATION.md](PROJECT_DOCUMENTATION.md) - Index tất cả tài liệu
-- [docs/PROJECT_DETAILS.md](docs/PROJECT_DETAILS.md) - Chi tiết kỹ thuật dự án
-- [docs/SETUP.md](docs/SETUP.md) - Hướng dẫn setup môi trường
-- [docs/OPTIMIZATION.md](docs/OPTIMIZATION.md) - Báo cáo tối ưu hóa
+### 📖 Technical Guides
+- [docs/PROJECT_DETAILS.md](docs/PROJECT_DETAILS.md) - Technical project details
+- [docs/SETUP.md](docs/SETUP.md) - Environment setup guide
+- [docs/OPTIMIZATION.md](docs/OPTIMIZATION.md) - Optimization report
+- [HUONG_DAN_HOC_TAP_VA_SU_DUNG.md](HUONG_DAN_HOC_TAP_VA_SU_DUNG.md) - Learning & usage guide (Vietnamese)
 
-### 🚀 Roadmap & Development
-- [docs/ROADMAP.md](docs/ROADMAP.md) - Roadmap phát triển
+### 🚀 Development & Deployment
+- [docs/ROADMAP.md](docs/ROADMAP.md) - Development roadmap
 - [docs/MLOPS_ROADMAP.md](docs/MLOPS_ROADMAP.md) - Hybrid MLOps roadmap
-- [docs/PRODUCTION_ROADMAP.md](docs/PRODUCTION_ROADMAP.md) - Roadmap to production ⭐ NEW
-
-### 🔒 Security & DevOps
-- [docs/SECURITY.md](docs/SECURITY.md) - Security best practices
-- [docs/GIT_GUIDE.md](docs/GIT_GUIDE.md) - Git commit guidelines
+- [docs/PRODUCTION_ROADMAP.md](docs/PRODUCTION_ROADMAP.md) - Production deployment roadmap
 - [docs/CI_CD.md](docs/CI_CD.md) - CI/CD pipeline guide
 
-### 🎓 Training
-- [training_experiments/README.md](training_experiments/README.md) - Training guide
-- [training_experiments/AUTO_TRAINING_GUIDE.md](training_experiments/AUTO_TRAINING_GUIDE.md) - Auto training
-- [training_experiments/DATASETS_INFO.md](training_experiments/DATASETS_INFO.md) - Datasets info
+### 🔒 Security
+- [docs/SECURITY.md](docs/SECURITY.md) - Security best practices
+- [docs/GIT_GUIDE.md](docs/GIT_GUIDE.md) - Git workflow and commit guidelines
 
-### 🚀 Edge App
-- [ai_edge_app/README.md](ai_edge_app/README.md) - Edge app docs
-- [ai_edge_app/ULTIMATE_ROADMAP.md](ai_edge_app/ULTIMATE_ROADMAP.md) - Roadmap
+### 🎓 Training & AI
+- [training_experiments/README.md](training_experiments/README.md) - Training guide and setup
+- [training_experiments/AUTO_TRAINING_GUIDE.md](training_experiments/AUTO_TRAINING_GUIDE.md) - Automated training workflow
+- [training_experiments/DATASETS_INFO.md](training_experiments/DATASETS_INFO.md) - Dataset information
+- [training_experiments/notebooks/](training_experiments/notebooks/) - Google Colab notebooks
+- [TRAINING_RESULTS.md](TRAINING_RESULTS.md) - Latest training results
+
+### 🚀 Edge Computing
+- [ai_edge_app/README.md](ai_edge_app/README.md) - Edge application documentation
+- [ai_edge_app/ULTIMATE_ROADMAP.md](ai_edge_app/ULTIMATE_ROADMAP.md) - Edge computing roadmap
+- [ai_edge_app/YOLO_COMPLETE.md](ai_edge_app/YOLO_COMPLETE.md) - YOLO integration guide
 
 ## 🔒 Security
 
