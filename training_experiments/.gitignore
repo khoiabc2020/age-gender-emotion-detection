@@ -31,7 +31,7 @@ logs/
 
 # Jupyter Notebooks
 .ipynb_checkpoints/
-*.ipynb
+# *.ipynb  # Allow notebooks for Colab training
 
 # IDE
 .vscode/
