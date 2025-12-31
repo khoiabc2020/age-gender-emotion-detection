@@ -42,13 +42,15 @@ START_PROJECT.bat
 
 **🚀 Production Ready:** [`PRODUCTION_READY.md`](PRODUCTION_READY.md) - **Tổng quan hoàn chỉnh về sản phẩm sẵn sàng triển khai** ⭐⭐⭐⭐
 
+**⚡ Train on Colab:** [`TRAIN_ON_COLAB_QUICKSTART.md`](TRAIN_ON_COLAB_QUICKSTART.md) - **Train với GPU miễn phí trong 5 phút!** ⭐⭐⭐⭐ 🆕
+
 **📊 Training Results:** [`TRAINING_RESULTS.md`](TRAINING_RESULTS.md) - **Kết quả training mới nhất và đánh giá model**
 
 **Chạy Localhost:** [`HUONG_DAN_CHAY_LOCALHOST.md`](HUONG_DAN_CHAY_LOCALHOST.md) - Hướng dẫn đầy đủ cách chạy localhost
 
 **Học tập & Sử dụng:** [`HUONG_DAN_HOC_TAP_VA_SU_DUNG.md`](HUONG_DAN_HOC_TAP_VA_SU_DUNG.md) - **Hướng dẫn học tập & sử dụng từ A đến Z** ⭐⭐⭐
 
-**GitHub & Colab:** [`docs/GITHUB_AND_COLAB_GUIDE.md`](docs/GITHUB_AND_COLAB_GUIDE.md) - **Hướng dẫn upload GitHub và train trên Colab** ⭐⭐⭐
+**Colab Training Guide:** [`COLAB_TRAINING_GUIDE.md`](COLAB_TRAINING_GUIDE.md) - **Hướng dẫn chi tiết train trên Colab** ⭐⭐⭐ 🆕
 
 **Tài liệu tổng hợp:** [`PROJECT_DOCUMENTATION.md`](PROJECT_DOCUMENTATION.md) - Tài liệu đầy đủ về dự án
 
