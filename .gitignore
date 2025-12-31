@@ -113,9 +113,8 @@ $RECYCLE.BIN/
 
 # ========== JUPYTER NOTEBOOKS ==========
 .ipynb_checkpoints/
-*.ipynb
-# Uncomment nếu muốn commit notebooks:
-# !*.ipynb
+# *.ipynb  # Commented out - allow notebooks for Colab
+# Notebooks are needed for Colab training
 
 # ========== TESTING & COVERAGE ==========
 .coverage
@@ -179,7 +178,7 @@ site/
 # Training experiments
 training_experiments/venv/
 training_experiments/venv_gpu/
-training_experiments/notebooks/*.ipynb
+# training_experiments/notebooks/*.ipynb  # Allow Colab notebooks
 
 # Edge app logs
 ai_edge_app/logs/
