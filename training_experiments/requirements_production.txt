@@ -1,0 +1,54 @@
+# Production Training Requirements
+# Install: pip install -r requirements_production.txt
+
+# Core deep learning
+torch>=2.0.0
+torchvision>=0.15.0
+torchaudio>=2.0.0
+
+# Model zoo and pretrained models
+timm>=0.9.0
+
+# Advanced augmentation
+albumentations>=1.3.0
+imgaug>=0.4.0
+
+# Data handling
+opencv-python>=4.8.0
+Pillow>=10.0.0
+scikit-image>=0.21.0
+
+# Utilities
+tqdm>=4.66.0
+numpy>=1.24.0
+pandas>=2.0.0
+scipy>=1.11.0
+
+# Visualization
+matplotlib>=3.7.0
+seaborn>=0.12.0
+tensorboard>=2.13.0
+
+# Model export
+onnx>=1.14.0
+onnxscript>=0.1.0
+onnxruntime>=1.15.0
+onnxruntime-gpu>=1.15.0  # For GPU inference testing
+
+# Metrics and evaluation
+scikit-learn>=1.3.0
+torchmetrics>=1.0.0
+
+# Dataset downloading
+kagglehub>=0.1.0
+gdown>=4.7.0
+
+# Experiment tracking (optional but recommended)
+wandb>=0.15.0  # Uncomment if using Weights & Biases
+
+# Optimization
+# apex  # Uncomment for mixed precision training (needs manual install)
+
+# Utils
+pyyaml>=6.0
+colorama>=0.4.6
