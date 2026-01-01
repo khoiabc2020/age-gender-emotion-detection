@@ -32,7 +32,12 @@ if not exist ".env" (
         echo DEBUG=True
     ) > .env
 )
-pip install -r requirements.txt --upgrade --disable-pip-version-check
+echo Installing Python packages...
+pip install -r requirements.txt --upgrade --disable-pip-version-check -q 2>nul
+if %errorlevel% neq 0 (
+    echo WARNING: Some packages failed to install. Retrying...
+    pip install -r requirements.txt --upgrade --disable-pip-version-check
+)
 cd ..
 
 echo.
@@ -40,7 +45,12 @@ echo ======================================================
 echo [2/3] Dashboard Dependencies
 echo ======================================================
 cd dashboard
-call npm install --legacy-peer-deps
+echo Installing Node packages (this may take a while)...
+call npm install --silent --legacy-peer-deps 2>nul
+if %errorlevel% neq 0 (
+    echo WARNING: Silent install failed. Retrying with verbose...
+    call npm install --legacy-peer-deps
+)
 cd ..
 
 echo.
@@ -48,8 +58,12 @@ echo ======================================================
 echo [3/3] Edge AI App Dependencies
 echo ======================================================
 cd ai_edge_app
-pip install qrcode pillow onnxruntime==1.14.0 numpy opencv-python --upgrade --disable-pip-version-check
-pip install -r requirements.txt --upgrade --disable-pip-version-check
+echo Installing core packages...
+pip install qrcode pillow onnxruntime==1.16.0 numpy opencv-python requests paho-mqtt python-dotenv --upgrade --disable-pip-version-check -q 2>nul
+if %errorlevel% neq 0 (
+    echo WARNING: Some packages failed. Retrying...
+    pip install -r requirements.txt --upgrade --disable-pip-version-check
+)
 cd ..
 
 echo.
