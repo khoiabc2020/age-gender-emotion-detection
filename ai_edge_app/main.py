@@ -272,7 +272,30 @@ class EdgeAIApp:
                 detections = []
                 if self.detector:
                     try:
-                        detections = self.detector.detect(frame)
+                        raw_detections = self.detector.detect(frame)
+                        # Convert detector output to tracker format
+                        # Detector returns List[Tuple[x, y, w, h, score]] or List[Tuple[x1, y1, x2, y2, score]]
+                        # Tracker expects List[Dict] with keys: 'bbox', 'score', 'class'
+                        for det in raw_detections:
+                            if isinstance(det, tuple):
+                                # Tuple format: (x, y, w, h, score) or (x1, y1, x2, y2, score)
+                                if len(det) >= 5:
+                                    x, y, w_or_x2, h_or_y2, score = det[0], det[1], det[2], det[3], det[4]
+                                    # Determine if it's (x, y, w, h) or (x1, y1, x2, y2)
+                                    if w_or_x2 > 100 or h_or_y2 > 100:
+                                        # Likely (x, y, w, h) format
+                                        bbox = np.array([x, y, x + w_or_x2, y + h_or_y2], dtype=np.float32)
+                                    else:
+                                        # Likely (x1, y1, x2, y2) format
+                                        bbox = np.array([x, y, w_or_x2, h_or_y2], dtype=np.float32)
+                                    detections.append({
+                                        'bbox': bbox,
+                                        'score': float(score),
+                                        'class': 0  # Face class
+                                    })
+                            elif isinstance(det, dict):
+                                # Already in correct format
+                                detections.append(det)
                     except Exception as e:
                         self.logger.warning(f"Detection error: {e}")
                         detections = []

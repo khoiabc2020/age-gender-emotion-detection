@@ -10,10 +10,19 @@ import json
 from datetime import datetime
 
 try:
-    import google.generativeai as genai
+    # Try new google.genai first (recommended)
+    import google.genai as genai
     GOOGLE_AI_AVAILABLE = True
+    GOOGLE_AI_NEW_API = True
 except ImportError:
-    GOOGLE_AI_AVAILABLE = False
+    try:
+        # Fallback to deprecated google.generativeai
+        import google.generativeai as genai
+        GOOGLE_AI_AVAILABLE = True
+        GOOGLE_AI_NEW_API = False
+    except ImportError:
+        GOOGLE_AI_AVAILABLE = False
+        GOOGLE_AI_NEW_API = False
 
 try:
     import openai
@@ -53,8 +62,14 @@ class AIAgent:
         
         # Initialize Google AI
         if GOOGLE_AI_AVAILABLE and self.google_ai_key:
-            genai.configure(api_key=self.google_ai_key)
-            self.google_model = genai.GenerativeModel('gemini-pro')
+            if GOOGLE_AI_NEW_API:
+                # New google.genai API
+                genai.configure(api_key=self.google_ai_key)
+                self.google_model = genai.GenerativeModel('gemini-pro')
+            else:
+                # Deprecated google.generativeai API
+                genai.configure(api_key=self.google_ai_key)
+                self.google_model = genai.GenerativeModel('gemini-pro')
         else:
             self.google_model = None
         

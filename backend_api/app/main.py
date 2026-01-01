@@ -19,7 +19,12 @@ from app.core.security import verify_token
 async def lifespan(app: FastAPI):
     """Lifespan events for FastAPI app"""
     # Startup
-    Base.metadata.create_all(bind=engine)
+    try:
+        Base.metadata.create_all(bind=engine)
+    except Exception as e:
+        # Database connection failed - continue without database
+        print(f"Warning: Database connection failed: {e}")
+        print("Continuing without database. Some features may be limited.")
     yield
     # Shutdown (if needed)
 
