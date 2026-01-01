@@ -63,16 +63,58 @@ A complete Edge-to-Cloud solution using Deep Learning for real-time customer dem
 ### Prerequisites
 - Python 3.11+
 - Node.js 18+
-- PostgreSQL 14+
-- Docker (optional)
+- Git
 
-### Option 1: Docker (Recommended)
+### ⚡ **Fastest Way (3 Steps)**
 
+#### **Step 1: Clone Repository**
 ```bash
-# Clone repository
 git clone https://github.com/khoiabc2020/age-gender-emotion-detection.git
 cd age-gender-emotion-detection
+```
 
+#### **Step 2: Install Dependencies**
+```bash
+# Run this ONCE (takes 5-10 minutes)
+INSTALL_DEPENDENCIES.bat
+```
+
+#### **Step 3: Start Application**
+```bash
+# Option A: Quick start (Backend + Frontend)
+QUICK_START.bat
+
+# Option B: Interactive menu
+START.bat
+
+# Option C: All services at once
+run_app\run_all.bat
+```
+
+#### **Access the Application**
+- 🌐 **Dashboard**: http://localhost:3000
+- 🔧 **API Docs**: http://localhost:8000/docs
+- 👤 **Login**: `admin` / `admin123`
+
+---
+
+### 🔍 **Troubleshooting**
+
+#### Check if dependencies are installed:
+```bash
+CHECK_DEPENDENCIES.bat
+```
+
+#### If you get errors:
+1. Make sure Python 3.11+ is installed: `python --version`
+2. Make sure Node.js 18+ is installed: `node --version`
+3. Re-run: `INSTALL_DEPENDENCIES.bat`
+
+---
+
+### 🐳 **Alternative: Docker Setup**
+
+```bash
 # Copy environment variables
 cp .env.example .env
 
@@ -82,20 +124,6 @@ docker-compose up -d
 # Access services
 # Dashboard: http://localhost:3000
 # API: http://localhost:8000/docs
-# Login: admin / admin123
-```
-
-### Option 2: Manual Setup (Windows)
-
-```bash
-# Interactive menu
-START.bat
-
-# Or run directly:
-run_app\run_all.bat        # All services
-run_app\run_backend.bat    # Backend only
-run_app\run_frontend.bat   # Frontend only
-run_app\run_edge.bat       # Edge AI only
 ```
 
 ### Option 3: Development Setup
