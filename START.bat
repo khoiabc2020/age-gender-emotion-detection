@@ -220,12 +220,12 @@ cd ..
 echo.
 echo [2/3] Installing Dashboard dependencies...
 cd dashboard
-if not exist "node_modules\" (
+if not exist "node_modules\vite" (
     echo Installing npm packages (this may take a while)...
-    call npm install --legacy-peer-deps
+    call npm install --include=dev --legacy-peer-deps
     if %errorlevel% neq 0 (
-        echo WARNING: npm install failed. Trying with verbose output...
-        call npm install --legacy-peer-deps --verbose
+        echo WARNING: npm install failed. Retrying...
+        call npm install --legacy-peer-deps
     )
 ) else (
     echo Node modules already installed, skipping...
