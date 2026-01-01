@@ -88,10 +88,13 @@ docker-compose up -d
 ### Option 2: Manual Setup (Windows)
 
 ```bash
-# Run automated setup script
-START_PROJECT.bat
+# Run all services at once
+run_all.bat
 
-# Select option 4 - Start all services
+# Or run individually:
+run_backend.bat   # Backend API only
+run_frontend.bat  # Dashboard only
+run_edge.bat      # Edge AI App only
 ```
 
 ### Option 3: Development Setup
