@@ -21,7 +21,7 @@ import torch.nn as nn
 import torch.optim as optim
 from torch.utils.data import DataLoader, ConcatDataset
 from torchvision import datasets, transforms
-from torch.cuda.amp import autocast, GradScaler
+from torch.amp import autocast, GradScaler  # PyTorch 2.x
 import timm
 import json
 from pathlib import Path
@@ -178,7 +178,7 @@ scheduler = optim.lr_scheduler.OneCycleLR(
 # MIXED PRECISION SETUP
 # ============================================================
 
-scaler = GradScaler('cuda') if USE_MIXED_PRECISION else None
+scaler = GradScaler(device='cuda') if USE_MIXED_PRECISION else None
 if USE_MIXED_PRECISION:
     print("[OK] Mixed Precision Training enabled (faster)")
 
@@ -216,7 +216,7 @@ for epoch in range(EPOCHS):
         images, labels = images.to(DEVICE), labels.to(DEVICE)
         
         if USE_MIXED_PRECISION:
-            with autocast():
+            with autocast(device_type='cuda'):
                 if np.random.rand() > 0.3:
                     images, la, lb, lam = mixup_data(images, labels)
                     loss = mixup_loss(criterion, model(images), la, lb, lam) / GRAD_ACCUM_STEPS
