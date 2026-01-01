@@ -1,62 +1,28 @@
-# Edge AI Application Dependencies - Ultimate Edition
-# Optimized for edge computing devices
+# Edge AI Application Dependencies - Simplified & Stable
+# Essential packages only for core functionality
 
 # Core dependencies
 opencv-python>=4.8.0
 numpy>=1.24.0
-onnxruntime>=1.14.0
-
-# Modern UI - PyQt6 + QFluentWidgets
-PyQt6>=6.6.0
-PyQt6-Qt6>=6.6.0
-PyQt6-sip>=6.6.0
-PyQt6-QtMultimedia>=6.6.0
-PyQt6-QtMultimediaWidgets>=6.6.0
-qfluentwidgets>=1.0.0
-PyQtGraph>=0.13.0
-
-# MQTT for async data transmission
-paho-mqtt>=2.0.0
-
-# Kafka (Edge-to-Cloud)
-kafka-python>=2.0.2
-
-# MinIO Client (for OTA updates)
-minio>=7.2.0
-requests>=2.31.0
+onnxruntime>=1.16.0
 
 # Image processing
 Pillow>=10.0.0
 
-# Database
-sqlalchemy>=2.0.0
+# QR Code generation
+qrcode>=7.0.0
 
-# Reporting
-openpyxl>=3.1.0  # Excel export
-reportlab>=4.0.0  # PDF export
+# Networking
+requests>=2.31.0
 
-# Gesture Recognition
-mediapipe>=0.10.0
-
-# Voice Recognition (Optional)
-# whisper-cpp-python>=0.1.0  # For offline STT
-
-# Local LLM (Optional)
-# onnxruntime-gpu>=1.16.0  # For Phi-3/TinyLlama
+# MQTT for data transmission
+paho-mqtt>=1.6.0
 
 # Utilities
 python-dotenv>=1.0.0
 
-
-# Optional: For better performance
-scipy>=1.10.0  # For advanced tracking algorithms
-filterpy>=1.4.5  # For Kalman filter
-
-# YOLO Support (Optional - for YOLO detection)
-# ultralytics>=8.0.0  # For YOLOv8 (if using PyTorch version)
-# onnxruntime-gpu>=1.16.0  # For GPU acceleration (optional)
-
-# New Features (Phase 2)
-qrcode>=7.0.0
-requests>=2.31.0
-
+# Optional advanced features (comment out if not needed)
+# PyQt6>=6.6.0
+# mediapipe>=0.10.0
+# kafka-python>=2.0.2
+# sqlalchemy>=2.0.0
