@@ -40,13 +40,7 @@ START_PROJECT.bat
 
 ### 📚 Hướng Dẫn Chi Tiết
 
-**🚀 Production Ready:** [`PRODUCTION_READY.md`](PRODUCTION_READY.md) - Tổng quan hoàn chỉnh về sản phẩm sẵn sàng triển khai ⭐⭐⭐⭐
-
-**📖 Project Documentation:** [`PROJECT_DOCUMENTATION.md`](PROJECT_DOCUMENTATION.md) - Tài liệu đầy đủ về dự án và hướng dẫn sử dụng ⭐⭐⭐⭐
-
-**📊 Training Results:** [`TRAINING_RESULTS.md`](TRAINING_RESULTS.md) - Kết quả training mới nhất và đánh giá model
-
-**🎓 Learning Guide:** [`HUONG_DAN_HOC_TAP_VA_SU_DUNG.md`](HUONG_DAN_HOC_TAP_VA_SU_DUNG.md) - Hướng dẫn học tập & sử dụng từ A đến Z ⭐⭐⭐
+**📖 Project Documentation:** [`PROJECT_DOCUMENTATION.md`](PROJECT_DOCUMENTATION.md) - Tài liệu đầy đủ về dự án ⭐⭐⭐⭐
 
 **🤝 Contributing:** [`CONTRIBUTING.md`](CONTRIBUTING.md) - Hướng dẫn đóng góp cho dự án
 
@@ -179,16 +173,13 @@ npm test
 ## 📚 Documentation
 
 ### ⭐ Core Documentation
-- **[PROJECT_DOCUMENTATION.md](PROJECT_DOCUMENTATION.md)** - Complete project documentation index ⭐⭐⭐⭐
-- **[PRODUCTION_READY.md](PRODUCTION_READY.md)** - Production readiness checklist ⭐⭐⭐⭐
-- **[PRODUCTION_TODO.md](PRODUCTION_TODO.md)** - Production deployment roadmap
+- **[PROJECT_DOCUMENTATION.md](PROJECT_DOCUMENTATION.md)** - Complete project documentation ⭐⭐⭐⭐
 - **[CONTRIBUTING.md](CONTRIBUTING.md)** - Contribution guidelines
 
 ### 📖 Technical Guides
 - [docs/PROJECT_DETAILS.md](docs/PROJECT_DETAILS.md) - Technical project details
 - [docs/SETUP.md](docs/SETUP.md) - Environment setup guide
 - [docs/OPTIMIZATION.md](docs/OPTIMIZATION.md) - Optimization report
-- [HUONG_DAN_HOC_TAP_VA_SU_DUNG.md](HUONG_DAN_HOC_TAP_VA_SU_DUNG.md) - Learning & usage guide (Vietnamese)
 
 ### 🚀 Development & Deployment
 - [docs/ROADMAP.md](docs/ROADMAP.md) - Development roadmap
@@ -201,16 +192,13 @@ npm test
 - [docs/GIT_GUIDE.md](docs/GIT_GUIDE.md) - Git workflow and commit guidelines
 
 ### 🎓 Training & AI
-- [training_experiments/README.md](training_experiments/README.md) - Training guide and setup
-- [training_experiments/AUTO_TRAINING_GUIDE.md](training_experiments/AUTO_TRAINING_GUIDE.md) - Automated training workflow
-- [training_experiments/DATASETS_INFO.md](training_experiments/DATASETS_INFO.md) - Dataset information
-- [training_experiments/notebooks/](training_experiments/notebooks/) - Google Colab notebooks
-- [TRAINING_RESULTS.md](TRAINING_RESULTS.md) - Latest training results
+- [training_experiments/README.md](training_experiments/README.md) - Training guide
+- [training_experiments/POST_TRAINING_WORKFLOW.md](training_experiments/POST_TRAINING_WORKFLOW.md) - Complete post-training workflow
+- [training_experiments/TRAINING_VERSIONS_COMPARISON.md](training_experiments/TRAINING_VERSIONS_COMPARISON.md) - Training version comparison
+- [training_experiments/notebooks/kaggle_4datasets_training.ipynb](training_experiments/notebooks/kaggle_4datasets_training.ipynb) - Main training notebook (80%+ target)
 
 ### 🚀 Edge Computing
 - [ai_edge_app/README.md](ai_edge_app/README.md) - Edge application documentation
-- [ai_edge_app/ULTIMATE_ROADMAP.md](ai_edge_app/ULTIMATE_ROADMAP.md) - Edge computing roadmap
-- [ai_edge_app/YOLO_COMPLETE.md](ai_edge_app/YOLO_COMPLETE.md) - YOLO integration guide
 
 ## 🔒 Security
 
