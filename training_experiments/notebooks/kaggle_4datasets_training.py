@@ -157,6 +157,12 @@ print("=" * 60)
 # CELL 5: TRAIN (MAIN TRAINING)
 # ============================================================
 
+# Suppress warnings
+import warnings
+warnings.filterwarnings('ignore', category=UserWarning, module='pydantic')
+warnings.filterwarnings('ignore', message='.*UnsupportedFieldAttributeWarning.*')
+
+import torch
 import torch.nn as nn
 import torch.optim as optim
 from torch.utils.data import DataLoader, ConcatDataset
