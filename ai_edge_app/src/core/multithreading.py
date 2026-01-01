@@ -30,7 +30,7 @@ class FrameGrabber(QThread):
         """Main grabber loop"""
         self.camera = cv2.VideoCapture(self.camera_source)
         if not self.camera.isOpened():
-            print(f"❌ Cannot open camera {self.camera_source}")
+            print(f"ERROR: Cannot open camera {self.camera_source}")
             return
         
         self.running = True

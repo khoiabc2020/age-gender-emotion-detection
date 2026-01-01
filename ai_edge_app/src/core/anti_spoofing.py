@@ -30,7 +30,7 @@ class MiniFASNet:
         if Path(self.model_path).exists():
             self._load_model()
         else:
-            print(f"⚠️  MiniFASNet model not found: {self.model_path}")
+            print(f"WARNING: MiniFASNet model not found: {self.model_path}")
             print("   Anti-spoofing will be disabled")
     
     def _load_model(self):
@@ -44,9 +44,9 @@ class MiniFASNet:
                 self.model_path,
                 providers=providers
             )
-            print(f"⚡ Loaded MiniFASNet: {self.model_path}")
+            print(f"Loaded MiniFASNet: {self.model_path}")
         except Exception as e:
-            print(f"❌ Failed to load MiniFASNet: {e}")
+            print(f"ERROR: Failed to load MiniFASNet: {e}")
             self.session = None
     
     def preprocess(self, face_image: np.ndarray) -> np.ndarray:
@@ -112,7 +112,7 @@ class MiniFASNet:
             return is_real, float(confidence)
         
         except Exception as e:
-            print(f"❌ Anti-spoofing prediction error: {e}")
+            print(f"ERROR: Anti-spoofing prediction error: {e}")
             return True, 1.0  # Default to real on error
     
     def is_real_face(self, face_image: np.ndarray, threshold: float = 0.5) -> bool:

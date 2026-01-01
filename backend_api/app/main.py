@@ -96,10 +96,30 @@ async def health_check():
     return {"status": "healthy"}
 
 if __name__ == "__main__":
+    import socket
+    
+    # Check if port is available, try alternative ports if needed
+    def find_free_port(start_port: int, max_attempts: int = 10) -> int:
+        """Find a free port starting from start_port"""
+        for i in range(max_attempts):
+            port = start_port + i
+            sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+            try:
+                sock.bind(('0.0.0.0', port))
+                sock.close()
+                return port
+            except OSError:
+                continue
+        return start_port  # Return original if all fail
+    
+    port = find_free_port(settings.PORT)
+    if port != settings.PORT:
+        print(f"Port {settings.PORT} is in use, using port {port} instead")
+    
     uvicorn.run(
         "app.main:app",
         host=settings.HOST,
-        port=settings.PORT,
+        port=port,
         reload=settings.DEBUG
     )
 

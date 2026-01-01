@@ -32,7 +32,7 @@ class FaceRestorer:
         if Path(self.model_path).exists():
             self._load_model()
         else:
-            print(f"⚠️  Face restoration model not found: {self.model_path}")
+            print(f"WARNING: Face restoration model not found: {self.model_path}")
             print("   Face restoration will be disabled")
     
     def _load_model(self):
@@ -46,9 +46,9 @@ class FaceRestorer:
                 self.model_path,
                 providers=providers
             )
-            print(f"⚡ Loaded {self.method.upper()} model: {self.model_path}")
+            print(f"Loaded {self.method.upper()} model: {self.model_path}")
         except Exception as e:
-            print(f"❌ Failed to load face restoration model: {e}")
+            print(f"ERROR: Failed to load face restoration model: {e}")
             self.session = None
     
     def preprocess(self, face_image: np.ndarray) -> np.ndarray:
@@ -113,7 +113,7 @@ class FaceRestorer:
             return enhanced_bgr
         
         except Exception as e:
-            print(f"❌ Face restoration error: {e}")
+            print(f"ERROR: Face restoration error: {e}")
             return face_image  # Return original on error
     
     def enhance_if_needed(self, face_image: np.ndarray, quality_threshold: float = 0.3) -> np.ndarray:
