@@ -422,7 +422,8 @@ print("="*60)
 checkpoint_path = Path('/kaggle/working/checkpoints_production/best_model_4datasets.pth')
 
 if checkpoint_path.exists():
-    checkpoint = torch.load(checkpoint_path, map_location='cpu')
+    # Fix for PyTorch 2.6+: add weights_only=False
+    checkpoint = torch.load(checkpoint_path, map_location='cpu', weights_only=False)
     
     model = timm.create_model('efficientnet_b0', pretrained=False, num_classes=checkpoint['num_classes'])
     model.load_state_dict(checkpoint['model_state_dict'])
