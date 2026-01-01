@@ -2,9 +2,15 @@
 
 ## Cách chạy nhanh nhất
 
-### 1. Chạy tất cả (Recommended)
+### 0. Menu Launcher (Easiest!)
 ```bash
-run_all.bat
+START.bat
+```
+Chọn option 1 để chạy tất cả!
+
+### 1. Chạy tất cả trực tiếp
+```bash
+run_app\run_all.bat
 ```
 Script này sẽ tự động mở 3 cửa sổ:
 - ✅ Backend API (http://localhost:8000)
@@ -15,20 +21,20 @@ Script này sẽ tự động mở 3 cửa sổ:
 
 #### Backend API
 ```bash
-run_backend.bat
+run_app\run_backend.bat
 ```
 Access: http://localhost:8000/docs
 
 #### Dashboard (Frontend)
 ```bash
-run_frontend.bat
+run_app\run_frontend.bat
 ```
 Access: http://localhost:3000  
 Login: `admin` / `admin123`
 
 #### Edge AI App
 ```bash
-run_edge.bat
+run_app\run_edge.bat
 ```
 Press 'q' to quit
 
