@@ -11,43 +11,46 @@ Hệ thống sử dụng **Multi-task Learning** với EfficientNet-B0 backbone 
 
 ## 🚀 Quick Start
 
-### 1. Setup Environment
+### Option 1: Kaggle Training (Recommended - Free P100 GPU)
+```bash
+# 1. Upload notebook to Kaggle
+#    File: notebooks/kaggle_4datasets_training.ipynb
+# 2. Add datasets and run
+```
+**Target accuracy: 80-83%** | See [Kaggle notebook](notebooks/kaggle_4datasets_training.ipynb)
 
+### Option 2: Local Training (Your GPU)
 ```bash
 cd training_experiments
-venv_gpu\Scripts\activate  # Windows
-# hoặc
-source venv_gpu/bin/activate  # Linux/Mac
+pip install -r requirements.txt
+python train_local.py
 ```
+See [Local Training Guide](TRAIN_LOCAL_GUIDE.md) for details.
 
-### 2. Test Pipeline
-
+### Option 3: Evaluation & Testing
 ```bash
-python scripts/test_pipeline.py
+# Evaluate trained model
+python scripts/evaluate_model.py
+
+# Test predictions
+python scripts/predict_test.py
+
+# Convert to ONNX
+python scripts/convert_to_onnx.py
 ```
 
-### 3. Training
+## 📊 Training Results
 
-#### Single Training Run:
-```bash
-python train_week2_lightweight.py \
-    --data_dir data/processed \
-    --epochs 50 \
-    --batch_size 32 \
-    --lr 1e-3 \
-    --use_distillation
-```
+**Latest Training (Kaggle):**
+- **Accuracy**: 76.49%
+- **Epochs**: 150
+- **Model**: EfficientNet-B0
+- **Training Time**: 7.95 hours
+- **Dataset**: FER2013 + UTKFace + RAF-DB
 
-#### Automated Training (10 runs):
-```bash
-python train_10x_automated.py
-```
-
-### 4. Monitor Training
-
-```bash
-tensorboard --logdir checkpoints/logs
-```
+**Target (Next Training):**
+- **Accuracy**: 80-83%
+- **Improvements**: EfficientNetV2-S, RandAugment, CutMix, Focal Loss, 200 epochs
 
 ### 5. Evaluate & Optimize
 
