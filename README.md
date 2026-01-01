@@ -97,15 +97,19 @@ AI_PROVIDER=google_ai  # or chatgpt, or both
 ## 📁 Cấu trúc Project
 
 ```
-Smart-Retail-Ads/
-├── ai_edge_app/          # Edge AI Application
-├── backend_api/          # FastAPI Backend
-├── dashboard/            # React Dashboard
-├── database/             # Database scripts
-├── training_experiments/ # Model training
-├── mqtt/                 # MQTT config
-├── docker-compose.yml    # Docker setup
-└── .env.example          # Environment template
+Smart-Retail-AI/
+├── ai_edge_app/              # Edge AI Application
+├── backend_api/              # FastAPI Backend  
+├── dashboard/                # React Dashboard
+├── training_experiments/     # ML Training (Kaggle)
+│   ├── notebooks/            # Kaggle notebooks
+│   ├── checkpoints/          # Model checkpoints
+│   └── scripts/              # Training scripts
+├── docs/                     # Documentation
+├── database/                 # Database scripts
+├── k8s/                      # Kubernetes configs
+├── docker-compose.yml        # Docker orchestration
+└── .env.example              # Environment template
 ```
 
 ## 🎯 Features
@@ -193,9 +197,9 @@ npm test
 
 ### 🎓 Training & AI
 - [training_experiments/README.md](training_experiments/README.md) - Training guide
-- [training_experiments/POST_TRAINING_WORKFLOW.md](training_experiments/POST_TRAINING_WORKFLOW.md) - Complete post-training workflow
+- [training_experiments/POST_TRAINING_WORKFLOW.md](training_experiments/POST_TRAINING_WORKFLOW.md) - Complete post-training workflow  
 - [training_experiments/TRAINING_VERSIONS_COMPARISON.md](training_experiments/TRAINING_VERSIONS_COMPARISON.md) - Training version comparison
-- [training_experiments/notebooks/kaggle_4datasets_training.ipynb](training_experiments/notebooks/kaggle_4datasets_training.ipynb) - Main training notebook (80%+ target)
+- [training_experiments/notebooks/kaggle_4datasets_training.ipynb](training_experiments/notebooks/kaggle_4datasets_training.ipynb) - Main Kaggle notebook (80%+ target)
 
 ### 🚀 Edge Computing
 - [ai_edge_app/README.md](ai_edge_app/README.md) - Edge application documentation
