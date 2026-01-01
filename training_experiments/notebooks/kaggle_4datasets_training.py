@@ -1,4 +1,4 @@
-"""
+lok"""
 4-DATASET KAGGLE TRAINING SCRIPT
 Target: 80-85% accuracy
 Time: 10-12 hours (P100 GPU)
@@ -8,9 +8,11 @@ Pre-requisites:
    - msambare/fer2013
    - jangedoo/utkface-new
    - shuvoalok/raf-db-dataset
-   - noamsegal/affectnet-training-data
+   - shreyanshverma27/ferplus (OR davilsena/ckextended)
 
 2. Run this script in Kaggle notebook
+
+Note: AffectNet is no longer available. Use FER2013+, CK+, or ExpW instead.
 """
 
 # ============================================================
@@ -100,15 +102,27 @@ for path in rafdb_paths:
         print(f"  [OK] {path}")
         break
 
-# 4. AffectNet
-print("\n[4/4] AffectNet...")
-affectnet_paths = ['/kaggle/input/affectnet-training-data', '/kaggle/input/noamsegal-affectnet-training-data',
-                   '/kaggle/input/affectnet-cnn-validation', '/kaggle/input/tom99763-affectnet-cnn-validation']
-for path in affectnet_paths:
+# 4. FER2013+ or Alternatives
+print("\n[4/4] Checking Additional Datasets...")
+ferplus_paths = ['/kaggle/input/ferplus', '/kaggle/input/shreyanshverma27-ferplus',
+                 '/kaggle/input/fer-plus', '/kaggle/input/fer2013plus']
+for path in ferplus_paths:
     if Path(path).exists():
-        dataset_paths['affectnet'] = path
-        print(f"  [OK] {path}")
+        dataset_paths['ferplus'] = path
+        print(f"  [OK] FER2013+: {path}")
         break
+
+if 'ferplus' not in dataset_paths:
+    ckplus_paths = ['/kaggle/input/ckextended', '/kaggle/input/davilsena-ckextended']
+    for path in ckplus_paths:
+        if Path(path).exists():
+            dataset_paths['ckplus'] = path
+            print(f"  [OK] CK+: {path}")
+            break
+
+if len(dataset_paths) < 4:
+    print("  [WARN] No 4th dataset found")
+    print("  [INFO] Add: shreyanshverma27/ferplus OR davilsena/ckextended")
 
 with open('/kaggle/working/dataset_paths.json', 'w') as f:
     json.dump(dataset_paths, f, indent=2)
@@ -117,7 +131,8 @@ print("\n" + "=" * 60)
 print(f"FOUND: {len(dataset_paths)}/4 datasets")
 print("=" * 60)
 
-estimates = {'fer2013': 28709, 'utkface': 23708, 'rafdb': 12271, 'affectnet': 30000}
+estimates = {'fer2013': 28709, 'utkface': 23708, 'rafdb': 12271, 
+             'ferplus': 35887, 'ckplus': 10000, 'expw': 15000}
 total = sum(estimates[n] for n in dataset_paths if n in estimates)
 print(f"\n[ESTIMATE] ~{total:,} images")
 
