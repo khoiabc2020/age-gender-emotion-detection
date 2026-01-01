@@ -61,7 +61,7 @@ A complete Edge-to-Cloud solution using Deep Learning for real-time customer dem
 ## 🚀 Quick Start
 
 ### Prerequisites
-- Python 3.11+
+- Python 3.11 or 3.12 (⚠️ **NOT 3.13+**, see [Python Version Fix](PYTHON_VERSION_FIX.md))
 - Node.js 18+
 - Git
 

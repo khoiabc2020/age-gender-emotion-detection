@@ -1,28 +1,26 @@
-# Edge AI Application Dependencies - Simplified & Stable
-# Essential packages only for core functionality
+# Edge AI Application Dependencies - Compatible with Python 3.8-3.12
+# Simplified & Stable for production use
 
 # Core dependencies
-opencv-python>=4.8.0
-numpy>=1.24.0
-onnxruntime>=1.16.0
+opencv-python>=4.8.0,<5.0.0
+numpy>=1.24.0,<2.0.0
+
+# ONNX Runtime - Use CPU version for compatibility
+# Note: Python 3.14+ may need manual installation
+onnxruntime>=1.15.0,<1.19.0 ; python_version < "3.13"
+onnxruntime>=1.16.0 ; python_version >= "3.13"
 
 # Image processing
-Pillow>=10.0.0
+Pillow>=10.0.0,<11.0.0
 
 # QR Code generation
-qrcode>=7.0.0
+qrcode>=7.0.0,<8.0.0
 
 # Networking
-requests>=2.31.0
+requests>=2.31.0,<3.0.0
 
 # MQTT for data transmission
-paho-mqtt>=1.6.0
+paho-mqtt>=1.6.0,<3.0.0
 
 # Utilities
-python-dotenv>=1.0.0
-
-# Optional advanced features (comment out if not needed)
-# PyQt6>=6.6.0
-# mediapipe>=0.10.0
-# kafka-python>=2.0.2
-# sqlalchemy>=2.0.0
+python-dotenv>=1.0.0,<2.0.0

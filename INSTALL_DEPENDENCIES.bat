@@ -10,6 +10,29 @@ echo   - Backend API (Python)
 echo   - Dashboard (Node.js)
 echo   - Edge AI App (Python)
 echo.
+echo Checking Python version...
+python --version
+python -c "import sys; v=sys.version_info; print(f'Detected: Python {v.major}.{v.minor}'); exit(0 if v.major == 3 and v.minor <= 12 else 1)" 2>nul
+if %errorlevel% neq 0 (
+    echo.
+    echo ============================================================
+    echo WARNING: Python 3.13+ detected!
+    echo ============================================================
+    echo.
+    echo ONNX Runtime may not work with Python 3.13+
+    echo.
+    echo RECOMMENDED: Use Python 3.12
+    echo Download: https://www.python.org/downloads/release/python-3120/
+    echo.
+    echo Or use Docker: docker-compose up -d
+    echo.
+    echo See PYTHON_VERSION_FIX.md for details.
+    echo.
+    echo ============================================================
+    echo.
+    pause
+)
+echo.
 echo This may take 5-10 minutes...
 echo.
 pause
@@ -59,10 +82,18 @@ echo [3/3] Edge AI App Dependencies
 echo ======================================================
 cd ai_edge_app
 echo Installing core packages...
-pip install qrcode pillow onnxruntime==1.16.0 numpy opencv-python requests paho-mqtt python-dotenv --upgrade --disable-pip-version-check -q 2>nul
+pip install opencv-python numpy Pillow qrcode requests paho-mqtt python-dotenv --upgrade --disable-pip-version-check -q 2>nul
+echo Installing ONNX Runtime...
+pip install onnxruntime --upgrade --disable-pip-version-check -q 2>nul
 if %errorlevel% neq 0 (
-    echo WARNING: Some packages failed. Retrying...
-    pip install -r requirements.txt --upgrade --disable-pip-version-check
+    echo.
+    echo WARNING: ONNX Runtime installation failed!
+    echo This is expected for Python 3.13+
+    echo.
+    echo See PYTHON_VERSION_FIX.md for solutions.
+    echo.
+    echo You can still run Backend + Frontend without Edge AI.
+    echo.
 )
 cd ..
 
