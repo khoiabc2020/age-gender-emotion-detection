@@ -8,11 +8,14 @@ echo.
 cd /d "%~dp0\.."
 cd ai_edge_app
 
-echo [1/2] Installing dependencies...
-pip install -r requirements.txt
+echo [1/3] Checking dependencies...
+pip install qrcode pillow onnxruntime==1.14.0 --quiet
+
+echo [2/3] Installing all dependencies...
+pip install -r requirements.txt --quiet
 
 echo.
-echo [2/2] Starting Edge AI App...
+echo [3/3] Starting Edge AI App...
 echo Press 'q' to quit
 echo.
 
