@@ -9,7 +9,7 @@ cd /d "%~dp0\.."
 cd dashboard
 
 echo [1/2] Installing dependencies...
-call npm install
+call npm install --legacy-peer-deps
 
 echo.
 echo [2/2] Starting development server...
