@@ -36,30 +36,29 @@ def run_check(script_name, week_name):
     except Exception as e:
         return False, "", str(e)
 
-
 def main():
     """Main function"""
     print("\n" + "=" * 80)
-    print("🔍 KIỂM TRA TỔNG THỂ TOÀN BỘ DỰ ÁN")
+    print(" KIỂM TRA TỔNG THỂ TOÀN BỘ DỰ ÁN")
     print("=" * 80)
     
     checks = [
-        ("check_week1_requirements.py", "Tuần 1: Data Processing"),
-        ("check_week2_requirements.py", "Tuần 2: Model Training"),
-        ("check_week3_requirements.py", "Tuần 3: Advanced Modules"),
-        ("check_week4_requirements.py", "Tuần 4: UI Framework"),
-        ("check_week5_requirements.py", "Tuần 5: Real-time Visualization"),
-        ("check_week6_requirements.py", "Tuần 6: Dynamic Ads System"),
-        ("check_week7_requirements.py", "Tuần 7: Business Logic & Tracking"),
-        ("check_week8_requirements.py", "Tuần 8: Multi-Threading"),
-        ("check_week9_requirements.py", "Tuần 9: Database & Reporting"),
+        ("check_week1_requirements.py", "Data Processing"),
+        ("check_week2_requirements.py", "Model Training"),
+        ("check_week3_requirements.py", "Advanced Modules"),
+        ("check_week4_requirements.py", "UI Framework"),
+        ("check_week5_requirements.py", "Real-time Visualization"),
+        ("check_week6_requirements.py", "Dynamic Ads System"),
+        ("check_week7_requirements.py", "Business Logic & Tracking"),
+        ("check_week8_requirements.py", "Multi-Threading"),
+        ("check_week9_requirements.py", "Database & Reporting"),
     ]
     
     results = []
     
     for script, name in checks:
         print(f"\n{'='*80}")
-        print(f"📋 {name}")
+        print(f" {name}")
         print('='*80)
         success, stdout, stderr = run_check(script, name)
         if stdout:
@@ -70,7 +69,7 @@ def main():
     
     # Summary
     print("\n" + "=" * 80)
-    print("📊 TỔNG KẾT TẤT CẢ CÁC TUẦN")
+    print(" TỔNG KẾT TẤT CẢ CÁC TUẦN")
     print("=" * 80)
     
     passed = sum(1 for _, success in results if success)
@@ -85,7 +84,7 @@ def main():
     print("\n" + "=" * 80)
     
     if passed == total:
-        print("🎉 TẤT CẢ CÁC TUẦN ĐÃ HOÀN THÀNH!")
+        print(" TẤT CẢ CÁC TUẦN ĐÃ HOÀN THÀNH!")
     else:
         print(f"⚠️  {total - passed} tuần cần kiểm tra lại")
     
@@ -93,13 +92,7 @@ def main():
     
     return passed == total
 
-
 if __name__ == "__main__":
     success = main()
     sys.exit(0 if success else 1)
-
-
-
-
-
 

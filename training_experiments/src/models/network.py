@@ -8,7 +8,6 @@ import torch.nn as nn
 import torch.nn.functional as F
 from torchvision import models
 
-
 class MultiTaskModel(nn.Module):
     """
     Multi-task Learning Model với improved regularization
@@ -123,7 +122,6 @@ class MultiTaskModel(nn.Module):
         
         return gender_logits, age_pred, emotion_logits
 
-
 class LabelSmoothingCrossEntropy(nn.Module):
     """
     Label Smoothing Cross Entropy Loss
@@ -140,7 +138,6 @@ class LabelSmoothingCrossEntropy(nn.Module):
             true_dist.fill_(self.smoothing / (pred.size(1) - 1))
             true_dist.scatter_(1, target.unsqueeze(1), 1.0 - self.smoothing)
         return torch.mean(torch.sum(-true_dist * log_prob, dim=1))
-
 
 class FocalLoss(nn.Module):
     """
@@ -163,7 +160,6 @@ class FocalLoss(nn.Module):
             return focal_loss.sum()
         else:
             return focal_loss
-
 
 class MultiTaskLoss(nn.Module):
     """
@@ -233,7 +229,6 @@ class MultiTaskLoss(nn.Module):
             'age': loss_age,
             'emotion': loss_emotion
         }
-
 
 if __name__ == "__main__":
     # Test model

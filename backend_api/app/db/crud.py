@@ -8,12 +8,10 @@ from datetime import datetime, timedelta
 from typing import List, Optional, Dict
 from app.db.models import Device, Session as DBSession, Interaction, Advertisement
 
-
 # Device CRUD
 def get_device_by_key(db: Session, device_key: str) -> Optional[Device]:
     """Get device by device_key"""
     return db.query(Device).filter(Device.device_key == device_key).first()
-
 
 def create_device(db: Session, device_key: str, name: str = None, location: str = None) -> Device:
     """Create new device"""
@@ -23,7 +21,6 @@ def create_device(db: Session, device_key: str, name: str = None, location: str 
     db.refresh(device)
     return device
 
-
 # Session CRUD
 def create_session(db: Session, device_id: int, track_id: int) -> DBSession:
     """Create new customer session"""
@@ -32,7 +29,6 @@ def create_session(db: Session, device_id: int, track_id: int) -> DBSession:
     db.commit()
     db.refresh(session)
     return session
-
 
 def get_active_session(db: Session, device_id: int, track_id: int) -> Optional[DBSession]:
     """Get active session for track_id"""
@@ -44,14 +40,12 @@ def get_active_session(db: Session, device_id: int, track_id: int) -> Optional[D
         )
     ).first()
 
-
 def end_session(db: Session, session_id: int):
     """End a session"""
     session = db.query(DBSession).filter(DBSession.id == session_id).first()
     if session:
         session.end_time = datetime.utcnow()
         db.commit()
-
 
 # Interaction CRUD
 def create_interaction(
@@ -77,7 +71,6 @@ def create_interaction(
     db.refresh(interaction)
     return interaction
 
-
 # Analytics queries
 def get_interactions_by_time_range(
     db: Session,
@@ -97,7 +90,6 @@ def get_interactions_by_time_range(
         query = query.join(DBSession).filter(DBSession.device_id == device_id)
     
     return query.all()
-
 
 def get_average_age_by_hour(
     db: Session,
@@ -131,7 +123,6 @@ def get_average_age_by_hour(
         for row in results
     ]
 
-
 def get_emotion_distribution(
     db: Session,
     start_date: datetime,
@@ -158,7 +149,6 @@ def get_emotion_distribution(
         {'emotion': row.emotion, 'count': int(row.count)}
         for row in results
     ]
-
 
 def get_ad_performance(
     db: Session,
@@ -192,12 +182,10 @@ def get_ad_performance(
         for row in results
     ]
 
-
 # Advertisement CRUD
 def get_advertisement(db: Session, ad_id: str) -> Optional[Advertisement]:
     """Get advertisement by ad_id"""
     return db.query(Advertisement).filter(Advertisement.ad_id == ad_id).first()
-
 
 def get_all_advertisements(db: Session) -> List[Advertisement]:
     """Get all advertisements"""

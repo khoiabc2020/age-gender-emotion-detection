@@ -21,13 +21,11 @@ try:
 except ImportError:
     OPENAI_AVAILABLE = False
 
-
 class AIProvider(str, Enum):
     """AI Provider options"""
     GOOGLE_AI = "google_ai"
     CHATGPT = "chatgpt"
     BOTH = "both"  # Use both and combine results
-
 
 class AIAgent:
     """

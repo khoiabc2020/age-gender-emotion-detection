@@ -1,6 +1,6 @@
 """
 Script to convert PyTorch model to ONNX format
-Tuần 4: Chuyển đổi model sang ONNX cho Edge Computing
+Chuyển đổi model sang ONNX cho Edge Computing
 """
 
 import torch
@@ -14,13 +14,11 @@ sys.path.append(str(Path(__file__).parent.parent))
 
 from src.models.network import MultiTaskModel
 
-
 def convert_to_onnx(
     model_path: str,
     output_path: str,
     input_size: tuple = (1, 3, 224, 224),
-    opset_version: int = 13  # Updated to opset 13+ for Tuần 2
-):
+    opset_version: int = 13  # Updated to opset 13+ for ):
     """
     Convert PyTorch model to ONNX format
     
@@ -117,13 +115,12 @@ def convert_to_onnx(
     
     return True
 
-
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Convert PyTorch model to ONNX")
     parser.add_argument("--model_path", type=str, required=True, help="Path to PyTorch checkpoint (.pth)")
     parser.add_argument("--output_path", type=str, required=True, help="Output ONNX file path")
     parser.add_argument("--input_size", type=int, nargs=4, default=[1, 3, 224, 224], help="Input size (batch, channels, height, width)")
-    parser.add_argument("--opset_version", type=int, default=13, help="ONNX opset version (13+ for Tuần 2)")
+    parser.add_argument("--opset_version", type=int, default=13, help="ONNX opset version (13+ for )")
     
     args = parser.parse_args()
     

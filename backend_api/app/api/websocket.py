@@ -13,7 +13,6 @@ from app.db import crud
 
 router = APIRouter()
 
-
 class ConnectionManager:
     """Manage WebSocket connections"""
     
@@ -43,9 +42,7 @@ class ConnectionManager:
         for conn in disconnected:
             self.disconnect(conn)
 
-
 manager = ConnectionManager()
-
 
 @router.websocket("/ws")
 async def websocket_endpoint(websocket: WebSocket):
@@ -64,7 +61,6 @@ async def websocket_endpoint(websocket: WebSocket):
             })
     except WebSocketDisconnect:
         manager.disconnect(websocket)
-
 
 @router.websocket("/ws/stats")
 async def websocket_stats(websocket: WebSocket):
@@ -89,7 +85,6 @@ async def websocket_stats(websocket: WebSocket):
             await websocket.receive_text()
     except WebSocketDisconnect:
         manager.disconnect(websocket)
-
 
 # Function to broadcast new interaction (called from MQTT worker)
 async def broadcast_new_interaction(interaction_data: dict):

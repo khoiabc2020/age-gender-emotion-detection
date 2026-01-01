@@ -1,13 +1,12 @@
 """
 Dwell Time Logic
-Tuần 7: Business Logic & Tracking
+Business Logic & Tracking
 Chỉ tính là "khách hàng" nếu nhìn vào cam > 3 giây
 """
 
 import time
 from typing import Dict, Optional
 from collections import defaultdict
-
 
 class DwellTimeTracker:
     """

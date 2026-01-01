@@ -1,6 +1,6 @@
 """
 Face Restoration Module - GFPGAN/ESPCN
-Giai đoạn 1 Tuần 3: Advanced Modules
+Giai đoạn 1 Advanced Modules
 Khôi phục khuôn mặt mờ trước khi nhận diện
 """
 
@@ -9,7 +9,6 @@ import numpy as np
 from pathlib import Path
 from typing import Optional
 import onnxruntime as ort
-
 
 class FaceRestorer:
     """
@@ -139,7 +138,6 @@ class FaceRestorer:
             return self.restore(face_image)
         else:
             return face_image
-
 
 if __name__ == "__main__":
     # Test

@@ -1,6 +1,6 @@
 """
 Evaluation Script - Đánh giá chi tiết model trên test set
-Giai đoạn 1: Tuần 3 - Evaluation
+Giai đoạn 1: - Evaluation
 """
 
 import torch
@@ -18,7 +18,6 @@ sys.path.append(str(Path(__file__).parent.parent))
 
 from src.models.network import MultiTaskModel
 from src.data.dataset import MultiTaskDataset
-
 
 def evaluate_model(model_path, data_dir, batch_size=32, device='cuda'):
     """
@@ -198,15 +197,15 @@ def evaluate_model(model_path, data_dir, batch_size=32, device='cuda'):
     print(f"  Age STD: {age_std:.2f} years")
     print(f"  Age RMSE: {age_rmse:.2f} years")
     
-    print(f"\n👤 Gender per-class:")
+    print(f"\n Gender per-class:")
     for name, acc in gender_per_class.items():
         print(f"  {name}: {acc:.2f}%")
     
-    print(f"\n😊 Emotion per-class:")
+    print(f"\n Emotion per-class:")
     for name, acc in emotion_per_class.items():
         print(f"  {name}: {acc:.2f}%")
     
-    print(f"\n📅 Age by range:")
+    print(f"\n Age by range:")
     for range_name, stats in age_by_range.items():
         print(f"  {range_name}: MAE={stats['mae']:.2f} years (n={stats['count']})")
     
@@ -225,7 +224,6 @@ def evaluate_model(model_path, data_dir, batch_size=32, device='cuda'):
     print("=" * 60)
     
     return metrics
-
 
 def main():
     parser = argparse.ArgumentParser(description='Evaluate model on test set')
@@ -264,7 +262,6 @@ def main():
         with open(output_path, 'w') as f:
             json.dump(metrics, f, indent=2)
         print(f"\n[OK] Metrics saved to: {output_path}")
-
 
 if __name__ == "__main__":
     main()

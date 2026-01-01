@@ -8,7 +8,6 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 
-
 class SEBlock(nn.Module):
     """Squeeze-and-Excitation Block"""
     def __init__(self, channels, reduction=4):
@@ -26,7 +25,6 @@ class SEBlock(nn.Module):
         y = self.avg_pool(x).view(b, c)
         y = self.fc(y).view(b, c, 1, 1)
         return x * y
-
 
 class MobileOneBlock(nn.Module):
     """MobileOne building block"""
@@ -62,7 +60,6 @@ class MobileOneBlock(nn.Module):
         x = self.activation(x)
         
         return x
-
 
 class MobileOneS2(nn.Module):
     """
@@ -119,7 +116,6 @@ class MobileOneS2(nn.Module):
         x = self.avg_pool(x)
         x = x.view(x.size(0), -1)
         return x
-
 
 class MobileOneMultiTaskModel(nn.Module):
     """
@@ -192,9 +188,4 @@ class MobileOneMultiTaskModel(nn.Module):
         age_pred = torch.clamp(age_pred, min=0.0, max=100.0)
         
         return gender_logits, age_pred, emotion_logits
-
-
-
-
-
 

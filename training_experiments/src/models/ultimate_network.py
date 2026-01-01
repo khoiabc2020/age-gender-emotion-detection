@@ -1,6 +1,6 @@
 """
 Ultimate Multi-task Network Architecture - SOTA Edition
-Tuần 2: SOTA Model Architecture
+SOTA Model Architecture
 - CBAM Attention Mechanism
 - CORAL for Age Estimation
 - Focal Loss & Wing Loss
@@ -12,7 +12,6 @@ import torch.nn as nn
 import torch.nn.functional as F
 from torchvision import models
 import numpy as np
-
 
 class ChannelAttention(nn.Module):
     """Channel Attention Module"""
@@ -34,7 +33,6 @@ class ChannelAttention(nn.Module):
         out = self.sigmoid(avg_out + max_out)
         return x * out
 
-
 class SpatialAttention(nn.Module):
     """Spatial Attention Module"""
     def __init__(self, kernel_size=7):
@@ -50,7 +48,6 @@ class SpatialAttention(nn.Module):
         out = self.sigmoid(out)
         return x * out
 
-
 class CBAM(nn.Module):
     """
     Convolutional Block Attention Module (CBAM)
@@ -65,7 +62,6 @@ class CBAM(nn.Module):
         x = self.channel_attention(x)
         x = self.spatial_attention(x)
         return x
-
 
 class CORALAgeHead(nn.Module):
     """
@@ -126,7 +122,6 @@ class CORALAgeHead(nn.Module):
         age_pred = torch.sum(probs, dim=1)  # (B,)
         
         return age_pred
-
 
 class UltimateMultiTaskModel(nn.Module):
     """
@@ -263,7 +258,6 @@ class UltimateMultiTaskModel(nn.Module):
         
         return gender_logits, age_pred, emotion_logits
 
-
 class FocalLoss(nn.Module):
     """
     Focal Loss for handling class imbalance
@@ -286,7 +280,6 @@ class FocalLoss(nn.Module):
             return focal_loss.sum()
         else:
             return focal_loss
-
 
 class WingLoss(nn.Module):
     """
@@ -315,7 +308,6 @@ class WingLoss(nn.Module):
         )
         
         return loss.mean()
-
 
 class CORALLoss(nn.Module):
     """
@@ -346,7 +338,6 @@ class CORALLoss(nn.Module):
         loss = F.binary_cross_entropy_with_logits(logits, binary_targets, reduction='mean')
         
         return loss
-
 
 class UltimateMultiTaskLoss(nn.Module):
     """
@@ -430,7 +421,6 @@ class UltimateMultiTaskLoss(nn.Module):
             'age': loss_age,
             'emotion': loss_emotion
         }
-
 
 if __name__ == "__main__":
     # Test model

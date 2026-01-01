@@ -1,13 +1,12 @@
 """
 DeepSORT Tracker for multi-face tracking
-Tuần 5: Face Detection & Tracking pipeline
+Face Detection & Tracking pipeline
 Improved implementation with IoU matching and Kalman filter-like prediction
 """
 
 from typing import List, Tuple, Dict, Optional
 import numpy as np
 import time
-
 
 class Track:
     """Single track object"""
@@ -62,7 +61,6 @@ class Track:
             
             return (x, y, w, h)
         return self.bbox
-
 
 class DeepSORTTracker:
     """

@@ -1,6 +1,6 @@
 """
 Multi-Threading Architecture với QThread
-Tuần 8: System Logic & Optimization
+System Logic & Optimization
 QThread: Grabber, Inferencer, Renderer với Queue-based pipeline
 """
 
@@ -10,7 +10,6 @@ import cv2
 import numpy as np
 import time
 from typing import Optional, Dict, Any
-
 
 class FrameGrabber(QThread):
     """
@@ -62,7 +61,6 @@ class FrameGrabber(QThread):
         self.running = False
         if self.camera:
             self.camera.release()
-
 
 class FrameInferencer(QThread):
     """
@@ -156,7 +154,7 @@ class FrameInferencer(QThread):
                                 tracks_list.append((track_id, (x, y, w, h)))
                 
                 for track_id, bbox in tracks_list:
-                    # Check dwell time (Tuần 7)
+                    # Check dwell time ()
                     if self.dwell_tracker and not self.dwell_tracker.is_valid_customer(track_id):
                         continue
                     
@@ -170,13 +168,13 @@ class FrameInferencer(QThread):
                     face_roi = frame[y:y+h, x:x+w]
                     
                     if face_roi.size > 0 and len(face_roi.shape) == 3 and face_roi.shape[0] >= 32 and face_roi.shape[1] >= 32:
-                        # Anti-spoofing (Tuần 3)
+                        # Anti-spoofing ()
                         if self.anti_spoofing:
                             is_real, _ = self.anti_spoofing.predict(face_roi)
                             if not is_real:
                                 continue
                         
-                        # Face restoration (Tuần 3)
+                        # Face restoration ()
                         if self.face_restorer:
                             face_roi = self.face_restorer.enhance_if_needed(face_roi, quality_threshold=0.3)
                         
@@ -201,7 +199,6 @@ class FrameInferencer(QThread):
     def stop(self):
         """Stop inferencer"""
         self.running = False
-
 
 class FrameRenderer(QThread):
     """

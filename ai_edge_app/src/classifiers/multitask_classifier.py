@@ -8,7 +8,6 @@ import numpy as np
 from typing import Dict, Tuple
 import onnxruntime as ort
 
-
 class MultiTaskClassifier:
     """
     Multi-task classifier for age estimation, gender classification, and emotion recognition
@@ -62,7 +61,7 @@ class MultiTaskClassifier:
             # Preprocess image
             processed = self._preprocess(face_image)
             
-            # Run inference (Optimized: Use optimized session)
+            
             outputs = self.session.run(None, {self.input_name: processed})
             
             # Post-process outputs

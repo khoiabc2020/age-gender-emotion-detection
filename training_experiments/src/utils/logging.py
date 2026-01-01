@@ -7,7 +7,6 @@ import sys
 from pathlib import Path
 from datetime import datetime
 
-
 def setup_logger(name: str, log_file: str = None, level: int = logging.INFO):
     """
     Setup logger with file and console handlers
@@ -51,9 +50,4 @@ def setup_logger(name: str, log_file: str = None, level: int = logging.INFO):
         logger.addHandler(file_handler)
     
     return logger
-
-
-
-
-
 

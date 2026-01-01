@@ -12,13 +12,11 @@ from app.db import crud, models
 
 router = APIRouter()
 
-
 @router.get("/devices")
 async def get_devices(db: Session = Depends(get_db)):
     """Get all devices"""
     devices = db.query(models.Device).all()
     return devices
-
 
 @router.get("/sessions")
 async def get_sessions(

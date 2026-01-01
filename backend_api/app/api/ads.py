@@ -12,7 +12,6 @@ from app.db.models import Advertisement
 
 router = APIRouter()
 
-
 @router.get("/", response_model=List[dict])
 async def get_all_ads(db: Session = Depends(get_db)):
     """Get all advertisements"""
@@ -30,7 +29,6 @@ async def get_all_ads(db: Session = Depends(get_db)):
         }
         for ad in ads
     ]
-
 
 @router.get("/{ad_id}")
 async def get_ad(ad_id: str, db: Session = Depends(get_db)):

@@ -8,8 +8,6 @@ import random
 from typing import Dict, List, Optional
 from datetime import datetime
 
-
-
 from .lin_ucb import LinUCB
 
 class AdsSelector:
@@ -130,5 +128,4 @@ class AdsSelector:
                 continue
             filtered.append(ad)
         return filtered
-
 

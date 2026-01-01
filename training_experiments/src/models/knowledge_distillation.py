@@ -9,7 +9,6 @@ import torch.nn as nn
 import torch.nn.functional as F
 from torchvision import models
 
-
 class DistillationLoss(nn.Module):
     """
     Knowledge Distillation Loss
@@ -51,7 +50,6 @@ class DistillationLoss(nn.Module):
             'soft': soft_loss,
             'hard': hard_loss
         }
-
 
 class TeacherModel(nn.Module):
     """
@@ -107,7 +105,6 @@ class TeacherModel(nn.Module):
         age_pred = torch.clamp(age_pred, min=0.0, max=100.0)
         
         return gender_logits, age_pred, emotion_logits
-
 
 class MultiTaskDistillationLoss(nn.Module):
     """
@@ -171,9 +168,4 @@ class MultiTaskDistillationLoss(nn.Module):
             'emotion_soft': emotion_loss_dict['soft'],
             'emotion_hard': emotion_loss_dict['hard']
         }
-
-
-
-
-
 

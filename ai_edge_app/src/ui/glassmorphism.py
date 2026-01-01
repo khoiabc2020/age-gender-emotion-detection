@@ -1,6 +1,6 @@
 """
 Glassmorphism (Acrylic) Effect Stylesheet
-Tuần 4: Modern UI Framework
+Modern UI Framework
 Windows 11-style glass effect
 """
 
@@ -85,7 +85,6 @@ HeaderCardWidget {
 }
 """
 
-
 def apply_glassmorphism(widget):
     """
     Apply glassmorphism effect to widget
@@ -94,9 +93,4 @@ def apply_glassmorphism(widget):
         widget: QWidget to apply effect
     """
     widget.setStyleSheet(GLASSMORPHISM_STYLESHEET)
-
-
-
-
-
 

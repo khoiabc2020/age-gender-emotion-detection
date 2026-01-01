@@ -7,7 +7,6 @@ import paho.mqtt.client as mqtt
 from typing import Dict, Optional
 import logging
 
-
 class MQTTClient:
     """
     MQTT client for sending analytics data to cloud server

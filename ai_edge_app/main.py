@@ -1,7 +1,8 @@
 """
-Main entry point for Edge AI Application
-Real-time face detection, tracking, attribute recognition, and ad recommendation
-Tuần 5-7: Edge Client Application
+Edge AI Application for Smart Retail Analytics.
+
+Real-time face detection, tracking, attribute recognition, and personalized
+advertisement recommendation system optimized for edge computing.
 """
 
 import cv2
@@ -12,7 +13,6 @@ import numpy as np
 from pathlib import Path
 from typing import Optional, Dict
 from collections import deque
-
 
 from src.detectors import RetinaFaceDetector, YOLOFaceDetector, YOLOPersonDetector
 from src.trackers import DeepSORTTracker, ByteTracker
@@ -25,16 +25,28 @@ from src.core.face_restoration import FaceRestorer
 from src.core.dwell_time import DwellTimeTracker
 from src.utils import MQTTClient, setup_logger
 
-
 class EdgeAIApp:
-    """
-    Main application class for edge AI processing
-    Optimized for real-time performance with threading
+    """Main application class for edge AI processing.
+    
+    Optimized for real-time performance with multi-threading support.
+    Handles face detection, tracking, attribute classification, and
+    personalized advertisement selection.
+    
+    Attributes:
+        config: Application configuration dictionary
+        logger: Application logger instance
+        detector: Face detection model
+        tracker: Object tracking system
+        classifier: Attribute classification model
+        ads_selector: Advertisement recommendation engine
+        mqtt_client: MQTT client for cloud communication
     """
     
     def __init__(self, config_path: str = "configs/camera_config.json"):
-        """
-        Initialize Edge AI Application
+        """Initialize Edge AI Application.
+        
+        Args:
+            config_path: Path to configuration JSON file
         """
         # Load configuration
         with open(config_path, 'r', encoding='utf-8') as f:
@@ -53,14 +65,15 @@ class EdgeAIApp:
         self.ads_selector = None
         self.mqtt_client = None
         
-        # Advanced Modules (Tuần 3)
+        # Advanced Modules ()
+        # Advanced modules
         self.anti_spoofing = None
         self.face_restorer = None
         
-        # Business Logic (Tuần 7)
+        # Business logic
         self.dwell_tracker = None
         
-        # New Services (GenAI & Interactive)
+        # Services
         self.gen_ads = None
         self.qr_service = None
         
@@ -73,7 +86,7 @@ class EdgeAIApp:
         self.fps_start_time = time.time()
         self.fps_history = deque(maxlen=30)
         
-        # Threading for performance (Tuần 7)
+        # Threading for performance ()
         self.frame_queue = deque(maxlen=2)  # Buffer for frames
         self.processing_lock = threading.Lock()
         self.display_frame = None
@@ -142,7 +155,7 @@ class EdgeAIApp:
                         confidence_threshold=self.config['detection']['confidence_threshold']
                     )
             
-            # Initialize tracker (Tuần 7: ByteTrack thay DeepSORT)
+            # Initialize tracker (ByteTrack thay DeepSORT)
             use_bytetrack = self.config['tracking'].get('use_bytetrack', False)
             if use_bytetrack:
                 self.tracker = ByteTracker(
@@ -160,7 +173,7 @@ class EdgeAIApp:
                 )
                 self.logger.info("Initialized DeepSORT tracker")
             
-            # Initialize Dwell Time Tracker (Tuần 7)
+            # Initialize Dwell Time Tracker ()
             dwell_threshold = self.config['tracking'].get('dwell_threshold', 3.0)
             self.dwell_tracker = DwellTimeTracker(threshold=dwell_threshold)
             self.logger.info(f"Initialized Dwell Time Tracker (threshold: {dwell_threshold}s)")
@@ -183,7 +196,7 @@ class EdgeAIApp:
             else:
                 self.logger.warning(f"Ads rules not found: {ads_rules_path}")
                 
-            # Initialize Advanced Modules (Tuần 3)
+            # Initialize Advanced Modules ()
             model_dir = Path("models")
             anti_spoofing_model = model_dir / "minifasnet.onnx"
             self.anti_spoofing = MiniFASNet(
@@ -255,7 +268,7 @@ class EdgeAIApp:
                 
                 start_time = time.time()
                 
-                # Step 1: Face Detection (Optimized: Skip if no detector)
+                
                 detections = []
                 if self.detector:
                     try:
@@ -264,7 +277,7 @@ class EdgeAIApp:
                         self.logger.warning(f"Detection error: {e}")
                         detections = []
                 
-                # Step 2: Tracking (Tuần 7: ByteTrack hoặc DeepSORT)
+                # Step 2: Tracking (ByteTrack hoặc DeepSORT)
                 tracker_result = self.tracker.update(detections)
                 
                 # Normalize tracker output format
@@ -295,7 +308,7 @@ class EdgeAIApp:
                 # Use frame directly instead of copy to save memory
                 display_frame = frame
                 
-                # Update Dwell Time (Tuần 7)
+                # Update Dwell Time ()
                 current_time = time.time()
                 if self.dwell_tracker:
                     for track_id in active_tracks.keys():
@@ -343,7 +356,7 @@ class EdgeAIApp:
                     
                     face_roi = frame[y_pad:y_pad+h_pad, x_pad:x_pad+w_pad]
                     
-                    # Tuần 7: Dwell Time check - Chỉ xử lý nếu là valid customer (> 3s)
+                    # Dwell Time check - Chỉ xử lý nếu là valid customer (> 3s)
                     if self.dwell_tracker:
                         if not self.dwell_tracker.is_valid_customer(track_id):
                             # Chưa đủ dwell time, chỉ vẽ basic track
@@ -360,7 +373,7 @@ class EdgeAIApp:
                         face_roi.shape[1] >= 32 and 
                         self.classifier):
                         try:
-                            # Tuần 3: Advanced Modules
+                            # Advanced Modules
                             # Step 1: Anti-Spoofing - Check if face is real
                             if self.anti_spoofing:
                                 is_real, spoof_confidence = self.anti_spoofing.predict(face_roi)
@@ -373,14 +386,14 @@ class EdgeAIApp:
                             if self.face_restorer:
                                 face_roi = self.face_restorer.enhance_if_needed(face_roi, quality_threshold=0.3)
                             
-                            # Step 3a: Classify attributes (Optimized: Error handling)
+                            
                             try:
                                 attributes = self.classifier.predict(face_roi)
                             except Exception as e:
                                 self.logger.warning(f"Classification error for track {track_id}: {e}")
                                 continue
                             
-                            # Step 3b: Select advertisement (Tuần 7: Ad Recommendation Engine)
+                            # Step 3b: Select advertisement (Ad Recommendation Engine)
                             ad = None
                             if self.ads_selector:
                                 try:
@@ -584,7 +597,7 @@ class EdgeAIApp:
             )
     
     def _cleanup_old_tracks(self, current_time: float):
-        """Cleanup old tracks and send feedback to Recommender System (Tuần 7)"""
+        """Cleanup old tracks and send feedback to Recommender System ()"""
         with self.tracks_lock:
             # Remove tracks older than 5 seconds (lost attention)
             max_age = 5.0 
@@ -601,12 +614,12 @@ class EdgeAIApp:
                 start_time = track_data.get('start_time', track_data.get('last_processed')) # Fallback
                 duration = current_time - start_time
                 
-                # Tuần 7: Get final dwell time
+                # Get final dwell time
                 final_dwell_time = None
                 if self.dwell_tracker:
                     final_dwell_time = self.dwell_tracker.remove_track(track_id)
                 
-                # Send Feedback to LinUCB (Tuần 7: Ad Recommendation Engine)
+                # Send Feedback to LinUCB (Ad Recommendation Engine)
                 if self.ads_selector and duration > 0:
                     self.ads_selector.update_feedback(track_id, duration)
                     self.logger.info(f"Feedback Sent - Track {track_id}: Duration {duration:.2f}s, Dwell {final_dwell_time:.2f}s" if final_dwell_time else f"Feedback Sent - Track {track_id}: Duration {duration:.2f}s")
@@ -640,7 +653,6 @@ class EdgeAIApp:
         cv2.destroyAllWindows()
         self.logger.info("Cleanup complete")
 
-
 def main():
     """Main entry point"""
     app = EdgeAIApp()
@@ -653,7 +665,6 @@ def main():
         traceback.print_exc()
         return 1
     return 0
-
 
 if __name__ == "__main__":
     exit(main())

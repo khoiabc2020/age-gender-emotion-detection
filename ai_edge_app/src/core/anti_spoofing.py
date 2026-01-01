@@ -1,6 +1,6 @@
 """
 Anti-Spoofing Module - MiniFASNet
-Giai đoạn 1 Tuần 3: Advanced Modules
+Giai đoạn 1 Advanced Modules
 Chống gian lận lượt xem bằng cách lọc bỏ khuôn mặt giả (ảnh/video)
 """
 
@@ -9,7 +9,6 @@ import numpy as np
 from pathlib import Path
 from typing import Tuple, Optional
 import onnxruntime as ort
-
 
 class MiniFASNet:
     """
@@ -129,7 +128,6 @@ class MiniFASNet:
         """
         is_real, confidence = self.predict(face_image)
         return is_real and confidence >= threshold
-
 
 if __name__ == "__main__":
     # Test

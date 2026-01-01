@@ -8,7 +8,6 @@ import torch.nn as nn
 import torch.quantization as quantization
 from torch.quantization import QuantStub, DeQuantStub
 
-
 class QATMultiTaskModel(nn.Module):
     """
     Quantization-Aware Training Wrapper
@@ -51,9 +50,4 @@ class QATMultiTaskModel(nn.Module):
         self.eval()
         quantization.convert(self, inplace=True)
         return self
-
-
-
-
-
 

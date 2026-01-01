@@ -14,7 +14,6 @@ from app.core.database import engine, Base
 from app.api import analytics, dashboard, ads, auth, websocket, ai_agent
 from app.core.security import verify_token
 
-
 # Create database tables on startup
 @asynccontextmanager
 async def lifespan(app: FastAPI):
@@ -23,7 +22,6 @@ async def lifespan(app: FastAPI):
     Base.metadata.create_all(bind=engine)
     yield
     # Shutdown (if needed)
-
 
 # Initialize FastAPI app
 app = FastAPI(
@@ -45,7 +43,6 @@ app.add_middleware(
 # Security
 security = HTTPBearer()
 
-
 # Dependency for authentication
 async def get_current_user(
     credentials: HTTPAuthorizationCredentials = Depends(security)
@@ -60,7 +57,6 @@ async def get_current_user(
             headers={"WWW-Authenticate": "Bearer"},
         )
     return payload
-
 
 # Include routers
 app.include_router(auth.router, prefix="/api/v1/auth", tags=["authentication"])
@@ -80,7 +76,6 @@ app.include_router(
     dependencies=[Depends(get_current_user)]
 )
 
-
 @app.get("/")
 async def root():
     """Root endpoint"""
@@ -90,12 +85,10 @@ async def root():
         "status": "running"
     }
 
-
 @app.get("/health")
 async def health_check():
     """Health check endpoint"""
     return {"status": "healthy"}
-
 
 if __name__ == "__main__":
     uvicorn.run(

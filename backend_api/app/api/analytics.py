@@ -13,7 +13,6 @@ from app.schemas.analytics import InteractionCreate, InteractionResponse, Analyt
 
 router = APIRouter()
 
-
 @router.post("/interactions", response_model=InteractionResponse)
 async def create_interaction(
     interaction: InteractionCreate,
@@ -45,7 +44,6 @@ async def create_interaction(
     )
     
     return db_interaction
-
 
 @router.get("/stats", response_model=AnalyticsStats)
 async def get_analytics_stats(
@@ -106,7 +104,6 @@ async def get_analytics_stats(
         top_ads=top_ads
     )
 
-
 @router.get("/age-by-hour")
 async def get_age_by_hour(
     hours: int = 24,
@@ -120,7 +117,6 @@ async def get_age_by_hour(
     results = crud.get_average_age_by_hour(db, start_time, end_time, device_id)
     return results
 
-
 @router.get("/emotion-distribution")
 async def get_emotion_distribution(
     hours: int = 24,
@@ -133,7 +129,6 @@ async def get_emotion_distribution(
     
     results = crud.get_emotion_distribution(db, start_time, end_time, device_id)
     return results
-
 
 @router.get("/ad-performance")
 async def get_ad_performance(

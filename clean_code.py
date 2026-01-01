@@ -104,10 +104,10 @@ class CodeCleaner:
                     self.stats['lines_cleaned'] += lines_removed
                     
                     if lines_removed > 0:
-                        print(f"✓ Cleaned: {filepath} ({lines_removed} lines removed)")
+                        print(f"[OK] Cleaned: {filepath} ({lines_removed} lines removed)")
                 
                 except Exception as e:
-                    print(f"✗ Error processing {filepath}: {e}")
+                    print(f"[ERROR] Error processing {filepath}: {e}")
     
     def run(self):
         """Run the cleanup"""

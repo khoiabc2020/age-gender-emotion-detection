@@ -1,6 +1,6 @@
 """
 Live Charts với PyQtGraph
-Tuần 5: Real-time Visualization
+Real-time Visualization
 Real-time emotion distribution và customer flow charts
 """
 
@@ -12,7 +12,6 @@ from qfluentwidgets import HeaderCardWidget
 from typing import Dict, List
 import numpy as np
 from collections import deque
-
 
 class EmotionDistributionChart(HeaderCardWidget):
     """
@@ -102,7 +101,6 @@ class EmotionDistributionChart(HeaderCardWidget):
         x_axis = self.plot_widget.getAxis('bottom')
         x_axis.setTicks([[(i, e.capitalize()) for i, e in enumerate(emotions)]])
 
-
 class CustomerFlowChart(HeaderCardWidget):
     """
     Real-time Customer Flow Chart
@@ -169,7 +167,6 @@ class CustomerFlowChart(HeaderCardWidget):
         if len(x) > 0:
             self.plot_widget.setXRange(max(0, x[-1] - 50), x[-1] + 5, padding=0)
 
-
 class FPSChart(HeaderCardWidget):
     """
     Real-time FPS Chart
@@ -232,9 +229,4 @@ class FPSChart(HeaderCardWidget):
         # Auto-scale
         if len(x) > 0:
             self.plot_widget.setXRange(max(0, x[-1] - 50), x[-1] + 5, padding=0)
-
-
-
-
-
 

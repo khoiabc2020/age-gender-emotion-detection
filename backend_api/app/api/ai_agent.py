@@ -17,22 +17,18 @@ from app.main import get_current_user
 
 router = APIRouter()
 
-
 class ChatRequest(BaseModel):
     """Chat request schema"""
     question: str
     time_range_hours: Optional[int] = 24
-
 
 class GenerateReportRequest(BaseModel):
     """Generate report request schema"""
     time_range_hours: Optional[int] = 24
     include_charts: Optional[bool] = True
 
-
 # Initialize AI Agent (singleton)
 _ai_agent: Optional[AIAgent] = None
-
 
 def get_ai_agent() -> Optional[AIAgent]:
     """Get or create AI Agent instance"""
@@ -58,7 +54,6 @@ def get_ai_agent() -> Optional[AIAgent]:
             )
     
     return _ai_agent
-
 
 @router.post("/analyze")
 async def analyze_analytics(
@@ -135,7 +130,6 @@ async def analyze_analytics(
     
     return analysis
 
-
 @router.post("/chat")
 async def chat_with_data(
     request: ChatRequest,
@@ -183,7 +177,6 @@ async def chat_with_data(
         "answer": response,
         "timestamp": datetime.utcnow().isoformat()
     }
-
 
 @router.post("/generate-report")
 async def generate_report(
@@ -242,7 +235,6 @@ async def generate_report(
         "time_range": f"{request.time_range_hours} hours",
         "generated_at": datetime.utcnow().isoformat()
     }
-
 
 @router.get("/status")
 async def get_ai_agent_status(

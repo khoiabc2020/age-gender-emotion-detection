@@ -11,7 +11,6 @@ from kafka.errors import KafkaError
 
 logger = logging.getLogger(__name__)
 
-
 class KafkaProducerService:
     """Service for sending data to Kafka topics"""
     

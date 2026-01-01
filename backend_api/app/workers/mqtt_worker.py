@@ -15,7 +15,6 @@ from app.schemas.analytics import InteractionCreate
 
 logger = logging.getLogger(__name__)
 
-
 class MQTTWorker:
     """MQTT worker to process messages from edge devices"""
     
@@ -87,7 +86,6 @@ class MQTTWorker:
         if self.db:
             self.db.close()
 
-
 def run_worker():
     """Run MQTT worker"""
     worker = MQTTWorker()
@@ -100,7 +98,6 @@ def run_worker():
     except KeyboardInterrupt:
         logger.info("Stopping MQTT worker...")
         worker.disconnect()
-
 
 if __name__ == "__main__":
     run_worker()

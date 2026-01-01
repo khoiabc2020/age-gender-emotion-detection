@@ -1,6 +1,6 @@
 """
 Test Inference Script
-Tuần 4: Test model với ảnh bất kỳ
+Test model với ảnh bất kỳ
 """
 
 import torch
@@ -10,7 +10,6 @@ import argparse
 import onnxruntime as ort
 import numpy as np
 from pathlib import Path
-
 
 def predict_pytorch(model_path, image_path, device='cpu'):
     """Predict using PyTorch model"""
@@ -51,7 +50,6 @@ def predict_pytorch(model_path, image_path, device='cpu'):
         'emotion': emotion_names[emotion]
     }
 
-
 def predict_onnx(model_path, image_path):
     """Predict using ONNX model"""
     # Load ONNX model
@@ -90,7 +88,6 @@ def predict_onnx(model_path, image_path):
         'age': int(round(age)),
         'emotion': emotion_names[emotion]
     }
-
 
 def main():
     parser = argparse.ArgumentParser(description='Test model inference')
@@ -133,7 +130,6 @@ def main():
     print(f"  Age: {results['age']} years")
     print(f"  Emotion: {results['emotion']}")
     print("=" * 60)
-
 
 if __name__ == "__main__":
     main()

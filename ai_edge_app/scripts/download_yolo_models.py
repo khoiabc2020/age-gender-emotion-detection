@@ -6,7 +6,6 @@ import os
 import urllib.request
 from pathlib import Path
 
-
 def download_file(url: str, output_path: Path):
     """Download file from URL"""
     print(f"Downloading {url}...")
@@ -17,7 +16,6 @@ def download_file(url: str, output_path: Path):
     except Exception as e:
         print(f"❌ Failed to download: {e}")
         return False
-
 
 def main():
     """Download YOLO models"""
@@ -67,9 +65,6 @@ def main():
     print("\nCập nhật configs/camera_config.json:")
     print('  "type": "yolo_face"  // hoặc "yolo_person"')
 
-
 if __name__ == "__main__":
     main()
-
-
 

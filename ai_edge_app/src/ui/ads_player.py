@@ -1,6 +1,6 @@
 """
 Smart Ads Player với QMediaPlayer
-Tuần 6: Dynamic Ads System
+Dynamic Ads System
 Video 4K support với transition effects
 """
 
@@ -14,7 +14,6 @@ from typing import Dict, List, Optional
 from pathlib import Path
 import cv2
 import numpy as np
-
 
 class TransitionEffect:
     """Transition effect base class"""
@@ -36,7 +35,6 @@ class TransitionEffect:
             TransitionEffect.SLIDE_DOWN,
             TransitionEffect.NONE
         ]
-
 
 class AdsPlayerWidget(CardWidget):
     """
@@ -261,7 +259,6 @@ class AdsPlayerWidget(CardWidget):
         self.transition_type = transition_type
         self.transition_duration = duration
 
-
 class AdsPlayerCard(HeaderCardWidget):
     """
     Ads Player Card với header
@@ -296,9 +293,4 @@ class AdsPlayerCard(HeaderCardWidget):
     def set_transition(self, transition_type: str, duration: int = 500):
         """Set transition effect"""
         self.player.set_transition(transition_type, duration)
-
-
-
-
-
 

@@ -26,7 +26,6 @@ USERS_DB = {
     }
 }
 
-
 def authenticate_user(username: str, password: str) -> dict:
     """Authenticate user"""
     user = USERS_DB.get(username)
@@ -35,7 +34,6 @@ def authenticate_user(username: str, password: str) -> dict:
     if not verify_password(password, user["hashed_password"]):
         return None
     return user
-
 
 @router.post("/login", response_model=Token)
 async def login(
@@ -69,7 +67,6 @@ async def login(
             "full_name": user["full_name"]
         }
     }
-
 
 @router.get("/me")
 async def get_current_user_info(

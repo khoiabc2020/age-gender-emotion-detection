@@ -7,7 +7,6 @@ import sys
 from pathlib import Path
 from typing import Optional
 
-
 def setup_logger(name: str, log_file: Optional[str] = None, level=logging.INFO):
     """
     Setup logger with file and console handlers

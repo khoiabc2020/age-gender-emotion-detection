@@ -1,6 +1,6 @@
 """
 ByteTrack Tracker - SOTA Multi-Object Tracking
-Giai đoạn 3 Tuần 7: Business Logic & Tracking
+Giai đoạn 3 Business Logic & Tracking
 Thay thế DeepSORT với ByteTrack (nhẹ hơn, chính xác hơn)
 """
 
@@ -8,7 +8,6 @@ import numpy as np
 from typing import List, Dict, Tuple, Optional
 from collections import defaultdict
 import time
-
 
 class Track:
     """Track object for ByteTrack"""
@@ -54,7 +53,6 @@ class Track:
     def mark_missed(self):
         """Mark track as missed"""
         self.time_since_update += 1
-
 
 class ByteTracker:
     """
@@ -262,7 +260,6 @@ class ByteTracker:
         unmatched_dets = [j for j in range(len(detections)) if j not in used_dets]
         
         return matched_pairs, unmatched_tracks, unmatched_dets
-
 
 if __name__ == "__main__":
     # Test

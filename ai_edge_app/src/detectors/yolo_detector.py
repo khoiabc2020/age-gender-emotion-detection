@@ -10,7 +10,6 @@ from typing import List, Tuple, Optional
 import onnxruntime as ort
 from pathlib import Path
 
-
 class YOLODetector:
     """
     YOLO detector for face or person detection
@@ -343,7 +342,6 @@ class YOLODetector:
         
         return detections
 
-
 class YOLOFaceDetector(YOLODetector):
     """
     Specialized YOLO detector for face detection
@@ -363,7 +361,6 @@ class YOLOFaceDetector(YOLODetector):
             input_size=(640, 640),
             detect_class="face"
         )
-
 
 class YOLOPersonDetector(YOLODetector):
     """

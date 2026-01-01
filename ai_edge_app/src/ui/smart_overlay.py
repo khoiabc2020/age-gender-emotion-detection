@@ -1,6 +1,6 @@
 """
 Smart Overlay - Rounded Bounding Boxes với Emotion Colors
-Tuần 5: Real-time Visualization
+Real-time Visualization
 Bounding box bo tròn, màu theo cảm xúc
 """
 
@@ -8,7 +8,6 @@ from PyQt6.QtGui import QPainter, QColor, QPen, QBrush, QFont, QPainterPath
 from PyQt6.QtCore import Qt
 from typing import Dict, List, Optional
 import math
-
 
 class SmartOverlay:
     """
@@ -197,9 +196,4 @@ class SmartOverlay:
                 painter, x_scaled, y_scaled, w_scaled, h_scaled,
                 track, scale_x, scale_y
             )
-
-
-
-
-
 

@@ -1,6 +1,6 @@
 """
 Gesture Recognizer - MediaPipe Hands
-Giai đoạn 4 Tuần 10: Touchless Control
+Giai đoạn 4 Touchless Control
 Điều khiển không chạm: Lướt tay trái/phải để điều hướng
 """
 
@@ -9,7 +9,6 @@ import numpy as np
 import mediapipe as mp
 from typing import List, Tuple, Optional, Dict
 from enum import Enum
-
 
 class GestureType(Enum):
     """Gesture types"""
@@ -21,7 +20,6 @@ class GestureType(Enum):
     POINT = "point"
     OPEN_HAND = "open_hand"
     CLOSED_FIST = "closed_fist"
-
 
 class GestureRecognizer:
     """
@@ -228,7 +226,6 @@ class GestureRecognizer:
             )
         
         return cv2.cvtColor(annotated_image, cv2.COLOR_RGB2BGR)
-
 
 if __name__ == "__main__":
     # Test

@@ -1,6 +1,6 @@
 """
 Main Window - Modern UI với PyQt6 + QFluentWidgets
-Giai đoạn 2 Tuần 4: Setup UI Framework
+Giai đoạn 2 Setup UI Framework
 Glassmorphism, Dashboard HUD, Real-time visualization
 """
 
@@ -25,7 +25,6 @@ from .hud_overlay import HUDOverlay
 from .smart_overlay import SmartOverlay
 from .live_charts import EmotionDistributionChart, CustomerFlowChart, FPSChart
 from .ads_player import AdsPlayerCard, TransitionEffect
-
 
 class VideoDisplayWidget(CardWidget):
     """Video display widget với glassmorphism effect"""
@@ -84,14 +83,14 @@ class VideoDisplayWidget(CardWidget):
         painter.drawPixmap(x, y, scaled_pixmap)
         
         # Draw overlay data (bounding boxes, labels, etc.)
-        # Tuần 5: Smart Overlay với rounded boxes và emotion colors
+        # Smart Overlay với rounded boxes và emotion colors
         if self.overlay_data:
             self._draw_smart_overlay(painter, x, y, scaled_pixmap.width(), scaled_pixmap.height())
         
         painter.end()
     
     def _draw_smart_overlay(self, painter: QPainter, x: int, y: int, w: int, h: int):
-        """Draw smart overlay với rounded boxes và emotion colors (Tuần 5)"""
+        """Draw smart overlay với rounded boxes và emotion colors ()"""
         if self.current_frame is None:
             return
         
@@ -103,7 +102,6 @@ class VideoDisplayWidget(CardWidget):
             self.overlay_renderer.draw_multiple_tracks(
                 painter, tracks, frame_w, frame_h, x, y, w, h
             )
-
 
 class StatsCardWidget(HeaderCardWidget):
     """Stats card widget với glassmorphism"""
@@ -129,7 +127,6 @@ class StatsCardWidget(HeaderCardWidget):
     def update_value(self, value: str):
         """Update displayed value"""
         self.content_label.setText(str(value))
-
 
 class MainWindow(FluentWindow):
     """
@@ -210,7 +207,7 @@ class MainWindow(FluentWindow):
         right_layout.addWidget(self.customer_card, stretch=0)
         right_layout.addWidget(self.emotion_card, stretch=0)
         
-        # Tuần 5: Live Charts
+        # Live Charts
         self.emotion_chart = EmotionDistributionChart()
         self.emotion_chart.setFixedHeight(200)
         right_layout.addWidget(self.emotion_chart, stretch=0)
@@ -223,7 +220,7 @@ class MainWindow(FluentWindow):
         self.fps_chart.setFixedHeight(200)
         right_layout.addWidget(self.fps_chart, stretch=0)
         
-        # Tuần 6: Dynamic Ads Player
+        # Dynamic Ads Player
         self.ads_player = AdsPlayerCard()
         self.ads_player.setFixedHeight(400)
         right_layout.addWidget(self.ads_player, stretch=0)
@@ -267,7 +264,7 @@ class MainWindow(FluentWindow):
         emotion_text = self.stats['current_emotion'] or "N/A"
         self.emotion_card.update_value(emotion_text.capitalize())
         
-        # Tuần 5: Update live charts
+        # Update live charts
         self.fps_chart.update_fps(self.stats['fps'])
         self.customer_flow_chart.update_customer_count(self.stats['total_customers'])
         
@@ -309,7 +306,6 @@ class MainWindow(FluentWindow):
     def _on_ad_error(self, ad_id: str, error_message: str):
         """Handle ad playback errors"""
         print(f"Ad error ({ad_id}): {error_message}")
-
 
 if __name__ == "__main__":
     from PyQt6.QtWidgets import QApplication

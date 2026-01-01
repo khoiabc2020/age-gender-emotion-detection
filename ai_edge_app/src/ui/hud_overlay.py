@@ -1,6 +1,6 @@
 """
 Dashboard HUD Overlay Widget
-Tuần 4: Dashboard HUD
+Dashboard HUD
 Real-time stats overlay trên video
 """
 
@@ -10,7 +10,6 @@ from PyQt6.QtGui import QPainter, QColor, QFont, QPen
 from qfluentwidgets import CardWidget
 from typing import Dict, Optional
 import time
-
 
 class HUDOverlay(CardWidget):
     """
@@ -135,9 +134,4 @@ class HUDOverlay(CardWidget):
                         )
         
         painter.end()
-
-
-
-
-
 

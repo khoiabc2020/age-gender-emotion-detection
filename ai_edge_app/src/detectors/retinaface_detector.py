@@ -1,7 +1,7 @@
 """
 RetinaFace Face Detector
 Optimized for edge computing with ONNX Runtime
-Tuần 5: Face Detection & Tracking pipeline
+Face Detection & Tracking pipeline
 """
 
 import cv2
@@ -9,7 +9,6 @@ import numpy as np
 from typing import List, Tuple, Optional
 import onnxruntime as ort
 from pathlib import Path
-
 
 class RetinaFaceDetector:
     """

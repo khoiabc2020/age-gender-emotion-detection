@@ -8,7 +8,6 @@ from sqlalchemy.orm import relationship
 from sqlalchemy.sql import func
 from app.core.database import Base
 
-
 class Device(Base):
     """Edge device information"""
     __tablename__ = "devices"
@@ -21,7 +20,6 @@ class Device(Base):
     
     # Relationships
     sessions = relationship("Session", back_populates="device")
-
 
 class Session(Base):
     """Customer session tracking"""
@@ -36,7 +34,6 @@ class Session(Base):
     # Relationships
     device = relationship("Device", back_populates="sessions")
     interactions = relationship("Interaction", back_populates="session")
-
 
 class Interaction(Base):
     """Individual customer interaction/analytics data"""
@@ -63,7 +60,6 @@ class Interaction(Base):
         Index('idx_interactions_timestamp', 'timestamp'),
         Index('idx_interactions_session_timestamp', 'session_id', 'timestamp'),
     )
-
 
 class Advertisement(Base):
     """Advertisement metadata"""
