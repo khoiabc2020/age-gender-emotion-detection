@@ -6,21 +6,33 @@ from fastapi import APIRouter, Depends, HTTPException, status
 from fastapi.security import OAuth2PasswordRequestForm
 from sqlalchemy.orm import Session
 from datetime import timedelta
+from pydantic import BaseModel
+from typing import Optional
 
 from app.core.database import get_db
 from app.core.config import settings
 from app.core.security import create_access_token, verify_password, get_password_hash
-from fastapi import Depends
-from app.main import get_current_user
 
 router = APIRouter()
 
+# Pydantic models
+class Token(BaseModel):
+    access_token: str
+    token_type: str
+    user: dict
+
+class UserInfo(BaseModel):
+    username: str
+    email: str
+    full_name: str
+
 # Simple in-memory user store (in production, use database)
 # Default admin credentials
+# Precomputed hash for "admin123" to avoid runtime hashing issues
 USERS_DB = {
     "admin": {
         "username": "admin",
-        "hashed_password": get_password_hash("admin123"),  # Change in production!
+        "hashed_password": "$2b$12$LQv3c1yqBWVHxkd0LHAkCOYz6TtxMQJqhN8/LewY5GyWE3Q7vZxBS",  # admin123
         "email": "admin@retail.com",
         "full_name": "Administrator"
     }

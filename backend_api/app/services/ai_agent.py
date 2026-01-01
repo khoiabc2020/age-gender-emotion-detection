@@ -150,7 +150,7 @@ class AIAgent:
             if self.google_model:
                 response = self.google_model.generate_content(prompt)
                 return response.text
-        el        if self.provider == AIProvider.CHATGPT:
+        elif self.provider == AIProvider.CHATGPT:
             if self.openai_client:
                 response = self.openai_client.chat.completions.create(
                     model="gpt-3.5-turbo",

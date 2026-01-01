@@ -13,7 +13,6 @@ from app.core.database import get_db
 from app.core.config import settings
 from app.services.ai_agent import AIAgent, AIProvider
 from app.db import crud
-from app.main import get_current_user
 
 router = APIRouter()
 
