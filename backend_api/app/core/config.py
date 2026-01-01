@@ -40,7 +40,15 @@ class Settings(BaseSettings):
     
     class Config:
         env_file = ".env"
+        env_file_encoding = "utf-8"
         case_sensitive = True
+        extra = "ignore"
 
-settings = Settings()
+# Initialize settings with error handling
+try:
+    settings = Settings()
+except Exception as e:
+    print(f"Warning: Could not load .env file: {e}")
+    print("Using default configuration values")
+    settings = Settings(_env_file=None)
 
