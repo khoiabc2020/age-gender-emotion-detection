@@ -5,6 +5,7 @@ echo   DASHBOARD (React Frontend)
 echo ======================================================
 echo.
 
+cd /d "%~dp0\.."
 cd dashboard
 
 echo [1/2] Installing dependencies...

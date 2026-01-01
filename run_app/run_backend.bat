@@ -5,6 +5,7 @@ echo   BACKEND API SERVER
 echo ======================================================
 echo.
 
+cd /d "%~dp0\.."
 cd backend_api
 
 echo [1/2] Installing dependencies...

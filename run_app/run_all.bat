@@ -7,6 +7,9 @@ echo.
 echo Starting all services...
 echo.
 
+REM Get script directory and move to project root
+cd /d "%~dp0\.."
+
 REM Start Backend in new window
 echo [1/3] Starting Backend API...
 start "Backend API" cmd /k "cd /d "%~dp0" && run_backend.bat"

@@ -5,6 +5,7 @@ echo   EDGE AI APPLICATION
 echo ======================================================
 echo.
 
+cd /d "%~dp0\.."
 cd ai_edge_app
 
 echo [1/2] Installing dependencies...
