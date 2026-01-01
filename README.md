@@ -65,30 +65,24 @@ A complete Edge-to-Cloud solution using Deep Learning for real-time customer dem
 - Node.js 18+
 - Git
 
-### ⚡ **Fastest Way (3 Steps)**
+### ⚡ **Fastest Way (2 Steps)**
 
-#### **Step 1: Clone Repository**
+#### **Step 1: Install Dependencies**
 ```bash
+# Clone repository
 git clone https://github.com/khoiabc2020/age-gender-emotion-detection.git
 cd age-gender-emotion-detection
-```
 
-#### **Step 2: Install Dependencies**
-```bash
-# Run this ONCE (takes 5-10 minutes)
-INSTALL_DEPENDENCIES.bat
-```
-
-#### **Step 3: Start Application**
-```bash
-# Option A: Quick start (Backend + Frontend)
-QUICK_START.bat
-
-# Option B: Interactive menu
+# Run START.bat and choose [6] Install All
 START.bat
+```
 
-# Option C: All services at once
-run_app\run_all.bat
+#### **Step 2: Run Application**
+```bash
+# Run START.bat and choose:
+# [1] Quick Start - Backend + Frontend
+# [2] Run All - All services
+START.bat
 ```
 
 #### **Access the Application**
@@ -98,17 +92,27 @@ run_app\run_all.bat
 
 ---
 
-### 🔍 **Troubleshooting**
+### 📋 **START.bat Menu**
 
-#### Check if dependencies are installed:
-```bash
-CHECK_DEPENDENCIES.bat
+```
+[1] ⚡ Quick Start     - Start Backend + Frontend
+[2] 🚀 Run All        - Start All Services
+[3] 🔧 Run Backend    - API only
+[4] 🌐 Run Frontend   - Dashboard only
+[5] 🤖 Run Edge AI    - Edge App only
+[6] 📦 Install All    - Install all dependencies
+[7] 🔍 Check Status   - Check installed packages
+[8] 📖 Help          - Documentation
 ```
 
-#### If you get errors:
-1. Make sure Python 3.11+ is installed: `python --version`
-2. Make sure Node.js 18+ is installed: `node --version`
-3. Re-run: `INSTALL_DEPENDENCIES.bat`
+---
+
+### 🔍 **Troubleshooting**
+
+#### If installation fails:
+1. Check Python version: `python --version` (should be 3.11 or 3.12)
+2. Run `START.bat` → Option [7] to check status
+3. See [PYTHON_VERSION_FIX.md](PYTHON_VERSION_FIX.md) for Python issues
 
 ---
 
