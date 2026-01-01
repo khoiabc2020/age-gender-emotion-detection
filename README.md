@@ -166,7 +166,7 @@ python main.py --camera 0
 ### 🎓 Training & AI
 - [training_experiments/README.md](training_experiments/README.md) - Training guide
 - [training_experiments/POST_TRAINING_WORKFLOW.md](training_experiments/POST_TRAINING_WORKFLOW.md) - Post-training workflow  
-- [training_experiments/TRAINING_SUCCESS_76.49.md](training_experiments/TRAINING_SUCCESS_76.49.md) - Training results
+- [GOOGLE_AI_SETUP.md](GOOGLE_AI_SETUP.md) - **Google Gemini AI Agent setup**
 - [training_experiments/notebooks/kaggle_4datasets_training.ipynb](training_experiments/notebooks/kaggle_4datasets_training.ipynb) - Main training notebook
 
 ### 🛠️ Technical

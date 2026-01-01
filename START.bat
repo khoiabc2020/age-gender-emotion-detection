@@ -200,7 +200,18 @@ if not exist ".env" (
         echo ACCESS_TOKEN_EXPIRE_MINUTES=30
         echo CORS_ORIGINS=["http://localhost:3000"]
         echo DEBUG=True
+        echo.
+        echo # Google AI Configuration
+        echo # Get your API key: https://makersuite.google.com/app/apikey
+        echo GOOGLE_AI_API_KEY=
+        echo AI_PROVIDER=google_ai
     ) > .env
+    echo.
+    echo .env file created!
+    echo.
+    echo IMPORTANT: Add your Google API Key to backend_api/.env
+    echo Get key from: https://makersuite.google.com/app/apikey
+    echo.
 )
 pip install -r requirements.txt --upgrade --disable-pip-version-check -q
 echo Backend dependencies installed!
