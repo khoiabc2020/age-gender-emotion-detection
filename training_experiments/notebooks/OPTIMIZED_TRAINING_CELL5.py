@@ -174,9 +174,13 @@ scheduler = optim.lr_scheduler.OneCycleLR(
     optimizer, max_lr=LEARNING_RATE, epochs=EPOCHS,
     steps_per_epoch=len(train_loader)//GRAD_ACCUM_STEPS, pct_start=0.1
 )
-scaler = GradScaler() if USE_MIXED_PRECISION else None
+# ============================================================
+# MIXED PRECISION SETUP
+# ============================================================
 
-print("[OK] ImprovedFocalLoss + AdamW + OneCycleLR + MixedPrecision")
+scaler = GradScaler('cuda') if USE_MIXED_PRECISION else None
+if USE_MIXED_PRECISION:
+    print("[OK] Mixed Precision Training enabled (faster)")
 
 # ============================================================
 # MIXUP
