@@ -26,10 +26,10 @@
   --gray-800: #262626;
   --gray-900: #1f1f1f;
   
-  /* Text Colors */
-  --text-primary: #262626;
-  --text-secondary: #595959;
-  --text-tertiary: #8c8c8c;
+  /* Text Colors - Improved contrast */
+  --text-primary: #1a1a1a;
+  --text-secondary: #434343;
+  --text-tertiary: #595959;
   --text-inverse: #ffffff;
   
   /* Background Colors */
@@ -481,11 +481,11 @@ body:not(.dark) .page-description {
 /* Dark Mode Support - Optimized for readability */
 .dark {
   background: #1a1d29;
-  color: #e8e8e8;
+  color: #f0f0f0;
   min-height: 100vh;
   --text-primary: #ffffff;
-  --text-secondary: rgba(255, 255, 255, 0.85);
-  --text-tertiary: rgba(255, 255, 255, 0.7);
+  --text-secondary: rgba(255, 255, 255, 0.9);
+  --text-tertiary: rgba(255, 255, 255, 0.75);
   --bg-primary: #252836;
   --bg-secondary: #2d3142;
   --bg-tertiary: #35394a;
@@ -546,12 +546,24 @@ body:not(.dark) .page-description {
 
 .dark .page-title {
   color: #ffffff !important;
-  font-weight: 600 !important;
+  font-weight: 700 !important;
+  font-size: 28px !important;
 }
 
 .dark .page-description {
-  color: rgba(255, 255, 255, 0.75) !important;
-  font-size: 14px !important;
+  color: rgba(255, 255, 255, 0.9) !important;
+  font-size: 15px !important;
+}
+
+body:not(.dark) .page-title {
+  color: #1a1a1a !important;
+  font-weight: 700 !important;
+  font-size: 28px !important;
+}
+
+body:not(.dark) .page-description {
+  color: #434343 !important;
+  font-size: 15px !important;
 }
 
 .dark .ant-statistic-title {
@@ -616,7 +628,12 @@ body:not(.dark) .page-description {
 }
 
 .dark .ant-typography-secondary {
-  color: rgba(255, 255, 255, 0.75) !important;
+  color: rgba(255, 255, 255, 0.9) !important;
+}
+
+.dark .ant-card-head-title {
+  color: #ffffff !important;
+  font-weight: 600 !important;
 }
 
 .dark p,

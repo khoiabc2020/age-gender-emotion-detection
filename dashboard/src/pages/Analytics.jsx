@@ -77,11 +77,21 @@ const AnalyticsPage = () => {
           <Title 
             level={2} 
             className="page-title mb-2"
-            style={{ color: 'var(--text-primary)' }}
+            style={{ 
+              color: darkMode ? '#ffffff' : '#1a1a1a',
+              fontWeight: 700,
+              fontSize: '28px',
+            }}
           >
             Phân tích Chi tiết
           </Title>
-          <p className="page-description" style={{ color: 'var(--text-secondary)' }}>Phân tích sâu về hành vi và hiệu suất quảng cáo</p>
+          <p className="page-description" style={{ 
+            color: darkMode ? 'rgba(255, 255, 255, 0.85)' : '#434343',
+            fontSize: '15px',
+            marginTop: '8px',
+          }}>
+            Phân tích sâu về hành vi và hiệu suất quảng cáo
+          </p>
         </div>
         <Select
           value={timeRange}

@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { Card, Input, Button, Typography, Space, Spin, message, Select, Divider, Tag, List, Avatar, Row, Col } from 'antd'
+import { useTheme } from '../components/layout/ThemeProvider'
 import {
   RobotOutlined,
   SendOutlined,

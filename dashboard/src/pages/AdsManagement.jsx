@@ -160,11 +160,21 @@ const AdsManagementPage = () => {
           <Title 
             level={2} 
             className="page-title mb-2"
-            style={{ color: 'var(--text-primary)' }}
+            style={{ 
+              color: darkMode ? '#ffffff' : '#1a1a1a',
+              fontWeight: 700,
+              fontSize: '28px',
+            }}
           >
             Quản lý Quảng cáo
           </Title>
-          <p className="page-description" style={{ color: 'var(--text-secondary)' }}>Quản lý và cấu hình các quảng cáo hiển thị</p>
+          <p className="page-description" style={{ 
+            color: darkMode ? 'rgba(255, 255, 255, 0.85)' : '#434343',
+            fontSize: '15px',
+            marginTop: '8px',
+          }}>
+            Quản lý và cấu hình các quảng cáo hiển thị
+          </p>
         </div>
         <Button
           type="primary"
