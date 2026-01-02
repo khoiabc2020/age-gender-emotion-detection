@@ -1,9 +1,9 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Form, Input, Button, Card, message, Typography, Divider } from 'antd'
 import { UserOutlined, LockOutlined, MailOutlined } from '@ant-design/icons'
 import { useNavigate, Link } from 'react-router-dom'
-import { useAppDispatch } from '../store/hooks'
-import { login } from '../store/slices/authSlice'
+import { useAppDispatch, useAppSelector } from '../store/hooks'
+import { login as loginThunk } from '../store/slices/authSlice'
 import api from '../services/api'
 
 const { Title, Text } = Typography
@@ -12,33 +12,41 @@ const LoginPage = () => {
   const [loading, setLoading] = useState(false)
   const navigate = useNavigate()
   const dispatch = useAppDispatch()
+  const isAuthenticated = useAppSelector((state) => state.auth.isAuthenticated)
+  const authError = useAppSelector((state) => state.auth.error)
+
+  // Navigate when authenticated
+  useEffect(() => {
+    if (isAuthenticated) {
+      navigate('/')
+    }
+  }, [isAuthenticated, navigate])
+
+  // Show error message
+  useEffect(() => {
+    if (authError) {
+      message.error(authError)
+    }
+  }, [authError])
 
   const onFinish = async (values) => {
     setLoading(true)
     try {
-      const params = new URLSearchParams()
-      params.append('username', values.username)
-      params.append('password', values.password)
+      // Use async thunk - it handles API call and state update
+      const result = await dispatch(loginThunk({
+        username: values.username,
+        password: values.password
+      }))
       
-      const response = await api.post('/auth/login', params.toString(), {
-        headers: {
-          'Content-Type': 'application/x-www-form-urlencoded',
-        },
-      })
-      
-      if (response.data.access_token) {
-        dispatch(login({
-          token: response.data.access_token,
-          user: response.data.user,
-        }))
+      if (loginThunk.fulfilled.match(result)) {
         message.success('Đăng nhập thành công!')
-        navigate('/')
+        // Navigation will happen automatically via useEffect
       } else {
-        message.error('Đăng nhập thất bại!')
+        const errorMsg = result.payload || 'Đăng nhập thất bại!'
+        message.error(errorMsg)
       }
     } catch (error) {
-      const errorMessage = error.response?.data?.detail || error.message || 'Tên đăng nhập hoặc mật khẩu không đúng!'
-      message.error(errorMessage)
+      message.error('Đã xảy ra lỗi khi đăng nhập!')
       console.error('Login error:', error)
     } finally {
       setLoading(false)

@@ -5,12 +5,30 @@ export const login = createAsyncThunk(
   'auth/login',
   async ({ username, password }, { rejectWithValue }) => {
     try {
-      const response = await api.post('/auth/login', { username, password })
-      const { token } = response.data
-      localStorage.setItem('token', token)
-      return { token }
+      // Use URLSearchParams for OAuth2PasswordRequestForm compatibility
+      const params = new URLSearchParams()
+      params.append('username', username)
+      params.append('password', password)
+      
+      const response = await api.post('/auth/login', params.toString(), {
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+        },
+      })
+      
+      if (response.data.access_token) {
+        const { access_token, user } = response.data
+        localStorage.setItem('token', access_token)
+        localStorage.setItem('user', JSON.stringify(user))
+        return { 
+          token: access_token,
+          user: user
+        }
+      } else {
+        return rejectWithValue('No access token received')
+      }
     } catch (error) {
-      return rejectWithValue(error.response?.data?.message || 'Login failed')
+      return rejectWithValue(error.response?.data?.detail || error.message || 'Login failed')
     }
   }
 )
@@ -80,6 +98,7 @@ const authSlice = createSlice({
         state.isAuthenticated = true
         state.token = action.payload.token
         state.user = action.payload.user
+        state.error = null
       })
       .addCase(login.rejected, (state, action) => {
         state.loading = false
