@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { Card, Form, Input, Button, Switch, Select, Divider, Typography, message, Space } from 'antd'
-import { SaveOutlined, UserOutlined, BellOutlined, SecurityScanOutlined, PaletteOutlined, RobotOutlined, KeyOutlined } from '@ant-design/icons'
+import { SaveOutlined, UserOutlined, BellOutlined, SecurityScanOutlined, BgColorsOutlined, RobotOutlined, KeyOutlined } from '@ant-design/icons'
 import { useAppSelector } from '../store/hooks'
 
 const { Title, Text } = Typography
@@ -111,7 +111,7 @@ const SettingsPage = () => {
           style={{ borderRadius: '20px', background: 'rgba(255, 255, 255, 0.95)' }}
           title={
             <Space>
-              <PaletteOutlined className="text-lg" style={{ color: '#667eea' }} />
+              <BgColorsOutlined className="text-lg" style={{ color: '#667eea' }} />
               <span className="text-lg font-semibold">Giao diện</span>
             </Space>
           }
