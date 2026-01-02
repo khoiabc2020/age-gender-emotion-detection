@@ -312,7 +312,15 @@ const AIAgentPage = () => {
                     size="small"
                     type="dashed"
                     onClick={() => setQuestion(q)}
-                    className="rounded-lg"
+                    className="rounded-lg quick-question-btn"
+                    style={{
+                      borderColor: 'rgba(255, 255, 255, 0.2)',
+                      color: 'rgba(255, 255, 255, 0.9)',
+                      background: 'rgba(255, 255, 255, 0.05)',
+                      fontSize: '13px',
+                      height: '32px',
+                      padding: '0 16px',
+                    }}
                   >
                     {q}
                   </Button>
