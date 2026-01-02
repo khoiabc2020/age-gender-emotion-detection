@@ -16,6 +16,7 @@ import AdPerformanceChart from '../components/charts/AdPerformanceChart'
 import StatsCard from '../components/dashboard/StatsCard'
 import ProfileCard from '../components/dashboard/ProfileCard'
 import QuickActions from '../components/dashboard/QuickActions'
+import WeeklyInvoice from '../components/dashboard/WeeklyInvoice'
 
 const { Title, Text } = Typography
 
@@ -24,6 +25,7 @@ const DashboardPage = () => {
   const { stats, ageByHour, emotionDistribution, loading } = useAppSelector(
     (state) => state.analytics
   )
+  const user = useAppSelector((state) => state.auth.user)
 
   useEffect(() => {
     // Initial load with delay to prevent blocking
@@ -63,40 +65,7 @@ const DashboardPage = () => {
   const spentPercentage = Math.min((usedToday / dailyLimit) * 100, 100)
 
   return (
-    <div className="animate-fade-in" style={{ padding: '0' }}>
-      {/* Top Bar with Search */}
-      <div style={{ 
-        display: 'flex', 
-        justifyContent: 'space-between', 
-        alignItems: 'center',
-        marginBottom: '24px',
-        flexWrap: 'wrap',
-        gap: '16px',
-      }}>
-        <Space size="large">
-          <Title 
-            level={2} 
-            style={{ 
-              margin: 0,
-              color: 'var(--text-primary)',
-              fontSize: '28px',
-              fontWeight: 700,
-            }}
-          >
-            Dashboard
-          </Title>
-        </Space>
-        <Space>
-          <Text type="secondary" style={{ fontSize: '14px' }}>
-            {new Date().toLocaleDateString('vi-VN', { 
-              weekday: 'long', 
-              year: 'numeric', 
-              month: 'long', 
-              day: 'numeric' 
-            })}
-          </Text>
-        </Space>
-      </div>
+    <div className="animate-fade-in" style={{ padding: '24px', background: '#fafafa', minHeight: '100%' }}>
 
       {/* Main Content Grid */}
       <Row gutter={[24, 24]}>
@@ -107,33 +76,34 @@ const DashboardPage = () => {
             <Col xs={24} md={12}>
               <Card
                 style={{
-                  borderRadius: '12px',
+                  borderRadius: '16px',
                   border: 'none',
-                  boxShadow: '0 2px 8px rgba(0,0,0,0.08)',
-                  background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
-                  color: '#fff',
+                  boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
+                  background: '#ffffff',
                   height: '100%',
                 }}
-                bodyStyle={{ padding: '24px' }}
+                bodyStyle={{ padding: '32px' }}
               >
-                <Text style={{ color: 'rgba(255,255,255,0.9)', fontSize: '14px', display: 'block', marginBottom: '8px' }}>
-                  Chào mừng trở lại
+                <Text style={{ color: '#8c8c8c', fontSize: '14px', display: 'block', marginBottom: '12px' }}>
+                  Hello, {user?.full_name || user?.username || 'User'}
                 </Text>
                 <Title 
                   level={1} 
                   style={{ 
                     margin: 0, 
-                    color: '#fff', 
-                    fontSize: '36px',
+                    color: '#ff4d4f', 
+                    fontSize: '48px',
                     fontWeight: 700,
+                    lineHeight: '1.2',
                   }}
                 >
-                  {totalInteractions.toLocaleString()}
+                  ${totalInteractions.toLocaleString()}
                 </Title>
-                <Space style={{ marginTop: '8px' }}>
-                  <Text style={{ color: 'rgba(255,255,255,0.8)', fontSize: '12px' }}>
-                    0.00% (0) 24h qua
+                <Space style={{ marginTop: '12px' }}>
+                  <Text style={{ color: '#8c8c8c', fontSize: '13px' }}>
+                    0.00% (US$0.00) last 24 hours
                   </Text>
+                  <span style={{ color: '#52c41a', fontSize: '12px' }}>↑</span>
                 </Space>
               </Card>
             </Col>
@@ -142,52 +112,81 @@ const DashboardPage = () => {
             <Col xs={24} md={12}>
               <Card
                 style={{
-                  borderRadius: '12px',
+                  borderRadius: '16px',
                   border: 'none',
-                  boxShadow: '0 2px 8px rgba(0,0,0,0.08)',
-                  background: 'linear-gradient(135deg, #f093fb 0%, #f5576c 50%, #4facfe 100%)',
+                  boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
+                  background: 'linear-gradient(135deg, #ff6b6b 0%, #ffa500 50%, #4ecdc4 100%)',
                   height: '100%',
+                  position: 'relative',
+                  overflow: 'hidden',
                 }}
-                bodyStyle={{ padding: '24px', textAlign: 'center' }}
+                bodyStyle={{ padding: '32px', textAlign: 'center', position: 'relative', zIndex: 1 }}
               >
-                <div style={{ marginBottom: '16px' }}>
-                  <div style={{ 
-                    width: '120px', 
-                    height: '120px', 
+                <div style={{
+                  position: 'absolute',
+                  top: '-50%',
+                  right: '-50%',
+                  width: '200%',
+                  height: '200%',
+                  background: 'radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%)',
+                  zIndex: 0,
+                }} />
+                <div style={{ marginBottom: '20px', position: 'relative', zIndex: 1 }}>
+                  <div style={{
+                    width: '140px',
+                    height: '140px',
                     margin: '0 auto',
                     position: 'relative',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
                   }}>
                     <div style={{
                       position: 'absolute',
-                      top: '50%',
-                      left: '50%',
-                      transform: 'translate(-50%, -50%)',
+                      width: '100%',
+                      height: '100%',
+                      borderRadius: '50%',
+                      border: '8px solid rgba(255,255,255,0.3)',
+                    }} />
+                    <div style={{
+                      position: 'absolute',
+                      width: '100%',
+                      height: '100%',
+                      borderRadius: '50%',
+                      border: '8px solid transparent',
+                      borderTopColor: '#fff',
+                      transform: `rotate(${(spentPercentage / 100) * 360 - 90}deg)`,
+                      transition: 'transform 0.3s',
+                    }} />
+                    <div style={{
+                      position: 'absolute',
                       textAlign: 'center',
                     }}>
                       <Text style={{ 
                         color: '#fff', 
-                        fontSize: '24px', 
+                        fontSize: '32px', 
                         fontWeight: 700,
                         display: 'block',
                       }}>
                         {spentPercentage.toFixed(0)}%
                       </Text>
                       <Text style={{ 
-                        color: 'rgba(255,255,255,0.9)', 
-                        fontSize: '12px',
+                        color: 'rgba(255,255,255,0.95)', 
+                        fontSize: '14px',
+                        fontWeight: 600,
                         display: 'block',
                       }}>
-                        Đã sử dụng
+                        Spent
                       </Text>
                     </div>
                   </div>
                 </div>
-                <div>
-                  <Text style={{ color: 'rgba(255,255,255,0.9)', fontSize: '12px', display: 'block', marginBottom: '4px' }}>
-                    Giới hạn hàng ngày {dailyLimit.toLocaleString()}
+                <div style={{ position: 'relative', zIndex: 1 }}>
+                  <Text style={{ color: 'rgba(255,255,255,0.95)', fontSize: '13px', display: 'block', marginBottom: '6px', fontWeight: 500 }}>
+                    Daily Limit ${dailyLimit.toLocaleString()}
                   </Text>
-                  <Text style={{ color: '#fff', fontSize: '16px', fontWeight: 600, display: 'block' }}>
-                    Đã dùng hôm nay {usedToday.toLocaleString()}
+                  <Text style={{ color: '#fff', fontSize: '18px', fontWeight: 700, display: 'block' }}>
+                    Used Today ${usedToday.toLocaleString()}
                   </Text>
                 </div>
               </Card>
@@ -233,63 +232,6 @@ const DashboardPage = () => {
             </Col>
           </Row>
 
-          <Divider style={{ margin: '24px 0' }} />
-
-          {/* Charts Section */}
-          <Row gutter={[16, 16]}>
-            <Col xs={24} lg={12}>
-              <Card
-                title="Phân bố Độ tuổi theo Giờ"
-                className="card-hover"
-                style={{
-                  borderRadius: '12px',
-                  border: 'none',
-                  boxShadow: '0 2px 8px rgba(0,0,0,0.08)',
-                }}
-              >
-                <AgeChart data={ageByHour} />
-              </Card>
-            </Col>
-            <Col xs={24} lg={12}>
-              <Card
-                title="Phân bố Cảm xúc"
-                className="card-hover"
-                style={{
-                  borderRadius: '12px',
-                  border: 'none',
-                  boxShadow: '0 2px 8px rgba(0,0,0,0.08)',
-                }}
-              >
-                <EmotionPieChart data={emotionDistribution} />
-              </Card>
-            </Col>
-            <Col xs={24} lg={12}>
-              <Card
-                title="Phân bố Giới tính"
-                className="card-hover"
-                style={{
-                  borderRadius: '12px',
-                  border: 'none',
-                  boxShadow: '0 2px 8px rgba(0,0,0,0.08)',
-                }}
-              >
-                <GenderChart data={stats?.gender_distribution} />
-              </Card>
-            </Col>
-            <Col xs={24} lg={12}>
-              <Card
-                title="Hiệu suất Quảng cáo"
-                className="card-hover"
-                style={{
-                  borderRadius: '12px',
-                  border: 'none',
-                  boxShadow: '0 2px 8px rgba(0,0,0,0.08)',
-                }}
-              >
-                <AdPerformanceChart data={stats?.top_ads} />
-              </Card>
-            </Col>
-          </Row>
         </Col>
 
         {/* Right Column - Profile & Actions */}
@@ -298,77 +240,11 @@ const DashboardPage = () => {
             <ProfileCard />
             <QuickActions />
             
-            {/* Weekly Summary Card */}
-            <Card
-              title="Tóm tắt Tuần"
-              style={{
-                borderRadius: '12px',
-                border: 'none',
-                boxShadow: '0 2px 8px rgba(0,0,0,0.08)',
-              }}
-            >
-              <div style={{ marginBottom: '16px' }}>
-                <Text type="secondary" style={{ fontSize: '12px' }}>
-                  Từ {new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toLocaleDateString('vi-VN')} - {new Date().toLocaleDateString('vi-VN')}
-                </Text>
-              </div>
-              <div style={{ height: '200px', display: 'flex', alignItems: 'flex-end', gap: '8px' }}>
-                {[65, 45, 80, 55, 70, 60, 75].map((value, index) => (
-                  <div
-                    key={index}
-                    style={{
-                      flex: 1,
-                      height: `${value}%`,
-                      background: index % 2 === 0 
-                        ? 'linear-gradient(180deg, #52c41a 0%, #73d13d 100%)'
-                        : 'linear-gradient(180deg, #ff4d4f 0%, #ff7875 100%)',
-                      borderRadius: '4px 4px 0 0',
-                      minHeight: '20px',
-                    }}
-                    title={`${value}%`}
-                  />
-                ))}
-              </div>
-            </Card>
+            <WeeklyInvoice />
           </Space>
         </Col>
       </Row>
 
-      {/* Charts Section */}
-      <Row gutter={[16, 16]}>
-        <Col xs={24} lg={12}>
-          <Card
-            title="Phân bố Độ tuổi theo Giờ"
-            className="card-hover"
-          >
-            <AgeChart data={ageByHour} />
-          </Card>
-        </Col>
-        <Col xs={24} lg={12}>
-          <Card
-            title="Phân bố Cảm xúc"
-            className="card-hover"
-          >
-            <EmotionPieChart data={emotionDistribution} />
-          </Card>
-        </Col>
-        <Col xs={24} lg={12}>
-          <Card
-            title="Phân bố Giới tính"
-            className="card-hover"
-          >
-            <GenderChart data={stats?.gender_distribution} />
-          </Card>
-        </Col>
-        <Col xs={24} lg={12}>
-          <Card
-            title="Hiệu suất Quảng cáo"
-            className="card-hover"
-          >
-            <AdPerformanceChart data={stats?.top_ads} />
-          </Card>
-        </Col>
-      </Row>
     </div>
   )
 }
