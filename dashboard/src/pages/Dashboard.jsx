@@ -27,6 +27,33 @@ const DashboardPage = () => {
   )
   const user = useAppSelector((state) => state.auth.user)
 
+  // Generate week days with real dates
+  const getWeekDays = () => {
+    const today = new Date()
+    const days = []
+    const dayNames = ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa']
+    
+    // Start from 3 days ago to show more context
+    for (let i = -3; i <= 5; i++) {
+      const date = new Date(today)
+      date.setDate(today.getDate() + i)
+      const dayName = dayNames[date.getDay()]
+      const dayNumber = date.getDate()
+      const isToday = date.toDateString() === today.toDateString()
+      
+      days.push({
+        label: `${dayName} ${dayNumber}`,
+        date: date,
+        isToday: isToday,
+      })
+    }
+    
+    return days
+  }
+
+  const weekDays = getWeekDays()
+  const currentMonth = new Date().toLocaleDateString('en-US', { month: 'long', year: 'numeric' })
+
   useEffect(() => {
     // Initial load with delay to prevent blocking
     const initialTimeout = setTimeout(() => {
@@ -209,36 +236,33 @@ const DashboardPage = () => {
                   </Text>
                 </div>
                 <div style={{ display: 'flex', gap: '8px', alignItems: 'center', flexWrap: 'wrap' }}>
-                  {['Mo 12', 'Tu 13', 'We 14', 'Th 15', 'Fr 16', 'Sa 17', 'Su 18', 'Mo 19', 'Tu 20'].map((day, idx) => {
-                    const isToday = day === 'Tu 13'
-                    return (
-                      <div
-                        key={idx}
-                        style={{
-                          padding: '8px 16px',
-                          borderRadius: isToday ? '20px' : '8px',
-                          background: isToday ? '#ff4d4f' : '#f5f5f5',
-                          color: isToday ? '#fff' : '#595959',
-                          fontSize: '13px',
-                          fontWeight: isToday ? 600 : 400,
-                          cursor: 'pointer',
-                          transition: 'all 0.2s',
-                        }}
-                        onMouseEnter={(e) => {
-                          if (!isToday) {
-                            e.currentTarget.style.background = '#e8e8e8'
-                          }
-                        }}
-                        onMouseLeave={(e) => {
-                          if (!isToday) {
-                            e.currentTarget.style.background = '#f5f5f5'
-                          }
-                        }}
-                      >
-                        {day}
-                      </div>
-                    )
-                  })}
+                  {weekDays.map((day, idx) => (
+                    <div
+                      key={idx}
+                      style={{
+                        padding: '8px 16px',
+                        borderRadius: day.isToday ? '20px' : '8px',
+                        background: day.isToday ? '#ff4d4f' : '#f5f5f5',
+                        color: day.isToday ? '#fff' : '#595959',
+                        fontSize: '13px',
+                        fontWeight: day.isToday ? 600 : 400,
+                        cursor: 'pointer',
+                        transition: 'all 0.2s',
+                      }}
+                      onMouseEnter={(e) => {
+                        if (!day.isToday) {
+                          e.currentTarget.style.background = '#e8e8e8'
+                        }
+                      }}
+                      onMouseLeave={(e) => {
+                        if (!day.isToday) {
+                          e.currentTarget.style.background = '#f5f5f5'
+                        }
+                      }}
+                    >
+                      {day.label}
+                    </div>
+                  ))}
                   <div style={{
                     marginLeft: 'auto',
                     padding: '8px 12px',
@@ -247,7 +271,7 @@ const DashboardPage = () => {
                     fontSize: '12px',
                     color: '#8c8c8c',
                   }}>
-                    August 12-2021
+                    {currentMonth}
                   </div>
                 </div>
               </Card>
