@@ -259,12 +259,26 @@ class EdgeAIApp:
         self.running = True
         self.logger.info("Starting main processing loop...")
         
+        # Performance optimization: Frame skipping
+        frame_skip = 2  # Process every 2nd frame (reduce CPU load)
+        frame_count = 0
+        target_fps = 15  # Target 15 FPS instead of 30
+        frame_delay = 1.0 / target_fps  # ~66ms per frame
+        
         try:
             while self.running:
                 ret, frame = self.camera.read()
                 if not ret:
                     self.logger.warning("Failed to read frame from camera")
-                    break
+                    time.sleep(0.1)  # Small delay before retry
+                    continue
+                
+                frame_count += 1
+                
+                # Skip frames for performance
+                if frame_count % (frame_skip + 1) != 0:
+                    time.sleep(frame_delay)
+                    continue
                 
                 start_time = time.time()
                 
@@ -535,6 +549,11 @@ class EdgeAIApp:
                 if cv2.waitKey(1) & 0xFF == ord('q'):
                     self.running = False
                     break
+                
+                # Performance: Add delay to maintain target FPS and prevent freezing
+                elapsed = time.time() - start_time
+                if elapsed < frame_delay:
+                    time.sleep(frame_delay - elapsed)
                 
         except KeyboardInterrupt:
             self.logger.info("Interrupted by user")

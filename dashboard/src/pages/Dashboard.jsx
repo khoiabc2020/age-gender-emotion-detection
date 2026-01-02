@@ -24,9 +24,12 @@ const DashboardPage = () => {
   )
 
   useEffect(() => {
-    dispatch(fetchStats(24))
-    dispatch(fetchAgeByHour(24))
-    dispatch(fetchEmotionDistribution(24))
+    // Initial load with delay to prevent blocking
+    const initialTimeout = setTimeout(() => {
+      dispatch(fetchStats(24))
+      dispatch(fetchAgeByHour(24))
+      dispatch(fetchEmotionDistribution(24))
+    }, 100)
     
     // Refresh every 30 seconds
     const interval = setInterval(() => {
@@ -35,7 +38,10 @@ const DashboardPage = () => {
       dispatch(fetchEmotionDistribution(24))
     }, 30000)
     
-    return () => clearInterval(interval)
+    return () => {
+      clearTimeout(initialTimeout)
+      clearInterval(interval)
+    }
   }, [dispatch])
 
   if (loading && !stats) {

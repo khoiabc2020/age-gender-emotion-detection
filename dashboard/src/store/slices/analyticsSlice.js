@@ -3,31 +3,46 @@ import api from '../../services/api'
 
 export const fetchStats = createAsyncThunk(
   'analytics/fetchStats',
-  async (hours = 24) => {
-    const response = await api.get('/api/v1/analytics/stats', {
-      params: { hours },
-    })
-    return response.data
+  async (hours = 24, { rejectWithValue }) => {
+    try {
+      const response = await api.get('/api/v1/analytics/stats', {
+        params: { hours },
+        timeout: 5000,
+      })
+      return response.data
+    } catch (error) {
+      return rejectWithValue(error.response?.data || { message: 'Failed to fetch stats' })
+    }
   }
 )
 
 export const fetchAgeByHour = createAsyncThunk(
   'analytics/fetchAgeByHour',
-  async (hours = 24) => {
-    const response = await api.get('/api/v1/analytics/age-by-hour', {
-      params: { hours },
-    })
-    return response.data
+  async (hours = 24, { rejectWithValue }) => {
+    try {
+      const response = await api.get('/api/v1/analytics/age-by-hour', {
+        params: { hours },
+        timeout: 5000,
+      })
+      return response.data
+    } catch (error) {
+      return rejectWithValue(error.response?.data || { message: 'Failed to fetch age data' })
+    }
   }
 )
 
 export const fetchEmotionDistribution = createAsyncThunk(
   'analytics/fetchEmotionDistribution',
-  async (hours = 24) => {
-    const response = await api.get('/api/v1/analytics/emotion-distribution', {
-      params: { hours },
-    })
-    return response.data
+  async (hours = 24, { rejectWithValue }) => {
+    try {
+      const response = await api.get('/api/v1/analytics/emotion-distribution', {
+        params: { hours },
+        timeout: 5000,
+      })
+      return response.data
+    } catch (error) {
+      return rejectWithValue(error.response?.data || { message: 'Failed to fetch emotion data' })
+    }
   }
 )
 
