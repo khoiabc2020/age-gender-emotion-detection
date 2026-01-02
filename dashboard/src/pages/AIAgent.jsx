@@ -219,10 +219,10 @@ const AIAgentPage = () => {
               }}
             >
               {chatHistory.length === 0 ? (
-                <div className="text-center text-gray-400 py-8">
-                  <RobotOutlined className="text-4xl mb-3" />
-                  <p>Bắt đầu trò chuyện với AI Agent</p>
-                  <p className="text-sm mt-2">Hoặc chọn câu hỏi nhanh bên dưới</p>
+                <div className="text-center py-8">
+                  <RobotOutlined className="text-4xl mb-3" style={{ color: 'var(--text-secondary)' }} />
+                  <p style={{ color: 'var(--text-primary)', fontSize: '15px', fontWeight: 500 }}>Bắt đầu trò chuyện với AI Agent</p>
+                  <p className="text-sm mt-2" style={{ color: 'var(--text-secondary)', fontSize: '13px' }}>Hoặc chọn câu hỏi nhanh bên dưới</p>
                 </div>
               ) : (
                 <Space direction="vertical" size="large" className="w-full">

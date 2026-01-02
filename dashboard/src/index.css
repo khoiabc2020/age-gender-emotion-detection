@@ -216,6 +216,25 @@ body:not(.dark) .page-description {
   color: #595959 !important;
 }
 
+/* Force text colors in dark mode for better visibility */
+.dark * {
+  color: inherit;
+}
+
+.dark .ant-card-body * {
+  color: #ffffff !important;
+}
+
+.dark .ant-card-body .ant-typography {
+  color: #ffffff !important;
+}
+
+.dark .ant-card-body p,
+.dark .ant-card-body span,
+.dark .ant-card-body div {
+  color: #ffffff !important;
+}
+
 /* Stats Cards */
 .stats-card {
   background: var(--bg-primary);
@@ -344,6 +363,13 @@ body:not(.dark) .page-description {
   background: #1a1d29;
   color: #ffffff;
   min-height: 100vh;
+  --text-primary: #ffffff;
+  --text-secondary: rgba(255, 255, 255, 0.75);
+  --text-tertiary: rgba(255, 255, 255, 0.6);
+  --bg-primary: #252836;
+  --bg-secondary: #2d3142;
+  --bg-tertiary: #35394a;
+  --border-color: rgba(255, 255, 255, 0.08);
 }
 
 .dark .ant-card {
