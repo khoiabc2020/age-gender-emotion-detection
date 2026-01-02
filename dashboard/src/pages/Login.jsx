@@ -14,11 +14,12 @@ const LoginPage = () => {
   const onFinish = async (values) => {
     setLoading(true)
     try {
-      const formData = new FormData()
-      formData.append('username', values.username)
-      formData.append('password', values.password)
+      // Use URLSearchParams for OAuth2PasswordRequestForm compatibility
+      const params = new URLSearchParams()
+      params.append('username', values.username)
+      params.append('password', values.password)
       
-      const response = await api.post('/auth/login', formData, {
+      const response = await api.post('/auth/login', params.toString(), {
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded',
         },
@@ -31,9 +32,12 @@ const LoginPage = () => {
         }))
         message.success('Đăng nhập thành công!')
         navigate('/')
+      } else {
+        message.error('Đăng nhập thất bại!')
       }
     } catch (error) {
-      message.error('Tên đăng nhập hoặc mật khẩu không đúng!')
+      const errorMessage = error.response?.data?.detail || error.message || 'Tên đăng nhập hoặc mật khẩu không đúng!'
+      message.error(errorMessage)
       console.error('Login error:', error)
     } finally {
       setLoading(false)

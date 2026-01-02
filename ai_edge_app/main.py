@@ -93,7 +93,7 @@ class EdgeAIApp:
         
         # Track processed faces to avoid redundant processing
         # Thread-safe dictionaries with locks
-        self.processed_tracks: Dict[int, Dict] = {}
+        self.processed_tracks: Dict[int, Dict] = {}  # Track processing history
         self.track_attributes: Dict[int, Dict] = {}  # Store attributes per track
         self.tracks_lock = threading.Lock()  # Lock for track dictionaries
         
@@ -260,10 +260,14 @@ class EdgeAIApp:
         self.logger.info("Starting main processing loop...")
         
         # Performance optimization: Frame skipping
-        frame_skip = 2  # Process every 2nd frame (reduce CPU load)
+        frame_skip = 4  # Process every 4th frame (reduce CPU load by 75%)
         frame_count = 0
-        target_fps = 15  # Target 15 FPS instead of 30
-        frame_delay = 1.0 / target_fps  # ~66ms per frame
+        target_fps = 10  # Target 10 FPS instead of 30 (reduce CPU by 66%)
+        frame_delay = 1.0 / target_fps  # ~100ms per frame
+        
+        # Classification optimization: Only classify every N seconds per track
+        classification_interval = 3.0  # Classify each track every 3 seconds
+        last_classification_time = {}  # Track last classification time per track_id
         
         try:
             while self.running:
@@ -366,13 +370,14 @@ class EdgeAIApp:
                     h = max(1, min(h, frame.shape[0] - y))
                     
                     # Skip if recently processed (to reduce computation)
-                    # Process every 2 seconds per track to balance accuracy and performance
+                    # Process every N seconds per track to balance accuracy and performance
                     # Optimization: Use cached attributes to reduce computation
                     should_skip = False
                     with self.tracks_lock:
                         if track_id in self.processed_tracks:
                             last_time = self.processed_tracks[track_id].get('last_processed', 0)
-                            if current_time - last_time < 2.0:  # Process every 2 seconds
+                            # Only classify every 3 seconds per track (reduced from 2s)
+                            if current_time - last_time < classification_interval:
                                 # Use cached attributes
                                 if track_id in self.track_attributes:
                                     attributes = self.track_attributes[track_id].copy()
@@ -382,6 +387,9 @@ class EdgeAIApp:
                     
                     if should_skip:
                         continue
+                    
+                    # Update last classification time
+                    last_classification_time[track_id] = current_time
                     
                     # Crop face region with padding to avoid edge issues
                     # Add small padding to ensure we capture full face
