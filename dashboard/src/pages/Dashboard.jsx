@@ -123,7 +123,7 @@ const DashboardPage = () => {
                 </div>
                 <div style={{ flex: 1, minWidth: 0 }}>
                   <Statistic
-                    title={<span style={{ color: '#8c8c8c', fontSize: '14px' }}>{stat.title}</span>}
+                    title={<span style={{ color: 'var(--text-secondary)', fontSize: '14px' }}>{stat.title}</span>}
                     value={stat.value}
                     prefix={stat.prefix}
                     suffix={stat.suffix}
@@ -131,7 +131,7 @@ const DashboardPage = () => {
                     valueStyle={{
                       fontSize: '24px',
                       fontWeight: 600,
-                      color: '#262626',
+                      color: 'var(--text-primary)',
                     }}
                   />
                 </div>

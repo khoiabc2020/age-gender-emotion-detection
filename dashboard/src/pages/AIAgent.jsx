@@ -200,8 +200,8 @@ const AIAgentPage = () => {
               style={{
                 height: '400px',
                 overflowY: 'auto',
-                background: '#f8fafc',
-                border: '1px solid #e2e8f0',
+                background: 'var(--bg-primary)',
+                border: '1px solid var(--border-color)',
               }}
             >
               {chatHistory.length === 0 ? (
@@ -231,18 +231,19 @@ const AIAgentPage = () => {
                         className={`max-w-[80%] p-3 rounded-lg ${
                           msg.type === 'user'
                             ? 'bg-blue-600 text-white'
-                            : 'bg-white border border-gray-200'
+                            : 'bg-white border'
                         }`}
                         style={{
                           borderRadius: '8px',
+                          borderColor: 'var(--border-color)',
                         }}
                       >
-                        <Paragraph className="mb-1" style={{ color: msg.type === 'user' ? 'white' : '#1e293b' }}>
+                        <Paragraph className="mb-1" style={{ color: msg.type === 'user' ? 'white' : 'var(--text-primary)' }}>
                           {msg.content}
                         </Paragraph>
                         <Text
                           className="text-xs opacity-70"
-                          style={{ color: msg.type === 'user' ? 'white' : '#64748b' }}
+                          style={{ color: msg.type === 'user' ? 'rgba(255,255,255,0.8)' : 'var(--text-secondary)' }}
                         >
                           {msg.timestamp}
                         </Text>
@@ -266,9 +267,9 @@ const AIAgentPage = () => {
                           background: '#1890ff',
                         }}
                       />
-                      <div className="bg-white border border-gray-200 p-3 rounded-lg">
+                      <div className="bg-white border p-3 rounded-lg" style={{ borderColor: 'var(--border-color)' }}>
                         <Spin size="small" />
-                        <span className="ml-2 text-gray-500">AI đang suy nghĩ...</span>
+                        <span className="ml-2" style={{ color: 'var(--text-secondary)' }}>AI đang suy nghĩ...</span>
                       </div>
                     </div>
                   )}
@@ -279,7 +280,7 @@ const AIAgentPage = () => {
 
             {/* Quick Questions */}
             <div className="mb-4">
-              <Text className="text-sm text-gray-500 mb-2 block">Câu hỏi nhanh:</Text>
+              <Text className="text-sm mb-2 block" style={{ color: 'var(--text-secondary)' }}>Câu hỏi nhanh:</Text>
               <Space wrap>
                 {quickQuestions.map((q, index) => (
                   <Button
