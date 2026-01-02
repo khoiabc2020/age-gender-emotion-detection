@@ -245,7 +245,11 @@ const DashboardPage = () => {
                 bodyStyle={{ padding: '24px' }}
               >
                 <div style={{ marginBottom: '16px' }}>
-                  <Text style={{ fontSize: '16px', fontWeight: 600, color: 'var(--text-primary)' }}>
+                  <Text style={{ 
+                    fontSize: '16px', 
+                    fontWeight: 600, 
+                    color: darkMode ? '#ffffff' : '#262626' 
+                  }}>
                     Today's Stats
                   </Text>
                 </div>

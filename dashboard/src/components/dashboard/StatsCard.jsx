@@ -18,6 +18,7 @@
 import React from 'react'
 import { Card, Progress, Typography, Space } from 'antd'
 import { ArrowUpOutlined, ArrowDownOutlined } from '@ant-design/icons'
+import { useTheme } from '../layout/ThemeProvider'
 
 const { Text, Title } = Typography
 
@@ -33,6 +34,7 @@ const StatsCard = ({
   progress,
   progressLabel 
 }) => {
+  const { darkMode } = useTheme()
   const changeColor = changeType === 'up' ? '#52c41a' : '#ff4d4f'
   const ChangeIcon = changeType === 'up' ? ArrowUpOutlined : ArrowDownOutlined
 
@@ -42,15 +44,21 @@ const StatsCard = ({
       style={{
         borderRadius: '12px',
         border: 'none',
-        boxShadow: '0 2px 8px rgba(0,0,0,0.08)',
-        background: 'var(--bg-primary)',
+        boxShadow: darkMode ? '0 2px 8px rgba(0,0,0,0.3)' : '0 2px 8px rgba(0,0,0,0.08)',
+        background: darkMode ? '#252836' : '#ffffff',
+        border: darkMode ? '1px solid rgba(255, 255, 255, 0.08)' : 'none',
         height: '100%',
       }}
       bodyStyle={{ padding: '20px' }}
     >
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '16px' }}>
         <div>
-          <Text type="secondary" style={{ fontSize: '13px', display: 'block', marginBottom: '8px' }}>
+          <Text style={{ 
+            fontSize: '13px', 
+            display: 'block', 
+            marginBottom: '8px',
+            color: darkMode ? 'rgba(255, 255, 255, 0.7)' : '#8c8c8c'
+          }}>
             {title}
           </Text>
           <Title 
@@ -71,7 +79,7 @@ const StatsCard = ({
               width: '48px',
               height: '48px',
               borderRadius: '12px',
-              background: `${color}15`,
+              background: darkMode ? `${color}25` : `${color}15`,
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
@@ -90,7 +98,10 @@ const StatsCard = ({
           <Text style={{ color: changeColor, fontSize: '13px', fontWeight: 500 }}>
             {change}%
           </Text>
-          <Text type="secondary" style={{ fontSize: '12px' }}>
+          <Text style={{ 
+            fontSize: '12px',
+            color: darkMode ? 'rgba(255, 255, 255, 0.6)' : '#8c8c8c'
+          }}>
             so với 24h trước
           </Text>
         </Space>

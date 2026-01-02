@@ -12,8 +12,10 @@ import {
   BellOutlined,
   SettingOutlined,
 } from '@ant-design/icons'
+import { useTheme } from '../layout/ThemeProvider'
 
 const QuickActions = () => {
+  const { darkMode } = useTheme()
   const actions = [
     { icon: <FileTextOutlined />, label: 'Báo cáo', color: '#1890ff' },
     { icon: <MessageOutlined />, label: 'Tin nhắn', color: '#52c41a' },
@@ -27,8 +29,9 @@ const QuickActions = () => {
       style={{
         borderRadius: '12px',
         border: 'none',
-        boxShadow: '0 2px 8px rgba(0,0,0,0.08)',
-        background: 'var(--bg-primary)',
+        boxShadow: darkMode ? '0 2px 8px rgba(0,0,0,0.3)' : '0 2px 8px rgba(0,0,0,0.08)',
+        background: darkMode ? '#252836' : '#ffffff',
+        border: darkMode ? '1px solid rgba(255, 255, 255, 0.08)' : 'none',
       }}
       bodyStyle={{ padding: '16px' }}
     >
@@ -45,7 +48,7 @@ const QuickActions = () => {
               height: '56px',
               fontSize: '24px',
               color: action.color,
-              background: `${action.color}15`,
+              background: darkMode ? `${action.color}25` : `${action.color}15`,
               border: 'none',
             }}
             title={action.label}

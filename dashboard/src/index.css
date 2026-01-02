@@ -151,6 +151,10 @@ code {
   color: #fff !important;
 }
 
+.ant-menu-item-selected .anticon {
+  color: #fff !important;
+}
+
 .ant-menu-item:hover {
   background: #f5f5f5 !important;
   border-radius: 8px !important;
@@ -158,6 +162,18 @@ code {
 
 .ant-menu-item-selected:hover {
   background: #ff4d4f !important;
+}
+
+.ant-menu-item {
+  color: #262626 !important;
+}
+
+.ant-menu-item .anticon {
+  color: #595959 !important;
+}
+
+.ant-menu-item-selected .anticon {
+  color: #fff !important;
 }
 
 .ant-card-head {

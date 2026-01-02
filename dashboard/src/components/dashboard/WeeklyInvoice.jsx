@@ -1,9 +1,11 @@
 import React from 'react'
 import { Card, Typography } from 'antd'
+import { useTheme } from '../layout/ThemeProvider'
 
 const { Text } = Typography
 
 const WeeklyInvoice = () => {
+  const { darkMode } = useTheme()
   const data = [
     { value: 65, date: '12 Oct' },
     { value: 45, date: '14 Oct' },
@@ -18,21 +20,30 @@ const WeeklyInvoice = () => {
 
   return (
     <Card
-      title="Weekly Invoice"
+      title={
+        <span style={{ color: darkMode ? '#ffffff' : '#262626', fontWeight: 600 }}>
+          Weekly Invoice
+        </span>
+      }
       style={{
         borderRadius: '16px',
         border: 'none',
-        boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
-        background: '#ffffff',
+        boxShadow: darkMode ? '0 4px 12px rgba(0,0,0,0.3)' : '0 4px 12px rgba(0,0,0,0.1)',
+        background: darkMode ? '#252836' : '#ffffff',
+        border: darkMode ? '1px solid rgba(255, 255, 255, 0.08)' : 'none',
       }}
       headStyle={{
-        borderBottom: '1px solid #f0f0f0',
+        borderBottom: darkMode ? '1px solid rgba(255, 255, 255, 0.08)' : '1px solid #f0f0f0',
         padding: '20px 24px',
+        background: darkMode ? '#252836' : '#ffffff',
       }}
       bodyStyle={{ padding: '24px' }}
     >
       <div style={{ marginBottom: '16px' }}>
-        <Text type="secondary" style={{ fontSize: '12px' }}>
+        <Text style={{ 
+          fontSize: '12px',
+          color: darkMode ? 'rgba(255, 255, 255, 0.7)' : '#8c8c8c'
+        }}>
           From 12 Oct - 24 Nov
         </Text>
       </div>
@@ -67,7 +78,12 @@ const WeeklyInvoice = () => {
               }}
               title={`${item.value}%`}
             />
-            <Text style={{ fontSize: '11px', color: '#8c8c8c' }}>{item.date}</Text>
+            <Text style={{ 
+              fontSize: '11px', 
+              color: darkMode ? 'rgba(255, 255, 255, 0.7)' : '#8c8c8c' 
+            }}>
+              {item.date}
+            </Text>
           </div>
         ))}
       </div>

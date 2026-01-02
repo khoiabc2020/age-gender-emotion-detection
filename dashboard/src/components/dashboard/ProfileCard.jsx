@@ -8,11 +8,13 @@ import React from 'react'
 import { Card, Avatar, Typography, Space, Button } from 'antd'
 import { UserOutlined, EditOutlined, CalendarOutlined } from '@ant-design/icons'
 import { useAppSelector } from '../../store/hooks'
+import { useTheme } from '../layout/ThemeProvider'
 
 const { Text, Title } = Typography
 
 const ProfileCard = () => {
   const user = useAppSelector((state) => state.auth.user)
+  const { darkMode } = useTheme()
   
   const joinDate = user?.created_at 
     ? new Date(user.created_at).toLocaleDateString('vi-VN', { 
@@ -27,8 +29,9 @@ const ProfileCard = () => {
       style={{
         borderRadius: '12px',
         border: 'none',
-        boxShadow: '0 2px 8px rgba(0,0,0,0.08)',
-        background: 'var(--bg-primary)',
+        boxShadow: darkMode ? '0 2px 8px rgba(0,0,0,0.3)' : '0 2px 8px rgba(0,0,0,0.08)',
+        background: darkMode ? '#252836' : '#ffffff',
+        border: darkMode ? '1px solid rgba(255, 255, 255, 0.08)' : 'none',
       }}
     >
       <div style={{ textAlign: 'center', marginBottom: '20px' }}>
@@ -41,12 +44,20 @@ const ProfileCard = () => {
         >
           {user?.username?.charAt(0).toUpperCase() || 'A'}
         </Avatar>
-        <Title level={4} style={{ margin: '8px 0 4px', color: 'var(--text-primary)' }}>
+        <Title level={4} style={{ 
+          margin: '8px 0 4px', 
+          color: darkMode ? '#ffffff' : '#262626' 
+        }}>
           {user?.full_name || user?.username || 'Admin'}
         </Title>
         <Space>
-          <CalendarOutlined style={{ color: 'var(--text-secondary)' }} />
-          <Text type="secondary" style={{ fontSize: '12px' }}>
+          <CalendarOutlined style={{ 
+            color: darkMode ? 'rgba(255, 255, 255, 0.7)' : '#8c8c8c' 
+          }} />
+          <Text style={{ 
+            fontSize: '12px',
+            color: darkMode ? 'rgba(255, 255, 255, 0.7)' : '#8c8c8c'
+          }}>
             Tham gia {joinDate}
           </Text>
         </Space>
