@@ -135,7 +135,9 @@ const AIAgentPage = () => {
                 display: 'flex', 
                 alignItems: 'center', 
                 gap: '12px',
-                color: 'var(--text-primary)'
+                color: darkMode ? '#ffffff' : '#1a1a1a',
+                fontWeight: 700,
+                fontSize: '28px',
               }}
             >
               <RobotOutlined style={{ fontSize: '28px', color: '#1890ff' }} />
@@ -143,7 +145,11 @@ const AIAgentPage = () => {
             </Title>
             <p 
               className="page-description"
-              style={{ color: 'var(--text-secondary)' }}
+              style={{ 
+                color: darkMode ? 'rgba(255, 255, 255, 0.85)' : '#434343',
+                fontSize: '15px',
+                marginTop: '8px',
+              }}
             >
               Chat với dữ liệu và nhận insights tự động từ AI
             </p>
