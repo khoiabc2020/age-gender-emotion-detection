@@ -358,7 +358,7 @@ const AIAgentPage = () => {
                 <div className="mt-4 space-y-3">
                   {analysis.insights && analysis.insights.length > 0 && (
                     <div>
-                      <Text strong className="text-gray-700">Insights:</Text>
+                      <Text strong style={{ color: 'var(--text-primary)' }}>Insights:</Text>
                       <List
                         size="small"
                         dataSource={analysis.insights}
@@ -372,7 +372,7 @@ const AIAgentPage = () => {
                   )}
                   {analysis.recommendations && analysis.recommendations.length > 0 && (
                     <div>
-                      <Text strong className="text-gray-700">Đề xuất:</Text>
+                      <Text strong style={{ color: 'var(--text-primary)' }}>Đề xuất:</Text>
                       <List
                         size="small"
                         dataSource={analysis.recommendations}
@@ -414,15 +414,16 @@ const AIAgentPage = () => {
               </Button>
               {report && (
                 <div
-                  className="mt-4 p-4 rounded-lg bg-gray-50"
+                  className="mt-4 p-4 rounded-lg"
                   style={{
                     maxHeight: '300px',
                     overflowY: 'auto',
                     whiteSpace: 'pre-wrap',
                     fontSize: '13px',
+                    background: 'var(--bg-tertiary)',
                   }}
                 >
-                  <Paragraph className="text-gray-700">{report}</Paragraph>
+                  <Paragraph style={{ color: 'var(--text-primary)' }}>{report}</Paragraph>
                 </div>
               )}
             </Card>
