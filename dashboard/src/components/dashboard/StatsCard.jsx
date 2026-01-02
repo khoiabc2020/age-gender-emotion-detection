@@ -1,3 +1,20 @@
+/**
+ * StatsCard Component
+ * 
+ * Displays a single statistic with optional change indicator and progress bar.
+ * Used in Dashboard for key metrics visualization.
+ * 
+ * @param {string} title - Card title
+ * @param {string|number} value - Main value to display
+ * @param {string} prefix - Prefix for value (e.g., "$")
+ * @param {string} suffix - Suffix for value (e.g., "tuổi")
+ * @param {number} change - Percentage change (optional)
+ * @param {string} changeType - "up" or "down" (optional)
+ * @param {ReactNode} icon - Icon component (optional)
+ * @param {string} color - Primary color for card (optional)
+ * @param {number} progress - Progress percentage (optional)
+ * @param {string} progressLabel - Label for progress (optional)
+ */
 import React from 'react'
 import { Card, Progress, Typography, Space } from 'antd'
 import { ArrowUpOutlined, ArrowDownOutlined } from '@ant-design/icons'
