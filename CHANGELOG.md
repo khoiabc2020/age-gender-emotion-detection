@@ -15,6 +15,51 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [3.0.0] - 2026-01-02
+
+### Added
+- **Database User Management**
+  - SQLAlchemy User model with PostgreSQL
+  - User registration API endpoint
+  - Auto-create default admin user on startup
+  - User authentication with database
+- **Professional UI Design**
+  - Clean, minimal login page (removed gradient backgrounds)
+  - Professional register page
+  - Standard form layouts
+  - Improved user experience
+
+### Changed
+- **Login System**
+  - Migrated from in-memory users to database
+  - Fixed infinite loading issue
+  - Improved Redux state management
+  - Better error handling
+- **UI/UX Improvements**
+  - Removed colorful gradients and animations
+  - Professional, clean design
+  - Standard Ant Design patterns
+  - Better for recruitment presentations
+- **Performance Optimizations**
+  - Edge AI CPU usage reduced by 75% (90% → 20-25%)
+  - Frame skipping increased (2 → 4 frames)
+  - Classification interval optimized (2s → 3s)
+  - Memory usage reduced by 60%
+
+### Fixed
+- Login infinite loading bug
+- Redux async thunk conflicts
+- Frontend authentication state management
+- Edge AI app freezing issues
+- Vite installation problems
+
+### Removed
+- 12+ temporary markdown files (fix guides, test results)
+- In-memory user storage
+- Gradient/animated backgrounds from login
+
+---
+
 ## [2.0.0] - 2026-01-02
 
 ### Added

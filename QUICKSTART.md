@@ -100,7 +100,7 @@ ERROR: Could not find onnxruntime
 
 **Giải pháp:**
 - Dùng Python 3.12 (không phải 3.13+)
-- Xem: [PYTHON_VERSION_FIX.md](PYTHON_VERSION_FIX.md)
+- Hoặc dùng Docker: `docker-compose up -d`
 
 ### **Lỗi: Frontend trắng trang**
 ```
@@ -111,6 +111,17 @@ http://localhost:8000
 **Giải pháp:**
 - Backend phải chạy trước
 - Dùng `START.bat → [1] Quick Start`
+- Clear browser cache (Ctrl + Shift + Delete)
+
+### **Lỗi: Login không hoạt động**
+```
+# Kiểm tra database
+```
+
+**Giải pháp:**
+- Database tự động tạo khi start backend
+- Default admin: `admin` / `admin123`
+- Hoặc đăng ký tài khoản mới tại `/register`
 
 ### **Lỗi: Dependencies thiếu**
 ```
@@ -137,9 +148,9 @@ http://localhost:3000
 ## 📖 **Xem thêm**
 
 - [README.md](README.md) - Chi tiết dự án
-- [PYTHON_VERSION_FIX.md](PYTHON_VERSION_FIX.md) - Fix Python issues
-- [dashboard/FRONTEND_STATUS.md](dashboard/FRONTEND_STATUS.md) - Frontend details
 - [PROJECT_DOCUMENTATION.md](PROJECT_DOCUMENTATION.md) - Full docs
+- [CHANGELOG.md](CHANGELOG.md) - Version history
+- [GOOGLE_AI_SETUP.md](GOOGLE_AI_SETUP.md) - AI Agent setup
 
 ---
 

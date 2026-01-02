@@ -2,7 +2,7 @@
 
 Complete documentation index for Smart Retail AI - Ultimate Edition
 
-**Version**: 4.0.0  
+**Version**: 3.0.0  
 **Status**: Production Ready  
 **Updated**: 2026-01-02
 
@@ -11,10 +11,11 @@ Complete documentation index for Smart Retail AI - Ultimate Edition
 ## 🚀 Quick Start
 
 - **[README.md](README.md)** - Project overview ⭐⭐⭐⭐
+- **[QUICKSTART.md](QUICKSTART.md)** - Quick start guide ⭐⭐⭐
 - **[CONTRIBUTING.md](CONTRIBUTING.md)** - Contribution guidelines
 - **[CHANGELOG.md](CHANGELOG.md)** - Version history
 
-**Run**: START_PROJECT.bat or docker-compose up -d
+**Run**: `START.bat` or `docker-compose up -d`
 
 ---
 
@@ -38,9 +39,8 @@ Complete documentation index for Smart Retail AI - Ultimate Edition
 
 - [training_experiments/README.md](training_experiments/README.md) - Training guide ⭐⭐⭐
 - [training_experiments/POST_TRAINING_WORKFLOW.md](training_experiments/POST_TRAINING_WORKFLOW.md) - Post-training workflow
-- [training_experiments/TRAINING_VERSIONS_COMPARISON.md](training_experiments/TRAINING_VERSIONS_COMPARISON.md) - Training versions
 - [training_experiments/notebooks/kaggle_4datasets_training.ipynb](training_experiments/notebooks/kaggle_4datasets_training.ipynb) - Main Kaggle notebook (80%+ target) ⭐⭐⭐
-- [training_experiments/TRAINING_SUCCESS_76.49.md](training_experiments/TRAINING_SUCCESS_76.49.md) - Training results
+- [GOOGLE_AI_SETUP.md](GOOGLE_AI_SETUP.md) - AI Agent (Gemini/ChatGPT) setup
 
 ---
 
@@ -63,15 +63,29 @@ Complete documentation index for Smart Retail AI - Ultimate Edition
 ```
 Smart-Retail-AI/
 ├── ai_edge_app/              # Edge AI Application
-├── backend_api/              # FastAPI Backend  
+│   ├── models/               # ONNX models
+│   ├── src/                  # Source code
+│   └── configs/              # Configuration files
+├── backend_api/              # FastAPI Backend
+│   ├── app/
+│   │   ├── api/              # API endpoints
+│   │   ├── models/           # Database models
+│   │   └── core/             # Core utilities
+│   └── requirements.txt
 ├── dashboard/                # React Dashboard
+│   ├── src/
+│   │   ├── pages/            # Page components
+│   │   ├── components/       # Reusable components
+│   │   └── store/            # Redux store
+│   └── package.json
 ├── training_experiments/     # ML Training (Kaggle)
 │   ├── notebooks/            # Kaggle notebooks
-│   ├── checkpoints/          # Model checkpoints
-│   └── scripts/              # Training scripts
+│   ├── scripts/              # Training scripts
+│   └── requirements.txt
 ├── docs/                     # Documentation
 ├── database/                 # Database scripts
 ├── k8s/                      # Kubernetes configs
+├── START.bat                 # Main launcher
 ├── docker-compose.yml        # Docker orchestration
 └── .env.example              # Environment template
 ```
