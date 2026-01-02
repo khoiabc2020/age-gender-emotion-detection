@@ -44,25 +44,54 @@ const RegisterPage = () => {
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
-      background: '#f5f5f5',
-      padding: '20px'
+      background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+      padding: '20px',
+      position: 'relative',
+      overflow: 'hidden'
     }}>
+      {/* Background decoration */}
+      <div style={{
+        position: 'absolute',
+        top: '-50%',
+        right: '-50%',
+        width: '200%',
+        height: '200%',
+        background: 'radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%)',
+        animation: 'pulse 20s ease-in-out infinite'
+      }} />
+      
       <Card
         style={{
           width: '100%',
-          maxWidth: '420px',
-          borderRadius: '8px',
-          boxShadow: '0 2px 8px rgba(0,0,0,0.1)',
-          border: '1px solid #e8e8e8'
+          maxWidth: '440px',
+          borderRadius: '16px',
+          boxShadow: '0 20px 60px rgba(0,0,0,0.3)',
+          border: 'none',
+          background: '#ffffff',
+          position: 'relative',
+          zIndex: 1
         }}
-        bodyStyle={{ padding: '40px' }}
+        bodyStyle={{ padding: '48px' }}
       >
         {/* Logo/Title */}
-        <div style={{ textAlign: 'center', marginBottom: '32px' }}>
-          <Title level={2} style={{ marginBottom: '8px', color: '#262626' }}>
+        <div style={{ textAlign: 'center', marginBottom: '40px' }}>
+          <div style={{
+            width: '64px',
+            height: '64px',
+            margin: '0 auto 20px',
+            background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+            borderRadius: '16px',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            boxShadow: '0 8px 24px rgba(102, 126, 234, 0.4)'
+          }}>
+            <span style={{ fontSize: '32px', color: '#ffffff', fontWeight: 'bold' }}>S</span>
+          </div>
+          <Title level={2} style={{ marginBottom: '8px', color: '#262626', fontWeight: 600 }}>
             Đăng ký tài khoản
           </Title>
-          <Text type="secondary" style={{ fontSize: '14px' }}>
+          <Text style={{ fontSize: '15px', color: '#8c8c8c' }}>
             Tạo tài khoản mới để bắt đầu
           </Text>
         </div>
@@ -85,7 +114,12 @@ const RegisterPage = () => {
             <Input
               prefix={<UserOutlined style={{ color: '#bfbfbf' }} />}
               placeholder="Tên đăng nhập"
-              style={{ borderRadius: '4px' }}
+              size="large"
+              style={{ 
+                borderRadius: '8px',
+                height: '48px',
+                fontSize: '15px'
+              }}
             />
           </Form.Item>
 
@@ -99,7 +133,12 @@ const RegisterPage = () => {
             <Input
               prefix={<MailOutlined style={{ color: '#bfbfbf' }} />}
               placeholder="Email"
-              style={{ borderRadius: '4px' }}
+              size="large"
+              style={{ 
+                borderRadius: '8px',
+                height: '48px',
+                fontSize: '15px'
+              }}
             />
           </Form.Item>
 
@@ -109,7 +148,12 @@ const RegisterPage = () => {
             <Input
               prefix={<UserOutlined style={{ color: '#bfbfbf' }} />}
               placeholder="Họ và tên (tùy chọn)"
-              style={{ borderRadius: '4px' }}
+              size="large"
+              style={{ 
+                borderRadius: '8px',
+                height: '48px',
+                fontSize: '15px'
+              }}
             />
           </Form.Item>
 
@@ -123,7 +167,12 @@ const RegisterPage = () => {
             <Input.Password
               prefix={<LockOutlined style={{ color: '#bfbfbf' }} />}
               placeholder="Mật khẩu"
-              style={{ borderRadius: '4px' }}
+              size="large"
+              style={{ 
+                borderRadius: '8px',
+                height: '48px',
+                fontSize: '15px'
+              }}
             />
           </Form.Item>
 
@@ -136,7 +185,12 @@ const RegisterPage = () => {
             <Input.Password
               prefix={<LockOutlined style={{ color: '#bfbfbf' }} />}
               placeholder="Xác nhận mật khẩu"
-              style={{ borderRadius: '4px' }}
+              size="large"
+              style={{ 
+                borderRadius: '8px',
+                height: '48px',
+                fontSize: '15px'
+              }}
             />
           </Form.Item>
 
