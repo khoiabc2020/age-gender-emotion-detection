@@ -124,16 +124,27 @@ const AppLayout = ({ children }) => {
         <Header
           className="bg-white px-6 flex items-center justify-between"
           style={{
-            background: '#ffffff',
-            borderBottom: '1px solid #e8e8e8',
-            boxShadow: '0 1px 4px rgba(0, 0, 0, 0.04)',
+            background: darkMode 
+              ? 'rgba(30, 30, 46, 0.8)' 
+              : '#ffffff',
+            backdropFilter: darkMode ? 'blur(20px) saturate(180%)' : 'none',
+            WebkitBackdropFilter: darkMode ? 'blur(20px) saturate(180%)' : 'none',
+            borderBottom: darkMode 
+              ? '1px solid rgba(255, 255, 255, 0.1)' 
+              : '1px solid #e8e8e8',
+            boxShadow: darkMode 
+              ? '0 1px 4px rgba(0, 0, 0, 0.2)' 
+              : '0 1px 4px rgba(0, 0, 0, 0.04)',
           }}
         >
           <div className="flex items-center gap-4">
             {React.createElement(
               collapsed ? MenuUnfoldOutlined : MenuFoldOutlined,
               {
-                className: 'trigger text-xl text-gray-600 hover:text-gray-900 cursor-pointer transition-colors',
+                className: 'trigger text-xl cursor-pointer transition-colors',
+                style: {
+                  color: darkMode ? '#e8e8e8' : '#595959',
+                },
                 onClick: () => setCollapsed(!collapsed),
               }
             )}
@@ -158,7 +169,10 @@ const AppLayout = ({ children }) => {
 
             {/* Notifications */}
             <Badge count={5} size="small">
-              <BellOutlined className="text-xl text-gray-600 hover:text-gray-900 cursor-pointer transition-colors" />
+              <BellOutlined 
+                className="text-xl cursor-pointer transition-colors" 
+                style={{ color: darkMode ? '#e8e8e8' : '#595959' }}
+              />
             </Badge>
 
             {/* User Menu */}
@@ -174,10 +188,10 @@ const AppLayout = ({ children }) => {
                 </Avatar>
                 {!collapsed && (
                   <div className="hidden md:block">
-                    <div className="text-sm font-semibold text-gray-700">
+                    <div className="text-sm font-semibold" style={{ color: darkMode ? '#ffffff' : '#262626' }}>
                       {user?.full_name || user?.username || 'Admin'}
                     </div>
-                    <div className="text-xs text-gray-500">
+                    <div className="text-xs" style={{ color: darkMode ? 'rgba(255,255,255,0.7)' : '#8c8c8c' }}>
                       {user?.email || 'admin@retail.com'}
                     </div>
                   </div>
