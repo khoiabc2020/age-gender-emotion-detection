@@ -261,7 +261,7 @@ const AppLayout = ({ children }) => {
             }}>
               <Text style={{ 
                 fontSize: '14px', 
-                color: '#8c8c8c',
+                color: darkMode ? 'rgba(255, 255, 255, 0.7)' : '#8c8c8c',
                 fontWeight: 500,
                 lineHeight: '1.2',
               }}>
@@ -274,7 +274,7 @@ const AppLayout = ({ children }) => {
               </Text>
               <Text style={{ 
                 fontSize: '18px', 
-                color: '#262626',
+                color: darkMode ? '#ffffff' : '#262626',
                 fontWeight: 600,
                 lineHeight: '1.2',
                 marginTop: '4px',
@@ -287,10 +287,10 @@ const AppLayout = ({ children }) => {
                 })}
               </Text>
             </div>
-            <Title level={4} style={{ margin: 0, color: '#262626', fontWeight: 600 }}>
+            <Title level={4} style={{ margin: 0, color: darkMode ? '#ffffff' : '#262626', fontWeight: 600 }}>
               My Profile
             </Title>
-            <span style={{ fontSize: '20px', color: '#8c8c8c', cursor: 'pointer' }}>⋯</span>
+            <span style={{ fontSize: '20px', color: darkMode ? 'rgba(255, 255, 255, 0.7)' : '#8c8c8c', cursor: 'pointer' }}>⋯</span>
           </div>
         </Header>
 

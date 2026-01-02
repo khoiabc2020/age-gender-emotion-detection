@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { Card, Form, Input, Button, Switch, Select, Divider, Typography, message, Space } from 'antd'
 import { SaveOutlined, UserOutlined, BellOutlined, SecurityScanOutlined, BgColorsOutlined, RobotOutlined, KeyOutlined } from '@ant-design/icons'
 import { useAppSelector } from '../store/hooks'
+import { useTheme } from '../components/layout/ThemeProvider'
 
 const { Title, Text } = Typography
 const { Option } = Select
@@ -10,6 +11,7 @@ const SettingsPage = () => {
   const [form] = Form.useForm()
   const user = useAppSelector((state) => state.auth.user)
   const [loading, setLoading] = useState(false)
+  const { darkMode, toggleDarkMode } = useTheme()
 
   const onFinish = async (values) => {
     setLoading(true)
@@ -48,7 +50,11 @@ const SettingsPage = () => {
         {/* Profile Settings */}
         <Card
           className="mb-6 card-hover border-0 shadow-lg"
-          style={{ borderRadius: '20px', background: 'rgba(255, 255, 255, 0.95)' }}
+          style={{ 
+            borderRadius: '20px', 
+            background: darkMode ? '#252836' : 'rgba(255, 255, 255, 0.95)',
+            border: darkMode ? '1px solid rgba(255, 255, 255, 0.08)' : 'none'
+          }}
           title={
             <Space>
               <UserOutlined className="text-lg" style={{ color: '#667eea' }} />
@@ -78,7 +84,11 @@ const SettingsPage = () => {
         {/* Notification Settings */}
         <Card
           className="mb-6 card-hover border-0 shadow-lg"
-          style={{ borderRadius: '20px', background: 'rgba(255, 255, 255, 0.95)' }}
+          style={{ 
+            borderRadius: '20px', 
+            background: darkMode ? '#252836' : 'rgba(255, 255, 255, 0.95)',
+            border: darkMode ? '1px solid rgba(255, 255, 255, 0.08)' : 'none'
+          }}
           title={
             <Space>
               <BellOutlined className="text-lg" style={{ color: '#667eea' }} />
@@ -112,7 +122,11 @@ const SettingsPage = () => {
         {/* Appearance Settings */}
         <Card
           className="mb-6 card-hover border-0 shadow-lg"
-          style={{ borderRadius: '20px', background: 'rgba(255, 255, 255, 0.95)' }}
+          style={{ 
+            borderRadius: '20px', 
+            background: darkMode ? '#252836' : 'rgba(255, 255, 255, 0.95)',
+            border: darkMode ? '1px solid rgba(255, 255, 255, 0.08)' : 'none'
+          }}
           title={
             <Space>
               <BgColorsOutlined className="text-lg" style={{ color: '#667eea' }} />
@@ -120,11 +134,23 @@ const SettingsPage = () => {
             </Space>
           }
         >
-          <Form.Item label="Chủ đề" name="theme">
+          <Form.Item 
+            label="Chế độ tối" 
+            name="dark_mode"
+            valuePropName="checked"
+            initialValue={darkMode}
+          >
+            <Switch 
+              checked={darkMode}
+              onChange={toggleDarkMode}
+              checkedChildren="Bật"
+              unCheckedChildren="Tắt"
+            />
+          </Form.Item>
+          <Form.Item label="Ngôn ngữ" name="language">
             <Select className="rounded-lg">
-              <Option value="light">Sáng</Option>
-              <Option value="dark">Tối</Option>
-              <Option value="auto">Tự động</Option>
+              <Option value="vi">Tiếng Việt</Option>
+              <Option value="en">English</Option>
             </Select>
           </Form.Item>
           <Form.Item label="Ngôn ngữ" name="language">
@@ -138,7 +164,11 @@ const SettingsPage = () => {
         {/* AI Agent Settings */}
         <Card
           className="mb-6 card-hover border-0 shadow-lg"
-          style={{ borderRadius: '20px', background: 'rgba(255, 255, 255, 0.95)' }}
+          style={{ 
+            borderRadius: '20px', 
+            background: darkMode ? '#252836' : 'rgba(255, 255, 255, 0.95)',
+            border: darkMode ? '1px solid rgba(255, 255, 255, 0.08)' : 'none'
+          }}
           title={
             <Space>
               <RobotOutlined className="text-lg" style={{ color: '#667eea' }} />
@@ -188,7 +218,11 @@ const SettingsPage = () => {
         {/* Security Settings */}
         <Card
           className="mb-6 card-hover border-0 shadow-lg"
-          style={{ borderRadius: '20px', background: 'rgba(255, 255, 255, 0.95)' }}
+          style={{ 
+            borderRadius: '20px', 
+            background: darkMode ? '#252836' : 'rgba(255, 255, 255, 0.95)',
+            border: darkMode ? '1px solid rgba(255, 255, 255, 0.08)' : 'none'
+          }}
           title={
             <Space>
               <SecurityScanOutlined className="text-lg" style={{ color: '#667eea' }} />

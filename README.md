@@ -158,10 +158,10 @@ python main.py --camera 0
 ## 📚 Documentation
 
 ### 📖 Main Guides
-- **[APP_RUNNING_GUIDE.md](APP_RUNNING_GUIDE.md)** - Complete setup & running guide
-- **[RECRUITMENT_READY.md](RECRUITMENT_READY.md)** - Demo guide for recruiters
 - **[PROJECT_DOCUMENTATION.md](PROJECT_DOCUMENTATION.md)** - Full documentation index
+- **[QUICKSTART.md](QUICKSTART.md)** - Quick start guide
 - **[CODE_QUALITY.md](CODE_QUALITY.md)** - Code quality standards and practices
+- **[CONTRIBUTING.md](CONTRIBUTING.md)** - Contribution guidelines
 
 ### 🎓 Training & AI
 - [training_experiments/README.md](training_experiments/README.md) - Training guide
@@ -432,7 +432,7 @@ This project is licensed under the MIT License - see [LICENSE](LICENSE) file.
 
 For questions or issues:
 1. Check [Documentation](PROJECT_DOCUMENTATION.md)
-2. Read [FAQ](docs/FAQ.md)
+2. Read [QUICKSTART.md](QUICKSTART.md) for setup help
 3. Create [GitHub Issue](https://github.com/khoiabc2020/age-gender-emotion-detection/issues)
 
 ---

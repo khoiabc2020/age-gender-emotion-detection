@@ -388,18 +388,23 @@ body:not(.dark) .page-description {
   background: var(--bg-primary) !important;
 }
 
-/* Dark Mode Support - Modern Quizlet-style design */
+/* Dark Mode Support - Optimized for readability */
 .dark {
   background: #1a1d29;
-  color: #ffffff;
+  color: #e8e8e8;
   min-height: 100vh;
   --text-primary: #ffffff;
-  --text-secondary: rgba(255, 255, 255, 0.75);
-  --text-tertiary: rgba(255, 255, 255, 0.6);
+  --text-secondary: rgba(255, 255, 255, 0.85);
+  --text-tertiary: rgba(255, 255, 255, 0.7);
   --bg-primary: #252836;
   --bg-secondary: #2d3142;
   --bg-tertiary: #35394a;
-  --border-color: rgba(255, 255, 255, 0.08);
+  --border-color: rgba(255, 255, 255, 0.12);
+}
+
+.dark body {
+  background: #1a1d29;
+  color: #e8e8e8;
 }
 
 .dark .ant-card {

@@ -2,9 +2,9 @@
 
 Complete documentation index for Smart Retail AI - Ultimate Edition
 
-**Version**: 3.0.0  
+**Version**: 3.1.0  
 **Status**: Production Ready  
-**Updated**: 2026-01-02
+**Updated**: 2026-01-15
 
 ---
 
@@ -85,6 +85,7 @@ Smart-Retail-AI/
 ├── docs/                     # Documentation
 ├── database/                 # Database scripts
 ├── k8s/                      # Kubernetes configs
+├── mqtt/                     # MQTT configuration
 ├── START.bat                 # Main launcher
 ├── docker-compose.yml        # Docker orchestration
 └── .env.example              # Environment template

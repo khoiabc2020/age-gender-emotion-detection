@@ -9,6 +9,7 @@ import {
 } from '@ant-design/icons'
 import { useAppDispatch, useAppSelector } from '../store/hooks'
 import { fetchStats, fetchAgeByHour, fetchEmotionDistribution } from '../store/slices/analyticsSlice'
+import { useTheme } from '../components/layout/ThemeProvider'
 import AgeChart from '../components/charts/AgeChart'
 import EmotionPieChart from '../components/charts/EmotionPieChart'
 import GenderChart from '../components/charts/GenderChart'
@@ -26,6 +27,7 @@ const DashboardPage = () => {
     (state) => state.analytics
   )
   const user = useAppSelector((state) => state.auth.user)
+  const { darkMode } = useTheme()
 
   // Generate week days with real dates
   const getWeekDays = () => {
@@ -92,7 +94,11 @@ const DashboardPage = () => {
   const spentPercentage = Math.min((usedToday / dailyLimit) * 100, 100)
 
   return (
-    <div className="animate-fade-in" style={{ padding: '24px', background: '#fafafa', minHeight: '100%' }}>
+    <div className="animate-fade-in" style={{ 
+      padding: '24px', 
+      background: darkMode ? '#1a1d29' : '#fafafa', 
+      minHeight: '100%' 
+    }}>
 
       {/* Main Content Grid */}
       <Row gutter={[24, 24]}>
@@ -105,13 +111,18 @@ const DashboardPage = () => {
                 style={{
                   borderRadius: '16px',
                   border: 'none',
-                  boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
-                  background: '#ffffff',
+                  boxShadow: darkMode ? '0 4px 12px rgba(0,0,0,0.3)' : '0 4px 12px rgba(0,0,0,0.1)',
+                  background: darkMode ? '#252836' : '#ffffff',
                   height: '100%',
                 }}
                 bodyStyle={{ padding: '32px' }}
               >
-                <Text style={{ color: '#8c8c8c', fontSize: '14px', display: 'block', marginBottom: '12px' }}>
+                <Text style={{ 
+                  color: darkMode ? 'rgba(255, 255, 255, 0.7)' : '#8c8c8c', 
+                  fontSize: '14px', 
+                  display: 'block', 
+                  marginBottom: '12px' 
+                }}>
                   Hello, {user?.full_name || user?.username || 'User'}
                 </Text>
                 <Title 
@@ -127,7 +138,10 @@ const DashboardPage = () => {
                   ${totalInteractions.toLocaleString()}
                 </Title>
                 <Space style={{ marginTop: '12px' }}>
-                  <Text style={{ color: '#8c8c8c', fontSize: '13px' }}>
+                  <Text style={{ 
+                    color: darkMode ? 'rgba(255, 255, 255, 0.7)' : '#8c8c8c', 
+                    fontSize: '13px' 
+                  }}>
                     0.00% (US$0.00) last 24 hours
                   </Text>
                   <span style={{ color: '#52c41a', fontSize: '12px' }}>↑</span>
@@ -225,51 +239,63 @@ const DashboardPage = () => {
                 style={{
                   borderRadius: '16px',
                   border: 'none',
-                  boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
-                  background: '#ffffff',
+                  boxShadow: darkMode ? '0 4px 12px rgba(0,0,0,0.3)' : '0 4px 12px rgba(0,0,0,0.1)',
+                  background: darkMode ? '#252836' : '#ffffff',
                 }}
                 bodyStyle={{ padding: '24px' }}
               >
                 <div style={{ marginBottom: '16px' }}>
-                  <Text style={{ fontSize: '16px', fontWeight: 600, color: '#262626' }}>
+                  <Text style={{ fontSize: '16px', fontWeight: 600, color: 'var(--text-primary)' }}>
                     Today's Stats
                   </Text>
                 </div>
                 <div style={{ display: 'flex', gap: '8px', alignItems: 'center', flexWrap: 'wrap' }}>
                   {weekDays.map((day, idx) => (
-                    <div
-                      key={idx}
-                      style={{
-                        padding: '8px 16px',
-                        borderRadius: day.isToday ? '20px' : '8px',
-                        background: day.isToday ? '#ff4d4f' : '#f5f5f5',
-                        color: day.isToday ? '#fff' : '#595959',
-                        fontSize: '13px',
-                        fontWeight: day.isToday ? 600 : 400,
-                        cursor: 'pointer',
-                        transition: 'all 0.2s',
-                      }}
-                      onMouseEnter={(e) => {
-                        if (!day.isToday) {
-                          e.currentTarget.style.background = '#e8e8e8'
-                        }
-                      }}
-                      onMouseLeave={(e) => {
-                        if (!day.isToday) {
-                          e.currentTarget.style.background = '#f5f5f5'
-                        }
-                      }}
-                    >
-                      {day.label}
-                    </div>
+                      <div
+                        key={idx}
+                        style={{
+                          padding: '8px 16px',
+                          borderRadius: day.isToday ? '20px' : '8px',
+                          background: day.isToday 
+                            ? '#ff4d4f' 
+                            : darkMode 
+                              ? 'rgba(255, 255, 255, 0.1)' 
+                              : '#f5f5f5',
+                          color: day.isToday 
+                            ? '#fff' 
+                            : darkMode 
+                              ? 'rgba(255, 255, 255, 0.85)' 
+                              : '#595959',
+                          fontSize: '13px',
+                          fontWeight: day.isToday ? 600 : 400,
+                          cursor: 'pointer',
+                          transition: 'all 0.2s',
+                        }}
+                        onMouseEnter={(e) => {
+                          if (!day.isToday) {
+                            e.currentTarget.style.background = darkMode 
+                              ? 'rgba(255, 255, 255, 0.15)' 
+                              : '#e8e8e8'
+                          }
+                        }}
+                        onMouseLeave={(e) => {
+                          if (!day.isToday) {
+                            e.currentTarget.style.background = darkMode 
+                              ? 'rgba(255, 255, 255, 0.1)' 
+                              : '#f5f5f5'
+                          }
+                        }}
+                      >
+                        {day.label}
+                      </div>
                   ))}
                   <div style={{
                     marginLeft: 'auto',
                     padding: '8px 12px',
-                    background: '#f5f5f5',
+                    background: darkMode ? 'rgba(255, 255, 255, 0.1)' : '#f5f5f5',
                     borderRadius: '8px',
                     fontSize: '12px',
-                    color: '#8c8c8c',
+                    color: darkMode ? 'rgba(255, 255, 255, 0.7)' : '#8c8c8c',
                   }}>
                     {currentMonth}
                   </div>
