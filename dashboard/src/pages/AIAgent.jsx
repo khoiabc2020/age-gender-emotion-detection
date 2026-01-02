@@ -421,9 +421,37 @@ const AIAgentPage = () => {
                           background: '#1890ff',
                         }}
                       />
-                      <div className="bg-white border p-3 rounded-lg" style={{ borderColor: 'var(--border-color)' }}>
+                      <div 
+                        className="border p-3 rounded-lg" 
+                        style={{ 
+                          borderColor: darkMode ? 'rgba(255, 255, 255, 0.08)' : 'var(--border-color)',
+                          background: darkMode ? '#2d3142' : '#ffffff'
+                        }}
+                      >
                         <Spin size="small" />
-                        <span className="ml-2" style={{ color: 'var(--text-primary)', fontSize: '14px' }}>AI đang suy nghĩ...</span>
+                        <span className="ml-2" style={{ 
+                          color: darkMode ? '#ffffff' : '#1a1a1a', 
+                          fontSize: '14px' 
+                        }}>
+                          AI đang suy nghĩ...
+                        </span>
+                      </div>
+                    </div>
+                  )}
+                  {isListening && (
+                    <div className="flex justify-end gap-3 mb-2">
+                      <div 
+                        className="border p-3 rounded-lg" 
+                        style={{ 
+                          borderColor: '#ff4d4f',
+                          background: 'rgba(255, 77, 79, 0.1)',
+                          animation: 'pulse 1.5s ease-in-out infinite'
+                        }}
+                      >
+                        <AudioOutlined style={{ color: '#ff4d4f', marginRight: '8px' }} />
+                        <span style={{ color: '#ff4d4f', fontSize: '14px' }}>
+                          Đang nghe...
+                        </span>
                       </div>
                     </div>
                   )}
@@ -434,22 +462,42 @@ const AIAgentPage = () => {
 
             {/* Quick Questions */}
             <div className="mb-4">
-              <Text className="text-sm mb-2 block" style={{ color: 'var(--text-primary)', fontWeight: 500, fontSize: '14px' }}>Câu hỏi nhanh:</Text>
+              <Text 
+                className="text-sm mb-2 block" 
+                style={{ 
+                  color: darkMode ? '#ffffff' : '#1a1a1a', 
+                  fontWeight: 500, 
+                  fontSize: '14px' 
+                }}
+              >
+                Câu hỏi nhanh:
+              </Text>
               <Space wrap>
                 {quickQuestions.map((q, index) => (
                   <Button
                     key={index}
                     size="small"
                     type="dashed"
-                    onClick={() => setQuestion(q)}
+                    onClick={() => {
+                      setQuestion(q)
+                      setTimeout(() => handleChat(), 100)
+                    }}
                     className="rounded-lg quick-question-btn"
                     style={{
-                      borderColor: 'rgba(255, 255, 255, 0.2)',
-                      color: 'rgba(255, 255, 255, 0.9)',
-                      background: 'rgba(255, 255, 255, 0.05)',
+                      borderColor: darkMode ? 'rgba(255, 255, 255, 0.2)' : '#e8e8e8',
+                      color: darkMode ? '#ffffff' : '#262626',
+                      background: darkMode ? 'rgba(255, 255, 255, 0.05)' : '#fafafa',
                       fontSize: '13px',
                       height: '32px',
                       padding: '0 16px',
+                    }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.background = darkMode ? 'rgba(255, 255, 255, 0.1)' : '#f0f0f0'
+                      e.currentTarget.style.borderColor = darkMode ? 'rgba(255, 255, 255, 0.3)' : '#1890ff'
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.background = darkMode ? 'rgba(255, 255, 255, 0.05)' : '#fafafa'
+                      e.currentTarget.style.borderColor = darkMode ? 'rgba(255, 255, 255, 0.2)' : '#e8e8e8'
                     }}
                   >
                     {q}
@@ -463,7 +511,7 @@ const AIAgentPage = () => {
               <TextArea
                 value={question}
                 onChange={(e) => setQuestion(e.target.value)}
-                placeholder="Nhập câu hỏi của bạn..."
+                placeholder="Nhập câu hỏi của bạn hoặc nhấn nút mic để nói..."
                 rows={2}
                 onPressEnter={(e) => {
                   if (!e.shiftKey) {
@@ -472,12 +520,38 @@ const AIAgentPage = () => {
                   }
                 }}
                 className="rounded-l-lg"
+                style={{
+                  background: darkMode ? '#2d3142' : '#ffffff',
+                  color: darkMode ? '#ffffff' : '#1a1a1a',
+                  borderColor: darkMode ? 'rgba(255, 255, 255, 0.1)' : '#e8e8e8',
+                }}
+              />
+              <Button
+                type={isListening ? "danger" : "default"}
+                icon={isListening ? <StopOutlined /> : <AudioOutlined />}
+                onClick={handleVoiceInput}
+                title={isListening ? "Dừng ghi âm" : "Nhận diện giọng nói"}
+                style={{
+                  height: 'auto',
+                  borderColor: darkMode ? 'rgba(255, 255, 255, 0.1)' : '#e8e8e8',
+                  background: isListening 
+                    ? '#ff4d4f' 
+                    : darkMode 
+                      ? '#2d3142' 
+                      : '#ffffff',
+                  color: isListening 
+                    ? '#ffffff' 
+                    : darkMode 
+                      ? '#ffffff' 
+                      : '#262626',
+                }}
               />
               <Button
                 type="primary"
                 icon={<SendOutlined />}
                 onClick={handleChat}
                 loading={loading}
+                disabled={!question.trim()}
                 className="rounded-r-lg"
                 style={{
                   height: 'auto',
