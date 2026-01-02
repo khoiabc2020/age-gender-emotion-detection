@@ -24,15 +24,32 @@ const getStoredUser = () => {
   }
 }
 
+// Safe localStorage access
+const getInitialAuthState = () => {
+  try {
+    const token = localStorage.getItem('token')
+    return {
+      isAuthenticated: !!token,
+      token: token,
+      user: getStoredUser(),
+      loading: false,
+      error: null,
+    }
+  } catch (error) {
+    console.warn('Failed to read from localStorage:', error)
+    return {
+      isAuthenticated: false,
+      token: null,
+      user: null,
+      loading: false,
+      error: null,
+    }
+  }
+}
+
 const authSlice = createSlice({
   name: 'auth',
-  initialState: {
-    isAuthenticated: !!localStorage.getItem('token'),
-    token: localStorage.getItem('token'),
-    user: getStoredUser(),
-    loading: false,
-    error: null,
-  },
+  initialState: getInitialAuthState(),
   reducers: {
     login: (state, action) => {
       state.isAuthenticated = true
