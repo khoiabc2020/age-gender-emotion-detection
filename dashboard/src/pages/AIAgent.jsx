@@ -125,11 +125,25 @@ const AIAgentPage = () => {
       <div className="mb-6">
         <div className="flex items-center justify-between">
           <div>
-            <Title level={2} className="page-title mb-2" style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+            <Title 
+              level={2} 
+              className="page-title mb-2" 
+              style={{ 
+                display: 'flex', 
+                alignItems: 'center', 
+                gap: '12px',
+                color: 'var(--text-primary)'
+              }}
+            >
               <RobotOutlined style={{ fontSize: '28px', color: '#1890ff' }} />
               AI Agent - Trợ lý Phân tích
             </Title>
-            <p className="page-description">Chat với dữ liệu và nhận insights tự động từ AI</p>
+            <p 
+              className="page-description"
+              style={{ color: 'var(--text-secondary)' }}
+            >
+              Chat với dữ liệu và nhận insights tự động từ AI
+            </p>
           </div>
           {aiStatus && (
             <Tag

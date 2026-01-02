@@ -99,10 +99,19 @@ const DashboardPage = () => {
     <div className="animate-fade-in">
       {/* Header */}
       <div className="page-header">
-        <Title level={2} className="page-title">
+        <Title 
+          level={2} 
+          className="page-title"
+          style={{ color: 'var(--text-primary)' }}
+        >
           Tổng quan Hệ thống
         </Title>
-        <p className="page-description">Theo dõi và phân tích dữ liệu khách hàng realtime</p>
+        <p 
+          className="page-description"
+          style={{ color: 'var(--text-secondary)' }}
+        >
+          Theo dõi và phân tích dữ liệu khách hàng realtime
+        </p>
       </div>
 
       {/* Key Metrics Cards */}
