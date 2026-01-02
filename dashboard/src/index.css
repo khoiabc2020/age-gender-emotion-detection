@@ -551,8 +551,9 @@ body:not(.dark) .page-description {
 }
 
 .dark .page-description {
-  color: rgba(255, 255, 255, 0.9) !important;
+  color: #ffffff !important;
   font-size: 15px !important;
+  opacity: 0.9 !important;
 }
 
 body:not(.dark) .page-title {
@@ -628,12 +629,27 @@ body:not(.dark) .page-description {
 }
 
 .dark .ant-typography-secondary {
-  color: rgba(255, 255, 255, 0.9) !important;
+  color: #ffffff !important;
+  opacity: 0.9 !important;
 }
 
 .dark .ant-card-head-title {
   color: #ffffff !important;
   font-weight: 600 !important;
+}
+
+.dark h1, .dark h2, .dark h3, .dark h4, .dark h5, .dark h6 {
+  color: #ffffff !important;
+}
+
+.dark p, .dark span, .dark div {
+  color: #ffffff !important;
+}
+
+.dark .ant-card-body p,
+.dark .ant-card-body span,
+.dark .ant-card-body div {
+  color: #ffffff !important;
 }
 
 .dark p,

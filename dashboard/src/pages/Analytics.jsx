@@ -86,9 +86,10 @@ const AnalyticsPage = () => {
             Phân tích Chi tiết
           </Title>
           <p className="page-description" style={{ 
-            color: darkMode ? 'rgba(255, 255, 255, 0.85)' : '#434343',
+            color: darkMode ? '#ffffff' : '#434343',
             fontSize: '15px',
             marginTop: '8px',
+            opacity: darkMode ? 0.95 : 1,
           }}>
             Phân tích sâu về hành vi và hiệu suất quảng cáo
           </p>

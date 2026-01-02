@@ -169,9 +169,10 @@ const AdsManagementPage = () => {
             Quản lý Quảng cáo
           </Title>
           <p className="page-description" style={{ 
-            color: darkMode ? 'rgba(255, 255, 255, 0.85)' : '#434343',
+            color: darkMode ? '#ffffff' : '#434343',
             fontSize: '15px',
             marginTop: '8px',
+            opacity: darkMode ? 0.95 : 1,
           }}>
             Quản lý và cấu hình các quảng cáo hiển thị
           </p>
