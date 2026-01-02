@@ -3,15 +3,12 @@ import { Layout, Menu, Avatar, Dropdown, Badge, Switch, Tooltip, Typography } fr
 import {
   DashboardOutlined,
   BarChartOutlined,
-  VideoCameraOutlined,
+  FileTextOutlined,
   SettingOutlined,
   LogoutOutlined,
-  BellOutlined,
-  MenuFoldOutlined,
-  MenuUnfoldOutlined,
-  MoonOutlined,
-  SunOutlined,
-  RobotOutlined,
+  MessageOutlined,
+  SearchOutlined,
+  FilterOutlined,
 } from '@ant-design/icons'
 import { useNavigate, useLocation } from 'react-router-dom'
 import { useAppDispatch, useAppSelector } from '../../store/hooks'
@@ -23,41 +20,45 @@ const { Title, Text } = Typography
 
 const AppLayout = ({ children }) => {
   const [collapsed, setCollapsed] = useState(false)
+  const [currentTime, setCurrentTime] = useState(new Date())
   const navigate = useNavigate()
   const location = useLocation()
   const dispatch = useAppDispatch()
   const user = useAppSelector((state) => state.auth.user)
   const { darkMode, toggleDarkMode } = useTheme()
 
+  // Real-time clock
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentTime(new Date())
+    }, 1000)
+    return () => clearInterval(timer)
+  }, [])
+
   const menuItems = [
     {
       key: '/',
-      icon: <DashboardOutlined />,
-      label: 'Home',
-    },
-    {
-      key: '/',
-      icon: <DashboardOutlined />,
+      icon: <DashboardOutlined style={{ fontSize: '18px' }} />,
       label: 'Dashboard',
     },
     {
       key: '/ads',
-      icon: <VideoCameraOutlined />,
+      icon: <FileTextOutlined style={{ fontSize: '18px' }} />,
       label: 'Bills',
     },
     {
       key: '/analytics',
-      icon: <BarChartOutlined />,
+      icon: <BarChartOutlined style={{ fontSize: '18px' }} />,
       label: 'Analytics',
     },
     {
       key: '/ai-agent',
-      icon: <RobotOutlined />,
+      icon: <MessageOutlined style={{ fontSize: '18px' }} />,
       label: 'Messages',
     },
     {
       key: '/settings',
-      icon: <SettingOutlined />,
+      icon: <SettingOutlined style={{ fontSize: '18px' }} />,
       label: 'Settings',
     },
   ]
@@ -214,14 +215,15 @@ const AppLayout = ({ children }) => {
                   e.target.style.boxShadow = 'none'
                 }}
               />
-              <span style={{
+              <SearchOutlined style={{
                 position: 'absolute',
                 right: '12px',
                 top: '50%',
                 transform: 'translateY(-50%)',
                 color: '#8c8c8c',
                 cursor: 'pointer',
-              }}>🔍</span>
+                fontSize: '16px',
+              }} />
             </div>
 
             {/* Filter & Favs */}
@@ -239,7 +241,7 @@ const AppLayout = ({ children }) => {
                 }}
                 onMouseEnter={(e) => e.currentTarget.style.background = '#f5f5f5'}
                 onMouseLeave={(e) => e.currentTarget.style.background = 'transparent'}>
-                  <span style={{ fontSize: '18px' }}>⚙️</span>
+                  <FilterOutlined style={{ fontSize: '18px', color: '#595959' }} />
                 </div>
               </Tooltip>
               <div className="flex items-center gap-2">
@@ -250,6 +252,41 @@ const AppLayout = ({ children }) => {
           </div>
 
           <div className="flex items-center gap-4">
+            {/* Real-time Clock */}
+            <div style={{
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'flex-end',
+              marginRight: '16px',
+            }}>
+              <Text style={{ 
+                fontSize: '14px', 
+                color: '#8c8c8c',
+                fontWeight: 500,
+                lineHeight: '1.2',
+              }}>
+                {currentTime.toLocaleDateString('en-US', { 
+                  weekday: 'short', 
+                  month: 'short', 
+                  day: 'numeric',
+                  year: 'numeric'
+                })}
+              </Text>
+              <Text style={{ 
+                fontSize: '18px', 
+                color: '#262626',
+                fontWeight: 600,
+                lineHeight: '1.2',
+                marginTop: '4px',
+              }}>
+                {currentTime.toLocaleTimeString('en-US', { 
+                  hour: '2-digit', 
+                  minute: '2-digit',
+                  second: '2-digit',
+                  hour12: false
+                })}
+              </Text>
+            </div>
             <Title level={4} style={{ margin: 0, color: '#262626', fontWeight: 600 }}>
               My Profile
             </Title>
