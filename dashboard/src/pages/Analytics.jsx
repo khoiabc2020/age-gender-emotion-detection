@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Card, Select, Row, Col, Table, Typography } from 'antd'
 import { useAppDispatch, useAppSelector } from '../store/hooks'
+import { useTheme } from '../components/layout/ThemeProvider'
 import {
   fetchStats,
   fetchAgeByHour,
@@ -17,6 +18,7 @@ const { Title } = Typography
 const AnalyticsPage = () => {
   const [timeRange, setTimeRange] = useState(24)
   const dispatch = useAppDispatch()
+  const { darkMode } = useTheme()
   const {
     stats,
     ageByHour,
@@ -37,7 +39,10 @@ const AnalyticsPage = () => {
       title: 'Mã Quảng cáo',
       dataIndex: 'ad_id',
       key: 'ad_id',
-      render: (text) => <span className="font-semibold text-gray-700">{text}</span>,
+      render: (text) => <span style={{ 
+        fontWeight: 600, 
+        color: darkMode ? '#ffffff' : '#262626' 
+      }}>{text}</span>,
     },
     {
       title: 'Số lần hiển thị',
@@ -55,7 +60,9 @@ const AnalyticsPage = () => {
       dataIndex: 'avg_age',
       key: 'avg_age',
       render: (value) => (
-        <span className="text-gray-600">
+        <span style={{ 
+          color: darkMode ? 'rgba(255, 255, 255, 0.7)' : '#595959' 
+        }}>
           {value ? `${value.toFixed(1)} tuổi` : 'N/A'}
         </span>
       ),
@@ -103,7 +110,11 @@ const AnalyticsPage = () => {
             }
             loading={loading}
             className="card-hover border-0 shadow-lg"
-            style={{ borderRadius: '20px', background: 'rgba(255, 255, 255, 0.95)' }}
+            style={{ 
+              borderRadius: '20px', 
+              background: darkMode ? '#252836' : 'rgba(255, 255, 255, 0.95)',
+              border: darkMode ? '1px solid rgba(255, 255, 255, 0.08)' : 'none'
+            }}
           >
             <AgeChart data={ageByHour} />
           </Card>
@@ -117,7 +128,11 @@ const AnalyticsPage = () => {
             }
             loading={loading}
             className="card-hover border-0 shadow-lg"
-            style={{ borderRadius: '20px', background: 'rgba(255, 255, 255, 0.95)' }}
+            style={{ 
+              borderRadius: '20px', 
+              background: darkMode ? '#252836' : 'rgba(255, 255, 255, 0.95)',
+              border: darkMode ? '1px solid rgba(255, 255, 255, 0.08)' : 'none'
+            }}
           >
             <EmotionPieChart data={emotionDistribution} />
           </Card>
@@ -131,7 +146,11 @@ const AnalyticsPage = () => {
             }
             loading={loading}
             className="card-hover border-0 shadow-lg"
-            style={{ borderRadius: '20px', background: 'rgba(255, 255, 255, 0.95)' }}
+            style={{ 
+              borderRadius: '20px', 
+              background: darkMode ? '#252836' : 'rgba(255, 255, 255, 0.95)',
+              border: darkMode ? '1px solid rgba(255, 255, 255, 0.08)' : 'none'
+            }}
           >
             <AdPerformanceChart data={adPerformance} />
           </Card>
@@ -145,7 +164,11 @@ const AnalyticsPage = () => {
             }
             loading={loading}
             className="card-hover border-0 shadow-lg"
-            style={{ borderRadius: '20px', background: 'rgba(255, 255, 255, 0.95)' }}
+            style={{ 
+              borderRadius: '20px', 
+              background: darkMode ? '#252836' : 'rgba(255, 255, 255, 0.95)',
+              border: darkMode ? '1px solid rgba(255, 255, 255, 0.08)' : 'none'
+            }}
           >
             <Table
               dataSource={adPerformance}
