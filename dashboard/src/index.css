@@ -772,6 +772,38 @@ body:not(.dark) .page-description {
   color: #ffffff !important;
 }
 
+/* Menu text in sidebar - Light theme (sidebar is white) */
+.ant-menu-light .ant-menu-item {
+  color: #262626 !important;
+}
+
+.ant-menu-light .ant-menu-item .ant-menu-title-content {
+  color: #262626 !important;
+  font-weight: 500 !important;
+  font-size: 14px !important;
+  display: inline-block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+.ant-menu-light .ant-menu-item .anticon {
+  color: #595959 !important;
+  font-size: 18px !important;
+}
+
+.ant-menu-light .ant-menu-item-selected .ant-menu-title-content {
+  color: #ffffff !important;
+  font-weight: 600 !important;
+  font-size: 14px !important;
+  display: inline-block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+.ant-menu-light .ant-menu-item-selected .anticon {
+  color: #ffffff !important;
+}
+
 /* Menu text in sidebar */
 .dark .ant-menu-dark .ant-menu-item {
   color: rgba(255, 255, 255, 0.9) !important;
