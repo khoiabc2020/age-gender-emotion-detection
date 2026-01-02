@@ -339,33 +339,30 @@ body:not(.dark) .page-description {
   background: var(--bg-primary) !important;
 }
 
-/* Dark Mode Support - Modern Gemini-style design */
+/* Dark Mode Support - Modern Quizlet-style design */
 .dark {
-  background: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 50%, #16213e 100%);
-  background-attachment: fixed;
-  color: #f5f5f5;
+  background: #1a1d29;
+  color: #ffffff;
   min-height: 100vh;
 }
 
 .dark .ant-card {
-  background: rgba(30, 30, 46, 0.8) !important;
-  backdrop-filter: blur(20px) saturate(180%);
-  -webkit-backdrop-filter: blur(20px) saturate(180%);
-  border: 1px solid rgba(255, 255, 255, 0.1) !important;
-  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37) !important;
-  transition: all 0.3s ease !important;
+  background: #252836 !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3) !important;
+  transition: all 0.2s ease !important;
 }
 
 .dark .ant-card:hover {
-  background: rgba(35, 35, 55, 0.9) !important;
-  border-color: rgba(255, 255, 255, 0.15) !important;
-  box-shadow: 0 12px 40px 0 rgba(0, 0, 0, 0.5) !important;
-  transform: translateY(-2px) !important;
+  background: #2d3142 !important;
+  border-color: rgba(255, 255, 255, 0.12) !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4) !important;
+  transform: translateY(-1px) !important;
 }
 
 .dark .ant-card-head {
-  background: transparent !important;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
+  background: #252836 !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
 }
 
 .dark .ant-card-head-title {
@@ -375,23 +372,21 @@ body:not(.dark) .page-description {
 }
 
 .dark .ant-card-body {
-  color: #f5f5f5 !important;
+  color: #ffffff !important;
 }
 
 .dark .stats-card {
-  background: rgba(30, 30, 46, 0.8);
-  backdrop-filter: blur(20px) saturate(180%);
-  -webkit-backdrop-filter: blur(20px) saturate(180%);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
-  transition: all 0.3s ease;
+  background: #252836;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  transition: all 0.2s ease;
 }
 
 .dark .stats-card:hover {
-  background: rgba(35, 35, 55, 0.9);
-  border-color: rgba(24, 144, 255, 0.5);
-  box-shadow: 0 12px 40px 0 rgba(0, 0, 0, 0.5);
-  transform: translateY(-2px);
+  background: #2d3142;
+  border-color: rgba(24, 144, 255, 0.3);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+  transform: translateY(-1px);
 }
 
 .dark .stats-card-icon {
@@ -401,59 +396,53 @@ body:not(.dark) .page-description {
 .dark .page-title {
   color: #ffffff !important;
   font-weight: 600 !important;
-  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
 }
 
 .dark .page-description {
-  color: rgba(255, 255, 255, 0.85) !important;
+  color: rgba(255, 255, 255, 0.75) !important;
   font-size: 14px !important;
 }
 
 .dark .ant-statistic-title {
-  color: rgba(255, 255, 255, 0.9) !important;
+  color: rgba(255, 255, 255, 0.8) !important;
   font-weight: 500 !important;
 }
 
 .dark .ant-statistic-content {
   color: #ffffff !important;
   font-weight: 600 !important;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 .dark .ant-table {
-  background: rgba(30, 30, 46, 0.6) !important;
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  color: #e8e8e8 !important;
-  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  background: #252836 !important;
+  color: #ffffff !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
 }
 
 .dark .ant-table-thead > tr > th {
-  background: rgba(40, 40, 60, 0.8) !important;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
+  background: #2d3142 !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
   color: #ffffff !important;
   font-weight: 600 !important;
 }
 
 .dark .ant-table-tbody > tr > td {
   border-bottom: 1px solid rgba(255, 255, 255, 0.05) !important;
-  color: #f5f5f5 !important;
+  color: #ffffff !important;
   font-size: 14px !important;
 }
 
 .dark .ant-table-tbody > tr:hover > td {
-  background: rgba(50, 50, 70, 0.6) !important;
+  background: #2d3142 !important;
 }
 
 .dark .ant-input,
 .dark .ant-input-number,
 .dark .ant-select-selector {
-  background: rgba(40, 40, 60, 0.8) !important;
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
+  background: #2d3142 !important;
   border: 1px solid rgba(255, 255, 255, 0.1) !important;
   color: #ffffff !important;
-  transition: all 0.3s ease !important;
+  transition: all 0.2s ease !important;
 }
 
 .dark .ant-input:focus,
@@ -461,8 +450,8 @@ body:not(.dark) .page-description {
 .dark .ant-input-number:focus,
 .dark .ant-input-number-focused,
 .dark .ant-select-focused .ant-select-selector {
-  background: rgba(50, 50, 70, 0.9) !important;
-  border-color: rgba(24, 144, 255, 0.5) !important;
+  background: #35394a !important;
+  border-color: #1890ff !important;
   box-shadow: 0 0 0 2px rgba(24, 144, 255, 0.2) !important;
 }
 
@@ -472,34 +461,34 @@ body:not(.dark) .page-description {
 }
 
 .dark .ant-typography {
-  color: #f5f5f5 !important;
+  color: #ffffff !important;
 }
 
 .dark .ant-typography-secondary {
-  color: rgba(255, 255, 255, 0.85) !important;
+  color: rgba(255, 255, 255, 0.75) !important;
 }
 
 .dark p,
 .dark span,
 .dark div {
-  color: #f5f5f5 !important;
+  color: #ffffff !important;
 }
 
 .dark .ant-typography p {
-  color: #f5f5f5 !important;
+  color: #ffffff !important;
   margin-bottom: 8px !important;
 }
 
 .dark .ant-btn-primary {
-  background: linear-gradient(135deg, #1890ff 0%, #096dd9 100%) !important;
+  background: #1890ff !important;
   border: none !important;
-  box-shadow: 0 4px 12px rgba(24, 144, 255, 0.3) !important;
-  transition: all 0.3s ease !important;
+  box-shadow: 0 2px 8px rgba(24, 144, 255, 0.3) !important;
+  transition: all 0.2s ease !important;
 }
 
 .dark .ant-btn-primary:hover {
-  background: linear-gradient(135deg, #40a9ff 0%, #1890ff 100%) !important;
-  box-shadow: 0 6px 16px rgba(24, 144, 255, 0.4) !important;
+  background: #40a9ff !important;
+  box-shadow: 0 4px 12px rgba(24, 144, 255, 0.4) !important;
   transform: translateY(-1px);
 }
 
@@ -508,19 +497,19 @@ body:not(.dark) .page-description {
 }
 
 .dark .ant-btn-default {
-  background: rgba(40, 40, 60, 0.8) !important;
+  background: #2d3142 !important;
   border: 1px solid rgba(255, 255, 255, 0.1) !important;
   color: #ffffff !important;
 }
 
 .dark .ant-btn-default:hover {
-  background: rgba(50, 50, 70, 0.9) !important;
-  border-color: rgba(255, 255, 255, 0.2) !important;
+  background: #35394a !important;
+  border-color: rgba(255, 255, 255, 0.15) !important;
   color: #ffffff !important;
 }
 
 .dark .ant-tag {
-  background: rgba(40, 40, 60, 0.8) !important;
+  background: #2d3142 !important;
   border: 1px solid rgba(255, 255, 255, 0.1) !important;
   color: #ffffff !important;
 }
@@ -535,10 +524,8 @@ body:not(.dark) .page-description {
 }
 
 .dark .ant-modal-header {
-  background: rgba(30, 30, 46, 0.95) !important;
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
+  background: #252836 !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
 }
 
 .dark .ant-modal-title {
@@ -546,25 +533,21 @@ body:not(.dark) .page-description {
 }
 
 .dark .ant-modal-body {
-  background: rgba(30, 30, 46, 0.95) !important;
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  color: #e8e8e8 !important;
+  background: #252836 !important;
+  color: #ffffff !important;
 }
 
 .dark .ant-select-dropdown {
-  background: rgba(30, 30, 46, 0.95) !important;
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  background: #252836 !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
 }
 
 .dark .ant-select-item {
-  color: #e8e8e8 !important;
+  color: #ffffff !important;
 }
 
 .dark .ant-select-item:hover {
-  background: rgba(50, 50, 70, 0.8) !important;
+  background: #2d3142 !important;
 }
 
 .dark .ant-select-item-option-selected {
@@ -574,23 +557,19 @@ body:not(.dark) .page-description {
 
 /* Chat container in dark mode */
 .dark .chat-container {
-  background: rgba(40, 40, 60, 0.6) !important;
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  background: #2d3142 !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
 }
 
 .dark .chat-container .bg-white {
-  background: rgba(50, 50, 70, 0.8) !important;
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
+  background: #35394a !important;
   border-color: rgba(255, 255, 255, 0.1) !important;
   color: #ffffff !important;
 }
 
 /* Scrollbar in dark mode */
 .dark ::-webkit-scrollbar-track {
-  background: rgba(0, 0, 0, 0.2);
+  background: #1a1d29;
 }
 
 .dark ::-webkit-scrollbar-thumb {
@@ -610,12 +589,12 @@ body:not(.dark) .page-description {
 /* List improvements in dark mode */
 .dark .ant-list-item {
   border-bottom: 1px solid rgba(255, 255, 255, 0.05) !important;
-  color: #f5f5f5 !important;
+  color: #ffffff !important;
   font-size: 14px !important;
 }
 
 .dark .ant-list-item .ant-typography {
-  color: #f5f5f5 !important;
+  color: #ffffff !important;
 }
 
 .dark .ant-list-item:hover {
@@ -717,21 +696,21 @@ body:not(.dark) .page-description {
 
 /* Quick Question Buttons in Dark Mode */
 .dark .quick-question-btn {
-  border-color: rgba(255, 255, 255, 0.2) !important;
-  color: rgba(255, 255, 255, 0.9) !important;
-  background: rgba(255, 255, 255, 0.05) !important;
+  border-color: rgba(255, 255, 255, 0.15) !important;
+  color: #ffffff !important;
+  background: #2d3142 !important;
   transition: all 0.2s ease !important;
 }
 
 .dark .quick-question-btn:hover {
-  border-color: rgba(24, 144, 255, 0.5) !important;
+  border-color: #1890ff !important;
   color: #ffffff !important;
-  background: rgba(24, 144, 255, 0.15) !important;
+  background: #35394a !important;
   transform: translateY(-1px);
 }
 
 .dark .quick-question-btn:active {
-  background: rgba(24, 144, 255, 0.25) !important;
+  background: #3d4254 !important;
   transform: translateY(0);
 }
 

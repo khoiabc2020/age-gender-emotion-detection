@@ -255,7 +255,7 @@ const AIAgentPage = () => {
                         <Paragraph 
                           className="mb-1" 
                           style={{ 
-                            color: msg.type === 'user' ? 'white' : '#f5f5f5',
+                            color: msg.type === 'user' ? 'white' : 'var(--text-primary)',
                             fontSize: '14px',
                             lineHeight: '1.6'
                           }}
@@ -265,7 +265,7 @@ const AIAgentPage = () => {
                         <Text
                           className="text-xs"
                           style={{ 
-                            color: msg.type === 'user' ? 'rgba(255,255,255,0.9)' : 'rgba(255,255,255,0.7)',
+                            color: msg.type === 'user' ? 'rgba(255,255,255,0.9)' : 'var(--text-secondary)',
                             fontSize: '12px'
                           }}
                         >
@@ -293,7 +293,7 @@ const AIAgentPage = () => {
                       />
                       <div className="bg-white border p-3 rounded-lg" style={{ borderColor: 'var(--border-color)' }}>
                         <Spin size="small" />
-                        <span className="ml-2" style={{ color: '#f5f5f5', fontSize: '14px' }}>AI đang suy nghĩ...</span>
+                        <span className="ml-2" style={{ color: 'var(--text-primary)', fontSize: '14px' }}>AI đang suy nghĩ...</span>
                       </div>
                     </div>
                   )}
@@ -304,7 +304,7 @@ const AIAgentPage = () => {
 
             {/* Quick Questions */}
             <div className="mb-4">
-              <Text className="text-sm mb-2 block" style={{ color: 'rgba(255,255,255,0.9)', fontWeight: 500, fontSize: '14px' }}>Câu hỏi nhanh:</Text>
+              <Text className="text-sm mb-2 block" style={{ color: 'var(--text-primary)', fontWeight: 500, fontSize: '14px' }}>Câu hỏi nhanh:</Text>
               <Space wrap>
                 {quickQuestions.map((q, index) => (
                   <Button

@@ -125,15 +125,13 @@ const AppLayout = ({ children }) => {
           className="bg-white px-6 flex items-center justify-between"
           style={{
             background: darkMode 
-              ? 'rgba(30, 30, 46, 0.8)' 
+              ? '#252836' 
               : '#ffffff',
-            backdropFilter: darkMode ? 'blur(20px) saturate(180%)' : 'none',
-            WebkitBackdropFilter: darkMode ? 'blur(20px) saturate(180%)' : 'none',
             borderBottom: darkMode 
-              ? '1px solid rgba(255, 255, 255, 0.1)' 
+              ? '1px solid rgba(255, 255, 255, 0.08)' 
               : '1px solid #e8e8e8',
             boxShadow: darkMode 
-              ? '0 1px 4px rgba(0, 0, 0, 0.2)' 
+              ? '0 1px 4px rgba(0, 0, 0, 0.3)' 
               : '0 1px 4px rgba(0, 0, 0, 0.04)',
           }}
         >
@@ -206,7 +204,7 @@ const AppLayout = ({ children }) => {
           className="p-6 min-h-[calc(100vh-64px)]"
           style={{
             background: darkMode 
-              ? 'transparent' 
+              ? '#1a1d29' 
               : '#fafafa',
           }}
         >
