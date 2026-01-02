@@ -87,6 +87,8 @@ async def get_current_user(
 
 # Include routers
 app.include_router(auth.router, prefix="/api/v1/auth", tags=["authentication"])
+# Add alias routes for convenience (backward compatibility)
+app.include_router(auth.router, prefix="/auth", tags=["authentication"])
 app.include_router(analytics.router, prefix="/api/v1/analytics", tags=["analytics"])
 app.include_router(
     dashboard.router, 

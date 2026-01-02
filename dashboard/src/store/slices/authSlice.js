@@ -10,7 +10,7 @@ export const login = createAsyncThunk(
       params.append('username', username)
       params.append('password', password)
       
-      const response = await api.post('/auth/login', params.toString(), {
+      const response = await api.post('/api/v1/auth/login', params.toString(), {
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded',
         },

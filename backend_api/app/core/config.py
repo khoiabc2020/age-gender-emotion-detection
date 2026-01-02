@@ -13,8 +13,9 @@ class Settings(BaseSettings):
     PORT: int = 8000
     DEBUG: bool = False
     
-    # Database
+    # Database - Use SQLite for development if PostgreSQL not available
     DATABASE_URL: str = "postgresql://postgres:postgres@localhost:5432/retail_analytics"
+    USE_SQLITE_FALLBACK: bool = True  # Fallback to SQLite if PostgreSQL unavailable
     
     # Security
     # [WARNING] IMPORTANT: Set SECRET_KEY in .env file for production!
