@@ -153,12 +153,6 @@ const SettingsPage = () => {
               <Option value="en">English</Option>
             </Select>
           </Form.Item>
-          <Form.Item label="Ngôn ngữ" name="language">
-            <Select className="rounded-lg">
-              <Option value="vi">Tiếng Việt</Option>
-              <Option value="en">English</Option>
-            </Select>
-          </Form.Item>
         </Card>
 
         {/* AI Agent Settings */}

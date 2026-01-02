@@ -2,6 +2,7 @@ import React, { useEffect } from 'react'
 import { Card, Table, Button, Space, Tag, Modal, Form, Input, InputNumber, Select, message, Typography, Row, Col } from 'antd'
 import { PlusOutlined, EditOutlined, DeleteOutlined } from '@ant-design/icons'
 import api from '../services/api'
+import { useTheme } from '../components/layout/ThemeProvider'
 
 const { Option } = Select
 const { Title } = Typography
@@ -12,6 +13,7 @@ const AdsManagementPage = () => {
   const [modalVisible, setModalVisible] = React.useState(false)
   const [editingAd, setEditingAd] = React.useState(null)
   const [form] = Form.useForm()
+  const { darkMode } = useTheme()
 
   useEffect(() => {
     fetchAds()
@@ -81,13 +83,18 @@ const AdsManagementPage = () => {
       title: 'Mã Quảng cáo',
       dataIndex: 'ad_id',
       key: 'ad_id',
-      render: (text) => <span className="font-semibold text-gray-700">{text}</span>,
+      render: (text) => <span style={{ 
+        fontWeight: 600, 
+        color: darkMode ? '#ffffff' : '#262626' 
+      }}>{text}</span>,
     },
     {
       title: 'Tên',
       dataIndex: 'name',
       key: 'name',
-      render: (text) => <span className="text-gray-800">{text}</span>,
+      render: (text) => <span style={{ 
+        color: darkMode ? 'rgba(255, 255, 255, 0.85)' : '#262626' 
+      }}>{text}</span>,
     },
     {
       title: 'Độ tuổi',
@@ -181,7 +188,11 @@ const AdsManagementPage = () => {
       {/* Table */}
       <Card
         className="card-hover border-0 shadow-lg"
-        style={{ borderRadius: '20px', background: 'rgba(255, 255, 255, 0.95)' }}
+        style={{ 
+          borderRadius: '20px', 
+          background: darkMode ? '#252836' : 'rgba(255, 255, 255, 0.95)',
+          border: darkMode ? '1px solid rgba(255, 255, 255, 0.08)' : 'none'
+        }}
       >
         <Table
           dataSource={ads}
