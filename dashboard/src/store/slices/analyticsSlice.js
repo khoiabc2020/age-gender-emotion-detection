@@ -85,7 +85,15 @@ const analyticsSlice = createSlice({
       })
       .addCase(fetchStats.rejected, (state, action) => {
         state.loading = false
-        state.error = action.error.message
+        state.error = action.payload?.message || action.error?.message || 'Failed to fetch stats'
+        if (!state.stats) {
+          state.stats = {
+            total_interactions: 0,
+            unique_customers: 0,
+            avg_age: 0,
+            top_ads: []
+          }
+        }
       })
       .addCase(fetchAgeByHour.fulfilled, (state, action) => {
         state.ageByHour = action.payload
