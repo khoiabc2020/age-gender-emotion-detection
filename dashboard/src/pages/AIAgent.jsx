@@ -238,12 +238,22 @@ const AIAgentPage = () => {
                           borderColor: 'var(--border-color)',
                         }}
                       >
-                        <Paragraph className="mb-1" style={{ color: msg.type === 'user' ? 'white' : 'var(--text-primary)' }}>
+                        <Paragraph 
+                          className="mb-1" 
+                          style={{ 
+                            color: msg.type === 'user' ? 'white' : '#f5f5f5',
+                            fontSize: '14px',
+                            lineHeight: '1.6'
+                          }}
+                        >
                           {msg.content}
                         </Paragraph>
                         <Text
-                          className="text-xs opacity-70"
-                          style={{ color: msg.type === 'user' ? 'rgba(255,255,255,0.8)' : 'var(--text-secondary)' }}
+                          className="text-xs"
+                          style={{ 
+                            color: msg.type === 'user' ? 'rgba(255,255,255,0.9)' : 'rgba(255,255,255,0.7)',
+                            fontSize: '12px'
+                          }}
                         >
                           {msg.timestamp}
                         </Text>
@@ -269,7 +279,7 @@ const AIAgentPage = () => {
                       />
                       <div className="bg-white border p-3 rounded-lg" style={{ borderColor: 'var(--border-color)' }}>
                         <Spin size="small" />
-                        <span className="ml-2" style={{ color: 'var(--text-secondary)' }}>AI đang suy nghĩ...</span>
+                        <span className="ml-2" style={{ color: '#f5f5f5', fontSize: '14px' }}>AI đang suy nghĩ...</span>
                       </div>
                     </div>
                   )}
@@ -280,7 +290,7 @@ const AIAgentPage = () => {
 
             {/* Quick Questions */}
             <div className="mb-4">
-              <Text className="text-sm mb-2 block" style={{ color: 'var(--text-secondary)' }}>Câu hỏi nhanh:</Text>
+              <Text className="text-sm mb-2 block" style={{ color: 'rgba(255,255,255,0.9)', fontWeight: 500, fontSize: '14px' }}>Câu hỏi nhanh:</Text>
               <Space wrap>
                 {quickQuestions.map((q, index) => (
                   <Button
