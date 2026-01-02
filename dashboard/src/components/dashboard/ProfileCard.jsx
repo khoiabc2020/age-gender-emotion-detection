@@ -1,0 +1,66 @@
+import React from 'react'
+import { Card, Avatar, Typography, Space, Button } from 'antd'
+import { UserOutlined, EditOutlined, CalendarOutlined } from '@ant-design/icons'
+import { useAppSelector } from '../../store/hooks'
+
+const { Text, Title } = Typography
+
+const ProfileCard = () => {
+  const user = useAppSelector((state) => state.auth.user)
+  
+  const joinDate = user?.created_at 
+    ? new Date(user.created_at).toLocaleDateString('vi-VN', { 
+        month: 'long', 
+        year: 'numeric' 
+      })
+    : 'Gần đây'
+
+  return (
+    <Card
+      className="profile-card"
+      style={{
+        borderRadius: '12px',
+        border: 'none',
+        boxShadow: '0 2px 8px rgba(0,0,0,0.08)',
+        background: 'var(--bg-primary)',
+      }}
+    >
+      <div style={{ textAlign: 'center', marginBottom: '20px' }}>
+        <Avatar
+          size={80}
+          style={{
+            background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+            marginBottom: '12px',
+          }}
+        >
+          {user?.username?.charAt(0).toUpperCase() || 'A'}
+        </Avatar>
+        <Title level={4} style={{ margin: '8px 0 4px', color: 'var(--text-primary)' }}>
+          {user?.full_name || user?.username || 'Admin'}
+        </Title>
+        <Space>
+          <CalendarOutlined style={{ color: 'var(--text-secondary)' }} />
+          <Text type="secondary" style={{ fontSize: '12px' }}>
+            Tham gia {joinDate}
+          </Text>
+        </Space>
+      </div>
+
+      <div style={{ marginTop: '20px' }}>
+        <Button
+          type="primary"
+          block
+          icon={<EditOutlined />}
+          style={{
+            borderRadius: '8px',
+            height: '40px',
+          }}
+        >
+          Chỉnh sửa hồ sơ
+        </Button>
+      </div>
+    </Card>
+  )
+}
+
+export default ProfileCard
