@@ -140,18 +140,30 @@ const RegisterPage = () => {
             />
           </Form.Item>
 
-          <Form.Item>
+          <Form.Item style={{ marginTop: '24px', marginBottom: 0 }}>
             <Button
               type="primary"
               htmlType="submit"
               loading={loading}
               block
+              size="large"
               style={{
-                height: '44px',
-                borderRadius: '4px',
+                height: '48px',
+                borderRadius: '8px',
                 fontSize: '16px',
-                fontWeight: 500,
-                marginTop: '8px'
+                fontWeight: 600,
+                background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+                border: 'none',
+                boxShadow: '0 4px 12px rgba(102, 126, 234, 0.4)',
+                transition: 'all 0.3s ease'
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.transform = 'translateY(-2px)'
+                e.currentTarget.style.boxShadow = '0 6px 20px rgba(102, 126, 234, 0.5)'
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.transform = 'translateY(0)'
+                e.currentTarget.style.boxShadow = '0 4px 12px rgba(102, 126, 234, 0.4)'
               }}
             >
               Đăng ký
