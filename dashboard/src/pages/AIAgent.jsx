@@ -9,6 +9,12 @@ import {
   CheckCircleOutlined,
   LoadingOutlined,
   ThunderboltOutlined,
+  CopyOutlined,
+  DeleteOutlined,
+  DownloadOutlined,
+  AudioOutlined,
+  StopOutlined,
+  ReloadOutlined,
 } from '@ant-design/icons'
 import api from '../services/api'
 
@@ -17,6 +23,7 @@ const { TextArea } = Input
 const { Option } = Select
 
 const AIAgentPage = () => {
+  const { darkMode } = useTheme()
   const [question, setQuestion] = useState('')
   const [chatHistory, setChatHistory] = useState([])
   const [loading, setLoading] = useState(false)
@@ -26,10 +33,37 @@ const AIAgentPage = () => {
   const [report, setReport] = useState(null)
   const [timeRange, setTimeRange] = useState(24)
   const [aiStatus, setAiStatus] = useState(null)
+  const [isListening, setIsListening] = useState(false)
+  const [recognition, setRecognition] = useState(null)
   const chatEndRef = useRef(null)
 
   useEffect(() => {
     checkAIStatus()
+    // Initialize speech recognition if available
+    if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
+      const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition
+      const recognitionInstance = new SpeechRecognition()
+      recognitionInstance.continuous = false
+      recognitionInstance.interimResults = false
+      recognitionInstance.lang = 'vi-VN'
+      
+      recognitionInstance.onresult = (event) => {
+        const transcript = event.results[0][0].transcript
+        setQuestion(transcript)
+        setIsListening(false)
+      }
+      
+      recognitionInstance.onerror = () => {
+        setIsListening(false)
+        message.error('Lỗi nhận diện giọng nói')
+      }
+      
+      recognitionInstance.onend = () => {
+        setIsListening(false)
+      }
+      
+      setRecognition(recognitionInstance)
+    }
   }, [])
 
   const checkAIStatus = async () => {
@@ -122,6 +156,51 @@ const AIAgentPage = () => {
     'Đề xuất cải thiện hệ thống?',
   ]
 
+  const handleVoiceInput = () => {
+    if (!recognition) {
+      message.warning('Trình duyệt không hỗ trợ nhận diện giọng nói')
+      return
+    }
+    
+    if (isListening) {
+      recognition.stop()
+      setIsListening(false)
+    } else {
+      setIsListening(true)
+      recognition.start()
+    }
+  }
+
+  const handleCopyResponse = (text) => {
+    navigator.clipboard.writeText(text)
+    message.success('Đã sao chép!')
+  }
+
+  const handleClearChat = () => {
+    setChatHistory([])
+    message.success('Đã xóa lịch sử chat')
+  }
+
+  const handleExportChat = () => {
+    if (chatHistory.length === 0) {
+      message.warning('Không có lịch sử chat để xuất')
+      return
+    }
+    
+    const chatText = chatHistory.map(msg => 
+      `[${msg.type === 'user' ? 'Bạn' : 'AI'}] ${msg.timestamp}\n${msg.content}\n`
+    ).join('\n---\n\n')
+    
+    const blob = new Blob([chatText], { type: 'text/plain' })
+    const url = URL.createObjectURL(blob)
+    const a = document.createElement('a')
+    a.href = url
+    a.download = `chat-history-${new Date().toISOString().split('T')[0]}.txt`
+    a.click()
+    URL.revokeObjectURL(url)
+    message.success('Đã xuất lịch sử chat')
+  }
+
   return (
     <div className="animate-fade-in">
       {/* Header */}
@@ -199,23 +278,45 @@ const AIAgentPage = () => {
           <Card
             className="card-hover h-full"
             title={
-              <span style={{ display: 'flex', alignItems: 'center', gap: '8px', fontWeight: 600 }}>
+              <span style={{ 
+                display: 'flex', 
+                alignItems: 'center', 
+                gap: '8px', 
+                fontWeight: 600,
+                color: darkMode ? '#ffffff' : '#1a1a1a'
+              }}>
                 <RobotOutlined /> Chat với AI
               </span>
             }
             extra={
-              <Select
-                value={timeRange}
-                onChange={setTimeRange}
-                style={{ width: 120 }}
-                size="small"
-              >
-                <Option value={1}>1 giờ</Option>
-                <Option value={6}>6 giờ</Option>
-                <Option value={24}>24 giờ</Option>
-                <Option value={48}>48 giờ</Option>
-                <Option value={72}>72 giờ</Option>
-              </Select>
+              <Space>
+                <Button
+                  type="text"
+                  icon={<DeleteOutlined />}
+                  onClick={handleClearChat}
+                  disabled={chatHistory.length === 0}
+                  title="Xóa lịch sử"
+                />
+                <Button
+                  type="text"
+                  icon={<DownloadOutlined />}
+                  onClick={handleExportChat}
+                  disabled={chatHistory.length === 0}
+                  title="Xuất lịch sử"
+                />
+                <Select
+                  value={timeRange}
+                  onChange={setTimeRange}
+                  style={{ width: 120 }}
+                  size="small"
+                >
+                  <Option value={1}>1 giờ</Option>
+                  <Option value={6}>6 giờ</Option>
+                  <Option value={24}>24 giờ</Option>
+                  <Option value={48}>48 giờ</Option>
+                  <Option value={72}>72 giờ</Option>
+                </Select>
+              </Space>
             }
           >
             {/* Chat History */}
@@ -255,32 +356,51 @@ const AIAgentPage = () => {
                         className={`max-w-[80%] p-3 rounded-lg ${
                           msg.type === 'user'
                             ? 'bg-blue-600 text-white'
-                            : 'bg-white border'
+                            : darkMode ? 'bg-[#2d3142] border' : 'bg-white border'
                         }`}
                         style={{
                           borderRadius: '8px',
-                          borderColor: 'var(--border-color)',
+                          borderColor: darkMode ? 'rgba(255, 255, 255, 0.08)' : 'var(--border-color)',
+                          position: 'relative',
                         }}
                       >
                         <Paragraph 
                           className="mb-1" 
                           style={{ 
-                            color: msg.type === 'user' ? 'white' : 'var(--text-primary)',
+                            color: msg.type === 'user' ? 'white' : (darkMode ? '#ffffff' : '#1a1a1a'),
                             fontSize: '14px',
                             lineHeight: '1.6'
                           }}
                         >
                           {msg.content}
                         </Paragraph>
-                        <Text
-                          className="text-xs"
-                          style={{ 
-                            color: msg.type === 'user' ? 'rgba(255,255,255,0.9)' : 'var(--text-secondary)',
-                            fontSize: '12px'
-                          }}
-                        >
-                          {msg.timestamp}
-                        </Text>
+                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: '8px' }}>
+                          <Text
+                            className="text-xs"
+                            style={{ 
+                              color: msg.type === 'user' ? 'rgba(255,255,255,0.9)' : (darkMode ? 'rgba(255,255,255,0.7)' : '#8c8c8c'),
+                              fontSize: '12px'
+                            }}
+                          >
+                            {msg.timestamp}
+                          </Text>
+                          {msg.type === 'ai' && (
+                            <Button
+                              type="text"
+                              size="small"
+                              icon={<CopyOutlined />}
+                              onClick={() => handleCopyResponse(msg.content)}
+                              style={{ 
+                                color: darkMode ? 'rgba(255,255,255,0.7)' : '#8c8c8c',
+                                fontSize: '12px',
+                                height: '24px',
+                                padding: '0 8px'
+                              }}
+                            >
+                              Sao chép
+                            </Button>
+                          )}
+                        </div>
                       </div>
                       {msg.type === 'user' && (
                         <Avatar
