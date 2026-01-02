@@ -331,9 +331,28 @@ const AIAgentPage = () => {
             >
               {chatHistory.length === 0 ? (
                 <div className="text-center py-8">
-                  <RobotOutlined className="text-4xl mb-3" style={{ color: 'var(--text-secondary)' }} />
-                  <p style={{ color: 'var(--text-primary)', fontSize: '15px', fontWeight: 500 }}>Bắt đầu trò chuyện với AI Agent</p>
-                  <p className="text-sm mt-2" style={{ color: 'var(--text-secondary)', fontSize: '13px' }}>Hoặc chọn câu hỏi nhanh bên dưới</p>
+                  <Avatar
+                    size={64}
+                    icon={<RobotOutlined />}
+                    style={{
+                      background: 'linear-gradient(135deg, #1890ff 0%, #096dd9 100%)',
+                      boxShadow: '0 4px 12px rgba(24, 144, 255, 0.3)',
+                      margin: '0 auto 16px',
+                    }}
+                  />
+                  <p style={{ 
+                    color: darkMode ? '#ffffff' : '#1a1a1a', 
+                    fontSize: '15px', 
+                    fontWeight: 500 
+                  }}>
+                    Bắt đầu trò chuyện với AI Agent
+                  </p>
+                  <p className="text-sm mt-2" style={{ 
+                    color: darkMode ? 'rgba(255, 255, 255, 0.7)' : '#8c8c8c', 
+                    fontSize: '13px' 
+                  }}>
+                    Hoặc chọn câu hỏi nhanh bên dưới
+                  </p>
                 </div>
               ) : (
                 <Space direction="vertical" size="large" className="w-full">
