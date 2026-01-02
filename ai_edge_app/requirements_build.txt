@@ -1,0 +1,5 @@
+# Additional dependencies for building .exe
+# Install these before running build_exe.py
+
+pyinstaller>=6.0.0
+pyinstaller-hooks-contrib>=2023.0
