@@ -191,7 +191,9 @@ const AppLayout = ({ children }) => {
         <Content
           className="p-6 min-h-[calc(100vh-64px)]"
           style={{
-            background: darkMode ? '#1a1a1a' : '#fafafa',
+            background: darkMode 
+              ? 'transparent' 
+              : '#fafafa',
           }}
         >
           <div className="animate-fade-in">{children}</div>

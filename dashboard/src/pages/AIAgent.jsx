@@ -196,7 +196,7 @@ const AIAgentPage = () => {
           >
             {/* Chat History */}
             <div
-              className="mb-4 p-4 rounded-lg"
+              className="mb-4 p-4 rounded-lg chat-container"
               style={{
                 height: '400px',
                 overflowY: 'auto',
