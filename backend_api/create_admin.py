@@ -23,10 +23,10 @@ try:
         )
         db.add(admin)
         db.commit()
-        print('✅ Admin user created successfully!')
+        print('[SUCCESS] Admin user created successfully!')
         print('   Username: admin')
         print('   Password: admin123')
     else:
-        print('✅ Admin user already exists')
+        print('[INFO] Admin user already exists')
 finally:
     db.close()
