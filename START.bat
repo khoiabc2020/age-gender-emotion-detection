@@ -4,35 +4,35 @@ setlocal enabledelayedexpansion
 
 :MAIN_MENU
 cls
-echo ╔════════════════════════════════════════════════════════════╗
-echo ║     SMART RETAIL ANALYTICS - CONTROL CENTER               ║
-echo ╚════════════════════════════════════════════════════════════╝
+echo ============================================================
+echo     SMART RETAIL ANALYTICS - CONTROL CENTER
+echo ============================================================
 echo.
-echo  [1] ⚡ QUICK START      - Start Backend + Frontend
-echo  [2] 🚀 Run All         - Start All Services
-echo  [3] 🔧 Run Backend     - API only
-echo  [4] 🌐 Run Frontend    - Dashboard only
-echo  [5] 🤖 Run Edge AI     - Edge App (Console)
-echo  [9] 🎨 Run Edge AI GUI - Edge App (Modern UI)
+echo  [1] QUICK START      - Start Backend + Frontend
+echo  [2] Run All         - Start All Services
+echo  [3] Run Backend     - API only
+echo  [4] Run Frontend    - Dashboard only
+echo  [5] Run Edge AI     - Edge App (Console)
+echo  [6] Run Edge AI GUI - Edge App (Modern UI)
 echo.
-echo  [6] 📦 Install All     - Install all dependencies
-echo  [7] 🔍 Check Status    - Check installed packages
+echo  [7] Install All     - Install all dependencies
+echo  [8] Check Status    - Check installed packages
 echo.
-echo  [8] 📖 Help           - Documentation
-echo  [0] ❌ Exit
+echo  [9] Help           - Documentation
+echo  [0] Exit
 echo.
-echo ════════════════════════════════════════════════════════════
-set /p choice="Enter your choice [0-8]: "
+echo ============================================================
+set /p choice="Enter your choice [0-9]: "
 
 if "%choice%"=="1" goto QUICK_START
 if "%choice%"=="2" goto RUN_ALL
 if "%choice%"=="3" goto RUN_BACKEND
 if "%choice%"=="4" goto RUN_FRONTEND
 if "%choice%"=="5" goto RUN_EDGE
-if "%choice%"=="6" goto INSTALL_ALL
-if "%choice%"=="7" goto CHECK_STATUS
-if "%choice%"=="8" goto HELP
-if "%choice%"=="9" goto RUN_EDGE_GUI
+if "%choice%"=="6" goto RUN_EDGE_GUI
+if "%choice%"=="7" goto INSTALL_ALL
+if "%choice%"=="8" goto CHECK_STATUS
+if "%choice%"=="9" goto HELP
 if "%choice%"=="0" goto EXIT
 echo Invalid choice! Press any key to try again...
 pause >nul
@@ -43,9 +43,9 @@ REM QUICK START - Backend + Frontend
 REM ============================================================
 :QUICK_START
 cls
-echo ╔════════════════════════════════════════════════════════════╗
-echo ║     QUICK START - Backend + Frontend                      ║
-echo ╚════════════════════════════════════════════════════════════╝
+echo ============================================================
+echo     QUICK START - Backend + Frontend
+echo ============================================================
 echo.
 echo Starting Backend API on http://localhost:8000
 echo Starting Dashboard on http://localhost:3000
@@ -78,14 +78,14 @@ REM RUN ALL SERVICES
 REM ============================================================
 :RUN_ALL
 cls
-echo ╔════════════════════════════════════════════════════════════╗
-echo ║     STARTING ALL SERVICES                                  ║
-echo ╚════════════════════════════════════════════════════════════╝
+echo ============================================================
+echo     STARTING ALL SERVICES
+echo ============================================================
 echo.
 echo Starting:
 echo   1. Backend API     (http://localhost:8000)
 echo   2. Dashboard       (http://localhost:3000)
-echo   3. Edge AI App     (Console - use option 5 for GUI)
+echo   3. Edge AI App     (Console - use option 6 for GUI)
 echo.
 echo Three new windows will open...
 echo.
@@ -110,9 +110,9 @@ REM RUN BACKEND ONLY
 REM ============================================================
 :RUN_BACKEND
 cls
-echo ╔════════════════════════════════════════════════════════════╗
-echo ║     STARTING BACKEND API                                   ║
-echo ╚════════════════════════════════════════════════════════════╝
+echo ============================================================
+echo     STARTING BACKEND API
+echo ============================================================
 echo.
 cd /d "%~dp0backend_api"
 echo Starting on http://localhost:8000
@@ -127,9 +127,9 @@ REM RUN FRONTEND ONLY
 REM ============================================================
 :RUN_FRONTEND
 cls
-echo ╔════════════════════════════════════════════════════════════╗
-echo ║     STARTING DASHBOARD                                     ║
-echo ╚════════════════════════════════════════════════════════════╝
+echo ============================================================
+echo     STARTING DASHBOARD
+echo ============================================================
 echo.
 cd /d "%~dp0dashboard"
 echo Starting on http://localhost:3000
@@ -143,9 +143,9 @@ REM RUN EDGE AI ONLY (Console)
 REM ============================================================
 :RUN_EDGE
 cls
-echo ╔════════════════════════════════════════════════════════════╗
-echo ║     STARTING EDGE AI APP (Console Mode)                    ║
-echo ╚════════════════════════════════════════════════════════════╝
+echo ============================================================
+echo     STARTING EDGE AI APP (Console Mode)
+echo ============================================================
 echo.
 cd /d "%~dp0ai_edge_app"
 python main.py
@@ -157,9 +157,9 @@ REM INSTALL ALL DEPENDENCIES
 REM ============================================================
 :INSTALL_ALL
 cls
-echo ╔════════════════════════════════════════════════════════════╗
-echo ║     INSTALLING ALL DEPENDENCIES                            ║
-echo ╚════════════════════════════════════════════════════════════╝
+echo ============================================================
+echo     INSTALLING ALL DEPENDENCIES
+echo ============================================================
 echo.
 echo This will install:
 echo   - Backend API (FastAPI, Uvicorn, SQLAlchemy...)
@@ -171,15 +171,15 @@ python --version
 python -c "import sys; v=sys.version_info; print(f'Detected: Python {v.major}.{v.minor}'); exit(0 if v.major == 3 and v.minor <= 12 else 1)" 2>nul
 if %errorlevel% neq 0 (
     echo.
-    echo ════════════════════════════════════════════════════════════
+    echo ============================================================
     echo WARNING: Python 3.13+ detected!
-    echo ════════════════════════════════════════════════════════════
+    echo ============================================================
     echo.
     echo ONNX Runtime may not work. Recommended: Python 3.12
     echo See PYTHON_VERSION_FIX.md for details.
     echo.
     echo Backend + Frontend will still work!
-    echo ════════════════════════════════════════════════════════════
+    echo ============================================================
     echo.
     pause
 )
@@ -250,9 +250,9 @@ echo Edge AI dependencies installed!
 cd ..
 
 echo.
-echo ════════════════════════════════════════════════════════════
+echo ============================================================
 echo     INSTALLATION COMPLETE!
-echo ════════════════════════════════════════════════════════════
+echo ============================================================
 echo.
 echo You can now use:
 echo   [1] Quick Start    - Backend + Frontend
@@ -267,42 +267,42 @@ REM CHECK STATUS
 REM ============================================================
 :CHECK_STATUS
 cls
-echo ╔════════════════════════════════════════════════════════════╗
-echo ║     CHECKING DEPENDENCIES STATUS                           ║
-echo ╚════════════════════════════════════════════════════════════╝
+echo ============================================================
+echo     CHECKING DEPENDENCIES STATUS
+echo ============================================================
 echo.
 
 cd /d "%~dp0"
 
 echo [1/3] Backend API
 cd backend_api
-python -c "import fastapi; print('  ✓ FastAPI:', fastapi.__version__)" 2>nul || echo   ✗ FastAPI: NOT INSTALLED
-python -c "import uvicorn; print('  ✓ Uvicorn:', uvicorn.__version__)" 2>nul || echo   ✗ Uvicorn: NOT INSTALLED
-python -c "import sqlalchemy; print('  ✓ SQLAlchemy:', sqlalchemy.__version__)" 2>nul || echo   ✗ SQLAlchemy: NOT INSTALLED
+python -c "import fastapi; print('  [OK] FastAPI:', fastapi.__version__)" 2>nul || echo   [ERROR] FastAPI: NOT INSTALLED
+python -c "import uvicorn; print('  [OK] Uvicorn:', uvicorn.__version__)" 2>nul || echo   [ERROR] Uvicorn: NOT INSTALLED
+python -c "import sqlalchemy; print('  [OK] SQLAlchemy:', sqlalchemy.__version__)" 2>nul || echo   [ERROR] SQLAlchemy: NOT INSTALLED
 cd ..
 
 echo.
 echo [2/3] Dashboard
 cd dashboard
 if exist "node_modules\" (
-    echo   ✓ Node modules: INSTALLED
+    echo   [OK] Node modules: INSTALLED
 ) else (
-    echo   ✗ Node modules: NOT INSTALLED
+    echo   [ERROR] Node modules: NOT INSTALLED
 )
 cd ..
 
 echo.
 echo [3/3] Edge AI App
 cd ai_edge_app
-python -c "import cv2; print('  ✓ OpenCV:', cv2.__version__)" 2>nul || echo   ✗ OpenCV: NOT INSTALLED
-python -c "import onnxruntime; print('  ✓ ONNX Runtime:', onnxruntime.__version__)" 2>nul || echo   ✗ ONNX Runtime: NOT INSTALLED
-python -c "import numpy; print('  ✓ NumPy:', numpy.__version__)" 2>nul || echo   ✗ NumPy: NOT INSTALLED
+python -c "import cv2; print('  [OK] OpenCV:', cv2.__version__)" 2>nul || echo   [ERROR] OpenCV: NOT INSTALLED
+python -c "import onnxruntime; print('  [OK] ONNX Runtime:', onnxruntime.__version__)" 2>nul || echo   [ERROR] ONNX Runtime: NOT INSTALLED
+python -c "import numpy; print('  [OK] NumPy:', numpy.__version__)" 2>nul || echo   [ERROR] NumPy: NOT INSTALLED
 cd ..
 
 echo.
-echo ════════════════════════════════════════════════════════════
-echo If any dependencies are missing, use option [6] Install All
-echo ════════════════════════════════════════════════════════════
+echo ============================================================
+echo If any dependencies are missing, use option [7] Install All
+echo ============================================================
 echo.
 pause
 goto MAIN_MENU
@@ -312,42 +312,42 @@ REM HELP
 REM ============================================================
 :HELP
 cls
-echo ╔════════════════════════════════════════════════════════════╗
-echo ║     DOCUMENTATION & HELP                                   ║
-echo ╚════════════════════════════════════════════════════════════╝
+echo ============================================================
+echo     DOCUMENTATION & HELP
+echo ============================================================
 echo.
-echo 📖 Main Documentation:
+echo Main Documentation:
 echo   - README.md               - Project overview
 echo   - QUICKSTART.md           - Quick start guide
 echo   - PROJECT_DOCUMENTATION.md - Full documentation
 echo.
-echo 🔧 Setup Guides:
+echo Setup Guides:
 echo   - PYTHON_VERSION_FIX.md   - Python compatibility
 echo   - docs/SETUP.md           - Detailed setup
 echo.
-echo 🎯 Frontend:
+echo Frontend:
 echo   - dashboard/FRONTEND_STATUS.md - Frontend details
 echo   - dashboard/README.md          - Dashboard guide
 echo.
-echo 🤖 Training:
+echo Training:
 echo   - training_experiments/README.md - Training guide
 echo   - training_experiments/TRAIN_LOCAL_GUIDE.md
 echo.
-echo 🌐 Access URLs:
+echo Access URLs:
 echo   - Dashboard:  http://localhost:3000
 echo   - API Docs:   http://localhost:8000/docs
 echo   - API:        http://localhost:8000
 echo.
-echo 👤 Default Login:
+echo Default Login:
 echo   - Username: admin
 echo   - Password: admin123
 echo.
-echo 📝 Common Tasks:
-echo   1. First time: [6] Install All
+echo Common Tasks:
+echo   1. First time: [7] Install All
 echo   2. Daily use: [1] Quick Start
 echo   3. Full system: [2] Run All
 echo.
-echo ════════════════════════════════════════════════════════════
+echo ============================================================
 pause
 goto MAIN_MENU
 
