@@ -570,10 +570,15 @@ class EdgeAIApp:
                 if elapsed < frame_delay:
                     time.sleep(frame_delay - elapsed)
                 
+                # Prevent blocking - yield to other threads
+                time.sleep(0.001)  # Small yield to prevent freezing
+                
         except KeyboardInterrupt:
             self.logger.info("Interrupted by user")
         except Exception as e:
             self.logger.error(f"Error in main loop: {e}", exc_info=True)
+            # Don't crash - continue with next frame
+            time.sleep(0.1)
         finally:
             self.cleanup()
     
