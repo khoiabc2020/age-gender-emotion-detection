@@ -1,3 +1,9 @@
+/**
+ * QuickActions Component
+ * 
+ * Provides quick access buttons for common actions:
+ * Reports, Messages, Notifications, and Settings.
+ */
 import React from 'react'
 import { Card, Space, Button } from 'antd'
 import {

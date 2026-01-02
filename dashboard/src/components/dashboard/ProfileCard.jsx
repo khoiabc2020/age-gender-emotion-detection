@@ -1,3 +1,9 @@
+/**
+ * ProfileCard Component
+ * 
+ * Displays user profile information with avatar, name, and join date.
+ * Includes edit profile button for quick access.
+ */
 import React from 'react'
 import { Card, Avatar, Typography, Space, Button } from 'antd'
 import { UserOutlined, EditOutlined, CalendarOutlined } from '@ant-design/icons'
