@@ -846,6 +846,56 @@ body:not(.dark) .page-description {
   color: #ffffff !important;
 }
 
+/* Dropdown Menu Styles */
+.ant-dropdown-menu {
+  background: var(--bg-primary) !important;
+  border-radius: 12px !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1) !important;
+  border: 1px solid var(--border-color) !important;
+  padding: 8px !important;
+}
+
+.dark .ant-dropdown-menu {
+  background: #252836 !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3) !important;
+}
+
+.ant-dropdown-menu-item {
+  color: var(--text-primary) !important;
+  border-radius: 6px !important;
+  padding: 8px 12px !important;
+  margin: 2px 0 !important;
+}
+
+.dark .ant-dropdown-menu-item {
+  color: rgba(255, 255, 255, 0.85) !important;
+}
+
+.ant-dropdown-menu-item:hover {
+  background: var(--bg-secondary) !important;
+}
+
+.dark .ant-dropdown-menu-item:hover {
+  background: rgba(255, 255, 255, 0.1) !important;
+}
+
+.ant-dropdown-menu-item-danger {
+  color: #ff4d4f !important;
+}
+
+.dark .ant-dropdown-menu-item-danger {
+  color: #ff7875 !important;
+}
+
+.ant-dropdown-menu-item-danger:hover {
+  background: rgba(255, 77, 79, 0.1) !important;
+}
+
+.dark .ant-dropdown-menu-item-danger:hover {
+  background: rgba(255, 77, 79, 0.2) !important;
+}
+
 /* Menu text in sidebar */
 .dark .ant-menu-dark .ant-menu-item {
   color: rgba(255, 255, 255, 0.9) !important;

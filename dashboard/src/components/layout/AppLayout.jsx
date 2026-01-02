@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { Layout, Menu, Avatar, Dropdown, Badge, Switch, Tooltip, Typography } from 'antd'
 import {
   DashboardOutlined,
@@ -9,6 +9,9 @@ import {
   MessageOutlined,
   SearchOutlined,
   FilterOutlined,
+  MoonOutlined,
+  SunOutlined,
+  UserOutlined,
 } from '@ant-design/icons'
 import { useNavigate, useLocation } from 'react-router-dom'
 import { useAppDispatch, useAppSelector } from '../../store/hooks'
@@ -20,20 +23,11 @@ const { Title, Text } = Typography
 
 const AppLayout = ({ children }) => {
   const [collapsed, setCollapsed] = useState(false)
-  const [currentTime, setCurrentTime] = useState(new Date())
   const navigate = useNavigate()
   const location = useLocation()
   const dispatch = useAppDispatch()
   const user = useAppSelector((state) => state.auth.user)
   const { darkMode, toggleDarkMode } = useTheme()
-
-  // Real-time clock
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setCurrentTime(new Date())
-    }, 1000)
-    return () => clearInterval(timer)
-  }, [])
 
   const menuItems = [
     {
@@ -66,7 +60,34 @@ const AppLayout = ({ children }) => {
   const userMenuItems = [
     {
       key: 'profile',
-      label: 'Hồ sơ',
+      label: (
+        <div style={{ padding: '8px 0' }}>
+          <div style={{ 
+            fontWeight: 600, 
+            fontSize: '14px',
+            color: darkMode ? '#ffffff' : '#262626',
+            marginBottom: '4px'
+          }}>
+            {user?.full_name || user?.username || 'User'}
+          </div>
+          <div style={{ 
+            fontSize: '12px',
+            color: darkMode ? 'rgba(255, 255, 255, 0.7)' : '#8c8c8c'
+          }}>
+            {user?.email || 'user@example.com'}
+          </div>
+        </div>
+      ),
+      disabled: true,
+    },
+    {
+      type: 'divider',
+    },
+    {
+      key: 'settings',
+      label: 'Cài đặt',
+      icon: <SettingOutlined />,
+      onClick: () => navigate('/settings'),
     },
     {
       type: 'divider',
@@ -307,45 +328,107 @@ const AppLayout = ({ children }) => {
           </div>
 
           <div className="flex items-center gap-4">
-            {/* Real-time Clock */}
-            <div style={{
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'flex-end',
-              marginRight: '16px',
-            }}>
-              <Text style={{ 
-                fontSize: '14px', 
-                color: darkMode ? 'rgba(255, 255, 255, 0.7)' : '#8c8c8c',
-                fontWeight: 500,
-                lineHeight: '1.2',
-              }}>
-                {currentTime.toLocaleDateString('en-US', { 
-                  weekday: 'short', 
-                  month: 'short', 
-                  day: 'numeric',
-                  year: 'numeric'
-                })}
-              </Text>
-              <Text style={{ 
-                fontSize: '18px', 
-                color: darkMode ? '#ffffff' : '#262626',
-                fontWeight: 600,
-                lineHeight: '1.2',
-                marginTop: '4px',
-              }}>
-                {currentTime.toLocaleTimeString('en-US', { 
-                  hour: '2-digit', 
-                  minute: '2-digit',
-                  second: '2-digit',
-                  hour12: false
-                })}
-              </Text>
-            </div>
-            <Title level={4} style={{ margin: 0, color: darkMode ? '#ffffff' : '#262626', fontWeight: 600 }}>
-              My Profile
-            </Title>
-            <span style={{ fontSize: '20px', color: darkMode ? 'rgba(255, 255, 255, 0.7)' : '#8c8c8c', cursor: 'pointer' }}>⋯</span>
+            {/* Dark Mode Toggle */}
+            <Tooltip title={darkMode ? 'Chuyển sang chế độ sáng' : 'Chuyển sang chế độ tối'}>
+              <div
+                onClick={toggleDarkMode}
+                style={{
+                  width: '40px',
+                  height: '40px',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  borderRadius: '8px',
+                  cursor: 'pointer',
+                  transition: 'all 0.2s',
+                  background: darkMode ? 'rgba(255, 255, 255, 0.1)' : '#f5f5f5',
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.background = darkMode ? 'rgba(255, 255, 255, 0.15)' : '#e8e8e8'
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.background = darkMode ? 'rgba(255, 255, 255, 0.1)' : '#f5f5f5'
+                }}
+              >
+                {darkMode ? (
+                  <SunOutlined style={{ 
+                    fontSize: '18px', 
+                    color: '#faad14' 
+                  }} />
+                ) : (
+                  <MoonOutlined style={{ 
+                    fontSize: '18px', 
+                    color: '#595959' 
+                  }} />
+                )}
+              </div>
+            </Tooltip>
+
+            {/* User Profile Dropdown */}
+            <Dropdown
+              menu={{ items: userMenuItems }}
+              placement="bottomRight"
+              trigger={['click']}
+              overlayStyle={{
+                background: darkMode ? '#252836' : '#ffffff',
+                borderRadius: '12px',
+                boxShadow: darkMode 
+                  ? '0 4px 12px rgba(0, 0, 0, 0.3)' 
+                  : '0 4px 12px rgba(0, 0, 0, 0.1)',
+                border: darkMode ? '1px solid rgba(255, 255, 255, 0.08)' : '1px solid #e8e8e8',
+                padding: '8px',
+                minWidth: '200px',
+              }}
+            >
+              <div
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '12px',
+                  cursor: 'pointer',
+                  padding: '6px 12px',
+                  borderRadius: '8px',
+                  transition: 'all 0.2s',
+                  background: darkMode ? 'rgba(255, 255, 255, 0.05)' : 'transparent',
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.background = darkMode ? 'rgba(255, 255, 255, 0.1)' : '#f5f5f5'
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.background = darkMode ? 'rgba(255, 255, 255, 0.05)' : 'transparent'
+                }}
+              >
+                <Avatar
+                  size={36}
+                  style={{
+                    background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+                    flexShrink: 0,
+                  }}
+                  icon={<UserOutlined />}
+                >
+                  {user?.username?.charAt(0).toUpperCase() || 'U'}
+                </Avatar>
+                {!collapsed && (
+                  <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
+                    <Text style={{ 
+                      fontSize: '14px', 
+                      fontWeight: 600,
+                      color: darkMode ? '#ffffff' : '#262626',
+                      lineHeight: '1.2',
+                    }}>
+                      {user?.full_name || user?.username || 'User'}
+                    </Text>
+                    <Text style={{ 
+                      fontSize: '12px',
+                      color: darkMode ? 'rgba(255, 255, 255, 0.7)' : '#8c8c8c',
+                      lineHeight: '1.2',
+                    }}>
+                      {user?.email || 'user@example.com'}
+                    </Text>
+                  </div>
+                )}
+              </div>
+            </Dropdown>
           </div>
         </Header>
 
