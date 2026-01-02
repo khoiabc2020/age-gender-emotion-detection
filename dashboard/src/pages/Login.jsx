@@ -150,7 +150,7 @@ const LoginPage = () => {
             <Form.Item style={{ marginBottom: '24px' }}>
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                 <Form.Item name="remember" valuePropName="checked" noStyle>
-                  <span style={{ fontSize: '14px', color: '#595959' }}>Ghi nhớ đăng nhập 30 ngày</span>
+                  <Checkbox style={{ fontSize: '14px', color: '#595959' }}>Ghi nhớ đăng nhập 30 ngày</Checkbox>
                 </Form.Item>
                 <Link 
                   to="#" 
