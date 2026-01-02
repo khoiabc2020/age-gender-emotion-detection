@@ -434,6 +434,13 @@ class EdgeAIApp:
                             
                             try:
                                 attributes = self.classifier.predict(face_roi)
+                                
+                                # Update processed tracks with new attributes
+                                with self.tracks_lock:
+                                    if track_id not in self.processed_tracks:
+                                        self.processed_tracks[track_id] = {}
+                                    self.processed_tracks[track_id]['last_processed'] = current_time
+                                    self.track_attributes[track_id] = attributes
                             except Exception as e:
                                 self.logger.warning(f"Classification error for track {track_id}: {e}")
                                 continue
