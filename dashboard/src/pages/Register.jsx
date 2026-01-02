@@ -1,45 +1,38 @@
 import React, { useState } from 'react'
 import { Form, Input, Button, Card, message, Typography, Divider } from 'antd'
-import { UserOutlined, LockOutlined, MailOutlined } from '@ant-design/icons'
+import { UserOutlined, LockOutlined, MailOutlined, ArrowLeftOutlined } from '@ant-design/icons'
 import { useNavigate, Link } from 'react-router-dom'
-import { useAppDispatch } from '../store/hooks'
-import { login } from '../store/slices/authSlice'
 import api from '../services/api'
 
 const { Title, Text } = Typography
 
-const LoginPage = () => {
+const RegisterPage = () => {
   const [loading, setLoading] = useState(false)
   const navigate = useNavigate()
-  const dispatch = useAppDispatch()
 
   const onFinish = async (values) => {
+    if (values.password !== values.confirmPassword) {
+      message.error('Mật khẩu xác nhận không khớp!')
+      return
+    }
+
     setLoading(true)
     try {
-      const params = new URLSearchParams()
-      params.append('username', values.username)
-      params.append('password', values.password)
-      
-      const response = await api.post('/auth/login', params.toString(), {
-        headers: {
-          'Content-Type': 'application/x-www-form-urlencoded',
-        },
+      const response = await api.post('/auth/register', {
+        username: values.username,
+        email: values.email,
+        password: values.password,
+        full_name: values.full_name || values.username
       })
       
-      if (response.data.access_token) {
-        dispatch(login({
-          token: response.data.access_token,
-          user: response.data.user,
-        }))
-        message.success('Đăng nhập thành công!')
-        navigate('/')
-      } else {
-        message.error('Đăng nhập thất bại!')
+      if (response.data) {
+        message.success('Đăng ký thành công! Vui lòng đăng nhập.')
+        navigate('/login')
       }
     } catch (error) {
-      const errorMessage = error.response?.data?.detail || error.message || 'Tên đăng nhập hoặc mật khẩu không đúng!'
+      const errorMessage = error.response?.data?.detail || error.message || 'Đăng ký thất bại!'
       message.error(errorMessage)
-      console.error('Login error:', error)
+      console.error('Register error:', error)
     } finally {
       setLoading(false)
     }
@@ -67,16 +60,16 @@ const LoginPage = () => {
         {/* Logo/Title */}
         <div style={{ textAlign: 'center', marginBottom: '32px' }}>
           <Title level={2} style={{ marginBottom: '8px', color: '#262626' }}>
-            Smart Retail
+            Đăng ký tài khoản
           </Title>
           <Text type="secondary" style={{ fontSize: '14px' }}>
-            Đăng nhập vào tài khoản của bạn
+            Tạo tài khoản mới để bắt đầu
           </Text>
         </div>
 
-        {/* Login Form */}
+        {/* Register Form */}
         <Form
-          name="login"
+          name="register"
           onFinish={onFinish}
           autoComplete="off"
           size="large"
@@ -86,6 +79,7 @@ const LoginPage = () => {
             name="username"
             rules={[
               { required: true, message: 'Vui lòng nhập tên đăng nhập!' },
+              { min: 3, message: 'Tên đăng nhập phải có ít nhất 3 ký tự!' },
             ]}
           >
             <Input
@@ -96,14 +90,52 @@ const LoginPage = () => {
           </Form.Item>
 
           <Form.Item
+            name="email"
+            rules={[
+              { required: true, message: 'Vui lòng nhập email!' },
+              { type: 'email', message: 'Email không hợp lệ!' },
+            ]}
+          >
+            <Input
+              prefix={<MailOutlined style={{ color: '#bfbfbf' }} />}
+              placeholder="Email"
+              style={{ borderRadius: '4px' }}
+            />
+          </Form.Item>
+
+          <Form.Item
+            name="full_name"
+          >
+            <Input
+              prefix={<UserOutlined style={{ color: '#bfbfbf' }} />}
+              placeholder="Họ và tên (tùy chọn)"
+              style={{ borderRadius: '4px' }}
+            />
+          </Form.Item>
+
+          <Form.Item
             name="password"
             rules={[
               { required: true, message: 'Vui lòng nhập mật khẩu!' },
+              { min: 6, message: 'Mật khẩu phải có ít nhất 6 ký tự!' },
             ]}
           >
             <Input.Password
               prefix={<LockOutlined style={{ color: '#bfbfbf' }} />}
               placeholder="Mật khẩu"
+              style={{ borderRadius: '4px' }}
+            />
+          </Form.Item>
+
+          <Form.Item
+            name="confirmPassword"
+            rules={[
+              { required: true, message: 'Vui lòng xác nhận mật khẩu!' },
+            ]}
+          >
+            <Input.Password
+              prefix={<LockOutlined style={{ color: '#bfbfbf' }} />}
+              placeholder="Xác nhận mật khẩu"
               style={{ borderRadius: '4px' }}
             />
           </Form.Item>
@@ -122,7 +154,7 @@ const LoginPage = () => {
                 marginTop: '8px'
               }}
             >
-              Đăng nhập
+              Đăng ký
             </Button>
           </Form.Item>
         </Form>
@@ -131,26 +163,13 @@ const LoginPage = () => {
           <Text type="secondary" style={{ fontSize: '12px' }}>hoặc</Text>
         </Divider>
 
-        {/* Register Link */}
+        {/* Login Link */}
         <div style={{ textAlign: 'center' }}>
           <Text type="secondary" style={{ fontSize: '14px' }}>
-            Chưa có tài khoản?{' '}
-            <Link to="/register" style={{ color: '#1890ff', fontWeight: 500 }}>
-              Đăng ký ngay
+            Đã có tài khoản?{' '}
+            <Link to="/login" style={{ color: '#1890ff', fontWeight: 500 }}>
+              Đăng nhập
             </Link>
-          </Text>
-        </div>
-
-        {/* Default Credentials Hint */}
-        <div style={{
-          marginTop: '24px',
-          padding: '12px',
-          background: '#f0f0f0',
-          borderRadius: '4px',
-          textAlign: 'center'
-        }}>
-          <Text type="secondary" style={{ fontSize: '12px' }}>
-            Demo: admin / admin123
           </Text>
         </div>
       </Card>
@@ -158,4 +177,4 @@ const LoginPage = () => {
   )
 }
 
-export default LoginPage
+export default RegisterPage

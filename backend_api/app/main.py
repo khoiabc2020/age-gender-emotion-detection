@@ -10,9 +10,10 @@ from contextlib import asynccontextmanager
 import uvicorn
 
 from app.core.config import settings
-from app.core.database import engine, Base
+from app.core.database import engine, Base, SessionLocal
 from app.api import analytics, dashboard, ads, auth, websocket, ai_agent
-from app.core.security import verify_token
+from app.core.security import verify_token, get_password_hash
+from app.models.user import User
 
 # Create database tables on startup
 @asynccontextmanager
@@ -21,9 +22,30 @@ async def lifespan(app: FastAPI):
     # Startup
     try:
         Base.metadata.create_all(bind=engine)
+        
+        # Create default admin user if not exists
+        db = SessionLocal()
+        try:
+            admin_user = db.query(User).filter(User.username == "admin").first()
+            if not admin_user:
+                admin_user = User(
+                    username="admin",
+                    email="admin@retail.com",
+                    hashed_password=get_password_hash("admin123"),
+                    full_name="Administrator",
+                    is_active=True,
+                    is_superuser=True
+                )
+                db.add(admin_user)
+                db.commit()
+                print("INFO: Default admin user created (admin/admin123)")
+            else:
+                print("INFO: Admin user already exists")
+        finally:
+            db.close()
     except Exception as e:
         # Database connection failed - continue without database
-        print(f"Warning: Database connection failed: {e}")
+        print(f"WARNING: Database connection failed: {e}")
         print("Continuing without database. Some features may be limited.")
     yield
     # Shutdown (if needed)
