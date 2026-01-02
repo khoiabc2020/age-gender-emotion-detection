@@ -38,27 +38,27 @@ const AppLayout = ({ children }) => {
   const menuItems = [
     {
       key: '/',
-      icon: <DashboardOutlined style={{ fontSize: '18px' }} />,
+      icon: <DashboardOutlined />,
       label: 'Dashboard',
     },
     {
       key: '/ads',
-      icon: <FileTextOutlined style={{ fontSize: '18px' }} />,
+      icon: <FileTextOutlined />,
       label: 'Bills',
     },
     {
       key: '/analytics',
-      icon: <BarChartOutlined style={{ fontSize: '18px' }} />,
+      icon: <BarChartOutlined />,
       label: 'Analytics',
     },
     {
       key: '/ai-agent',
-      icon: <MessageOutlined style={{ fontSize: '18px' }} />,
+      icon: <MessageOutlined />,
       label: 'Messages',
     },
     {
       key: '/settings',
-      icon: <SettingOutlined style={{ fontSize: '18px' }} />,
+      icon: <SettingOutlined />,
       label: 'Settings',
     },
   ]

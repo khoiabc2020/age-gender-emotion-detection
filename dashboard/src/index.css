@@ -166,10 +166,28 @@ code {
 
 .ant-menu-item {
   color: #262626 !important;
+  font-weight: 500 !important;
+}
+
+.ant-menu-item .ant-menu-title-content {
+  color: #262626 !important;
+  font-weight: 500 !important;
 }
 
 .ant-menu-item .anticon {
   color: #595959 !important;
+  font-size: 18px !important;
+}
+
+.ant-menu-item-selected {
+  background: #ff4d4f !important;
+  color: #fff !important;
+  border-radius: 8px !important;
+}
+
+.ant-menu-item-selected .ant-menu-title-content {
+  color: #fff !important;
+  font-weight: 600 !important;
 }
 
 .ant-menu-item-selected .anticon {
