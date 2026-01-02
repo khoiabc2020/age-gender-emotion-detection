@@ -192,6 +192,67 @@ const DashboardPage = () => {
               </Card>
             </Col>
 
+            {/* Today's Stats Section */}
+            <Col xs={24}>
+              <Card
+                style={{
+                  borderRadius: '16px',
+                  border: 'none',
+                  boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
+                  background: '#ffffff',
+                }}
+                bodyStyle={{ padding: '24px' }}
+              >
+                <div style={{ marginBottom: '16px' }}>
+                  <Text style={{ fontSize: '16px', fontWeight: 600, color: '#262626' }}>
+                    Today's Stats
+                  </Text>
+                </div>
+                <div style={{ display: 'flex', gap: '8px', alignItems: 'center', flexWrap: 'wrap' }}>
+                  {['Mo 12', 'Tu 13', 'We 14', 'Th 15', 'Fr 16', 'Sa 17', 'Su 18', 'Mo 19', 'Tu 20'].map((day, idx) => {
+                    const isToday = day === 'Tu 13'
+                    return (
+                      <div
+                        key={idx}
+                        style={{
+                          padding: '8px 16px',
+                          borderRadius: isToday ? '20px' : '8px',
+                          background: isToday ? '#ff4d4f' : '#f5f5f5',
+                          color: isToday ? '#fff' : '#595959',
+                          fontSize: '13px',
+                          fontWeight: isToday ? 600 : 400,
+                          cursor: 'pointer',
+                          transition: 'all 0.2s',
+                        }}
+                        onMouseEnter={(e) => {
+                          if (!isToday) {
+                            e.currentTarget.style.background = '#e8e8e8'
+                          }
+                        }}
+                        onMouseLeave={(e) => {
+                          if (!isToday) {
+                            e.currentTarget.style.background = '#f5f5f5'
+                          }
+                        }}
+                      >
+                        {day}
+                      </div>
+                    )
+                  })}
+                  <div style={{
+                    marginLeft: 'auto',
+                    padding: '8px 12px',
+                    background: '#f5f5f5',
+                    borderRadius: '8px',
+                    fontSize: '12px',
+                    color: '#8c8c8c',
+                  }}>
+                    August 12-2021
+                  </div>
+                </div>
+              </Card>
+            </Col>
+
             {/* Stats Cards */}
             <Col xs={24} sm={12} md={6}>
               <StatsCard
