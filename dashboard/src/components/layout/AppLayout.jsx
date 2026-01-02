@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Layout, Menu, Avatar, Dropdown, Badge, Switch, Tooltip } from 'antd'
+import { Layout, Menu, Avatar, Dropdown, Badge, Switch, Tooltip, Typography } from 'antd'
 import {
   DashboardOutlined,
   BarChartOutlined,
@@ -19,6 +19,7 @@ import { logout } from '../../store/slices/authSlice'
 import { useTheme } from './ThemeProvider'
 
 const { Header, Sider, Content } = Layout
+const { Title, Text } = Typography
 
 const AppLayout = ({ children }) => {
   const [collapsed, setCollapsed] = useState(false)
