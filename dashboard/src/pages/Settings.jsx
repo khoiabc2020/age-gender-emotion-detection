@@ -26,7 +26,11 @@ const SettingsPage = () => {
 
   return (
     <div className="animate-fade-in max-w-4xl">
-      <Title level={2} className="gradient-text mb-6">
+      <Title 
+        level={2} 
+        className="page-title mb-6"
+        style={{ color: 'var(--text-primary)' }}
+      >
         Cài đặt
       </Title>
 

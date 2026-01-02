@@ -157,7 +157,7 @@ const AdsManagementPage = () => {
           >
             Quản lý Quảng cáo
           </Title>
-          <p className="text-gray-500">Quản lý và cấu hình các quảng cáo hiển thị</p>
+          <p className="page-description" style={{ color: 'var(--text-secondary)' }}>Quản lý và cấu hình các quảng cáo hiển thị</p>
         </div>
         <Button
           type="primary"
@@ -196,7 +196,7 @@ const AdsManagementPage = () => {
       {/* Modal */}
       <Modal
         title={
-          <span className="text-lg font-semibold gradient-text">
+          <span className="text-lg font-semibold" style={{ color: 'var(--text-primary)' }}>
             {editingAd ? 'Sửa Quảng cáo' : 'Thêm Quảng cáo'}
           </span>
         }

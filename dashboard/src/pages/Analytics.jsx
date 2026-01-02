@@ -74,7 +74,7 @@ const AnalyticsPage = () => {
           >
             Phân tích Chi tiết
           </Title>
-          <p className="text-gray-500">Phân tích sâu về hành vi và hiệu suất quảng cáo</p>
+          <p className="page-description" style={{ color: 'var(--text-secondary)' }}>Phân tích sâu về hành vi và hiệu suất quảng cáo</p>
         </div>
         <Select
           value={timeRange}
@@ -97,7 +97,7 @@ const AnalyticsPage = () => {
         <Col xs={24} lg={12}>
           <Card
             title={
-              <span className="text-lg font-semibold gradient-text">
+              <span className="text-lg font-semibold" style={{ color: 'var(--text-primary)' }}>
                 Phân bố Độ tuổi theo Giờ
               </span>
             }
@@ -111,7 +111,7 @@ const AnalyticsPage = () => {
         <Col xs={24} lg={12}>
           <Card
             title={
-              <span className="text-lg font-semibold gradient-text">
+              <span className="text-lg font-semibold" style={{ color: 'var(--text-primary)' }}>
                 Phân bố Cảm xúc
               </span>
             }
@@ -125,7 +125,7 @@ const AnalyticsPage = () => {
         <Col xs={24}>
           <Card
             title={
-              <span className="text-lg font-semibold gradient-text">
+              <span className="text-lg font-semibold" style={{ color: 'var(--text-primary)' }}>
                 Hiệu suất Quảng cáo
               </span>
             }
@@ -139,7 +139,7 @@ const AnalyticsPage = () => {
         <Col xs={24}>
           <Card
             title={
-              <span className="text-lg font-semibold gradient-text">
+              <span className="text-lg font-semibold" style={{ color: 'var(--text-primary)' }}>
                 Chi tiết Quảng cáo
               </span>
             }
