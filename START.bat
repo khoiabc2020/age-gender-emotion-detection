@@ -214,6 +214,7 @@ if not exist ".env" (
     echo.
 )
 pip install -r requirements.txt --upgrade --disable-pip-version-check -q
+pip install email-validator --upgrade --disable-pip-version-check -q
 echo Backend dependencies installed!
 cd ..
 
