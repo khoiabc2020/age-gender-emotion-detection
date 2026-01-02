@@ -148,8 +148,11 @@ const AIAgentPage = () => {
       {/* AI Status Info */}
       {aiStatus && !aiStatus.available && (
         <Card
-          className="mb-6 border-orange-200 bg-orange-50"
-          style={{ borderRadius: '16px' }}
+          className="mb-6"
+          style={{ 
+            borderColor: '#fff7e6',
+            backgroundColor: '#fffbe6',
+          }}
         >
           <div className="flex items-center gap-3">
             <ThunderboltOutlined className="text-2xl text-orange-500" />
@@ -220,18 +223,18 @@ const AIAgentPage = () => {
                         <Avatar
                           icon={<RobotOutlined />}
                           style={{
-                            background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+                            background: '#1890ff',
                           }}
                         />
                       )}
                       <div
                         className={`max-w-[80%] p-3 rounded-lg ${
                           msg.type === 'user'
-                            ? 'bg-gradient-primary text-white'
+                            ? 'bg-blue-600 text-white'
                             : 'bg-white border border-gray-200'
                         }`}
                         style={{
-                          borderRadius: '12px',
+                          borderRadius: '8px',
                         }}
                       >
                         <Paragraph className="mb-1" style={{ color: msg.type === 'user' ? 'white' : '#1e293b' }}>
@@ -247,7 +250,7 @@ const AIAgentPage = () => {
                       {msg.type === 'user' && (
                         <Avatar
                           style={{
-                            background: 'linear-gradient(135deg, #f093fb 0%, #f5576c 100%)',
+                            background: '#52c41a',
                           }}
                         >
                           U
@@ -260,7 +263,7 @@ const AIAgentPage = () => {
                       <Avatar
                         icon={<RobotOutlined />}
                         style={{
-                          background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+                          background: '#1890ff',
                         }}
                       />
                       <div className="bg-white border border-gray-200 p-3 rounded-lg">
