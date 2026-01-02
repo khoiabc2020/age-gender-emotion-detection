@@ -23,6 +23,25 @@ const ProfileCard = () => {
       })
     : 'Gần đây'
 
+  // Generate beautiful gradient based on username
+  const getAvatarGradient = (username) => {
+    const gradients = [
+      'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+      'linear-gradient(135deg, #f093fb 0%, #f5576c 100%)',
+      'linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)',
+      'linear-gradient(135deg, #43e97b 0%, #38f9d7 100%)',
+      'linear-gradient(135deg, #fa709a 0%, #fee140 100%)',
+      'linear-gradient(135deg, #30cfd0 0%, #330867 100%)',
+      'linear-gradient(135deg, #a8edea 0%, #fed6e3 100%)',
+      'linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%)',
+      'linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%)',
+      'linear-gradient(135deg, #ff6b6b 0%, #ee5a6f 100%)',
+    ]
+    if (!username) return gradients[0]
+    const index = username.charCodeAt(0) % gradients.length
+    return gradients[index]
+  }
+
   return (
     <Card
       className="profile-card"
@@ -38,8 +57,10 @@ const ProfileCard = () => {
         <Avatar
           size={80}
           style={{
-            background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+            background: getAvatarGradient(user?.username),
             marginBottom: '12px',
+            boxShadow: '0 4px 12px rgba(0, 0, 0, 0.15)',
+            border: '3px solid rgba(255, 255, 255, 0.2)',
           }}
         >
           {user?.username?.charAt(0).toUpperCase() || 'A'}

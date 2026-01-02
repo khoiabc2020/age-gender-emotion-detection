@@ -348,7 +348,8 @@ const AIAgentPage = () => {
                         <Avatar
                           icon={<RobotOutlined />}
                           style={{
-                            background: '#1890ff',
+                            background: 'linear-gradient(135deg, #1890ff 0%, #096dd9 100%)',
+                            boxShadow: '0 2px 8px rgba(24, 144, 255, 0.3)',
                           }}
                         />
                       )}
@@ -405,7 +406,8 @@ const AIAgentPage = () => {
                       {msg.type === 'user' && (
                         <Avatar
                           style={{
-                            background: '#52c41a',
+                            background: 'linear-gradient(135deg, #52c41a 0%, #389e0d 100%)',
+                            boxShadow: '0 2px 8px rgba(82, 196, 26, 0.3)',
                           }}
                         >
                           U
@@ -418,7 +420,8 @@ const AIAgentPage = () => {
                       <Avatar
                         icon={<RobotOutlined />}
                         style={{
-                          background: '#1890ff',
+                          background: 'linear-gradient(135deg, #1890ff 0%, #096dd9 100%)',
+                          boxShadow: '0 2px 8px rgba(24, 144, 255, 0.3)',
                         }}
                       />
                       <div 
