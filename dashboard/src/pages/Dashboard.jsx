@@ -88,64 +88,52 @@ const DashboardPage = () => {
     },
   ]
 
+  const iconColors = [
+    { bg: '#e6f7ff', color: '#1890ff' },
+    { bg: '#f6ffed', color: '#52c41a' },
+    { bg: '#fffbe6', color: '#faad14' },
+    { bg: '#f0f5ff', color: '#2f54eb' },
+  ]
+
   return (
     <div className="animate-fade-in">
       {/* Header */}
-      <div className="mb-6">
-        <Title level={2} className="gradient-text mb-2">
+      <div className="page-header">
+        <Title level={2} className="page-title">
           Tổng quan Hệ thống
         </Title>
-        <p className="text-gray-500">Theo dõi và phân tích dữ liệu khách hàng realtime</p>
+        <p className="page-description">Theo dõi và phân tích dữ liệu khách hàng realtime</p>
       </div>
 
       {/* Key Metrics Cards */}
       <Row gutter={[16, 16]} className="mb-6">
         {statCards.map((stat, index) => (
           <Col xs={24} sm={12} lg={6} key={index}>
-            <Card
-              className="card-hover enhanced-card border-0 shadow-lg animate-scale-in"
-              style={{
-                background: 'linear-gradient(135deg, rgba(255,255,255,0.95) 0%, rgba(255,255,255,0.9) 100%)',
-                borderRadius: '20px',
-                animationDelay: `${index * 0.1}s`,
-                transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
-              }}
-            >
-              <div className="flex items-center justify-between">
-                <div className="flex-1">
+            <Card className="card-hover stats-card">
+              <div style={{ display: 'flex', alignItems: 'flex-start', gap: '16px' }}>
+                <div
+                  className="stats-card-icon"
+                  style={{
+                    background: iconColors[index].bg,
+                    color: iconColors[index].color,
+                    flexShrink: 0,
+                  }}
+                >
+                  {stat.icon}
+                </div>
+                <div style={{ flex: 1, minWidth: 0 }}>
                   <Statistic
-                    title={<span className="text-gray-600 font-medium">{stat.title}</span>}
+                    title={<span style={{ color: '#8c8c8c', fontSize: '14px' }}>{stat.title}</span>}
                     value={stat.value}
                     prefix={stat.prefix}
                     suffix={stat.suffix}
                     precision={stat.precision}
                     valueStyle={{
-                      fontSize: '28px',
-                      fontWeight: 700,
-                      background: `linear-gradient(135deg, ${index === 0 ? '#667eea' : index === 1 ? '#4facfe' : index === 2 ? '#fa709a' : '#f093fb'} 0%, ${index === 0 ? '#764ba2' : index === 1 ? '#00f2fe' : index === 2 ? '#fee140' : '#f5576c'} 100%)`,
-                      WebkitBackgroundClip: 'text',
-                      WebkitTextFillColor: 'transparent',
-                      backgroundClip: 'text',
+                      fontSize: '24px',
+                      fontWeight: 600,
+                      color: '#262626',
                     }}
                   />
-                </div>
-                <div
-                  className={`w-16 h-16 rounded-2xl flex items-center justify-center text-white text-2xl shadow-lg animate-float ${stat.gradient}`}
-                  style={{
-                    background: index === 0
-                      ? 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)'
-                      : index === 1
-                      ? 'linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)'
-                      : index === 2
-                      ? 'linear-gradient(135deg, #fa709a 0%, #fee140 100%)'
-                      : 'linear-gradient(135deg, #f093fb 0%, #f5576c 100%)',
-                    animationDelay: `${index * 0.2}s`,
-                    transition: 'transform 0.3s ease',
-                  }}
-                  onMouseEnter={(e) => e.currentTarget.style.transform = 'scale(1.1) rotate(5deg)'}
-                  onMouseLeave={(e) => e.currentTarget.style.transform = 'scale(1) rotate(0deg)'}
-                >
-                  {stat.icon}
                 </div>
               </div>
             </Card>
@@ -157,64 +145,32 @@ const DashboardPage = () => {
       <Row gutter={[16, 16]}>
         <Col xs={24} lg={12}>
           <Card
-            title={
-              <span className="text-lg font-semibold gradient-text">
-                Phân bố Độ tuổi theo Giờ
-              </span>
-            }
-            className="card-hover border-0 shadow-lg"
-            style={{
-              borderRadius: '20px',
-              background: 'rgba(255, 255, 255, 0.95)',
-            }}
+            title="Phân bố Độ tuổi theo Giờ"
+            className="card-hover"
           >
             <AgeChart data={ageByHour} />
           </Card>
         </Col>
         <Col xs={24} lg={12}>
           <Card
-            title={
-              <span className="text-lg font-semibold gradient-text">
-                Phân bố Cảm xúc
-              </span>
-            }
-            className="card-hover border-0 shadow-lg"
-            style={{
-              borderRadius: '20px',
-              background: 'rgba(255, 255, 255, 0.95)',
-            }}
+            title="Phân bố Cảm xúc"
+            className="card-hover"
           >
             <EmotionPieChart data={emotionDistribution} />
           </Card>
         </Col>
         <Col xs={24} lg={12}>
           <Card
-            title={
-              <span className="text-lg font-semibold gradient-text">
-                Phân bố Giới tính
-              </span>
-            }
-            className="card-hover border-0 shadow-lg"
-            style={{
-              borderRadius: '20px',
-              background: 'rgba(255, 255, 255, 0.95)',
-            }}
+            title="Phân bố Giới tính"
+            className="card-hover"
           >
             <GenderChart data={stats?.gender_distribution} />
           </Card>
         </Col>
         <Col xs={24} lg={12}>
           <Card
-            title={
-              <span className="text-lg font-semibold gradient-text">
-                Hiệu suất Quảng cáo
-              </span>
-            }
-            className="card-hover border-0 shadow-lg"
-            style={{
-              borderRadius: '20px',
-              background: 'rgba(255, 255, 255, 0.95)',
-            }}
+            title="Hiệu suất Quảng cáo"
+            className="card-hover"
           >
             <AdPerformanceChart data={stats?.top_ads} />
           </Card>

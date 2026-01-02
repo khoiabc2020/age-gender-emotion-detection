@@ -85,18 +85,18 @@ const AppLayout = ({ children }) => {
         theme="dark"
         width={260}
         style={{
-          background: 'linear-gradient(180deg, #1e293b 0%, #0f172a 100%)',
-          boxShadow: '4px 0 12px rgba(0, 0, 0, 0.15)',
+          background: '#001529',
+          boxShadow: '2px 0 8px rgba(0, 0, 0, 0.1)',
         }}
       >
         {/* Logo */}
-        <div className="h-20 flex items-center justify-center border-b border-gray-700">
+        <div className="h-16 flex items-center justify-center border-b border-gray-700" style={{ borderColor: 'rgba(255, 255, 255, 0.1)' }}>
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 bg-gradient-primary rounded-xl flex items-center justify-center shadow-glow">
+            <div className="w-10 h-10 bg-blue-600 rounded-lg flex items-center justify-center">
               <DashboardOutlined className="text-white text-lg" />
             </div>
             {!collapsed && (
-              <span className="text-white text-xl font-bold gradient-text-white">
+              <span className="text-white text-lg font-semibold">
                 Smart Retail
               </span>
             )}
@@ -122,10 +122,11 @@ const AppLayout = ({ children }) => {
       <Layout>
         {/* Header */}
         <Header
-          className="bg-white px-6 flex items-center justify-between shadow-sm border-b border-gray-100"
+          className="bg-white px-6 flex items-center justify-between"
           style={{
-            background: 'linear-gradient(90deg, rgba(255,255,255,0.95) 0%, rgba(255,255,255,0.9) 100%)',
-            backdropFilter: 'blur(10px)',
+            background: '#ffffff',
+            borderBottom: '1px solid #e8e8e8',
+            boxShadow: '0 1px 4px rgba(0, 0, 0, 0.04)',
           }}
         >
           <div className="flex items-center gap-4">
@@ -164,10 +165,8 @@ const AppLayout = ({ children }) => {
             <Dropdown menu={{ items: userMenuItems }} placement="bottomRight">
               <div className="flex items-center gap-3 cursor-pointer hover:opacity-80 transition-opacity">
                 <Avatar
-                  className="shadow-md"
                   style={{
-                    background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
-                    border: '2px solid white',
+                    background: '#1890ff',
                   }}
                   size="large"
                 >
@@ -192,9 +191,7 @@ const AppLayout = ({ children }) => {
         <Content
           className="p-6 min-h-[calc(100vh-64px)]"
           style={{
-            background: darkMode
-              ? 'linear-gradient(135deg, #0f172a 0%, #1e293b 100%)'
-              : 'linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%)',
+            background: darkMode ? '#141414' : '#fafafa',
           }}
         >
           <div className="animate-fade-in">{children}</div>

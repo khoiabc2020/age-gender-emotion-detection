@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react'
-import { Card, Input, Button, Typography, Space, Spin, message, Select, Divider, Tag, List, Avatar } from 'antd'
+import { Card, Input, Button, Typography, Space, Spin, message, Select, Divider, Tag, List, Avatar, Row, Col } from 'antd'
 import {
   RobotOutlined,
   SendOutlined,
@@ -125,11 +125,11 @@ const AIAgentPage = () => {
       <div className="mb-6">
         <div className="flex items-center justify-between">
           <div>
-            <Title level={2} className="gradient-text mb-2 flex items-center gap-3">
-              <RobotOutlined className="text-4xl" style={{ color: '#667eea' }} />
+            <Title level={2} className="page-title mb-2" style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+              <RobotOutlined style={{ fontSize: '28px', color: '#1890ff' }} />
               AI Agent - Trợ lý Phân tích
             </Title>
-            <p className="text-gray-500">Chat với dữ liệu và nhận insights tự động từ AI</p>
+            <p className="page-description">Chat với dữ liệu và nhận insights tự động từ AI</p>
           </div>
           {aiStatus && (
             <Tag
@@ -170,10 +170,9 @@ const AIAgentPage = () => {
         {/* Chat Section */}
         <Col xs={24} lg={14}>
           <Card
-            className="card-hover border-0 shadow-lg h-full"
-            style={{ borderRadius: '20px', background: 'rgba(255, 255, 255, 0.95)' }}
+            className="card-hover h-full"
             title={
-              <span className="text-lg font-semibold gradient-text flex items-center gap-2">
+              <span style={{ display: 'flex', alignItems: 'center', gap: '8px', fontWeight: 600 }}>
                 <RobotOutlined /> Chat với AI
               </span>
             }
@@ -313,9 +312,8 @@ const AIAgentPage = () => {
                 icon={<SendOutlined />}
                 onClick={handleChat}
                 loading={loading}
-                className="rounded-r-lg bg-gradient-primary border-0"
+                className="rounded-r-lg"
                 style={{
-                  background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
                   height: 'auto',
                 }}
               >
@@ -330,10 +328,9 @@ const AIAgentPage = () => {
           <Space direction="vertical" size="large" className="w-full">
             {/* Quick Analyze */}
             <Card
-              className="card-hover border-0 shadow-lg"
-              style={{ borderRadius: '20px', background: 'rgba(255, 255, 255, 0.95)' }}
+              className="card-hover"
               title={
-                <span className="text-lg font-semibold gradient-text flex items-center gap-2">
+                <span style={{ display: 'flex', alignItems: 'center', gap: '8px', fontWeight: 600 }}>
                   <BulbOutlined /> Phân tích Nhanh
                 </span>
               }
@@ -344,9 +341,8 @@ const AIAgentPage = () => {
                 icon={<BulbOutlined />}
                 onClick={handleAnalyze}
                 loading={analyzing}
-                className="rounded-lg bg-gradient-success border-0 mb-3"
+                className="rounded-lg mb-3"
                 style={{
-                  background: 'linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)',
                   height: '48px',
                   fontSize: '16px',
                   fontWeight: 600,
@@ -390,10 +386,9 @@ const AIAgentPage = () => {
 
             {/* Generate Report */}
             <Card
-              className="card-hover border-0 shadow-lg"
-              style={{ borderRadius: '20px', background: 'rgba(255, 255, 255, 0.95)' }}
+              className="card-hover"
               title={
-                <span className="text-lg font-semibold gradient-text flex items-center gap-2">
+                <span style={{ display: 'flex', alignItems: 'center', gap: '8px', fontWeight: 600 }}>
                   <FileTextOutlined /> Báo cáo Tự động
                 </span>
               }
@@ -404,9 +399,8 @@ const AIAgentPage = () => {
                 icon={<FileTextOutlined />}
                 onClick={handleGenerateReport}
                 loading={reportGenerating}
-                className="rounded-lg bg-gradient-warning border-0"
+                className="rounded-lg"
                 style={{
-                  background: 'linear-gradient(135deg, #fa709a 0%, #fee140 100%)',
                   height: '48px',
                   fontSize: '16px',
                   fontWeight: 600,
