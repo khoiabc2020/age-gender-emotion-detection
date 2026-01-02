@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from 'react'
-import { Form, Input, Button, Card, message, Typography, Divider } from 'antd'
-import { UserOutlined, LockOutlined, MailOutlined } from '@ant-design/icons'
+import { Form, Input, Button, Checkbox, message, Typography, Divider } from 'antd'
+import { UserOutlined, LockOutlined } from '@ant-design/icons'
 import { useNavigate, Link } from 'react-router-dom'
 import { useAppDispatch, useAppSelector } from '../store/hooks'
 import { login as loginThunk } from '../store/slices/authSlice'
-import api from '../services/api'
 
 const { Title, Text } = Typography
 
