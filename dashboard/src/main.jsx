@@ -25,7 +25,9 @@ class ErrorBoundary extends React.Component {
   }
 
   componentDidCatch(error, errorInfo) {
-    console.error('React Error:', error, errorInfo)
+    if (process.env.NODE_ENV === 'development') {
+      console.error('React Error:', error, errorInfo)
+    }
   }
 
   render() {
@@ -101,10 +103,10 @@ try {
       </ErrorBoundary>
     </React.StrictMode>
   )
-  
-  console.log('✅ React app rendered successfully!')
 } catch (error) {
-  console.error('❌ Failed to render React app:', error)
+  if (process.env.NODE_ENV === 'development') {
+    console.error('Failed to render React app:', error)
+  }
   document.body.innerHTML = `
     <div style="padding: 50px; text-align: center; font-family: Arial;">
       <h1 style="color: #e74c3c;">❌ Lỗi khởi động ứng dụng</h1>

@@ -54,7 +54,9 @@ const getInitialAuthState = () => {
       error: null,
     }
   } catch (error) {
-    console.warn('Failed to read from localStorage:', error)
+    if (process.env.NODE_ENV === 'development') {
+      console.warn('Failed to read from localStorage:', error)
+    }
     return {
       isAuthenticated: false,
       token: null,

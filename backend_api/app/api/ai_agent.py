@@ -4,7 +4,6 @@ Giai đoạn 6: Generative AI Integration
 """
 
 from fastapi import APIRouter, Depends, HTTPException, status
-from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
 from sqlalchemy.orm import Session
 from typing import Optional
 from pydantic import BaseModel
@@ -57,7 +56,6 @@ def get_ai_agent() -> Optional[AIAgent]:
 @router.post("/analyze")
 async def analyze_analytics(
     time_range_hours: int = 24,
-    # current_user: dict = Depends(get_current_user),  # TODO: Enable after fixing circular import
     db: Session = Depends(get_db)
 ):
     """
@@ -132,7 +130,6 @@ async def analyze_analytics(
 @router.post("/chat")
 async def chat_with_data(
     request: ChatRequest,
-    # current_user: dict = Depends(get_current_user),  # TODO: Enable after fixing circular import
     db: Session = Depends(get_db)
 ):
     """
@@ -180,7 +177,6 @@ async def chat_with_data(
 @router.post("/generate-report")
 async def generate_report(
     request: GenerateReportRequest,
-    # current_user: dict = Depends(get_current_user),  # TODO: Enable after fixing circular import
     db: Session = Depends(get_db)
 ):
     """

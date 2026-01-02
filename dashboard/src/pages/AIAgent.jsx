@@ -36,7 +36,9 @@ const AIAgentPage = () => {
       const response = await api.get('/api/v1/ai/status')
       setAiStatus(response.data)
     } catch (error) {
-      console.error('Failed to check AI status:', error)
+      if (process.env.NODE_ENV === 'development') {
+        console.error('Failed to check AI status:', error)
+      }
     }
   }
 

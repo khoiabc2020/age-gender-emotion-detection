@@ -32,7 +32,9 @@ const RegisterPage = () => {
     } catch (error) {
       const errorMessage = error.response?.data?.detail || error.message || 'Đăng ký thất bại!'
       message.error(errorMessage)
-      console.error('Register error:', error)
+      if (process.env.NODE_ENV === 'development') {
+        console.error('Register error:', error)
+      }
     } finally {
       setLoading(false)
     }

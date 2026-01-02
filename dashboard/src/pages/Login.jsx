@@ -46,7 +46,9 @@ const LoginPage = () => {
       }
     } catch (error) {
       message.error('Đã xảy ra lỗi khi đăng nhập!')
-      console.error('Login error:', error)
+      if (process.env.NODE_ENV === 'development') {
+        console.error('Login error:', error)
+      }
     } finally {
       setLoading(false)
     }
