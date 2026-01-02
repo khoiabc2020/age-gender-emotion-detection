@@ -153,6 +153,39 @@ pause
 goto MAIN_MENU
 
 REM ============================================================
+REM RUN EDGE AI GUI (Modern UI)
+REM ============================================================
+:RUN_EDGE_GUI
+cls
+echo ============================================================
+echo     STARTING EDGE AI APP (Modern GUI)
+echo ============================================================
+echo.
+echo Checking PyQt6 installation...
+cd /d "%~dp0ai_edge_app"
+python -c "import PyQt6" 2>nul
+if %errorlevel% neq 0 (
+    echo.
+    echo PyQt6 not found! Installing...
+    pip install PyQt6 --upgrade --disable-pip-version-check -q
+    echo PyQt6 installed!
+)
+echo.
+echo Starting Edge AI App with Modern GUI...
+echo.
+python main_gui.py
+if %errorlevel% neq 0 (
+    echo.
+    echo GUI mode failed. Falling back to console mode...
+    python main.py
+)
+echo.
+echo Edge AI App stopped.
+echo.
+pause
+goto MAIN_MENU
+
+REM ============================================================
 REM INSTALL ALL DEPENDENCIES
 REM ============================================================
 :INSTALL_ALL
