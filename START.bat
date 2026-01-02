@@ -12,7 +12,8 @@ echo  [1] ⚡ QUICK START      - Start Backend + Frontend
 echo  [2] 🚀 Run All         - Start All Services
 echo  [3] 🔧 Run Backend     - API only
 echo  [4] 🌐 Run Frontend    - Dashboard only
-echo  [5] 🤖 Run Edge AI     - Edge App only
+echo  [5] 🤖 Run Edge AI     - Edge App (Console)
+echo  [9] 🎨 Run Edge AI GUI - Edge App (Modern UI)
 echo.
 echo  [6] 📦 Install All     - Install all dependencies
 echo  [7] 🔍 Check Status    - Check installed packages
@@ -31,6 +32,7 @@ if "%choice%"=="5" goto RUN_EDGE
 if "%choice%"=="6" goto INSTALL_ALL
 if "%choice%"=="7" goto CHECK_STATUS
 if "%choice%"=="8" goto HELP
+if "%choice%"=="9" goto RUN_EDGE_GUI
 if "%choice%"=="0" goto EXIT
 echo Invalid choice! Press any key to try again...
 pause >nul
@@ -83,7 +85,7 @@ echo.
 echo Starting:
 echo   1. Backend API     (http://localhost:8000)
 echo   2. Dashboard       (http://localhost:3000)
-echo   3. Edge AI App     (Console)
+echo   3. Edge AI App     (Console - use option 5 for GUI)
 echo.
 echo Three new windows will open...
 echo.
@@ -137,12 +139,12 @@ pause
 goto MAIN_MENU
 
 REM ============================================================
-REM RUN EDGE AI ONLY
+REM RUN EDGE AI ONLY (Console)
 REM ============================================================
 :RUN_EDGE
 cls
 echo ╔════════════════════════════════════════════════════════════╗
-echo ║     STARTING EDGE AI APP                                   ║
+echo ║     STARTING EDGE AI APP (Console Mode)                    ║
 echo ╚════════════════════════════════════════════════════════════╝
 echo.
 cd /d "%~dp0ai_edge_app"
@@ -238,6 +240,7 @@ echo.
 echo [3/3] Installing Edge AI dependencies...
 cd ai_edge_app
 pip install opencv-python numpy Pillow qrcode requests paho-mqtt python-dotenv --upgrade --disable-pip-version-check -q
+pip install PyQt6 --upgrade --disable-pip-version-check -q 2>nul
 pip install onnxruntime --upgrade --disable-pip-version-check -q 2>nul
 if %errorlevel% neq 0 (
     echo.
