@@ -150,7 +150,11 @@ const AdsManagementPage = () => {
       {/* Header */}
       <div className="mb-6 flex justify-between items-center">
         <div>
-          <Title level={2} className="gradient-text mb-2">
+          <Title 
+            level={2} 
+            className="page-title mb-2"
+            style={{ color: 'var(--text-primary)' }}
+          >
             Quản lý Quảng cáo
           </Title>
           <p className="text-gray-500">Quản lý và cấu hình các quảng cáo hiển thị</p>
